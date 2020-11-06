@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['prefix' => 'Board'  , 'namespace' => 'Board'] , function(){
+Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin']  , 'namespace' => 'Board'] , function(){
 	Route::get('/' , 'BoardController@index' )->name('board.index');
 });
 
