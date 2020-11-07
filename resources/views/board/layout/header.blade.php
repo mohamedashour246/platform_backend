@@ -191,33 +191,40 @@
 
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
+
+					@php
+					$lang = App::getLocale();
+					@endphp
+
+					@if ($lang == 'en')
 					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
-						<img src="../../../../global_assets/images/lang/gb.png" class="img-flag mr-2" alt="">
+						<img src="{{ asset('board_assets/global_assets/images/lang/gb.png') }}" class="img-flag mr-2" alt="">
 						English
 					</a>
+					@else
+					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
+						<img src="{{ asset('board_assets/global_assets/images/lang/ar.png') }}" class="img-flag mr-2" alt="">
+						اللغه العربيه
+					</a>
+					@endif
+					
 
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#" class="dropdown-item english"><img src="../../../../global_assets/images/lang/gb.png" class="img-flag" alt=""> English</a>
-						<a href="#" class="dropdown-item ukrainian"><img src="../../../../global_assets/images/lang/ua.png" class="img-flag" alt=""> Українська</a>
-						<a href="#" class="dropdown-item deutsch"><img src="../../../../global_assets/images/lang/de.png" class="img-flag" alt=""> Deutsch</a>
-						<a href="#" class="dropdown-item espana"><img src="../../../../global_assets/images/lang/es.png" class="img-flag" alt=""> España</a>
-						<a href="#" class="dropdown-item russian"><img src="../../../../global_assets/images/lang/ru.png" class="img-flag" alt=""> Русский</a>
+						<a href="{{ url('Board/language/en') }}" class="dropdown-item english"><img src="{{ asset('board_assets/global_assets/images/lang/gb.png') }}" class="img-flag" alt=""> English </a>
+						<a href="{{ url('Board/language/ar') }}" class="dropdown-item ukrainian"><img src="{{ asset('board_assets/global_assets/images/lang/ar.png') }}" class="img-flag" alt=""> اللغه العربيه </a>
 					</div>
 				</li>
 
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="../../../../global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
-						<span>Victoria</span>
+						<img src="{{ asset('board_assets/global_assets/images/placeholders/placeholder.jpg') }}" class="rounded-circle mr-2" height="34" alt="">
+						<span>{{ Auth::guard('admin')->user()->username }}</span>
 					</a>
 
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-						<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-						<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
-						<a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+						<a href="{{ route('board.profile') }}" class="dropdown-item"><i class="icon-user-plus"></i> الملف الشخصى </a>
+						<a href="#" class="dropdown-item"><i class="icon-cog5"></i> تغير كلمة المرور </a>
+						<a href="{{ route('board.logout') }}" class="dropdown-item"><i class="icon-switch2"></i>  تسجيل الخروج </a>
 					</div>
 				</li>
 			</ul>

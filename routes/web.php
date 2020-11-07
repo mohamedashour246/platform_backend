@@ -16,12 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin']  , 'namespace' => 'Board'] , function(){
+Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'namespace' => 'Board'] , function(){
 	Route::get('/' , 'BoardController@index' )->name('board.index');
+	Route::get('/language/{lang}' , 'BoardController@change_language' )->name('board.lang');
+	Route::get('/logout'  , 'Auth\LoginController@logout')->name('board.logout');
+	Route::get('/profile'  , 'ProfileController@index' )->name('board.profile');
+	Route::patch('/profile' , 'ProfileController@update' )->name('board.profile.update');
 });
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test', function () {
+
+
+  	
 });
 
 Auth::routes();

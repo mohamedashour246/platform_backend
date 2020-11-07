@@ -28,9 +28,20 @@ class LoginController extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials))
             return redirect(route('board.index'));
-        }
+
+        return back()->with('error_msg'  , trans('auth.failed') );
+    }
+
+
+
+
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return back();
     }
 
    

@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Board;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App;
 class BoardController extends Controller
 {
 
 
     public function __construct() {
-        
+
         $this->middleware('admin');
     }
 
@@ -21,6 +21,7 @@ class BoardController extends Controller
      */
     public function index()
     {
+
         return view('board.index');
     }
 
@@ -29,9 +30,36 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function change_language(Request $request)
     {
-        //
+
+        $langs = ['ar'  , 'en' ];
+
+        if(!in_array($request->lang , $langs )) {
+            session()->put('locale'  ,'ar'); 
+            session()->put('dir' , 'rtl');
+            App::setLocale(session()->get('locale'));
+            return redirect()->back();
+        } 
+
+
+
+        if($request->lang == 'en') {
+            session()->put('locale'  , 'en' ); 
+            session()->put('dir' , 'ltr');
+        }
+
+        else 
+        {
+            session()->put('locale'  , 'ar' );
+            session()->put('dir' , 'rtl');
+        }
+
+
+
+        App::setLocale(session()->get('locale'));
+
+        return redirect()->back();
     }
 
     /**

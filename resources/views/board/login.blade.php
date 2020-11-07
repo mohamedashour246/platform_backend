@@ -44,6 +44,9 @@
 				<!-- Login form -->
 				<form class="login-form" action="{{ route('Board.login') }}" method="POST" >
 
+
+					@include('board.layout.messages')
+
 					@csrf
 					<div class="card mb-0">
 						<div class="card-body">
