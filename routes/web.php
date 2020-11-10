@@ -22,6 +22,9 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/logout'  , 'Auth\LoginController@logout')->name('board.logout');
 	Route::get('/profile'  , 'ProfileController@index' )->name('board.profile');
 	Route::patch('/profile' , 'ProfileController@update' )->name('board.profile.update');
+	Route::get('/password'  , 'ProfileController@edit_password' )->name('profile.password.edit');
+	Route::patch('/password' , 'ProfileController@change_password' )->name('profile.password.change');
+	Route::resource('/admins'  , 'AdminController');
 });
 
 Route::get('/test', function () {

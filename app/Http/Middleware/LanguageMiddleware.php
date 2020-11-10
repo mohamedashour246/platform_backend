@@ -21,6 +21,7 @@ class LanguageMiddleware
         } else {
             App::setLocale('ar');
             session()->put('dir' , 'rtl');
+            session()->put('locale' , 'ar');
         }
        
         return $next($request);

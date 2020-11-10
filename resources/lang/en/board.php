@@ -7,8 +7,7 @@ return [
 	'board' => 'Board' , 
 	'home' => 'Home' ,
 	'logout' => 'Log Out' , 
-	'update_success' => 'Data Updated Successfully' , 
-
+	'update_success' => 'Data Updated Successfully', 
 ];
 
 

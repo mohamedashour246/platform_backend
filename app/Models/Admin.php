@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Auth;
+use Hash;
 class Admin extends Authenticatable
 {
      use Notifiable;
@@ -35,4 +36,36 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+
+    public function  permissions()
+    {
+        return $this->hasMany(AdminPermission::class , 'admin_id');
+    }
+
+
+    public function add($data)
+    {
+        $this->email = $data['email'];
+        $this->username = $data['username'];
+        $this->password = Hash::make($data['password']);
+        $this->type = $data['type'];
+        $this->active = isset($data['active']) ? 1 : 0;
+        $this->notes = $data['notes'];
+        $this->admin_id = Auth::guard('admin')->id();
+        return $this->save();
+    }
+
+
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this->save();
+    }
+
+
+
 }

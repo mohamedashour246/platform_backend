@@ -223,7 +223,7 @@
 
 					<div class="dropdown-menu dropdown-menu-right">
 						<a href="{{ route('board.profile') }}" class="dropdown-item"><i class="icon-user-plus"></i> الملف الشخصى </a>
-						<a href="#" class="dropdown-item"><i class="icon-cog5"></i> تغير كلمة المرور </a>
+						<a href="{{ route('profile.password.edit') }}" class="dropdown-item"><i class="icon-cog5"></i> تغير كلمة المرور </a>
 						<a href="{{ route('board.logout') }}" class="dropdown-item"><i class="icon-switch2"></i>  تسجيل الخروج </a>
 					</div>
 				</li>
