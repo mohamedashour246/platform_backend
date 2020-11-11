@@ -48,12 +48,6 @@ class AdminController extends Controller
 
             if ($request->hasFile('profile_picture')) {
                 $path = $request->file('profile_picture')->store('admins', 's3');
-
-                // $profile_picture_url = Storage::disk('s3')->url($path);
-
-
-                // dd($profile_picture_url ,  Storage::disk('s3')->url('admins/'.basename($path)) );
-
                 $admin->setImage($path);
             }
 
@@ -84,9 +78,10 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Admin $admin)
     {
-        //
+        $admin->load(['permissions.permission'  , 'addedBy' ]);
+        return view('board.admins.admin'  , compact('admin') );
     }
 
     /**
@@ -95,9 +90,13 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Admin $admin)
     {
-        //
+        $groups = PermissionGroup::with('permissions')->get(); 
+        $admin->load('permissions');
+        $admin_permissions = $admin->permissions()->pluck('permission_id')->toArray();
+
+        return view('board.admins.edit'  , compact('admin' , 'groups' , 'admin_permissions') );
     }
 
     /**
@@ -107,9 +106,36 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAdminRequest $request,Admin $admin)
     {
-        //
+        if (!$admin->edit($request->all())) 
+            return back()->with('error_msg'  , trans('admins.adding_error') );
+
+
+            if ($request->hasFile('profile_picture')) {
+                $path = $request->file('profile_picture')->store('admins', 's3');
+                $admin->setImage(basename($path));
+            }
+
+            if ($request->type == 'admin') {
+                $admin->permissions()->delete();
+                $current_logged_in_admin_id = Auth::guard('admin')->id();
+                $permissions = [] ;
+                foreach ($request->permissions as $permission) {
+                    $permissions[] = new AdminPermission([
+                        'permission_id' => $permission ,
+                        'added_by' => $current_logged_in_admin_id,
+                    ]);
+                }
+
+                $admin->permissions()->saveMany($permissions);
+            }
+
+
+        return back()->with('success_msg'  , trans('admins.updating_success') );
+
+        
+
     }
 
     /**
@@ -118,8 +144,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Admin $admin)
     {
-        //
+        if($admin->remove())
+            return redirect(route('admins.index'))->with('success_msg' , trans('deleted_success') );
     }
 }

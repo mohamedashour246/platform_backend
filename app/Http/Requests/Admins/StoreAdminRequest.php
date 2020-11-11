@@ -31,7 +31,7 @@ class StoreAdminRequest extends FormRequest
             'notes' => 'nullable' , 
             'type' => 'required' , 
             'active' => 'nullable' , 
-            'permissions' => 'required',
+            'permissions' => 'required_if:type,==,admin',
         ];
     }
 }

@@ -2,30 +2,9 @@
 	
 	<div class="col-md-12">
 
-		<!-- Search field -->
-		<div class="">
-			<div class="">
-				
-				
-				
-			</div>
-		</div>
-		<!-- /search field -->
 
-		<!-- Basic responsive configuration -->
-		<div class="card">
-			<div class="card-header header-elements-inline">
-				<h5 class="card-title">@lang('admins.admins') </h5>
-				<div class="header-elements">
-					<div class="list-icons">
-						<a class="list-icons-item" data-action="collapse"></a>
-						<a class="list-icons-item" data-action="reload"></a>
-						<a class="list-icons-item" data-action="remove"></a>
-					</div>
-				</div>
-			</div>
-
-			<div class="card-body">
+		<div class="row">
+{{-- 			<div class="col-md-2">
 				<div class="input-group mb-3">
 					<div class="form-group-feedback form-group-feedback-left">
 						<input type="text"  wire:model="search" class="form-control form-control-lg text-center" placeholder="@lang('admins.search_admins')">
@@ -34,31 +13,86 @@
 						</div>
 					</div>
 				</div>
+			</div> --}}
+			<div class="col-md-12 mb-3">
+				<a  href="{{ route('admins.create') }}" class="btn btn-primary float-right" > <i class="icon-user-plus "></i> إضافه مشرف جديد  </a>
+			</div>
+		</div>
+
+		<div class="card" >
+			<div class="card-header bg-dark header-elements-inline">
+				<h5 class="card-title"> <i class="icon-users4 mr-1"></i> @lang('admins.admins')</h5>
+				<div class="header-elements">
+					<div class="wmin-200">
+						<select class="form-control" wire:model="paginate" >
+							<option value="2">2 </option>
+							<option value="15">15 </option>
+							<option value="30">30</option>
+							<option value="50">50</option>
+							<option value="70">70</option>
+							<option value="100">100</option>
+							<option value="150">150</option>
+						</select>
+					</div>
+				</div>
 			</div>
 
-			<table class="table datatable-responsive">
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Job Title</th>
-					</tr>
-				</thead>
-				<tbody>
-					
-					@foreach ($admins as $admin)
-					<tr>
-						<td>{{ $admin->username }}</td>
-						<td>{{ $admin->email }}</td>
-						<td>{{ $admin->type }}</td>
-					</tr>
+			<div class="card-body">
+				<table class="table datatable-responsive  text-center   table-hover ">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th> @lang('admins.picture') </th>
+							<th> @lang('admins.username') </th>
+							<th> @lang('admins.email') </th>
+							<th> @lang('admins.type') </th>
+							<th> @lang('admins.added_by') </th>
+							<th> @lang('admins.activation') </th>
+							<th> @lang('admins.created_at') </th>
+							<th> @lang('admins.settings') </th>
+						</tr>
+					</thead>
+					<tbody>
+						@php
+						$i =1 ;
+						@endphp
+						@foreach ($admins as $admin)
+						<tr>
+							<td  >{{ $i++ }}</td>
+							<td > <img class="img-thumbnail" width="50" height="50" src="{{ Storage::disk('s3')->url('admins/'.$admin->image) }}" alt=""> </td>
+							<td  > <a href="{{ route('admins.show', ['admin' => $admin->id])}}"> {{ $admin->username }} </a> </td>
+							<td >{{ $admin->email }}</td>
+							<td> <span class="badge badge-primary" >  @lang('admins.'.$admin->type)  </span> </td>
+							<td> <a target="_blank" href="{{ route('admins.show'  , ['admin' => $admin->id] ) }}"> {{ optional($admin->addedBy)->username }} </a> </td>
+							<td>
+								@switch($admin->active)
+								@case(1)
+								<span class="badge badge-success"> @lang('admins.active') </span>
+								@break
+								@case(0)
+								<span class="badge badge-secondary"> @lang('admins.inactive') </span>
+								@break
+								@endswitch
+							</td>
+							<td>{{ $admin->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $admin->created_at->diffForHumans() }} </span> </td>
+							<td></td>
+						</tr>
 
-					@endforeach
+						@endforeach
 
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
+
+
+			<div class="card-footer bg-light ">
+				<div class="float-right" >
+					{{ $admins->links() }}
+				</div>				
+			</div>
 		</div>
-		<!-- /basic responsive configuration -->
-		{{ $admins->links() }}
+
+
+
 	</div>
 </div>	

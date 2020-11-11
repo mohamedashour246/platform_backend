@@ -38,7 +38,10 @@ class Admin extends Authenticatable
     ];
 
 
-
+    public function addedBy()
+    {
+        return $this->belongsTo(Admin::class , 'admin_id');
+    }
 
     public function  permissions()
     {
@@ -60,6 +63,19 @@ class Admin extends Authenticatable
 
 
 
+    public function edit($data)
+    {
+        $this->email = $data['email'];
+        $this->username = $data['username'];
+        $this->password = !empty($data['password']) ? Hash::make($data['password']) : $this->password;
+        $this->type = $data['type'];
+        $this->active = isset($data['active']) ? 1 : 0;
+        $this->notes = $data['notes'];
+        return $this->save();
+    }
+
+
+
     public function setImage($image)
     {
         $this->image = $image;
@@ -67,5 +83,15 @@ class Admin extends Authenticatable
     }
 
 
+    public function isActive()
+    {
+        return $this->active == 1 ? true : false;    
+    }
 
+
+
+    public function  remove()
+    {
+        return $this->delete();
+    }
 }

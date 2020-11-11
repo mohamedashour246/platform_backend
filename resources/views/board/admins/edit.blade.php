@@ -3,12 +3,12 @@ $lang = session()->get('locale');
 @endphp
 @extends('board.layout.master')
 @section('title')
-@lang('profile.profile')
+@lang('admins.edit_admin_details')
 @endsection
 
 
 @section('header')
-<div class="page-header">
+<div class="page-header ">
 	<div class="page-header-content header-elements-md-inline">
 		<div class="page-title d-flex">
 			<h4><i class="icon-arrow-right6 mr-2"></i> @lang('admins.admins') </h4>
@@ -18,7 +18,7 @@ $lang = session()->get('locale');
 			<div class="breadcrumb">
 				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 				<a href="{{ route('admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
-				<span class="breadcrumb-item active"> @lang('admins.add_new_admin') </span>
+				<span class="breadcrumb-item active"> @lang('admins.edit_admin_details') </span>
 			</div>
 		</div>
 	</div>
@@ -29,10 +29,12 @@ $lang = session()->get('locale');
 
 <div class="row">
 	<div class="col-md-12">
+
+		@include('board.layout.messages')
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
-				<h5 class="card-title"> @lang('admins.add_new_admin') </h5>
+				<h5 class="card-title"> @lang('admins.edit_admin_details')</h5>
 				<div class="header-elements">
 					<div class="list-icons">
 						<a class="list-icons-item" data-action="collapse"></a>
@@ -41,33 +43,44 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('admins.store') }}" method="POST"  enctype="multipart/form-data" >
-				<div class="card-body">
 
+			<div class="card-body">
+				<form action="{{ route('admins.update'  , ['admin' => $admin->id] ) }}" method="POST"  enctype="multipart/form-data" >
 					@csrf
+					@method('PATCH')
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label> @lang('admins.username') </label>
-								<input type="text" name="username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror " >
+								<input type="text" name="username" value="{{ $admin->username }}" class="form-control @error('username') is-invalid @enderror " >
 								@error('username')
 								<label class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label> @lang('admins.email') </label>
-								<input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror ">
+								<input type="email" name="email" value="{{ $admin->email }}" class="form-control @error('email') is-invalid @enderror ">
 								@error('email')
 								<label  class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
+							</div>
+
+							<div class="col-md-4">
+								<div class="form-group">
+									<label> @lang('admins.type') </label>
+									<select name="type" class="form-control select" data-fouc>
+										<option value="admin" {{ $admin->type == 'admin' ? 'selected="selected"' : '' }} > @lang('admins.admin') </option>
+										<option value="superadmin" {{ $admin->type == 'superadmin' ? 'selected="selected"' : '' }} >@lang('admins.super_admin')</option>
+									</select>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label> @lang('admins.password') </label>
 								<input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
 								@error('password')
@@ -75,53 +88,38 @@ $lang = session()->get('locale');
 								@enderror
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label> @lang('admins.password_confirmation') </label>
 								<input type="password"  name="password_confirmation" class="form-control">
+							</div>
+
+							<div class="col-md-4">
+								<label> @lang('admins.notes') </label>
+								<input  name="notes"  class="form-control" value="{{ $admin->notes }}" class="form-control">
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label> @lang('admins.profile_picture') </label>
 								<input type="file" name="profile_picture" class="form-control form-input-styled @error('profile_picture') is-invalid @enderror">
 								@error('profile_picture')
 								<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
 								@enderror
 							</div>
-
-							<div class="col-md-6">
-								<label> @lang('admins.notes') </label>
-								<textarea  name="notes"  class="form-control" rows="2" >{{ old('notes') }}</textarea>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-check form-check-switchery">
+							<div class="col-md-4">
+								<div class="form-check form-check-switchery mt-4">
 									<label class="form-check-label">
-										<input type="checkbox" name="active" class="form-check-input-switchery" checked data-fouc>
+										<input type="checkbox" name="active" class="form-check-input-switchery " {{ $admin->isActive() ? 'checked' : '' }} data-fouc>
 										@lang('admins.active')
 									</label>
 								</div>
 							</div>
-
-							<div class="col-md-6">
-								<div class="form-group">
-									<label> @lang('admins.type') </label>
-									<select name="type" class="form-control select" data-fouc>
-										<option value="admin"> @lang('admins.admin') </option>
-										<option value="superadmin">@lang('admins.super_admin')</option>
-									</select>
-								</div>
-							</div>
 						</div>
 					</div>
+
 
 					@error('permissions')
 
@@ -140,7 +138,7 @@ $lang = session()->get('locale');
 								@foreach ($group->permissions as $permission)
 								<div class="form-check">
 									<label class="form-check-label">
-										<input type="checkbox" name="permissions[]" value="{{ $permission->id }}" class="form-input-styled permissions"  data-fouc>
+										<input type="checkbox" name="permissions[]" {{ in_array($permission->id , $admin_permissions) ? 'checked' : '' }} value="{{ $permission->id }}" class="form-input-styled permissions"  data-fouc>
 										{{ $permission['description_'.$lang ] }}
 									</label>
 								</div>
@@ -150,16 +148,26 @@ $lang = session()->get('locale');
 						</div>
 					</div>
 
+					<div class="form-group">
+						<div class="row">
+							
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<label> @lang('admins.current_profile_picture') </label>
+									<img class="img-thumbnail img-responsive" src="{{ Storage::disk('s3')->url('admins/'.$admin->image) }}" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
 
 
 
-				</div>
-
-				<div class="card-footer bg-light" >
-					<button type="submit" class="btn btn-primary float-right ml-2"> @lang('admins.add') </button>
-					<a href="{{ route('admins.index') }}" class="btn btn-secondary "> @lang('admins.back') </a>
-				</div>
-			</form>
+					<div class="text-right">
+						<button type="submit" class="btn btn-warning"> @lang('admins.edit') </button>
+					</div>
+				</form>
+			</div>
 		</div>
 		<!-- /account settings -->
 	</div>
@@ -181,6 +189,14 @@ $lang = session()->get('locale');
 <script>
 	$(function() {
 		// $("#firstname").attr("disabled", "disabled");
+
+
+		@if ($admin->type == 'superadmin')
+				$('input.permissions').each(function(){
+					$(this).prop('disabled',true);
+					$.uniform.update();
+				});
+		@endif
 
 		$('select[name="type"]').on('select2:select', function(event) {
 			

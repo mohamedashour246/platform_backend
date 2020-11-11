@@ -19,7 +19,24 @@ return [
 	'inactive' => 'In Active' , 
 	'permissions_required' => 'You should slect at least 1 permission to this user' , 
 	'add' => 'Add'  , 
-	'search_admins' => 'Search Admins'
+	'search_admins' => 'Search Admins' , 
+	'show_all_admins' => 'Show All Admins',
+	'activation' => 'Activation' , 
+	'superadmin' => 'Super Admin' , 
+	'settings' => 'Settings' , 
+	'edit' => 'Edit' , 
+	'current_profile_picture' => 'Current profile picture' , 
+	'edit_admin_details' => 'Edit Admin details' , 
+	'updating_success' => 'Data updated successfully' , 
+	'updating_error' => 'Error Try again' , 
+	'admin_details' => 'Admin Details' , 
+	'created_at' => 'Created At' , 
+	'added_by' => 'Added By' , 
+	'delete_admin' => 'Delete admin' , 
+	'deleted_success' => 'admin deleted  successfully' , 
+	'picture' => 'Picture' , 
+	'back' => 'Back'
+
 
 ];
 

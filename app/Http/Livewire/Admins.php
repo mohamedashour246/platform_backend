@@ -11,7 +11,7 @@ class Admins extends Component
 
 
 	public $search;
-	public $paginate = 10;
+	public $paginate = 2;
 
 
 	protected $paginationTheme = 'bootstrap';
@@ -19,7 +19,7 @@ class Admins extends Component
 
     public function render()
     {
-    	$admins = Admin::where('username', 'like', '%' . $this->search . '%' )->latest()->paginate(1);
+    	$admins = Admin::with('addedBy')->where('username', 'like', '%' . $this->search . '%' )->latest()->simplePaginate($this->paginate);
         return view('livewire.admins' , compact('admins') );
     }
 

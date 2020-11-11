@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Admins;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Request;
 class UpdateAdminRequest extends FormRequest
 {
     /**
@@ -13,7 +13,7 @@ class UpdateAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,16 @@ class UpdateAdminRequest extends FormRequest
      */
     public function rules()
     {
+        $id = Request::segment(3);
         return [
-            //
+            'username' => 'required|unique:admins,username,'.$id,
+            'email' => 'required|email|unique:admins,email,'.$id,
+            'password' => 'nullable|confirmed|min:8',
+            'profile_picture' => 'nullable|image',
+            'notes' => 'nullable' , 
+            'type' => 'required' , 
+            'active' => 'nullable' , 
+            'permissions' => 'required_if:type,==,admin',
         ];
     }
 }

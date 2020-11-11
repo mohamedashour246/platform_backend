@@ -18,7 +18,7 @@ $lang = session()->get('locale');
 			<div class="breadcrumb">
 				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 				<a href="{{ route('admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
-				<span class="breadcrumb-item active"> @lang('admins.add_new_admin') </span>
+				<span class="breadcrumb-item active"> @lang('admins.show_all_admins') </span>
 			</div>
 		</div>
 	</div>
@@ -47,9 +47,8 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-{{-- <script src="{{ asset('board_assets/global_assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/demo_pages/datatables_responsive.js') }}"></script> --}}
+	<script src="{{ asset('board_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
+
 <script>
 	$(function() {
 		// $("#firstname").attr("disabled", "disabled");
