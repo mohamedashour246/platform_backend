@@ -7,7 +7,7 @@ use App\Models\Admin;
 use Livewire\WithPagination;
 class Admins extends Component
 {
-	 use WithPagination;
+	use WithPagination;
 
 
 	public $search;

@@ -1,7 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800&display=swap');
-h1 , h2 , h3 , h4 , h5 , h6 , p , a , tr , th , td , thead , tbody , li , ul , span	, input , label , button , div {
+h1 , h2 , h3 , h4 , h5 , h6 , p , a , tr , th , td , thead , tbody , li , ul , span	, input , label , button , div , span  {
 
 	    font-family: 'Tajawal', sans-serif;
-	    font-weight: bolder !important;
+	    font-weight: bold !important;
+}
+
+
+label {
+	font-size: 15px;
 }

@@ -151,7 +151,14 @@ return [
         'email' => 'البريد الاكترونى ' , 
         'profile_picture' => 'الصوره الشخصيه',
         'current_password' => 'كلمة المرور الحاليه',
-        'password' => 'كلمة المرور'
+        'password' => 'كلمة المرور' , 
+        'code' => 'الكود '  , 
+        'phone' => 'رقم الجوال' , 
+        'car_number' => 'رقم العربيه' , 
+        'working_start_time' => 'وقت بدايه العمل' , 
+        'working_end_time' => 'وقت انتهاء العمل' , 
+        'driver_name' => 'اسم السائق' , 
+        'bounce' => 'المكافئه'
     ],
 
 ];

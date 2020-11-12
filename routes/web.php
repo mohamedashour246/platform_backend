@@ -25,6 +25,7 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/password'  , 'ProfileController@edit_password' )->name('profile.password.edit');
 	Route::patch('/password' , 'ProfileController@change_password' )->name('profile.password.change');
 	Route::resource('/admins'  , 'AdminController');
+	Route::resource('/drivers'  , 'DriverController');
 });
 
 Route::get('/test', function () {

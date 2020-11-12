@@ -15,7 +15,7 @@
 				</div>
 			</div> --}}
 			<div class="col-md-12 mb-3">
-				<a  href="{{ route('admins.create') }}" class="btn btn-primary float-right" > <i class="icon-user-plus "></i> إضافه مشرف جديد  </a>
+				<a  href="{{ route('admins.create') }}" class="btn btn-primary float-right" > <i class="icon-user-plus "></i>@lang('admins.add_new_admin') </a>
 			</div>
 		</div>
 
@@ -24,7 +24,7 @@
 				<h5 class="card-title"> <i class="icon-users4 mr-1"></i> @lang('admins.admins')</h5>
 				<div class="header-elements">
 					<div class="wmin-200">
-						<select class="form-control" wire:model="paginate" >
+						<select class="form-control form-control-select2 select" wire:model="paginate" >
 							<option value="2">2 </option>
 							<option value="15">15 </option>
 							<option value="30">30</option>
@@ -63,7 +63,7 @@
 							<td  > <a href="{{ route('admins.show', ['admin' => $admin->id])}}"> {{ $admin->username }} </a> </td>
 							<td >{{ $admin->email }}</td>
 							<td> <span class="badge badge-primary" >  @lang('admins.'.$admin->type)  </span> </td>
-							<td> <a target="_blank" href="{{ route('admins.show'  , ['admin' => $admin->id] ) }}"> {{ optional($admin->addedBy)->username }} </a> </td>
+							<td> <a target="_blank" href="{{ route('admins.show'  , ['admin' => $admin->admin_id] ) }}"> {{ optional($admin->addedBy)->username }} </a> </td>
 							<td>
 								@switch($admin->active)
 								@case(1)
