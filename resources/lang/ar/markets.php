@@ -62,7 +62,12 @@ return [
 	'delivery_prices' => 'اسعار التوصيل' , 
 	'admin_name' => 'اسم صاحب المتجر' , 
 	'market_branches' => 'فروع المتجر',
-	'by' => 'بواسطه'
+	'by' => 'بواسطه' , 
+	'bank_name' => 'اسم البنك' , 
+	'bank_account_number' => 'رقم الحساب ' , 
+	'account_owner_name' => 'اسم صاحب الحساب ' , 
+	'delete' => 'حذف'
+
 
 
 

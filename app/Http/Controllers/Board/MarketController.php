@@ -144,11 +144,40 @@ class MarketController extends Controller
      */
     public function emails(Market $market)
     {
-
         $market->load(['emails' , 'emails.admin' ]);
-
         return view('board.markets.market_emails' ,  compact('market'));
     }
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function bank_accounts(Market $market)
+    {
+        $market->load(['bank_accounts' , 'bank_accounts.admin'  ]);
+        return view('board.markets.market_bank_accounts' ,  compact('market'));
+    }
+
+
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function trips(Market $market)
+    {
+        // $market->load(['emails' , 'emails.admin' ]);
+        // return view('board.markets.market_emails' ,  compact('market'));
+    }
+
 
 
 

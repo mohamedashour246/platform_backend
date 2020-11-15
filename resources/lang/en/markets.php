@@ -67,7 +67,11 @@ return [
 	'delivery_prices' => 'Delivery Prices' , 
 	'admin_name' => 'Admin name' , 
 	'market_branches' => 'Market branches' , 
-	'by' => 'By'
+	'by' => 'By' , 
+	'bank_name' => 'Bank Name' , 
+	'bank_account_number' => 'Bank Account number' , 
+	'account_owner_name' => 'Bank owner name' , 
+	'delete' => 'Delete'
 ];
 
  ?>
