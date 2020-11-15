@@ -113,7 +113,7 @@ $lang = session()->get('locale');
 					<p class="mb-3"> {{ $bank_account->notes }} </p>
 
 					<ul class="list-inline list-inline-dotted mb-0">
-						<li class="list-inline-item"> @lang('markets.added_by') <a href="#"> {{ optional($bank_account->admin)->username }}</a></li>
+						<li class="list-inline-item"> @lang('markets.added_by') <a target="_blank" href="{{ route('admins.show'  , ['admin' => $bank_account->admin_id ] ) }}"> {{ optional($bank_account->admin)->username }}</a></li>
 						<li class="list-inline-item"> @lang('markets.created_at')  <span  class="text-muted" >  {{ $bank_account->created_at->toFormattedDateString() }} - {{ $bank_account->created_at->diffForHumans() }} </span> </li>
 					</ul>
 				</div>

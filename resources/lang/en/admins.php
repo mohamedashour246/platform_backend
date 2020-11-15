@@ -36,6 +36,8 @@ return [
 	'deleted_success' => 'admin deleted  successfully' , 
 	'picture' => 'Picture' , 
 	'back' => 'Back' ,
+	'adding_success' => 'admin added successfully',
+	'adding_error' => 'Error Try again'
 
 
 

@@ -44,32 +44,30 @@ class AdminController extends Controller
     public function store(StoreAdminRequest $request)
     {
         $admin = new Admin;
-        if ($admin->add($request->all())) {
 
-            if ($request->hasFile('profile_picture')) {
-                $path = $request->file('profile_picture')->store('admins', 's3');
-                $admin->setImage($path);
-            }
-
-            if ($request->type == 'admin') {
-                $current_logged_in_admin_id = Auth::guard('admin')->id();
-                $permissions = [] ;
-                foreach ($request->permissions as $permission) {
-                    $permissions[] = new AdminPermission([
-                        'permission_id' => $permission ,
-                        'added_by' => $current_logged_in_admin_id,
-                    ]);
-                }
-
-                $admin->permissions()->saveMany($permissions);
-            }
+        if (!$admin->add($request->all())) 
+            return back()->with('error_msg'  , trans('admins.adding_error') );
 
 
-            return redirect(route('admins.index'))->with('error_msg'  , trans('admins.adding_error') );
-
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('admins', 's3');
+            $admin->setImage(basename($path));
         }
 
-        return back()->with('error_msg'  , trans('admins.adding_error') );
+        if ($request->type == 'admin') {
+            $current_logged_in_admin_id = Auth::guard('admin')->id();
+            $permissions = [] ;
+            foreach ($request->permissions as $permission) {
+                $permissions[] = new AdminPermission([
+                    'permission_id' => $permission ,
+                    'added_by' => $current_logged_in_admin_id,
+                ]);
+            }
+
+            $admin->permissions()->saveMany($permissions);
+        }
+
+        return redirect(route('admins.index'))->with('success_msg'  , trans('admins.adding_success') );
     }
 
     /**
@@ -112,24 +110,24 @@ class AdminController extends Controller
             return back()->with('error_msg'  , trans('admins.adding_error') );
 
 
-            if ($request->hasFile('profile_picture')) {
-                $path = $request->file('profile_picture')->store('admins', 's3');
-                $admin->setImage(basename($path));
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('admins', 's3');
+            $admin->setImage(basename($path));
+        }
+
+        if ($request->type == 'admin') {
+            $admin->permissions()->delete();
+            $current_logged_in_admin_id = Auth::guard('admin')->id();
+            $permissions = [] ;
+            foreach ($request->permissions as $permission) {
+                $permissions[] = new AdminPermission([
+                    'permission_id' => $permission ,
+                    'added_by' => $current_logged_in_admin_id,
+                ]);
             }
 
-            if ($request->type == 'admin') {
-                $admin->permissions()->delete();
-                $current_logged_in_admin_id = Auth::guard('admin')->id();
-                $permissions = [] ;
-                foreach ($request->permissions as $permission) {
-                    $permissions[] = new AdminPermission([
-                        'permission_id' => $permission ,
-                        'added_by' => $current_logged_in_admin_id,
-                    ]);
-                }
-
-                $admin->permissions()->saveMany($permissions);
-            }
+            $admin->permissions()->saveMany($permissions);
+        }
 
 
         return back()->with('success_msg'  , trans('admins.updating_success') );

@@ -36,7 +36,9 @@ return [
 	'deleted_success' => 'تم حذف المشرف بنجاح',
 	'picture' => 'الصوره الشخصيه' , 
 	'back' => 'تراجع' ,
-	'deleted_success' => 'تم الحذف بنجاح'
+	'deleted_success' => 'تم الحذف بنجاح' , 
+	'adding_success' => 'تم إضافه المشرف بنجاح',
+	'adding_error' => 'خطا حاول مره اخرى'
 
 	
 
