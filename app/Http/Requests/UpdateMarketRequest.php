@@ -13,7 +13,7 @@ class UpdateMarketRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class UpdateMarketRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'market_name' => 'required',
+            'address' => 'required' , 
+            'phones' => 'required' , 
+            'logo' => 'nullable|image' , 
+            'notes' => 'nullable' , 
+            'active' => 'required',
         ];
     }
 }

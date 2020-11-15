@@ -21,7 +21,7 @@ class MarketController extends Controller
      */
     public function index()
     {
-        //
+        return view('board.markets.index');
     }
 
     /**
@@ -54,7 +54,7 @@ class MarketController extends Controller
 
 
         if ($request->hasFile('files')) {
-        
+
             for ($i = 0; $i <count($request->file('files')) ; $i++) {
                 $files = [];
                 $path = $request->file('files')[$i]->store('markets_documents'  , 's3' );
@@ -102,9 +102,8 @@ class MarketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function admin(Market $market)
-    {
-
+     public function admin(Market $market)
+     {
         $market->load('marketAdmin');
         return view('board.markets.market_admin' ,  compact('market'));
     }
@@ -118,9 +117,7 @@ class MarketController extends Controller
      */
     public function branches(Market $market)
     {
-
         $market->load('branches');
-
         return view('board.markets.market_branches' ,  compact('market'));
     }
 
@@ -162,9 +159,9 @@ class MarketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Market $market)
     {
-        // return view('board.markets.edit'  , compact('') )
+        return view('board.markets.edit'  , compact('market') );
     }
 
     /**
@@ -174,9 +171,33 @@ class MarketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateMarketRequest $request , Market $market )
     {
-        //
+        if (!$market->edit($request->all())) 
+            return back()->with('error_msg'  , trans('markets.updating_error') );
+
+        if($request->hasFile('logo')) {
+            $path = $request->file('logo')->store('markets'  , 's3' );
+            $market->setLogo(basename($path));
+        }
+
+
+        if ($request->hasFile('files')) {
+
+            for ($i = 0; $i <count($request->file('files')) ; $i++) {
+                $files = [];
+                $path = $request->file('files')[$i]->store('markets_documents'  , 's3' );
+                $files[] = new MarketDocument([
+                    'file' => basename($path) , 
+                    'market_id' => $market->id , 
+                    'admin_id' => Auth::guard('admin')->id(),
+                ]);
+            }
+
+            $market->documents()->saveMany($files);
+        }
+
+        return redirect(route('markets.show'  , ['market' => $market->id ] ))->with('success_msg'  , trans('markets.updating_success') );
     }
 
     /**
@@ -185,8 +206,9 @@ class MarketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Market $market)
     {
-        //
+        if($market->remove())
+            return redirect(route('markets.index'))->with('success_msg'  , trans('markets.deleted_success') );
     }
 }

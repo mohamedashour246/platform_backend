@@ -39,6 +39,11 @@ class Market extends Model
 	}
 
 
+	public function isActive()
+	{
+		return $this->active == 1 ? true : false;
+	}
+
 
 	public function branches()
 	{
@@ -58,9 +63,28 @@ class Market extends Model
     }
 
 
+     public function edit($data)
+    {
+    	$this->name = $data['market_name'];
+    	$this->notes = $data['notes'];
+    	$this->address = $data['address'];
+    	$this->phones = $data['phones'];
+    	$this->active = isset($data['active']) ? 1 : 0;
+    	return $this->save();
+    }
+
+
     public function setLogo($logo)
     {
     	$this->logo = $logo;
     	return $this->save();
+    }
+
+
+
+
+    public function remove()
+    {
+    	return $this->delete();
     }
 }

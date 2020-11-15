@@ -7,10 +7,10 @@
 				@lang('drivers.search')
 			</div>
 			<div class="card-body">
-				<a  href="{{ route('drivers.create') }}" class="btn btn-dark float-right" > <i class="icon-user-plus "></i> @lang('drivers.add_new_driver')  </a>
-				<button class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
+				<a  href="{{ route('drivers.create') }}" class="btn btn-primary float-right" > <i class="icon-user-plus "></i> @lang('drivers.add_new_driver')  </a>
+				{{-- <button class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
 					<i class="icon-filter3"></i> @lang('drivers.advanced_search')
-				</button>
+				</button> --}}
 				<div class="form-group">
 					<div class="row">
 						<div class="col-md-12">

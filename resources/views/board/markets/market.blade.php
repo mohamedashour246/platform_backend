@@ -29,6 +29,11 @@ $lang = session()->get('locale');
 
 <div class="row">
 
+	<div class="col-md-12">
+		@include('board.layout.messages')
+	</div>
+
+
 	<div class="col-md-12 mb-3">
 		<div class="header-elements ">
 			<div class="float-right">
@@ -44,7 +49,6 @@ $lang = session()->get('locale');
 	</div>
 
 
-	@include('board.layout.messages')
 
 	<div class="col-md-2">
 		<div class="card">
