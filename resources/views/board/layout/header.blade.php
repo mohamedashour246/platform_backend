@@ -2,7 +2,7 @@
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand wmin-0 mr-5">
 			<a href="{{ route('board.index') }}" class="d-inline-block">
-				<img src="{{ asset('board_assets/global_assets/images/logo_light.png') }}" alt="">
+				<img src="{{ asset('board_assets/logo.png') }}" alt="">
 			</a>
 		</div>
 

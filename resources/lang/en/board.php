@@ -8,6 +8,10 @@ return [
 	'home' => 'Home' ,
 	'logout' => 'Log Out' , 
 	'update_success' => 'Data Updated Successfully', 
+	'admins' => 'admins' , 
+	'trips' => 'trips' , 
+	'drivers' => 'drivers' , 
+	'markets' => 'markets'
 ];
 
 
