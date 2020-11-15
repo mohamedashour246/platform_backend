@@ -16,10 +16,13 @@
 	<link href="{{ asset('board_assets/rtl/assets/css/colors.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('board_assets/rtl/assets/css/lang.css') }}" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
+	@livewireStyles
+
 
 
 	@yield('styles')
 
+	@livewireScripts
 	<!-- Core JS files -->
 	<script src="{{ asset('board_assets/global_assets/js/main/jquery.min.js') }}"></script>
 	<script src="{{ asset('board_assets/global_assets/js/main/bootstrap.bundle.min.js') }}"></script>

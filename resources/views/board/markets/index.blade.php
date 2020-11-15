@@ -38,12 +38,12 @@ $lang = session()->get('locale');
 
 
 @section('styles')
-@livewireStyles
+
 
 @endsection
 
 @section('scripts')
-@livewireScripts
+
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
 
