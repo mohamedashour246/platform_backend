@@ -14,6 +14,13 @@ class Admins extends Component
 	public $paginate = 2;
 
 
+    
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+
 	protected $paginationTheme = 'bootstrap';
 
 

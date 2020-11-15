@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
 Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'namespace' => 'Board'] , function(){
 	Route::get('/' , 'BoardController@index' )->name('board.index');
 	Route::get('/language/{lang}' , 'BoardController@change_language' )->name('board.lang');
@@ -26,6 +25,16 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::patch('/password' , 'ProfileController@change_password' )->name('profile.password.change');
 	Route::resource('/admins'  , 'AdminController');
 	Route::resource('/drivers'  , 'DriverController');
+	Route::resource('/markets'  , 'MarketController' );
+	Route::resource('/branches'  , 'BranchController' );
+	Route::get('/markets/{market}/admin'  , 'MarketController@admin' )->name('market.admin');
+	Route::get('/markets/{market}/branches'  , 'MarketController@branches' )->name('market.branches');
+	Route::get('/markets/{market}/trips'  , 'MarketController@trips' )->name('market.trips');
+	Route::get('/markets/{market}/documents'  , 'MarketController@documents' )->name('market.documents');
+	Route::get('/markets/{market}/emails'  , 'MarketController@emails' )->name('market.emails');
+	Route::get('/markets/{market}/bank_accounts'  , 'MarketController@bank_accounts' )->name('market.bank_accounts');
+	Route::get('/markets/{market}/delivery_prices'  , 'MarketController@delivery_prices' )->name('market.delivery_prices');
+	Route::get('/market_documents/{file}/download'  , 'MarketDocumentController@download' )->name('market.documents.download');
 });
 
 Route::get('/test', function () {

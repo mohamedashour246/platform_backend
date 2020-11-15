@@ -35,7 +35,8 @@ return [
 	'delete_admin' => 'حذف المشرف' , 
 	'deleted_success' => 'تم حذف المشرف بنجاح',
 	'picture' => 'الصوره الشخصيه' , 
-	'back' => 'تراجع'
+	'back' => 'تراجع' ,
+	'deleted_success' => 'تم الحذف بنجاح'
 
 	
 

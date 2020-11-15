@@ -4,10 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Branch extends Model
+class MarketEmail extends Model
 {
     
 
+
+
+    public function admin()
+    {
+    	return $this->belongsTo(Admin::class , 'admin_id');
+    }
 
 
     public function market()

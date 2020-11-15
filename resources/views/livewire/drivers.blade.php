@@ -8,7 +8,7 @@
 			</div>
 			<div class="card-body">
 				<a  href="{{ route('drivers.create') }}" class="btn btn-dark float-right" > <i class="icon-user-plus "></i> @lang('drivers.add_new_driver')  </a>
-				<button type="button" class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
+				<button class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
 					<i class="icon-filter3"></i> @lang('drivers.advanced_search')
 				</button>
 				<div class="form-group">
@@ -92,7 +92,7 @@
 						<tr>
 							<td  >{{ $i++ }}</td>
 							<td > <img class="img-thumbnail" width="50" height="50" src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" alt=""> </td>
-							<td> {{ $driver->name }} </td>
+							<td> <a href="{{ route('drivers.show'  , ['driver' => $driver->id] ) }}">  {{ $driver->name }} </a> </td>
 							<td> {{ $driver->code }} </td>
 							<td>
 								@switch($driver->available)

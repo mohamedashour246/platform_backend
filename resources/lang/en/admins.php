@@ -35,7 +35,8 @@ return [
 	'delete_admin' => 'Delete admin' , 
 	'deleted_success' => 'admin deleted  successfully' , 
 	'picture' => 'Picture' , 
-	'back' => 'Back'
+	'back' => 'Back' ,
+
 
 
 ];

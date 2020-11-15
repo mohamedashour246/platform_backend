@@ -147,6 +147,6 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         if($admin->remove())
-            return redirect(route('admins.index'))->with('success_msg' , trans('deleted_success') );
+            return redirect(route('admins.index'))->with('success_msg' , trans('admins.deleted_success') );
     }
 }

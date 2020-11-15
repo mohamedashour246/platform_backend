@@ -18,24 +18,31 @@ class Drivers extends Component
 
 	protected $paginationTheme = 'bootstrap';
 
+
+	public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+
     public function render()
     {
 
     	$drivers = Driver::query();
     	$drivers->with(['admin'  , 'country' ]);
-    	if ($this->active) {
-    		// dd($this->active);
-
+    	if (!empty($this->active)) {
     		$drivers->where('active' , $this->active );
     	}
 
-    	if ($this->available) {
-    		// dd($this->available);
+    	if (!empty($this->available)) {
     		$drivers->where('available' , $this->available );
     	}
 
+    	if (!empty($this->search)) {
+    		$drivers->where('name', 'like', '%' . $this->search . '%' );
+    	}
 
-    	$drivers = $drivers->where('name', 'like', '%' . $this->search . '%' )->latest()->simplePaginate($this->paginate);
+    	$drivers = $drivers->latest()->simplePaginate($this->paginate);
         return view('livewire.drivers' , compact('drivers') );
     }
 }

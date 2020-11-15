@@ -163,8 +163,10 @@ $lang = session()->get('locale');
 
 
 
-					<div class="text-right">
-						<button type="submit" class="btn btn-warning"> @lang('admins.edit') </button>
+			
+					<div class="card-footer bg-light" >
+						<button type="submit" class="btn btn-warning float-right ml-2"> @lang('admins.edit') </button>
+						<a href="{{ route('admins.index') }}" class="btn btn-secondary "> @lang('admins.back') </a>
 					</div>
 				</form>
 			</div>
@@ -192,10 +194,10 @@ $lang = session()->get('locale');
 
 
 		@if ($admin->type == 'superadmin')
-				$('input.permissions').each(function(){
-					$(this).prop('disabled',true);
-					$.uniform.update();
-				});
+		$('input.permissions').each(function(){
+			$(this).prop('disabled',true);
+			$.uniform.update();
+		});
 		@endif
 
 		$('select[name="type"]').on('select2:select', function(event) {

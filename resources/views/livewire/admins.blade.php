@@ -75,7 +75,18 @@
 								@endswitch
 							</td>
 							<td>{{ $admin->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $admin->created_at->diffForHumans() }} </span> </td>
-							<td></td>
+							<td>
+								<a target="_blank" href="{{ route('admins.show'  , ['admin' => $admin->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+									<i class="icon-eye2 text-primary-800"></i>
+								</a>
+								<a target="_blank" href="{{ route('admins.edit' , ['admin' => $admin->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+									<i class="icon-pencil7 text-warning-800"></i></a>
+								<form action="{{ route('admins.destroy'  , ['admin' => $admin->id] ) }}" class="form-inline float-right" method="POST" >
+									@csrf
+									@method('DELETE')
+									<button type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i></button>
+								</form>
+							</td>
 						</tr>
 
 						@endforeach
