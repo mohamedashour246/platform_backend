@@ -9,6 +9,14 @@ class Driver extends Model
 {
     
 
+
+
+ protected $dates = [
+        'working_start_time' , 
+        'working_end_time' , 
+    ];
+
+
 	public function admin()
 	{
 		return $this->belongsTo(Admin::class , 'admin_id');
@@ -78,5 +86,10 @@ class Driver extends Model
     	return $this->save();
     }
 
+
+    public function remove()
+    {
+        return $this->delete();
+    }
 
 }

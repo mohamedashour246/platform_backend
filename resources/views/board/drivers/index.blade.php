@@ -29,6 +29,7 @@ $lang = session()->get('locale');
 
 <div class="row">
 	<div class="col-md-12">
+		@include('board.layout.messages')
 		<livewire:drivers />
 	</div>
 </div>

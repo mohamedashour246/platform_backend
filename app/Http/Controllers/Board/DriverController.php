@@ -62,9 +62,10 @@ class DriverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Driver $driver)
     {
-        //
+        $driver->load(['country' , 'admin']);
+        return view('board.drivers.driver' , compact('driver'));
     }
 
     /**
@@ -107,8 +108,11 @@ class DriverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Driver $driver)
     {
-        //
+
+        if($driver->remove())
+            return redirect(route('drivers.index'))->with('success_msg' , trans('drivers.deleted_success'));
+        
     }
 }
