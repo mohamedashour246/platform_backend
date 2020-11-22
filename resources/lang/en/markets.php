@@ -71,7 +71,9 @@ return [
 	'bank_name' => 'Bank Name' , 
 	'bank_account_number' => 'Bank Account number' , 
 	'account_owner_name' => 'Bank owner name' , 
-	'delete' => 'Delete'
+	'delete' => 'Delete' , 
+	'market_emails' => 'Market Emails '
+
 ];
 
  ?>

@@ -165,6 +165,22 @@ class MarketController extends Controller
 
 
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function delivery_prices(Market $market)
+    {
+        $market->load(['bank_accounts' , 'bank_accounts.admin'  ]);
+        return view('board.markets.market_bank_accounts' ,  compact('market'));
+    }
+
+
+
+
+
 
     /**
      * Display the specified resource.

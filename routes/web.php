@@ -28,6 +28,8 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::resource('/markets'  , 'MarketController' );
 	Route::resource('/branches'  , 'BranchController' );
 	Route::resource('/trips'  , 'TripController' );
+	Route::resource('/cities'  , 'CityController' );
+	Route::resource('/governorates'  , 'GovernorateController');
 	Route::get('/markets/{market}/admin'  , 'MarketController@admin' )->name('market.admin');
 	Route::get('/markets/{market}/branches'  , 'MarketController@branches' )->name('market.branches');
 	Route::get('/markets/{market}/trips'  , 'MarketController@trips' )->name('market.trips');

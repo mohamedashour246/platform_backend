@@ -158,7 +158,9 @@ return [
         'working_start_time' => 'وقت بدايه العمل' , 
         'working_end_time' => 'وقت انتهاء العمل' , 
         'driver_name' => 'اسم السائق' , 
-        'bounce' => 'المكافئه'
+        'bounce' => 'المكافئه' , 
+        'name_ar' => 'الاسم بالعربيه' , 
+        'name_en' => 'الاسم بالانجليزيه'
     ],
 
 ];
