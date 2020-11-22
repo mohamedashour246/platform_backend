@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Governorate;
 use App\Models\City;
+use App\Http\Requests\Cities\StoreCityRequest;
+use App\Http\Requests\Cities\UpdateCityRequest;
 class CityController extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        return view('board.cities.index');
     }
 
     /**
@@ -36,9 +38,13 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCityRequest $request)
     {
-        //
+        $city = new City;
+        if($city->add($request->all()))
+            return redirect(route('cities.index'))->with('success_msg' , trans('cities.adding_success') );
+
+        return back()->with('error_msg' , trans('cities.adding_error') );
     }
 
     /**
@@ -47,9 +53,10 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(City $city)
     {
-        //
+        $city->load(['governorate' , 'admin']);
+        return view('board.cities.city' , compact('city'));
     }
 
     /**
@@ -58,9 +65,11 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(City $city)
     {
-        //
+        $lang = session()->get('locale');
+        $governorates = Governorate::select('id' , 'name_'.$lang)->get();
+        return view('board.cities.edit'  , compact('governorates' , 'city') );
     }
 
     /**
@@ -70,9 +79,12 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCityRequest $request,City $city)
     {
-        //
+         if($city->edit($request->all()))
+            return redirect(route('cities.index'))->with('success_msg' , trans('cities.updating_success') );
+
+        return back()->with('error_msg' , trans('cities.updating_error') );
     }
 
     /**

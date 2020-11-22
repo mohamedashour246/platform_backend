@@ -3,22 +3,22 @@ $lang = session()->get('locale');
 @endphp
 @extends('board.layout.master')
 @section('title')
-@lang('governorates.edit_governorate_details')
+@lang('cities.edit_city_details')
 @endsection
 
 
 @section('header')
-<div class="page-header ">
+<div class="page-header">
 	<div class="page-header-content header-elements-md-inline">
 		<div class="page-title d-flex">
-			<h4><i class="icon-arrow-right6 mr-2"></i> @lang('governorates.governorates') </h4>
+			<h4><i class="icon-arrow-right6 mr-2"></i> @lang('cities.cities') </h4>
 			<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
 				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('governorates.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('governorates.governorates') </a>
-				<span class="breadcrumb-item active"> @lang('governorates.edit_governorate_details') </span>
+				<a href="{{ route('cities.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('cities.cities') </a>
+				<span class="breadcrumb-item active"> @lang('cities.edit_city_details') </span>
 			</div>
 		</div>
 	</div>
@@ -34,7 +34,7 @@ $lang = session()->get('locale');
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
-				<h5 class="card-title"> @lang('governorates.edit_governorate_details')</h5>
+				<h5 class="card-title"> @lang('cities.edit_city_details') </h5>
 				<div class="header-elements">
 					<div class="list-icons">
 						<a class="list-icons-item" data-action="collapse"></a>
@@ -43,69 +43,85 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
+			<form action="{{ route('cities.update' , ['city' => $city->id ] ) }}" method="POST"  enctype="multipart/form-data" >
+				<div class="card-body">
 
-			<div class="card-body">
-				<form action="{{ route('governorates.update'  , ['governorate' => $governorate->id] ) }}" method="POST"  enctype="multipart/form-data" >
 					@csrf
 					@method('PATCH')
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-4">
-								<label> @lang('governorates.name_ar') </label>
-								<input type="text" name="name_ar" value="{{ $governorate->name_ar }}" class="form-control @error('name_ar') is-invalid @enderror " >
-								@error('name_ar')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
 
 							<div class="col-md-4">
-								<label> @lang('governorates.name_en') </label>
-								<input type="text" name="name_en" value="{{ $governorate->name_en }}" class="form-control @error('name_en') is-invalid @enderror ">
-								@error('name_en')
+								<label> @lang('cities.name_ar') </label>
+								<input type="text" name="name_ar" value="{{ $city->name_ar }}" class="form-control @error('name_ar') is-invalid @enderror ">
+								@error('name_ar')
 								<label  class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
 
 							<div class="col-md-4">
+								<label> @lang('cities.name_en') </label>
+								<input type="text" name="name_en" value="{{ $city->name_en }}" class="form-control @error('name_en') is-invalid @enderror " >
+								@error('name_en')
+								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
+							</div>
+
+							<div class="col-md-4">
 								<div class="form-group">
-									<label> @lang('governorates.country') </label>
-									<select name="country_id" class="form-control select" data-fouc>
-										
-									@foreach ($countries as $country)
-										<option value="{{ $country->id }}" {{ $country->id == $governorate->country_id ? 'selected="selected"' : '' }} > {{ $country['name_'.$lang] }} </option>
-									@endforeach
+									<label> @lang('cities.governorate') </label>
+									<select name="governorate_id" class="form-control select" data-fouc>
+										@foreach ($governorates as $governorate)
+										<option value="{{ $governorate->id }}" {{ $governorate->id == $city->governorate_id ? 'selected="selected"' : '' }} >{{ $governorate['name_'.$lang] }}</option>
+										@endforeach
 									</select>
 								</div>
 							</div>
 						</div>
 					</div>
-
-
-
 					<div class="form-group">
 						<div class="row">
+
 							<div class="col-md-4">
-								<div class="form-check form-check-switchery mt-4">
+								<label> @lang('cities.price_within_city') </label>
+								<input type="text" name="price_within_city" value="{{ $city->price_within_city }}" class="form-control @error('price_within_city') is-invalid @enderror " >
+								@error('price_within_city')
+								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
+							</div>
+
+
+
+							<div class="col-md-4">
+								<label> @lang('cities.price_outside_city') </label>
+								<input type="text" name="price_outside_city" value="{{ $city->price_outside_city }}" class="form-control @error('price_outside_city') is-invalid @enderror " >
+								@error('price_outside_city')
+								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
+							</div>
+
+
+
+							<div class="col-md-4">
+								<div class="form-check form-check-switchery">
 									<label class="form-check-label">
-										<input type="checkbox" name="active" class="form-check-input-switchery " {{ $governorate->isActive() ? 'checked' : '' }} data-fouc>
-										@lang('governorates.active')
+										<input type="checkbox" name="active" class="form-check-input-switchery" {{ $city->isActive() ? 'checked' : '' }} data-fouc>
+										@lang('cities.active')
 									</label>
 								</div>
 							</div>
+
 						</div>
 					</div>
 
 
+				</div>
 
-
-
-			
-					<div class="card-footer bg-light" >
-						<button type="submit" class="btn btn-warning float-right ml-2"> @lang('governorates.edit') </button>
-						<a href="{{ route('governorates.index') }}" class="btn btn-secondary "> @lang('governorates.back') </a>
-					</div>
-				</form>
-			</div>
+				<div class="card-footer bg-light" >
+					<button type="submit" class="btn btn-warning float-right ml-2"> @lang('cities.edit') </button>
+					<a href="{{ route('cities.index') }}" class="btn btn-secondary "> @lang('cities.back') </a>
+				</div>
+			</form>
 		</div>
 		<!-- /account settings -->
 	</div>
@@ -126,34 +142,6 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 <script>
 	$(function() {
-		// $("#firstname").attr("disabled", "disabled");
-
-
-		@if ($governorate->type == 'supergovernorate')
-		$('input.permissions').each(function(){
-			$(this).prop('disabled',true);
-			$.uniform.update();
-		});
-		@endif
-
-		$('select[name="type"]').on('select2:select', function(event) {
-			
-			var governorate_type = $(event.currentTarget).val();
-			console.log(governorate_type);
-			if (governorate_type == 'supergovernorate') {
-				$('input.permissions').each(function(){
-					console.log(governorate_type);
-					$(this).prop('disabled',true);
-					$.uniform.update();
-				});
-			} else {
-				$('input.permissions').each(function(){
-					console.log(governorate_type);
-					$(this).prop('disabled',false);
-					$.uniform.update();
-				});
-			}
-		});
 
 
 		$('.select').select2({

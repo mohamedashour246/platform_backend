@@ -143,24 +143,6 @@ $lang = session()->get('locale');
 	$(function() {
 		// $("#firstname").attr("disabled", "disabled");
 
-		$('select[name="type"]').on('select2:select', function(event) {
-			
-			var city_type = $(event.currentTarget).val();
-			console.log(city_type);
-			if (city_type == 'supercity') {
-				$('input.permissions').each(function(){
-					console.log(city_type);
-					$(this).prop('disabled',true);
-					$.uniform.update();
-				});
-			} else {
-				$('input.permissions').each(function(){
-					console.log(city_type);
-					$(this).prop('disabled',false);
-					$.uniform.update();
-				});
-			}
-		});
 
 
 		$('.select').select2({
