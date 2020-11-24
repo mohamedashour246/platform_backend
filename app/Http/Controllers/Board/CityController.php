@@ -105,11 +105,24 @@ class CityController extends Controller
     }
 
 
+    public function get_governorate_cities(Request $request)
+    {
+        $lang = session()->get('locale');
+        $cities = City::select('name_'.$lang , 'id')->where('governorate_id' , $request->governorate_id)->get();
+        $options = '<option> </option>';
+
+       foreach ($cities as $city) {
+            $name = $city['name_'.$lang];
+            $options .= '<option value="'.$city->id.'" >'.$name.'</option>';
+       }
+
+
+       return $options;
+    }
 
 
     public function ajax_search(Request $request)
     {
-        
         // dd($request->all());
         $keyword = $request->q;
         if ($request->filled('from_governorate_id')) {
@@ -117,12 +130,6 @@ class CityController extends Controller
         } else {
              $cities = City::select('name_en' ,'name_ar' , 'id')->where('name_en',  'like', '%' . $keyword . '%')->orWhere('name_ar' ,  'like', '%' . $keyword . '%' )->get();
         }
-
-       
-       
-
         return $cities;
-
-
     }
 }
