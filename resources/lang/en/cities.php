@@ -35,6 +35,8 @@ return [
 	'price_within_city' => 'price within city' , 
 	'price_outside_city' => 'price outside city' , 
 	'governorate' => 'Governorate' , 
+	'save_and_add_more' => 'Save & add more'
+
 
 
 

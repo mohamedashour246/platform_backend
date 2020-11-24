@@ -8,6 +8,8 @@ use App\Models\Governorate;
 use App\Models\Country;
 use App\Http\Requests\Governorates\StoreGovernorateRequest;
 use App\Http\Requests\Governorates\UpdateGovernorateRequest;
+use App\Models\DeliveryPrice;
+use Auth;
 class GovernorateController extends Controller
 {
     /**
@@ -55,7 +57,8 @@ class GovernorateController extends Controller
      */
     public function show(Governorate $governorate)
     {
-        $governorate->load(['admin' , 'country']);
+        $governorate->withCount('cities');
+        $governorate->load(['admin','country' , 'cities' , 'delivery_prices' , 'delivery_prices.destinationGovernorate' ]);
         return  view('board.governorates.governorate'  , compact('governorate') );
     }
 
@@ -97,4 +100,51 @@ class GovernorateController extends Controller
     {
         //
     }
+
+
+
+
+
+    public function delivery_prices_create(Governorate $governorate)
+    {
+        $exception_governorates = $governorate->delivery_prices()->pluck('to_governorate')->toArray();
+        $exception_governorates[] = $governorate->id ;
+        $governorates = Governorate::whereNotIn('id' ,  $exception_governorates )->get();
+        return view('board.governorates.delivery_prices.create' , compact('governorate' , 'governorates'));
+    }
+
+
+    public function delivery_prices_store(Request $request ,  Governorate $governorate)
+    {
+
+        $delivery_prices = [];
+        for ($i = 0; $i <count($request->prices) ; $i++) {
+            if ($request->prices[$i] != null ) {
+                $delivery_prices[] = new DeliveryPrice([
+                    'price' => $request->prices[$i] ,
+                    'admin_id' => Auth::guard('admin')->id(),
+                    'from_governorate' => $governorate->id , 
+                    'to_governorate' => $request->from_governorate_id[$i],
+                ]);
+            } 
+        }
+
+        $governorate->delivery_prices()->saveMany($delivery_prices);
+
+        return redirect(route('governorates.delivery_prices.index'  , ['governorate' => $governorate->id ] ))->with('success_msg' , trans('governorates.delivery_prices_add_successfully') );
+    }
+
+
+
+    public function delivery_prices(Governorate $governorate)
+    {
+        $governorate->load(['delivery_prices.destinationGovernorate' , 'delivery_prices.admin' , 'delivery_prices' ]);
+        return view('board.governorates.delivery_prices.index'  , compact('governorate') );
+        
+    }
+
+
+
+
 }
+

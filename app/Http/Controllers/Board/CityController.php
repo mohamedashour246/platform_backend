@@ -8,6 +8,7 @@ use App\Models\Governorate;
 use App\Models\City;
 use App\Http\Requests\Cities\StoreCityRequest;
 use App\Http\Requests\Cities\UpdateCityRequest;
+use App\Http\Resources\CityResourceCollection;
 class CityController extends Controller
 {
     /**
@@ -40,9 +41,14 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
+        // dd($request->all());
         $city = new City;
-        if($city->add($request->all()))
+        if($city->add($request->all())) {
+            if (isset($request->save_and_add_more)) 
+                return redirect(route('cities.create'))->with('success_msg' , trans('cities.adding_success') );
+            
             return redirect(route('cities.index'))->with('success_msg' , trans('cities.adding_success') );
+        }
 
         return back()->with('error_msg' , trans('cities.adding_error') );
     }
@@ -96,5 +102,27 @@ class CityController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+
+    public function ajax_search(Request $request)
+    {
+        
+        // dd($request->all());
+        $keyword = $request->q;
+        if ($request->filled('from_governorate_id')) {
+            $cities = City::select('name_en' ,'name_ar' , 'id')->where('name_en',  'like', '%' . $keyword . '%')->orWhere('name_ar' ,  'like', '%' . $keyword . '%' )->where('governorate_id' , $request->from_governorate_id)->get();
+        } else {
+             $cities = City::select('name_en' ,'name_ar' , 'id')->where('name_en',  'like', '%' . $keyword . '%')->orWhere('name_ar' ,  'like', '%' . $keyword . '%' )->get();
+        }
+
+       
+       
+
+        return $cities;
+
+
     }
 }

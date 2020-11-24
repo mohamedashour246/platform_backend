@@ -63,15 +63,19 @@ $lang = session()->get('locale');
 			</div>
 
 			<div class="card-body">
-				<table class="table  table-xs border-top-0 my-2">
+				<table class="table   table-xs border-top-0 my-2">
 					<tbody>
 						<tr>
-							<th class="font-weight-bold text-dark">@lang('governorates.username')</th>
-							<td class="text-left"> {{ $governorate->username }} </td>
+							<th class="font-weight-bold text-dark">@lang('governorates.name_en')</th>
+							<td class="text-left"> {{ $governorate->name_en }} </td>
 						</tr>
 						<tr>
-							<th class="font-weight-bold text-dark"> @lang('governorates.email') </th>
-							<td class="text-left">	{{ $governorate->email }}	</td>
+							<th class="font-weight-bold text-dark">@lang('governorates.name_ar')</th>
+							<td class="text-left"> {{ $governorate->name_ar }} </td>
+						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark">@lang('governorates.country')</th>
+							<td class="text-left"> {{ optional($governorate->country)['name_'.$lang] }} </td>
 						</tr>
 						<tr>
 							<th class="font-weight-bold text-dark"> @lang('governorates.activation') </th>
@@ -86,20 +90,6 @@ $lang = session()->get('locale');
 								@endswitch
 							</td>
 						</tr>
-
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('governorates.type') </th>
-							<td class="text-left">	
-								@switch($governorate->type)
-								@case('governorate')
-								<label  class="badge badge-primary" > @lang('governorates.governorate') </label>
-								@break
-								@case('supergovernorate')
-								<label  class="badge badge-primary" > @lang('governorates.supergovernorate') </label>
-								@break
-								@endswitch
-							</td>
-						</tr>
 						<tr>
 							<td class="font-weight-bold text-dark"> @lang('governorates.created_at') </td>
 							<td class="text-left"> {{ $governorate->created_at->toFormattedDateString() }} - {{ $governorate->created_at->diffForHumans() }} </td>
@@ -107,31 +97,17 @@ $lang = session()->get('locale');
 
 						<tr>
 							<td class="font-weight-bold text-dark"> @lang('governorates.added_by') </td>
-							<td class="text-left font-weight-bold"> <a href="{{ route('governorates.show'  , ['governorate' => $governorate->id] ) }}"> {{ optional($governorate->addedBy)->username }} </a> </td>
+							<td class="text-left font-weight-bold"> <a href="{{ route('admins.show'  , ['admin' => $governorate->admin_id] ) }}"> {{ optional($governorate->admin)->username }} </a> </td>
 						</tr>
-
-
 						<tr>
-							<td class="font-weight-bold text-dark"> @lang('governorates.notes') </td>
-							<td class="text-left font-weight-bold"> {{ $governorate->notes }} </td>
+							<td class="font-weight-bold text-dark"> @lang('governorates.number_cities') </td>
+							<td class="text-left font-weight-bold"> {{ $governorate->cities()->count() }}  </td>
 						</tr>
 
-
-						<tr>
-							<td class="font-weight-semibold">  @lang('governorates.current_profile_picture') </td>
-							<td class="text-right text-muted">
-								<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('governorates/'.$governorate->image) }}" alt="">
-							</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
-			<div class="card-footer bg-white d-flex justify-content-between align-items-center">
-				<button type="button" class="btn btn-outline bg-indigo-400 text-indigo-400 border-indigo-400"> المشرفين </button>
-				<a  href="{{ route('governorates.edit'  , ['governorate' => $governorate->id ] ) }}" class="btn bg-warning">تعديل</a>
-			</div>
 		</div>
-		<!-- /account settings -->
 	</div>
 </div>
 
@@ -143,81 +119,5 @@ $lang = session()->get('locale');
 @endsection
 
 @section('scripts')
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-<script>
-	$(function() {
-		// $("#firstname").attr("disabled", "disabled");
-
-
-		@if ($governorate->type == 'supergovernorate')
-		$('input.permissions').each(function(){
-			$(this).prop('disabled',true);
-			$.uniform.update();
-		});
-		@endif
-
-		$('select[name="type"]').on('select2:select', function(event) {
-			
-			var governorate_type = $(event.currentTarget).val();
-			console.log(governorate_type);
-			if (governorate_type == 'supergovernorate') {
-				$('input.permissions').each(function(){
-					console.log(governorate_type);
-					$(this).prop('disabled',true);
-					$.uniform.update();
-				});
-			} else {
-				$('input.permissions').each(function(){
-					console.log(governorate_type);
-					$(this).prop('disabled',false);
-					$.uniform.update();
-				});
-			}
-		});
-
-
-		$('.select').select2({
-			minimumResultsForSearch: Infinity
-		});
-
-		$('.form-input-styled').uniform({
-			fileButtonClass: 'action btn bg-primary'
-		});
-
-
-		var _componentSwitchery = function() {
-			if (typeof Switchery == 'undefined') {
-				console.warn('Warning - switchery.min.js is not loaded.');
-				return;
-			}
-
-
-			var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
-			elems.forEach(function(html) {
-				var switchery = new Switchery(html);
-			});
-
-			var primary = document.querySelector('.form-check-input-switchery-primary');
-			var switchery = new Switchery(primary, { color: '#2196F3' });
-		};
-    // Bootstrap switch
-    var _componentBootstrapSwitch = function() {
-    	if (!$().bootstrapSwitch) {
-    		console.warn('Warning - switch.min.js is not loaded.');
-    		return;
-    	}
-
-        // Initialize
-        $('.form-check-input-switch').bootstrapSwitch();
-    };
-    _componentSwitchery();
-
-
-
-});
-</script>
 @endsection

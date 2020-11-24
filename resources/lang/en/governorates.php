@@ -31,10 +31,23 @@ return [
 	'name_ar' => 'Arabic name',
 	'name_en' => 'English name',
 	'country' => 'Country' , 
-	'search' => 'Search'
+	'search' => 'Search' , 
+	'governorate_delivery_prices' => 'Governorate delivery prices'  , 
+	'deliver_to_governorate' => 'deliver to governorate' , 
+	'all_governorates_are_done' => 'All governorates are priced'  , 
+	'number_cities' => 'number of cities in this governorate'  , 
+	'delivery_prices' => 'delivery prices' , 
+	'delivery_price' => 'delivery price' , 
+	'delete_delivery_price' => 'delete delivery price' , 
+	'edit_delivery_price_details' => 'edit delivery price details' , 
+	'editing_delivery_price_success' => 'editing delivery price success',
+	'no_delivery_prices_yet' => 'no delivery prices yet made to this governorate' , 
+	'add_delivery_prices_to_governorate' => 'add delivery prices to governorate' ,
+	'delivery_prices_add_successfully' => 'delivery prices to other governorates added successfully' , 
+	'from_governorate' => 'From Governorate'  , 
+	'to_governorate' => 'To governorate'  , 
 
-
-
+	
 ];
 
  ?>

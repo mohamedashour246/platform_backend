@@ -30,7 +30,25 @@ return [
 	'name_ar' => 'الاسم بالعربيه',
 	'name_en' => 'الاسم بالانجليزيه',
 	'country' => 'الدوله' , 
-	'search' => 'بحث'
+	'search' => 'بحث' , 
+	'governorate_delivery_prices' => 'سعر التوصيل للمحافظات' ,
+	'deliver_to_governorate' => 'توصيل الى محافظه' , 
+	'all_governorates_are_done' => 'تم وضع اسعار لجميع المحافظات' , 
+	'number_cities' => 'عدد المدن التباعه للمحافظه' , 
+	'delivery_prices' => 'اسعار التوصيل' , 
+	'delivery_price' => 'سعر التوصيل' , 
+	'delete_delivery_price' => 'حذذف سعر التوصيل' , 
+	'edit_delivery_price_details' => 'تعديل سعر التوصيل اللى المحافظه' , 
+	'editing_delivery_price_success' => 'تم تعديل سعر التوصيل بنجاح',
+	'no_delivery_prices_yet' => 'لم يتم إضافه اى اسعار توصيل خاصه بهذا المحافظه للمحافظات الاخر' , 
+	'add_delivery_prices_to_governorate' => 'إضافه سعر التوصيل الى المحافظات الاخرى' , 
+	'delivery_prices_add_successfully' => 'تم إضافه اسعار التوصيل الى المحافظات الاخر بنجاح' , 
+	'from_governorate' => 'من محافظه'  , 
+	'to_governorate' => 'الى محافظه'  , 
+
+
+
+
 
 
 	

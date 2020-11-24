@@ -31,7 +31,7 @@ class Cities extends Component
 
     public function render()
     {
-    	$cities =  City::latest()->where('name_ar', 'like', '%' . $this->search . '%')->orWhere('name_en', 'like', '%' . $this->search . '%')->simplePaginate($this->paginate);
+    	$cities =  City::with(['governorate'  , 'admin'])->latest()->where('name_ar', 'like', '%' . $this->search . '%')->orWhere('name_en', 'like', '%' . $this->search . '%')->simplePaginate($this->paginate);
         return view('livewire.cities' , compact('cities'));
     }
 }

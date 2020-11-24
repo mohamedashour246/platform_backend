@@ -21,6 +21,14 @@ class Governorate extends Model
     }
 
 
+
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
+
     public function add($data)
     {
     	$this->name_ar = $data['name_ar'];
@@ -45,6 +53,12 @@ class Governorate extends Model
     	$this->country_id = $data['country_id'];
     	$this->active = isset($data['active']) ? 1 : 0;
     	return $this->save();
+    }
+
+
+    public function delivery_prices()
+    {
+        return $this->hasMany(DeliveryPrice::class , 'from_governorate');
     }
 
 }

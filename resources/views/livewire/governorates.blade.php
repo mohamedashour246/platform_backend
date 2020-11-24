@@ -77,15 +77,22 @@
 							</td>
 							<td>{{ $governorate->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $governorate->created_at->diffForHumans() }} </span> </td>
 							<td>
-								<a target="_blank" href="{{ route('governorates.show',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.governorate_details')" href="{{ route('governorates.show',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
 									<i class="icon-eye2 text-primary-800"></i>
 								</a>
-								<a target="_blank" href="{{ route('governorates.edit' , ['governorate' => $governorate->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i></a>
+								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.delivery_prices')" href="{{ route('governorates.delivery_prices.index',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-info text-info-800 btn-icon ml-2">
+									<i class="icon-cash3 text-info-800"></i>
+								</a>
+								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.add_delivery_prices_to_governorate')" href="{{ route('governorates.delivery_prices.create',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon ml-2">
+									<i class="icon-plus3 text-primary-800"></i>
+								</a>
+								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.edit')" href="{{ route('governorates.edit' , ['governorate' => $governorate->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+									<i class="icon-pencil7 text-warning-800"></i>
+								</a>
 									<form action="{{ route('governorates.destroy'  , ['governorate' => $governorate->id] ) }}" class="form-inline float-right" method="POST" >
 										@csrf
 										@method('DELETE')
-										<button type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 "><i class="icon-trash"></i></button>
+										<button  data-popup="tooltip" title="@lang('governorates.delete_governorate')" type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 "><i class="icon-trash"></i></button>
 									</form>
 								</td>
 							</tr>

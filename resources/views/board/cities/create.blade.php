@@ -117,6 +117,7 @@ $lang = session()->get('locale');
 				</div>
 
 				<div class="card-footer bg-light" >
+					<button type="submit" name="save_and_add_more" value="true" class="btn btn-primary float-right ml-2"> @lang('cities.save_and_add_more')</button>
 					<button type="submit" class="btn btn-primary float-right ml-2"> @lang('cities.add') </button>
 					<a href="{{ route('cities.index') }}" class="btn btn-secondary "> @lang('cities.back') </a>
 				</div>

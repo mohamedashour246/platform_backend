@@ -30,14 +30,24 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::resource('/trips'  , 'TripController' );
 	Route::resource('/cities'  , 'CityController' );
 	Route::resource('/governorates'  , 'GovernorateController');
+	// Route::resource('/delivery_prices' , 'DeliveryPriceController' );
+
+	Route::get('/governorates/{governorate}/delivery_prices/create'  , 'GovernorateController@delivery_prices_create')->name('governorates.delivery_prices.create');
+	Route::post('/governorates/{governorate}/delivery_prices'  , 'GovernorateController@delivery_prices_store')->name('governorates.delivery_prices.store');
+	Route::get('/governorates/{governorate}/delivery_prices/'  , 'GovernorateController@delivery_prices' )->name('governorates.delivery_prices.index');
 	Route::get('/markets/{market}/admin'  , 'MarketController@admin' )->name('market.admin');
 	Route::get('/markets/{market}/branches'  , 'MarketController@branches' )->name('market.branches');
 	Route::get('/markets/{market}/trips'  , 'MarketController@trips' )->name('market.trips');
-	Route::get('/markets/{market}/documents'  , 'MarketController@documents' )->name('market.documents');
-	Route::get('/markets/{market}/emails'  , 'MarketController@emails' )->name('market.emails');
-	Route::get('/markets/{market}/bank_accounts'  , 'MarketController@bank_accounts' )->name('market.bank_accounts');
-	Route::get('/markets/{market}/delivery_prices'  , 'MarketController@delivery_prices' )->name('market.delivery_prices');
-	Route::get('/market_documents/{file}/download'  , 'MarketDocumentController@download' )->name('market.documents.download');
+	Route::get('/markets/{market}/documents' , 'MarketController@documents' )->name('market.documents');
+	Route::get('/markets/{market}/emails' , 'MarketController@emails' )->name('market.emails');
+	Route::get('/markets/{market}/bank_accounts' , 'MarketController@bank_accounts' )->name('market.bank_accounts');
+	Route::get('/markets/{market}/delivery_prices','MarketController@delivery_prices' )->name('market.delivery_prices');
+	Route::get('/market_documents/{file}/download','MarketDocumentController@download' )->name('market.documents.download');
+
+	Route::delete('/delivery_prices/{delivery_price}','DeliveryPriceController@destroy')->name('delivery_prices.destroy');
+	Route::get('/delivery_prices/{delivery_price}/edit','DeliveryPriceController@edit' )->name('delivery_prices.edit');
+	Route::patch('/delivery_prices/{delivery_price}','DeliveryPriceController@update' )->name('delivery_prices.update');
+	Route::get('/searching_cities'  , 'CityController@ajax_search');
 });
 
 Route::get('/test', function () {
@@ -47,7 +57,6 @@ Route::get('/test', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/Board/login' , 'Board\Auth\LoginController@login_form')->name('Board.login_form');
 Route::post('/Board/login' , 'Board\Auth\LoginController@login')->name('Board.login');

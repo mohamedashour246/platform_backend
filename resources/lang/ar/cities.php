@@ -34,6 +34,7 @@ return [
 	'price_within_city' => 'سعر التوصيل داخل المدينه' , 
 	'price_outside_city' => 'سعر التوصيل خارج المدينه' ,
 	'governorate' => 'المحافظه' , 
+	'save_and_add_more' => 'حفظ و إضافه اخر'
 	 
 
 
