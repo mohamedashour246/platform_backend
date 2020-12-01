@@ -66,8 +66,9 @@ return [
 	'bank_name' => 'اسم البنك' , 
 	'bank_account_number' => 'رقم الحساب ' , 
 	'account_owner_name' => 'اسم صاحب الحساب ' , 
-	'delete' => 'حذف'
-
+	'delete' => 'حذف' , 
+	'market_emails' => 'البريد الاكترونى الخاص بالمتجر ',
+	'' => ''
 
 
 

@@ -11,7 +11,8 @@ return [
 	'admins' => 'admins' , 
 	'trips' => 'trips' , 
 	'drivers' => 'drivers' , 
-	'markets' => 'markets'
+	'markets' => 'markets' , 
+	'shortcuts' => 'Shortcuts'
 ];
 
 
