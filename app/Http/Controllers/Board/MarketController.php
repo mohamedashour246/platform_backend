@@ -256,4 +256,14 @@ class MarketController extends Controller
         if($market->remove())
             return redirect(route('markets.index'))->with('success_msg'  , trans('markets.deleted_success') );
     }
+
+
+
+
+
+
+    public function ajax_search(Request $request) {
+        $markets = Market::select('name' , 'id')->where('name' , 'like', '%' . $request->q . '%' )->get();
+        return $markets;
+    }
 }

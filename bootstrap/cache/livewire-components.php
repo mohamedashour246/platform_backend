@@ -5,4 +5,5 @@
   'drivers' => 'App\\Http\\Livewire\\Drivers',
   'governorates' => 'App\\Http\\Livewire\\Governorates',
   'markets' => 'App\\Http\\Livewire\\Markets',
+  'trips' => 'App\\Http\\Livewire\\Trips',
 );

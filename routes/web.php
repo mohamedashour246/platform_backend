@@ -50,6 +50,13 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/searching_cities'  , 'CityController@ajax_search');
 	Route::get('/get_governorate_cities'  , 'CityController@get_governorate_cities');
 	Route::get('/get_cities_we_can_set_price_to_it' ,'CityDeliveryPriceController@get_cities_we_can_set_price_to_it');
+
+
+
+
+	//ajax request
+	Route::get('/ajax/search_markets' , 'MarketController@ajax_search');
+	Route::get('/ajax/search_branches' , 'BranchController@get_market_branches_via_ajax');
 });
 
 Route::get('/test', function () {

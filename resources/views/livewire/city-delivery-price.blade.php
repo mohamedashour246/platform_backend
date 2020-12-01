@@ -1,6 +1,6 @@
 @php
-	
-	$lang = session()->get('locale');
+
+$lang = session()->get('locale');
 @endphp
 
 <div class="row">
@@ -17,11 +17,29 @@
 				</button> --}}
 				<div class="form-group">
 					<div class="row">
-						<div class="col-md-6">
+						{{-- <div class="col-md-6">
 							<input type="text" id="search" wire:model="search" placeholder="@lang('prices.search_prices') ....." class="form-control" >
+						</div> --}}
+						<div class="col-md-6">					
+							<select  id="" wire:model="fromCity"  class="form-control select" >
+								<option value="all"></option>
+								@foreach ($cities as $city)
+									<option value="{{ $city->id }}"> {{ $city['name_'.$lang] }} </option>
+								@endforeach
+							</select>
+								{{ $fromCity }}
+
 						</div>
-						<div class="col-md-6">
-							<input type="text" id="search" wire:model="search" placeholder="@lang('prices.search_prices') ....." class="form-control" >
+
+
+						<div class="col-md-6" >
+							<select  id="" wire:model="toCity"   class="form-control select" >
+								<option value="all"></option>
+								@foreach ($cities as $city)
+									<option value="{{ $city->id }}"> {{ $city['name_'.$lang] }} </option>
+								@endforeach
+							</select>
+							{{ $toCity }}
 						</div>
 					</div>
 				</div>

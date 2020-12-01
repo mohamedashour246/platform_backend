@@ -10,7 +10,10 @@ return [
 	'from_city' => 'من مدينه' , 
 	'to_city' => 'الى مدينه' , 
 	'price_added_successfully' => 'تم إضافه السعر بنجاح',
-	'show_all_city_delivery_prices' => 'عرض كافه اسعار التوصيل للمدن '
+	'show_all_city_delivery_prices' => 'عرض كافه اسعار التوصيل للمدن ' , 
+	'show_all_city_delivery_prices' => 'عرض كافه اسعار التوصيل للمدن' , 
+	'add_new_price' => 'إضافه سعر جديد'
+
 
 
 ];

@@ -66,26 +66,18 @@
 
 	<!-- Page content -->
 	<div class="page-content pt-0">
-
+		@include('board.layout.sidebar')
 		<!-- Main content -->
 		<div class="content-wrapper">
-
 			<!-- Content area -->
 			<div class="content">
-
 				@yield('content')
-
 			</div>
 			<!-- /content area -->
-
 		</div>
 		<!-- /main content -->
-
 	</div>
 	<!-- /page content -->
-
-
 	@include('board.layout.footer')
-
 </body>
 </html>
