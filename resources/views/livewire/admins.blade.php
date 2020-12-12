@@ -23,8 +23,8 @@ $lang = session()->get('locale');
 		</div>
 
 		<div class="card" >
-			<div class="card-header  header-elements-inline">
-				<h5 class="card-title"> <i class="icon-users4 mr-1"></i> @lang('admins.admins')</h5>
+			<div class="card-header  header-elements-inline  bg-transparent ">
+				<h5 class="card-title"></h5>
 				<div class="header-elements">
 					<div class="wmin-200">
 						<select class="form-control form-control-select2 select" wire:model="paginate" >
