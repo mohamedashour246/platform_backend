@@ -27,7 +27,218 @@
 
 <div class="card-body">
 	<div class="row">
-		<div class="col-sm-6 col-xl-3">
+
+
+
+		<div class="col-xl-3">
+			<div class="card">
+				<div class="card-header bg-transparent header-elements-inline">
+					<span class="card-title font-weight-semibold"> احصائيات السائقين </span>
+					<div class="header-elements">
+						<div class="list-icons">
+							<a class="list-icons-item" data-action="collapse"></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> اجمالى السائقين <span class="text-muted ml-auto">
+								{{ App\Models\Driver::count() }} سائق
+							</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-primary" style="width: 50%">
+									<span class="sr-only">50% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> جاهز للعمل <span class="text-muted ml-auto">
+								1 
+							</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-success" style="width: 50%">
+									<span class="sr-only">50% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1">مشغول <span class="text-muted ml-auto">
+								1  
+							</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-warning" style="width: 50%">
+									<span class="sr-only">50% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> غير متاح  <span class="text-muted ml-auto">
+								1 
+							</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-danger" style="width: 50%">
+									<span class="sr-only">50% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+
+
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="col-xl-3">
+			<div class="card">
+				<div class="card-header bg-transparent header-elements-inline">
+					<span class="card-title font-weight-semibold"> احصائيات الرحلات</span>
+					<div class="header-elements">
+						<div class="list-icons">
+							<a class="list-icons-item" data-action="collapse"></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> اجمالى رحلات اليوم <span class="text-muted ml-auto">
+								50
+							</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-primary" style="width: 50%">
+									<span class="sr-only">50% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> الرحلات التى تم توصيلها <span class="text-muted ml-auto">22</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-success-400" style="width: 80%">
+									<span class="sr-only">80% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> الرحلات قيد التنفيذ <span class="text-muted ml-auto">10</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-warning" style="width: 70%">
+									<span class="sr-only">70% Complete</span>
+								</div>
+							</div>
+						</li>
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> الرحلات قيد التوصيل <span class="text-muted ml-auto">22</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-success-400" style="width: 80%">
+									<span class="sr-only">80% Complete</span>
+								</div>
+							</div>
+						</li>
+
+						<li>
+							<div class="d-flex align-items-center mb-1"> الرحلات الملغيه <span class="text-muted ml-auto">
+								2
+							</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-grey-400" style="width: 60%">
+									<span class="sr-only">60% Complete</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="col-xl-3">
+			<div class="card">
+				<div class="card-header bg-transparent header-elements-inline">
+					<span class="card-title font-weight-semibold">  الاحصائيات الماليه </span>
+					<div class="header-elements">
+						<div class="list-icons">
+							<a class="list-icons-item" data-action="collapse"></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> اجمالى اراد اليوم <span class="text-muted ml-auto">5500 دينار</span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-danger" style="width: 50%">
+									<span class="sr-only">50% Complete</span>
+								</div>
+							</div>
+						</li>
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> اجمالى التوصيل من الكاش <span class="text-muted ml-auto"> 500 دينار </span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-warning-400" style="width: 70%">
+									<span class="sr-only">70% Complete</span>
+								</div>
+							</div>
+						</li>
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1">  اجمالى ايراد التوصيل من الكى نت <span class="text-muted ml-auto"> 1000 دينار  </span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-success-400" style="width: 80%">
+									<span class="sr-only">80% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> اجمالى التوصيل  <span class="text-muted ml-auto"> 1500 دينار  </span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-success-400" style="width: 80%">
+									<span class="sr-only">80% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+						<li class="mb-3">
+							<div class="d-flex align-items-center mb-1"> المستحق دفع للمتجر  <span class="text-muted ml-auto"> 4000 دينار  </span></div>
+							<div class="progress" style="height: 0.125rem;">
+								<div class="progress-bar bg-success-400" style="width: 80%">
+									<span class="sr-only">80% Complete</span>
+								</div>
+							</div>
+						</li>
+
+
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+{{-- 		<div class="col-sm-6 col-xl-3">
 			<div class="card card-body">
 				<div class="media">
 					<div class="mr-3 align-self-center">
@@ -85,149 +296,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-6 col-xl-3">
-			<div class="card card-body">
-				<div class="media">
-					<div class="mr-3 align-self-center">
-						<i class="icon-users icon-3x text-success-400"></i>
-					</div>
-
-					<div class="media-body text-right">
-						<h3 class="font-weight-semibold mb-0">14</h3>
-						<span class="text-uppercase font-size-sm text-muted"> سائق متاح </span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-sm-6 col-xl-3">
-			<div class="card card-body">
-				<div class="media">
-					<div class="mr-3 align-self-center">
-						<i class="icon-users icon-3x text-indigo-400"></i>
-					</div>
-
-					<div class="media-body text-right">
-						<h3 class="font-weight-semibold mb-0">2</h3>
-						<span class="text-uppercase font-size-sm text-muted">سائق غير متاح</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-sm-6 col-xl-3">
-			<div class="card card-body">
-				<div class="media">
-					<div class="media-body">
-						<h3 class="font-weight-semibold mb-0">10</h3>
-						<span class="text-uppercase font-size-sm text-muted"> سائق يقوم بالتوصيل</span>
-					</div>
-
-					<div class="ml-3 align-self-center">
-						<i class="icon-users icon-3x text-blue-400"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-sm-6 col-xl-3">
-			<div class="card card-body">
-				<div class="media">
-					<div class="media-body">
-						<h3 class="font-weight-semibold mb-0">4</h3>
-						<span class="text-uppercase font-size-sm text-muted">سائق مستعد للتوصيل </span>
-					</div>
-
-					<div class="ml-3 align-self-center">
-						<i class="icon-users icon-3x text-danger-400"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-4">
-
-			<!-- Members online -->
-			<div class="card bg-teal-400">
-				<div class="card-body">
-					<div class="d-flex">
-						<h3 class="font-weight-semibold mb-0">3,450</h3>
-						<span class="badge bg-teal-800 badge-pill align-self-center ml-auto">+53,6%</span>
-					</div>
-
-					<div>
-						Members online
-						<div class="font-size-sm opacity-75">489 avg</div>
-					</div>
-				</div>
-
-				<div class="container-fluid">
-					<div id="members-online"></div>
-				</div>
-			</div>
-			<!-- /members online -->
-
-		</div>
-
-		<div class="col-lg-4">
-
-			<!-- Current server load -->
-			<div class="card bg-pink-400">
-				<div class="card-body">
-					<div class="d-flex">
-						<h3 class="font-weight-semibold mb-0">49.4%</h3>
-						<div class="list-icons ml-auto">
-							<div class="dropdown">
-								<a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i></a>
-								<div class="dropdown-menu">
-									<a href="#" class="dropdown-item"><i class="icon-sync"></i> Update data</a>
-									<a href="#" class="dropdown-item"><i class="icon-list-unordered"></i> Detailed log</a>
-									<a href="#" class="dropdown-item"><i class="icon-pie5"></i> Statistics</a>
-									<a href="#" class="dropdown-item"><i class="icon-cross3"></i> Clear list</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						Current server load
-						<div class="font-size-sm opacity-75">34.6% avg</div>
-					</div>
-				</div>
-
-				<div id="server-load"></div>
-			</div>
-			<!-- /current server load -->
-
-		</div>
-
-		<div class="col-lg-4">
-
-			<!-- Today's revenue -->
-			<div class="card bg-blue-400">
-				<div class="card-body">
-					<div class="d-flex">
-						<h3 class="font-weight-semibold mb-0">$18,390</h3>
-						<div class="list-icons ml-auto">
-							<a class="list-icons-item" data-action="reload"></a>
-						</div>
-					</div>
-
-					<div>
-						Today's revenue
-						<div class="font-size-sm opacity-75">$37,578 avg</div>
-					</div>
-				</div>
-
-				<div id="today-revenue"></div>
-			</div>
-			<!-- /today's revenue -->
-
-		</div>
+		</div> --}}
 	</div>
 
 </div>
