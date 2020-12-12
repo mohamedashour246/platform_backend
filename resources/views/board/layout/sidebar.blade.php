@@ -1,3 +1,6 @@
+@php
+	$lang = session()->get('locale');
+@endphp
 <!-- Main sidebar -->
 <div class="sidebar sidebar-light sidebar-main sidebar-expand-md align-self-start">
 
@@ -39,7 +42,12 @@
 						<div class="media-body">
 							<div class="media-title font-weight-semibold">{{ Auth::guard('admin')->user()->username }}</div>
 							<div class="font-size-xs opacity-50">
-								<i class="icon-pin font-size-sm"></i> @lang('admins.'.Auth::guard('admin')->user()->type)
+								@php
+									$admin = Auth::guard('admin')->user();
+									$admin->load('type');
+
+								@endphp
+								<i class="icon-pin font-size-sm"></i> {{ optional($admin->type)['name_'.$lang] }}
 							</div>
 						</div>
 						<div class="ml-3 align-self-center">

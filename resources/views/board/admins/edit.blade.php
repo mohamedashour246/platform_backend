@@ -50,13 +50,25 @@ $lang = session()->get('locale');
 					@method('PATCH')
 					<div class="form-group">
 						<div class="row">
+
 							<div class="col-md-4">
-								<label> @lang('admins.username') </label>
-								<input type="text" name="username" value="{{ $admin->username }}" class="form-control @error('username') is-invalid @enderror " >
-								@error('username')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								<label> @lang('admins.name') </label>
+								<input type="text" name="name" value="{{ $admin->name }}" class="form-control @error('name') is-invalid @enderror ">
+								@error('name')
+								<label  class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
+
+
+							<div class="col-md-4">
+								<label> @lang('admins.phone') </label>
+								<input type="text" name="phone" value="{{ $admin->phone }}" class="form-control @error('phone') is-invalid @enderror ">
+								@error('phone')
+								<label  class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
+							</div>
+
+							
 
 							<div class="col-md-4">
 								<label> @lang('admins.email') </label>
@@ -65,7 +77,7 @@ $lang = session()->get('locale');
 								<label  class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
-
+{{-- 
 							<div class="col-md-4">
 								<div class="form-group">
 									<label> @lang('admins.type') </label>
@@ -74,12 +86,21 @@ $lang = session()->get('locale');
 										<option value="superadmin" {{ $admin->type == 'superadmin' ? 'selected="selected"' : '' }} >@lang('admins.super_admin')</option>
 									</select>
 								</div>
-							</div>
+							</div> --}}
+
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="row">
+							<div class="col-md-4">
+								<label> @lang('admins.username') </label>
+								<input type="text" name="username" value="{{ $admin->username }}" class="form-control @error('username') is-invalid @enderror " >
+								@error('username')
+								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
+							</div>
+
 							<div class="col-md-4">
 								<label> @lang('admins.password') </label>
 								<input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
@@ -93,6 +114,30 @@ $lang = session()->get('locale');
 								<input type="password"  name="password_confirmation" class="form-control">
 							</div>
 
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label> @lang('admins.type') </label>
+									<select name="type" class="form-control select" data-fouc>
+										@foreach ($types as $type)
+										<option value="{{ $type->id }}"> {{ $type['name_'.$lang] }} </option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label> @lang('admins.address') </label>
+								<input type="text" name="address" class="form-control form-input-styled @error('address') is-invalid @enderror">
+								@error('address')
+								<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
+								@enderror
+							</div>
 							<div class="col-md-4">
 								<label> @lang('admins.notes') </label>
 								<input  name="notes"  class="form-control" value="{{ $admin->notes }}" class="form-control">

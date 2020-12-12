@@ -66,9 +66,22 @@ $lang = session()->get('locale');
 				<table class="table  table-xs border-top-0 my-2">
 					<tbody>
 						<tr>
+							<th class="font-weight-bold text-dark">@lang('admins.name')</th>
+							<td class="text-left"> {{ $admin->name }} </td>
+						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark">@lang('admins.phone')</th>
+							<td class="text-left"> {{ $admin->phone }} </td>
+						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark">@lang('admins.address')</th>
+							<td class="text-left"> {{ $admin->address }} </td>
+						</tr>
+						<tr>
 							<th class="font-weight-bold text-dark">@lang('admins.username')</th>
 							<td class="text-left"> {{ $admin->username }} </td>
 						</tr>
+
 						<tr>
 							<th class="font-weight-bold text-dark"> @lang('admins.email') </th>
 							<td class="text-left">	{{ $admin->email }}	</td>
@@ -90,14 +103,7 @@ $lang = session()->get('locale');
 						<tr>
 							<th class="font-weight-bold text-dark"> @lang('admins.type') </th>
 							<td class="text-left">	
-								@switch($admin->type)
-								@case('admin')
-								<label  class="badge badge-primary" > @lang('admins.admin') </label>
-								@break
-								@case('superadmin')
-								<label  class="badge badge-primary" > @lang('admins.superadmin') </label>
-								@break
-								@endswitch
+								<span class="badge badge-primary"> {{ optional($admin->type)['name_'.$lang] }} </span>
 							</td>
 						</tr>
 						<tr>

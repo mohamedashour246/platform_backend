@@ -25,6 +25,7 @@ class UpdateAdminRequest extends FormRequest
     {
         $id = Request::segment(3);
         return [
+            'name' => 'required|unique:admins,name,'.$id , 
             'username' => 'required|unique:admins,username,'.$id,
             'email' => 'required|email|unique:admins,email,'.$id,
             'password' => 'nullable|confirmed|min:8',
@@ -33,6 +34,8 @@ class UpdateAdminRequest extends FormRequest
             'type' => 'required' , 
             'active' => 'nullable' , 
             'permissions' => 'required_if:type,==,admin',
+            'phone' => 'nullable' , 
+            'address' => 'nullable' , 
         ];
     }
 }

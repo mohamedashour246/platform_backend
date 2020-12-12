@@ -24,14 +24,17 @@ class StoreAdminRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|unique:admins,name' , 
             'username' => 'required|unique:admins,username',
-            'email' => 'required|unique:admins,email',
+            'email' => 'nullable|unique:admins,email',
             'password' => 'required|confirmed|min:8',
             'profile_picture' => 'nullable|image',
             'notes' => 'nullable' , 
             'type' => 'required' , 
             'active' => 'nullable' , 
             'permissions' => 'required_if:type,==,admin',
+            'phone' => 'nullable' , 
+            'address' => 'nullable' , 
         ];
     }
 }

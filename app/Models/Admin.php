@@ -49,15 +49,24 @@ class Admin extends Authenticatable
     }
 
 
+    public function type()
+    {
+        return $this->belongsTo(AdminType::class , 'type_id');
+    }
+
+
     public function add($data)
     {
         $this->email = $data['email'];
         $this->username = $data['username'];
         $this->password = Hash::make($data['password']);
-        $this->type = $data['type'];
+        $this->type_id = $data['type'];
         $this->active = isset($data['active']) ? 1 : 0;
         $this->notes = $data['notes'];
         $this->admin_id = Auth::guard('admin')->id();
+        $this->name = $data['name'];
+        $this->phone = $data['phone'];
+        $this->address = $data['address'];
         return $this->save();
     }
 
@@ -68,9 +77,12 @@ class Admin extends Authenticatable
         $this->email = $data['email'];
         $this->username = $data['username'];
         $this->password = !empty($data['password']) ? Hash::make($data['password']) : $this->password;
-        $this->type = $data['type'];
+        $this->type_id = $data['type'];
         $this->active = isset($data['active']) ? 1 : 0;
         $this->notes = $data['notes'];
+        $this->name = $data['name'];
+        $this->phone = $data['phone'];
+        $this->address = $data['address'];
         return $this->save();
     }
 
