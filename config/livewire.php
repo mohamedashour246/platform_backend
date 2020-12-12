@@ -42,11 +42,11 @@ return [
     |
     */
 
-<<<<<<< HEAD
-    'asset_url'  => 'https://ahmedsamidev.com/platform/public',
-=======
+
+    // 'asset_url'  => 'https://ahmedsamidev.com/platform/public',
+
     'asset_url'  => 'http://127.0.0.1:8000',
->>>>>>> bd55728d6bd90c1a8abf2cf41b9a172a0326f6f3
+
 
     /*
     |--------------------------------------------------------------------------
