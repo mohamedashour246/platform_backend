@@ -45,9 +45,37 @@ $lang = session()->get('locale');
 
 @section('scripts')
 <script src="{{ asset('board_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
-
+<script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 <script>
 	$(function() {
+
+		$('.from , .to').select2({
+			placeholder: "اختر المتجر",
+			minimumInputLength: 2,
+			ajax: {
+				url: '/Board/search_in_cities',
+				dataType: 'json',
+				type: 'GET' ,
+				data: function (params) {
+					var queryParameters = {
+						q: params.term ,
+					}
+					return queryParameters;
+				},
+				delay: 500,
+				processResults: function (data) {
+					return {
+						results:  $.map(data.data, function (item) {
+							return {
+								text: item.text,
+								id: item.id
+							}
+						})
+					};
+				},
+				cache: true
+			}
+		});
 
 
 	});

@@ -162,7 +162,8 @@ return [
         'name_ar' => 'الاسم بالعربيه' , 
         'name_en' => 'الاسم بالانجليزيه' , 
         'price_within_city' => 'السعر داخل المدينه' , 
-        'price_outside_city' => 'السعر خارج المدينه'
+        'price_outside_city' => 'السعر خارج المدينه' , 
+        'price'=> 'السعر'
     ],
 
 ];

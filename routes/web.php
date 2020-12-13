@@ -30,7 +30,7 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::resource('/trips'  , 'TripController' );
 	Route::resource('/cities'  , 'CityController' );
 	Route::resource('/governorates'  , 'GovernorateController');
-	Route::resource('/city_delivery_prices' , 'CityDeliveryPriceController' );
+	Route::resource('/city_delivery_prices' , 'CityDeliveryPriceController');
 
 	Route::get('/governorates/{governorate}/delivery_prices/create'  , 'GovernorateController@delivery_prices_create')->name('governorates.delivery_prices.create');
 	Route::post('/governorates/{governorate}/delivery_prices'  , 'GovernorateController@delivery_prices_store')->name('governorates.delivery_prices.store');
@@ -48,12 +48,11 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/delivery_prices/{delivery_price}/edit','DeliveryPriceController@edit' )->name('delivery_prices.edit');
 	Route::patch('/delivery_prices/{delivery_price}','DeliveryPriceController@update' )->name('delivery_prices.update');
 	Route::get('/searching_cities'  , 'CityController@ajax_search');
+	Route::get('/search_in_cities'  , 'CityController@search_in_cities');
+	
+
 	Route::get('/get_governorate_cities'  , 'CityController@get_governorate_cities');
 	Route::get('/get_cities_we_can_set_price_to_it' ,'CityDeliveryPriceController@get_cities_we_can_set_price_to_it');
-
-
-
-
 	//ajax request
 	Route::get('/ajax/search_markets' , 'MarketController@ajax_search');
 	Route::get('/ajax/search_branches' , 'BranchController@get_market_branches_via_ajax');

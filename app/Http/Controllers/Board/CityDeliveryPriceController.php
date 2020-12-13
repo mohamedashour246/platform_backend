@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Board;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateCityDeliveryPriceRequest;
 use App\Models\CityDeliveryPrice;
 use App\Models\Governorate;
 use App\Models\City;
@@ -47,6 +48,31 @@ class CityDeliveryPriceController extends Controller
         $city_delivery_price->save();
         return redirect(route('city_delivery_prices.index'))->with('success_msg' , trans('city_delivery_prices.price_added_successfully'));
     }
+
+
+
+
+    public function edit(CityDeliveryPrice $city_delivery_price)
+    {
+        $price = $city_delivery_price;
+        $price->load(['from' , 'to' ]);
+        return view('board.city_delivery_prices.edit' , compact('price') );
+    }
+
+
+    public function update(UpdateCityDeliveryPriceRequest  $request  , CityDeliveryPrice $city_delivery_price)
+    {
+        
+        $city_delivery_price->price = $request->price;
+        $city_delivery_price->save();
+
+
+        return back()->with('success_msg'  , trans('city_delivery_prices.updated_successfully') );
+
+
+
+    }
+
 
     
 
