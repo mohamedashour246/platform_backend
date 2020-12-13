@@ -12,7 +12,6 @@ class CityDeliveryPrice extends Component
 
 	use WithPagination;
 
-    public $cities;
     public $fromCity = 'all';
     public $toCity = 'all' ;
 	public $paginate = 2;
@@ -38,19 +37,17 @@ class CityDeliveryPrice extends Component
     }
 
 
-    // public function filterPrices() {
+    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
 
-    //     $prices = Prices::latest()->simplePaginate($this->paginate);
-    //     $this->prices = Prices::latest()->simplePaginate($this->paginate);
-    // }
 
-    public function mount()
-    {
-        $this->cities = City::all();
+
+    public function handleItemDeletion($item_id)
+    {      
+        Prices::where('id' , $item_id )->delete();
+        $this->resetPage();
     }
 
 
-    // public function 
 
 
     public function render()

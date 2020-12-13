@@ -48,7 +48,6 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 <script>
 	$(function() {
-
 		$('.from , .to').select2({
 			placeholder: "اختر المتجر",
 			minimumInputLength: 2,
@@ -76,8 +75,6 @@ $lang = session()->get('locale');
 				cache: true
 			}
 		});
-
-
 	});
 </script>
 @endsection

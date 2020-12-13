@@ -24,9 +24,7 @@ $lang = session()->get('locale');
 							<label> @lang('city_delivery_prices.from_city') </label>			
 							<select  id="" wire:model="fromCity"  class="form-control select from" >
 								<option value="all"> @lang('city_delivery_prices.all_cities') </option>
-								@foreach ($cities as $city)
-								<option value="{{ $city->id }}"> {{ $city['name_'.$lang] }} </option>
-								@endforeach
+					
 							</select>
 							{{-- {{ $fromCity }} --}}
 						</div>
@@ -36,9 +34,7 @@ $lang = session()->get('locale');
 							<label> @lang('city_delivery_prices.to_city') </label>
 							<select  id="" wire:model="toCity"   class="form-control select to" >
 								<option value="all"> @lang('city_delivery_prices.all_cities') </option>
-								@foreach ($cities as $city)
-								<option value="{{ $city->id }}"> {{ $city['name_'.$lang] }} </option>
-								@endforeach
+			
 							</select>
 							{{-- {{ $toCity }} --}}
 						</div>
@@ -90,11 +86,13 @@ $lang = session()->get('locale');
 							<a target="_blank"  data-popup="tooltip" title="@lang('city_delivery_prices.edit')" href="{{ route('city_delivery_prices.edit' , ['city_delivery_price' => $price->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
 								<i class="icon-pencil7 text-warning-800"></i></a>
 
-								<form action="{{ route('city_delivery_prices.destroy'  , ['city_delivery_price' => $price->id] ) }}" class="form-inline float-right" method="POST" >
+								<a href="" data-popup="tooltip" title="@lang('city_delivery_prices.delete_price')"  data-id="{{ $price->id }}" class=" delete_admin btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+
+								{{-- <form action="{{ route('city_delivery_prices.destroy'  , ['city_delivery_price' => $price->id] ) }}" class="form-inline float-right" method="POST" >
 									@csrf
 									@method('DELETE')
 									<button  data-popup="tooltip" title="@lang('city_delivery_prices.delete_price')" type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 "><i class="icon-trash"></i></button>
-								</form>
+								</form> --}}
 							</td>
 						</tr>
 						@endforeach
@@ -108,3 +106,39 @@ $lang = session()->get('locale');
 			</div>
 		</div>
 	</div>	
+
+
+	<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script>
+
+
+		$(document).ready(function() {
+			$('.form-check-input-switch').bootstrapSwitch();
+			$('a.delete_admin').on('click',  function(event) {
+				event.preventDefault();
+				item_id = $(this).data('id');
+				confirm_deletion(item_id);
+			});
+		});
+
+		function confirm_deletion(item_id) {
+
+			Swal.fire({
+				title: 'تاكيد الحذف ',
+				text: "هل انت متاكد من حذف هذا المشرف ؟",
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'نعم',
+				cancelButtonText: 'لا',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Livewire.emit('deleteItemConfirmed'  , item_id );
+				}
+			})
+		}
+
+
+
+	</script>
