@@ -12,31 +12,18 @@ $lang = session()->get('locale');
 			<div class="card-body">
 				<a  href="{{ route('city_delivery_prices.create') }}" class="btn btn-primary float-right" >
 					<i class="icon-plus3 "></i> @lang('city_delivery_prices.add_new_price')  </a>
-				{{-- <button class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
-					<i class="icon-filter3"></i> @lang('prices.advanced_search')
-				</button> --}}
+
 				<div class="form-group">
 					<div class="row">
-						{{-- <div class="col-md-6">
-							<input type="text" id="search" wire:model="search" placeholder="@lang('prices.search_prices') ....." class="form-control" >
-						</div> --}}
 						<div class="col-md-6">		
-							<label> @lang('city_delivery_prices.from_city') </label>			
 							<select  id="" wire:model="fromCity"  class="form-control select from" >
-								<option value="all"> @lang('city_delivery_prices.all_cities') </option>
-					
+								<option value="all"> @lang('city_delivery_prices.from_city') </option>
 							</select>
-							{{-- {{ $fromCity }} --}}
 						</div>
-
-
 						<div class="col-md-6" >
-							<label> @lang('city_delivery_prices.to_city') </label>
 							<select  id="" wire:model="toCity"   class="form-control select to" >
-								<option value="all"> @lang('city_delivery_prices.all_cities') </option>
-			
+								<option value="all"> @lang('city_delivery_prices.to_city') </option>
 							</select>
-							{{-- {{ $toCity }} --}}
 						</div>
 					</div>
 				</div>
