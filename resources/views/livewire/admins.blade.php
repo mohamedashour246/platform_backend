@@ -80,11 +80,6 @@ $lang = session()->get('locale');
 								<i class="icon-pencil7 text-warning-800"></i></a>
 
 								<a href="" data-id="{{ $admin->id }}" class=" delete_admin btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
-								{{-- <form action="{{ route('admins.destroy'  , ['admin' => $admin->id] ) }}" class="form-inline float-right" method="POST" >
-									@csrf
-									@method('DELETE')
-									<button type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i></button>
-								</form> --}}
 							</td>
 						</tr>
 

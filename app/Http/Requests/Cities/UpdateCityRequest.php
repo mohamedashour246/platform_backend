@@ -26,11 +26,9 @@ class UpdateCityRequest extends FormRequest
         $id = Request::segment(3);
         return [
             'governorate_id' => 'required',
-            'name_ar' => 'required|unique:cities,name_en,'.$id,
+            'name_ar' => 'required|unique:cities,name_ar,'.$id,
             'name_en' => 'required|unique:cities,name_en,'.$id,
             'active' => 'nullable' ,
-            'price_within_city' => 'required' , 
-            'price_outside_city' => 'required', 
         ];
     }
 }

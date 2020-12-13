@@ -27,6 +27,17 @@ class Drivers extends Component
 
 
 
+    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
+
+
+
+    public function handleItemDeletion($item_id)
+    {
+        Driver::where('id' , $item_id )->delete();
+        $this->resetPage();
+    }
+
+
 
 
 
