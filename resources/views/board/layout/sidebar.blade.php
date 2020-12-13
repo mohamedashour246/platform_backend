@@ -121,6 +121,13 @@ $lang = session()->get('locale');
 						</ul>
 					</li>
 					<li class="nav-item nav-item-submenu">
+						<a href="#" class="nav-link {{ $governorates }}"><i class="icon-location3"></i> <span>@lang('governorates.governorates')</span></a>
+						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
+							<li class="nav-item"><a href="{{ route('governorates.index') }}" class="nav-link"> @lang('governorates.show_all_governorates') </a></li>
+							<li class="nav-item"><a href="{{ route('governorates.create') }}" class="nav-link"> @lang('governorates.add_new_governorate') </a></li>
+						</ul>
+					</li>
+					<li class="nav-item nav-item-submenu">
 						<a href="#" class="nav-link {{ $cities }}"><i class="icon-map"></i> <span>@lang('cities.cities')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('cities.index') }}" class="nav-link"> @lang('cities.show_all_cities') </a></li>
@@ -134,13 +141,7 @@ $lang = session()->get('locale');
 							<li class="nav-item"><a href="{{ route('city_delivery_prices.create') }}" class="nav-link"> @lang('city_delivery_prices.add_new_price') </a></li>
 						</ul>
 					</li>
-					<li class="nav-item nav-item-submenu">
-						<a href="#" class="nav-link {{ $governorates }}"><i class="icon-location3"></i> <span>@lang('governorates.governorates')</span></a>
-						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
-							<li class="nav-item"><a href="{{ route('governorates.index') }}" class="nav-link"> @lang('governorates.show_all_governorates') </a></li>
-							<li class="nav-item"><a href="{{ route('governorates.create') }}" class="nav-link"> @lang('governorates.add_new_governorate') </a></li>
-						</ul>
-					</li>
+
 					<li class="nav-item nav-item-submenu">
 						<a href="#" class="nav-link {{ $markets }}"><i class="icon-store"></i> <span>@lang('markets.markets')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
