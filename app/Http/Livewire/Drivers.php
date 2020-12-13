@@ -33,8 +33,11 @@ class Drivers extends Component
 
     public function handleItemDeletion($item_id)
     {
-        Driver::where('id' , $item_id )->delete();
-        $this->resetPage();
+
+
+        $this->emit('itemDeleted' , $item_id);
+        // Driver::where('id' , $item_id )->delete();
+        // $this->resetPage();
     }
 
 

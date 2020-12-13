@@ -11,9 +11,6 @@
 			<div class="card-body">
 				<a  href="{{ route('cities.create') }}" class="btn btn-primary float-right" >
 				 <i class="icon-plus3 "></i> @lang('cities.add_new_city')  </a>
-				{{-- <button class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
-					<i class="icon-filter3"></i> @lang('cities.advanced_search')
-				</button> --}}
 				<div class="form-group">
 					<div class="row">
 						<div class="col-md-12">
@@ -87,12 +84,11 @@
 									<i class="icon-eye2 text-primary-800"></i>
 								</a>
 								<a target="_blank" href="{{ route('cities.edit' , ['city' => $city->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i></a>
-									<form action="{{ route('cities.destroy'  , ['city' => $city->id] ) }}" class="form-inline float-right" method="POST" >
-										@csrf
-										@method('DELETE')
-										<button type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 "><i class="icon-trash"></i></button>
-									</form>
+									<i class="icon-pencil7 text-warning-800"></i>
+								</a>
+
+								<a href="" data-id="{{ $city->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+
 								</td>
 							</tr>
 
@@ -114,3 +110,62 @@
 
 		</div>
 	</div>	
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+
+
+
+
+	$(document).ready(function() {
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Livewire.on('itemDeleted', itemId => {
+			Toast.fire({
+				icon: 'success',
+				title: "@lang('cities.deleted_success')", 
+			});
+		})
+
+		$(document).on('click', 'a.delete_item' ,  function(event) {
+			event.preventDefault();
+			item_id = $(this).data('id');
+			confirm_deletion(item_id);
+		});
+
+		function confirm_deletion(item_id) {
+			Swal.fire({
+				title: 'تاكيد الحذف ',
+				text: "هل انت متاكد من حذف هذه المدينه ؟",
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'نعم',
+				cancelButtonText: 'لا',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Livewire.emit('deleteItemConfirmed'  , item_id );
+				}
+			})
+		}
+
+	});
+
+
+
+
+</script>

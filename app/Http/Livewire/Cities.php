@@ -10,14 +10,14 @@ class Cities extends Component
     use WithPagination;
 
 
-	public $search;
-	public $paginate = 2;
-	public $active;
+    public $search;
+    public $paginate = 2;
+    public $active;
 
-	protected $paginationTheme = 'bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
 
-	public function updatingSearch()
+    public function updatingSearch()
     {
         $this->resetPage();
     }
@@ -28,6 +28,16 @@ class Cities extends Component
     }
 
 
+
+
+    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
+
+    public function handleItemDeletion($item_id)
+    {
+        City::where('id' , $item_id )->delete();
+        $this->emit('itemDeleted' , $item_id);
+        $this->resetPage();
+    }
 
     public function render()
     {

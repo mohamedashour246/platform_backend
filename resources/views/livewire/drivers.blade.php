@@ -126,43 +126,70 @@
 									<i class="icon-eye2 text-primary-800"></i>
 								</a>
 								<a target="_blank" href="{{ route('drivers.edit' , ['driver' => $driver->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i></a>
-									<a href="" data-id="{{ $driver->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
-								</td>
-							</tr>
+									<i class="icon-pencil7 text-warning-800"></i>
+								</a>
+								<a href="" data-id="{{ $driver->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+							</td>
+						</tr>
 
-							@endforeach
+						@endforeach
 
-						</tbody>
-					</table>
-				</div>
-
-
-				<div class="card-footer bg-light ">
-					<div class="float-right" >
-						{{ $drivers->links() }}
-					</div>				
-				</div>
+					</tbody>
+				</table>
 			</div>
 
 
-
+			<div class="card-footer bg-light ">
+				<div class="float-right" >
+					{{ $drivers->links() }}
+				</div>				
+			</div>
 		</div>
-	</div>	
 
 
 
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<script>
+	</div>
+</div>	
 
 
-		$(document).ready(function() {
 
-			$('a.delete_item').on('click',  function(event) {
-				event.preventDefault();
-				item_id = $(this).data('id');
-				confirm_deletion(item_id);
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+
+
+
+
+	$(document).ready(function() {
+
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		
+
+
+		Livewire.on('itemDeleted', itemId => {
+			Toast.fire({
+				icon: 'success',
+				title: "@lang('drivers.deleted_success')", 
 			});
+		})
+
+
+
+
+		$('a.delete_item').on('click',  function(event) {
+			event.preventDefault();
+			item_id = $(this).data('id');
+			confirm_deletion(item_id);
 		});
 
 		function confirm_deletion(item_id) {
@@ -182,6 +209,9 @@
 			})
 		}
 
+	});
 
 
-	</script>
+
+
+</script>
