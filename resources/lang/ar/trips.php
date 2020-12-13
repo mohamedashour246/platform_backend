@@ -35,7 +35,8 @@ return [
 	'trip_code' => 'كود الرحله' , 
 	'status' => 'حاله الرحله' , 
 	'proccessing' => 'قيد التنفيذ', 
-	'search_trips' => 'البحث داخل الرحلات'
+	'search_trips' => 'البحث داخل الرحلات' , 
+	'delete_success' => 'تم حذف الرحله بنجاح' ,
 
 
 

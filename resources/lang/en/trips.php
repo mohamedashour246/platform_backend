@@ -36,7 +36,8 @@ return [
 	'trip_code' => 'Trip Code' , 
 	'status' => 'Status' ,
 	'proccessing' => 'proccessing' , 
-	'search_trips' => 'search trips'
+	'search_trips' => 'search trips' , 
+	'delete_success' => 'Deleted successfully' , 
 
 
 
