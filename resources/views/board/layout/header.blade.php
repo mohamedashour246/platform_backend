@@ -207,17 +207,16 @@
 						اللغه العربيه
 					</a>
 					@endif
-					
 
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="{{ url('Board/language/en') }}" class="dropdown-item english"><img src="{{ asset('board_assets/global_assets/images/lang/gb.png') }}" class="img-flag" alt=""> English </a>
-						<a href="{{ url('Board/language/ar') }}" class="dropdown-item ukrainian"><img src="{{ asset('board_assets/global_assets/images/lang/ar.png') }}" class="img-flag" alt=""> اللغه العربيه </a>
+						<a href="{{ url('Board/language/en') }}" class="dropdown-item english"><img src="{{ asset('board_assets/global_assets/images/lang/gb.png') }}" class="img-flag"> English </a>
+						<a href="{{ url('Board/language/ar') }}" class="dropdown-item ukrainian"><img src="{{ asset('board_assets/global_assets/images/lang/ar.png') }}" class="img-flag" > اللغه العربيه </a>
 					</div>
 				</li>
 
 				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="{{ asset('board_assets/global_assets/images/placeholders/placeholder.jpg') }}" class="rounded-circle mr-2" height="34" alt="">
+						<img src="{{ Storage::disk('s3')->url('admins/'.Auth::guard('admin')->user()->image) }}" class="rounded-circle mr-2" height="34" alt="">
 						<span>{{ Auth::guard('admin')->user()->username }}</span>
 					</a>
 
