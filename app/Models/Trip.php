@@ -51,9 +51,10 @@ class Trip extends Model
     	$this->admin_id = Auth::guard('admin')->id();
     	$this->order_price = $data['order_price'];
     	$this->payment_method_id = $data['payment_method_id'];
-    	$this->delivery_date_to_customer = $data['delivery_date_to_customer'];
-    	$this->receipt_date_from_market = $data['receipt_date_from_market'];
+    	$this->delivery_date_to_customer = $data['delivery_date_to_customer'].' '.$data['delivery_time_to_customer'];
+    	$this->receipt_date_from_market = $data['receipt_date_from_market'].' '.$data['receipt_time_from_market'];
     	$this->status = 1;
+    	$this->driver_id = $data['driver_id'];
     	$this->customer_address_id = $address_id;
     	// $this->notes = $data['notes'];
     	return $this->save();

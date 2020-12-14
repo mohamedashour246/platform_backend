@@ -38,6 +38,12 @@ return [
 	'proccessing' => 'proccessing' , 
 	'search_trips' => 'search trips' , 
 	'delete_success' => 'Deleted successfully' , 
+	'customers' => 'Customers' , 
+	'add' => 'Add' , 
+	'back' => 'Back' , 
+	'choose_customers' => 'Choose customers' , 
+	'add_new_customer' => 'Add new customer'  , 
+	'time' => 'Time',
 
 
 

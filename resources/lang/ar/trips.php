@@ -37,6 +37,16 @@ return [
 	'proccessing' => 'قيد التنفيذ', 
 	'search_trips' => 'البحث داخل الرحلات' , 
 	'delete_success' => 'تم حذف الرحله بنجاح' ,
+	'customer_added' => 'تم إضافه العميل بنجاح' , 
+	'customers' => 'العملاء'  , 
+	'add' => 'إضافه',
+	'back' => 'تراجع' , 
+	'choose_customers' => 'اختر العملاء' , 
+	'add_new_customer' => 'اضف عميل جديد' , 
+	'time' => 'الوقت'
+
+
+
 
 
 

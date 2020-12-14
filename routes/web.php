@@ -32,6 +32,9 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::resource('/governorates'  , 'GovernorateController');
 	Route::resource('/city_delivery_prices' , 'CityDeliveryPriceController');
 
+
+	Route::resource('/customers'  , 'CustomerController');
+
 	Route::get('/governorates/{governorate}/delivery_prices/create'  , 'GovernorateController@delivery_prices_create')->name('governorates.delivery_prices.create');
 	Route::post('/governorates/{governorate}/delivery_prices'  , 'GovernorateController@delivery_prices_store')->name('governorates.delivery_prices.store');
 	Route::get('/governorates/{governorate}/delivery_prices/'  , 'GovernorateController@delivery_prices' )->name('governorates.delivery_prices.index');
@@ -56,6 +59,7 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	//ajax request
 	Route::get('/ajax/search_markets' , 'MarketController@ajax_search');
 	Route::get('/ajax/search_branches' , 'BranchController@get_market_branches_via_ajax');
+	Route::get('/ajax/search_customers' , 'CustomerController@ajax_search_customers');
 });
 
 Route::get('/test', function () {
