@@ -44,6 +44,7 @@ return [
 	'choose_customers' => 'Choose customers' , 
 	'add_new_customer' => 'Add new customer'  , 
 	'time' => 'Time',
+	'adding_success' => 'Trip added successfully'
 
 
 

@@ -34,10 +34,9 @@ class TripController extends Controller
     {
         $payment_methods = PaymentMethod::all();
         $governorates = Governorate::all();
-        $cities = City::all();
         $building_types = BuildingType::all();
         $drivers = Driver::all();
-        return view('board.trips.create' , compact('payment_methods' , 'governorates' , 'cities' , 'building_types' , 'drivers'));
+        return view('board.trips.create' , compact('payment_methods' , 'governorates' ,  'building_types' , 'drivers'));
     }
 
     /**
@@ -48,25 +47,11 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {   
-        // dd($request->all());
-
-        // dd($request->delivery_date_to_customer , $request->delivery_time_to_customer);
-        // // $time1 = 
-
-        // die;
-
-
         foreach ($request->customers as $customer) {
-
             $trip = new Trip;
             $trip->add($request->all() , $customer);
-
-
             $items = [];
-
-
             for ($i = 0; $i <count($request->item_name) ; $i++) {
-
                 if (!is_null($request->item_name[$i])) {
                     $items[] = new TripItem([
                         'name' => $request->item_name[$i],
@@ -75,14 +60,13 @@ class TripController extends Controller
                     ]);
                 }
             }
-
            if(count($items))
                 $trip->items()->saveMany($items);
         }
 
+        // here we need to notify the diver about the order
 
-
-        // return redirect(route('trips.index'))->with('success_msg' , trans('trips.adding_success'));
+        return redirect(route('trips.create'))->with('success_msg' , trans('trips.adding_success'));
     }
 
     /**

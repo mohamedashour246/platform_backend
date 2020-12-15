@@ -29,6 +29,8 @@ $lang = session()->get('locale');
 
 <div class="row">
 	<div class="col-md-12">
+
+		@include('board.layout.messages')
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
@@ -178,7 +180,7 @@ $lang = session()->get('locale');
 									@enderror
 								</div>
 								<div class="col-md-2">
-									<a href="" class="add_new_customar mt-4 btn btn-primary"> <i class="icon-plus3 " ></i> @lang('trips.add_new_customer') </a> 
+									<a href="" class="add_new_customar mt-4 btn btn-sm btn-primary"> <i class="icon-plus3 " ></i> @lang('trips.add_new_customer') </a> 
 								</div>
 									<div class="col-md-4">
 									<label> @lang('trips.driver') </label>
@@ -223,10 +225,6 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.time.js') }}"></script>
-{{-- 	<script src="../../../../global_assets/js/plugins/pickers/anytime.min.js"></script>
-	<script src="../../../../global_assets/js/plugins/pickers/pickadate/picker.js"></script>
-	<script src="../../../../global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
-	<script src="../../../../global_assets/js/plugins/pickers/pickadate/legacy.js"></script> --}}
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&callback=initMap&libraries=&v=weekly"
 	defer></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -239,6 +237,7 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 <script>
 
 	$(document).ready(function() {
+
 
 
 		$('#pickatime1').pickatime({
@@ -308,6 +307,35 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 			minimumInputLength:3,
 			ajax: {
 				url: '/Board/ajax/search_customers',
+				dataType: 'json',
+				type: 'GET' ,
+				data: function (params) {
+					var queryParameters = {
+						q: params.term ,
+					}
+					return queryParameters;
+				},
+				delay: 500,
+				processResults: function (data) {
+					return {
+						results:  $.map(data.data, function (item) {
+							return {
+								text: item.text,
+								id: item.id
+							}
+						})
+					};
+				},
+				cache: true
+			}
+		});
+
+
+		$('select[name="city"]').select2({
+			placeholder: "اختر المدينه",
+			minimumInputLength:2,
+			ajax: {
+				url: '/Board/search_in_cities',
 				dataType: 'json',
 				type: 'GET' ,
 				data: function (params) {
@@ -458,6 +486,7 @@ $(function() {
 
 		  $('.market_id').select2({
 		  	placeholder: "اختر المتجر",
+		  	minimumInputLength:3,
 		  	ajax: {
 		  		url: '/Board/ajax/search_markets',
 		  		dataType: 'json',

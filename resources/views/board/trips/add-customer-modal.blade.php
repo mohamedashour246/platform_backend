@@ -1,4 +1,4 @@
-<div id="add_new_customar_modal" class="modal fade " tabindex="-1">
+<div id="add_new_customar_modal" class="modal fade "  style="overflow:hidden;" >
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -50,10 +50,8 @@
 							<div class="row">
 								<div class="col-md-6">
 									<label> @lang('trips.city') </label>
-									<select name="city"  class="form-control city select" >
-										@foreach ($cities as $city)
-										<option value="{{ $city->id }}">{{ $city['name_'.$lang] }}</option>
-										@endforeach
+									<select name="city"  class="form-control city " >
+									
 									</select>
 									@error('payment_method_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -143,3 +141,39 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+
+
+		$('select[name="city"]').select2({
+			dropdownParent: $('#add_new_customar_modal') , 
+			placeholder: "اختر المدينه",
+			minimumInputLength:2,
+			ajax: {
+				url: '/Board/search_in_cities',
+				dataType: 'json',
+				type: 'GET' ,
+				data: function (params) {
+					var queryParameters = {
+						q: params.term ,
+					}
+					return queryParameters;
+				},
+				delay: 500,
+				processResults: function (data) {
+					return {
+						results:  $.map(data.data, function (item) {
+							return {
+								text: item.text,
+								id: item.id
+							}
+						})
+					};
+				},
+				cache: true
+			}
+		});
+
+		});
+	</script>

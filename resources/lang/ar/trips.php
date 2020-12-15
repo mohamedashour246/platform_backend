@@ -43,7 +43,9 @@ return [
 	'back' => 'تراجع' , 
 	'choose_customers' => 'اختر العملاء' , 
 	'add_new_customer' => 'اضف عميل جديد' , 
-	'time' => 'الوقت'
+	'time' => 'الوقت'  , 
+	'adding_success' => 'تم إضافه الرحله بنجح'
+
 
 
 
