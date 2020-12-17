@@ -53,6 +53,11 @@ return [
 	'search' => 'Search' , 
 	'unavailable' => 'Unavailable'  ,
 	'availability' => 'Availability',
+	'reports' => 'Reports'
+	'driver_reports' => 'Driver Reports' , 
+	'date_from' => 'Date From ' , 
+	'date_to' => 'Date To ' , 
+	'payment_method' => 'Payment Method' , 
  
 
 

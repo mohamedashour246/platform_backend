@@ -47,21 +47,12 @@ return [
 	'driver_name' => 'اسم السائق' , 
 	'search' => 'بحث' , 
 	'unavailable' => 'غير متاح للعمل',
-	'availability' => 'التوافر للعمل'
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
+	'availability' => 'التوافر للعمل',
+	'reports' => 'تقارير' , 
+	'driver_reports' => 'تقارير رحلات السائقين',
+	'date_from' => 'تاريخ البدايه ' , 
+	'date_to' => 'تاريخ النهايه' , 
+	'payment_method' => 'طريق الدفع' ,
 ];
 
 ?>

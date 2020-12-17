@@ -118,6 +118,7 @@ $lang = session()->get('locale');
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('drivers.index') }}" class="nav-link"> @lang('drivers.show_all_drivers') </a></li>
 							<li class="nav-item"><a href="{{ route('drivers.create') }}" class="nav-link"> @lang('drivers.add_new_driver') </a></li>
+							<li class="nav-item"><a href="{{ route('drivers.reports') }}" class="nav-link"> @lang('drivers.reports') </a></li>
 						</ul>
 					</li>
 					<li class="nav-item nav-item-submenu {{ $governorates == 'active' ? 'nav-item-open' : '' }}">

@@ -4,6 +4,7 @@
   'city-delivery-price' => 'App\\Http\\Livewire\\CityDeliveryPrice',
   'customers.add-customer' => 'App\\Http\\Livewire\\Customers\\AddCustomer',
   'drivers' => 'App\\Http\\Livewire\\Drivers',
+  'drivers.reports' => 'App\\Http\\Livewire\\Drivers\\Reports',
   'governorates' => 'App\\Http\\Livewire\\Governorates',
   'markets' => 'App\\Http\\Livewire\\Markets',
   'trips' => 'App\\Http\\Livewire\\Trips',

@@ -24,6 +24,8 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/password'  , 'ProfileController@edit_password' )->name('profile.password.edit');
 	Route::patch('/password' , 'ProfileController@change_password' )->name('profile.password.change');
 	Route::resource('/admins'  , 'AdminController');
+	Route::get('/drivers/reports'  , 'DriverController@reports' )->name('drivers.reports');
+
 	Route::resource('/drivers'  , 'DriverController');
 	Route::resource('/markets'  , 'MarketController' );
 	Route::resource('/branches'  , 'BranchController' );
@@ -31,7 +33,6 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::resource('/cities'  , 'CityController' );
 	Route::resource('/governorates'  , 'GovernorateController');
 	Route::resource('/city_delivery_prices' , 'CityDeliveryPriceController');
-
 
 	Route::resource('/customers'  , 'CustomerController');
 
@@ -60,6 +61,10 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/ajax/search_markets' , 'MarketController@ajax_search');
 	Route::get('/ajax/search_branches' , 'BranchController@get_market_branches_via_ajax');
 	Route::get('/ajax/search_customers' , 'CustomerController@ajax_search_customers');
+	Route::get('/ajax/search_drivers' , 'DriverController@search_drivers');
+
+
+
 });
 
 Route::get('/test', function () {

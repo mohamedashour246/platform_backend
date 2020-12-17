@@ -8,6 +8,11 @@ use App\Http\Requests\Drivers\StoreDriverRequest;
 use App\Http\Requests\Drivers\UpdateDriverRequest;
 use App\Models\Country;
 use App\Models\Driver;
+use App\Models\PaymentMethod;
+use App\Http\Resources\DriverResourceCollection;
+use App\Models\Trip;
+use App\Exports\TripsExport;
+use Excel;
 class DriverController extends Controller
 {
     /**
@@ -113,6 +118,74 @@ class DriverController extends Controller
 
         if($driver->remove())
             return redirect(route('drivers.index'))->with('success_msg' , trans('drivers.deleted_success'));
-        
+    }
+
+
+
+    public function search_drivers(Request $request)
+    {
+        $keyword = $request->q;
+
+        $drivers = Driver::where('name', 'like', '%' . $keyword . '%')->orWhere('code', 'like', '%' . $keyword . '%')->orWhere('phone', 'like', '%' . $keyword . '%')->get();
+
+        return new DriverResourceCollection($drivers);
+    }
+
+
+
+
+    public function reports(Request $request)
+    {
+
+        $driver_erad = 0;
+        $cashe = 0;
+        $kent = 0;
+        $delivery_total_price = 0;
+        $trips = Trip::query();
+        $fillters = false;
+
+        if ($request->filled('drivers')) {
+            $fillters = true;
+            $trips = $trips->where('driver_id' , '=' , $request->driver );           
+        }
+
+        if ($request->filled('dateFrom')) {
+            $fillters = true;
+            $trips =  $trips->whereDate('receipt_date_from_market', '>=', $request->dateFrom );
+        }
+
+
+        if ($request->filled('dateTo')) {
+            $fillters = true;
+            $trips =  $trips->whereDate('receipt_date_from_market', '<=', $request->dateTo );
+        }
+
+
+        if ( $request->payment_method != 'all' ) {
+            $fillters = true;
+            $trips = $trips->where('payment_method_id', '=', $request->payment_method );
+        }
+
+
+        if ($fillters) {
+            $temp_trips = $trips;
+            $trips = $trips->get();
+
+            
+            $cashe = collect($trips)->where('payment_method_id' , 1)->sum('delivery_price');;
+            $kent = collect($trips)->where('payment_method_id' , 2)->sum('delivery_price');
+            $delivery_total_price = collect($trips)->sum('delivery_price');
+            $driver_erad = $cashe + $kent + $delivery_total_price;
+        }
+
+        if($request->btn_active == 'excel') {
+            $trips = $trips->toArray();
+
+            return Excel::download(new TripsExport($trips), 'users.xlsx'); 
+        }
+
+        $payment_methods = PaymentMethod::all();
+        return view('board.drivers.reports'  , compact('payment_methods' , 'trips'  , 'driver_erad' , 'cashe' , 'kent' , 
+            'delivery_total_price' ));
     }
 }
