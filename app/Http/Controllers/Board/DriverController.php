@@ -144,9 +144,9 @@ class DriverController extends Controller
         $trips = Trip::query();
         $fillters = false;
 
-        if ($request->filled('drivers')) {
+        if ($request->filled('driver')) {
             $fillters = true;
-            $trips = $trips->where('driver_id' , '=' , $request->driver );           
+            $trips = $trips->where('driver_id' , '=' , $request->driver );        
         }
 
         if ($request->filled('dateFrom')) {
@@ -164,12 +164,13 @@ class DriverController extends Controller
         if ( $request->payment_method != 'all' ) {
             $fillters = true;
             $trips = $trips->where('payment_method_id', '=', $request->payment_method );
+            // dd($trips->get());
         }
 
 
         if ($fillters) {
             $temp_trips = $trips;
-            $trips = $trips->get();
+            $trips = $trips->with(['market' , 'driver'])->get();
 
             
             $cashe = collect($trips)->where('payment_method_id' , 1)->sum('delivery_price');;
@@ -179,13 +180,23 @@ class DriverController extends Controller
         }
 
         if($request->btn_active == 'excel') {
-            $trips = $trips->toArray();
 
-            return Excel::download(new TripsExport($trips), 'users.xlsx'); 
         }
 
-        $payment_methods = PaymentMethod::all();
-        return view('board.drivers.reports'  , compact('payment_methods' , 'trips'  , 'driver_erad' , 'cashe' , 'kent' , 
-            'delivery_total_price' ));
+        switch ($request->btn_active) {
+            case 'excel':
+            return Excel::download(new TripsExport($trips), 'trips.xlsx'); 
+            break;
+            case 'pdf':
+            die('now we should do the pdf');
+            break;
+            default:
+            $payment_methods = PaymentMethod::all();
+            return view('board.drivers.reports'  , compact('payment_methods' , 'trips'  , 'driver_erad' , 'cashe' , 'kent' , 
+                'delivery_total_price' ));
+            break;
+        }
+
+        
     }
 }

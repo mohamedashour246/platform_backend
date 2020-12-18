@@ -24,9 +24,15 @@ class Trip extends Model
 	}
 
 
+	public function payment_method()
+	{
+		return $this->belongsTo(PaymentMethod::class , 'payment_method_id');
+	}
+
+
 	public function driver()
 	{
-		return $this->belongsTo(Branch::class , 'driver_id');
+		return $this->belongsTo(Driver::class , 'driver_id');
 	}
 
 

@@ -131,7 +131,7 @@ $lang = session()->get('locale');
 								<select  name="payment_method"  class="form-control payment_method">
 									<option value="all"> الكل </option>
 									@foreach ($payment_methods as $payment_method)
-									<option value="{{ $payment_method }}"> {{ $payment_method['name_'.$lang] }} </option>
+									<option value="{{ $payment_method->id }}"> {{ $payment_method['name_'.$lang] }} </option>
 									@endforeach
 								</select>
 							</div>
