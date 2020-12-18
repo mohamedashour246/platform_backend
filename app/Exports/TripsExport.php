@@ -68,26 +68,16 @@ class TripsExport implements FromCollection ,WithMapping , WithHeadings , Should
 
     	$sheet->getStyle('A1:V1')->getFill()
     	->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
-    	->getStartColor()->setARGB('064126');
-    	
-
-    	// $sheet->cells('A1:D1', function ($cells) {
-    	// 	$cells->setBackground('#008686');
-    	// 	$cells->setAlignment('center');
-    	// });
-        // $sheet->getStyle('A:B')->getAlignment('center')->setHorizontal('center');
-    	$sheet->getStyle('B:V')->getFont()->setBold(true);
+    	->getStartColor()->setARGB('55be95');
+		$sheet->getStyle('A:V')->getAlignment()->applyFromArray(
+		    array('horizontal' => 'center')
+		);
+		$sheet->getStyle('A1:V1')->getAlignment()->applyFromArray(
+		    array('horizontal' => 'center')
+		);
+    	$sheet->getStyle('B:V')->getFont()->setSize(13);
     	$sheet->getStyle('B1:V1')->getFont()->setBold(true);
     	$sheet->getStyle('B1:V1')->getFont()->getColor()->setARGB('FFFFFF');
-        // return [
-        //     'A'  => ['font' => ['color' => '#FFFFFF']],
-        //     'G'  => ['font' => ['color' => '#FFFFFF']],
-        //     'F'  => ['font' => ['color' => '#FFFFFF']],
-        //     'E'  => ['font' => ['color' => '#FFFFFF']],
-        //     'D'  => ['font' => ['color' => '#FFFFFF']],
-        //     'C'  => ['font' => ['color' => '#FFFFFF']],
-        //     'B'  => ['font' => ['color' => '#FFFFFF']],
-        // ];
     }
 
 

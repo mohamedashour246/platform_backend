@@ -188,7 +188,8 @@ class DriverController extends Controller
             return Excel::download(new TripsExport($trips), 'trips.xlsx'); 
             break;
             case 'pdf':
-            die('now we should do the pdf');
+            return Excel::download(new TripsExport($trips), 'trips.pdf'  ,  \Maatwebsite\Excel\Excel::MPDF); 
+            // return (new TripsExport($trips))->download('trips.pdf', \Maatwebsite\Excel\Excel::MPDF);
             break;
             default:
             $payment_methods = PaymentMethod::all();
@@ -197,6 +198,6 @@ class DriverController extends Controller
             break;
         }
 
-        
+
     }
 }

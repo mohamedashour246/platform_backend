@@ -42,6 +42,7 @@
     38 => 'Intervention\\Image\\ImageServiceProvider',
     39 => 'Barryvdh\\Debugbar\\ServiceProvider',
     40 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    41 => 'Meneses\\LaravelMpdf\\LaravelMpdfServiceProvider',
   ),
   'eager' => 
   array (
@@ -73,6 +74,7 @@
     25 => 'Intervention\\Image\\ImageServiceProvider',
     26 => 'Barryvdh\\Debugbar\\ServiceProvider',
     27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    28 => 'Meneses\\LaravelMpdf\\LaravelMpdfServiceProvider',
   ),
   'deferred' => 
   array (
