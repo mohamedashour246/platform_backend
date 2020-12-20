@@ -55,9 +55,6 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	->name('market.delivery_prices.store');
 
 
-
-
-
 	Route::delete('/delivery_prices/{delivery_price}','DeliveryPriceController@destroy')->name('delivery_prices.destroy');
 	Route::get('/delivery_prices/{delivery_price}/edit','DeliveryPriceController@edit' )->name('delivery_prices.edit');
 	Route::patch('/delivery_prices/{delivery_price}','DeliveryPriceController@update' )->name('delivery_prices.update');
@@ -72,8 +69,8 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/ajax/search_branches' , 'BranchController@get_market_branches_via_ajax');
 	Route::get('/ajax/search_customers' , 'CustomerController@ajax_search_customers');
 	Route::get('/ajax/search_drivers' , 'DriverController@search_drivers');
-
 	Route::get('get_row'  , 'MarketController@row');
+	Route::delete('ajax/delete_delivery_price'  , 'CityDeliveryPriceController@ajax_delete');
 
 
 });

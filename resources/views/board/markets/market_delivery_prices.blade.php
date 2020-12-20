@@ -96,9 +96,23 @@ $lang = session()->get('locale');
 	</div>
 	<div class="col-md-10">
 		<!-- Account settings -->
-		
-		
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="header-elements  ">
+					<div class="float-right">
+						<a href="{{ route('market.delivery_prices.create', ['market' => $market->id ] ) }}" class="btn btn-primary ml-1"> <i class="icon-plus3"></i>  @lang('markets.add_market_delivery_prices') </a>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<br>
+
+		</div>
+
+
 		<div class="card ">
+
 			<table class="table  table-xs table-bordered">
 				<thead class="bg-dark">
 					<tr>
@@ -108,6 +122,7 @@ $lang = session()->get('locale');
 						<th> @lang('markets.delivery_price') </th>
 						<th> @lang('markets.added_by') </th>
 						<th> @lang('markets.created_at') </th>
+						<th> @lang('markets.settings') </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -122,6 +137,12 @@ $lang = session()->get('locale');
 						<td> {{ $delivery_price->price }} </td>
 						<td> {{ optional($delivery_price->admin)->name }} </td>
 						<td> <span data-popup="tooltip" title="{{ $delivery_price->created_at->diffForHumans() }}" >  {{ $delivery_price->created_at->toFormattedDateString() }} </span> </td>
+						<td> 
+							<a target="_blank" href="{{ route('city_delivery_prices.edit' , ['city_delivery_price' => $delivery_price->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+								<i class="icon-pencil7 text-warning-800"></i>
+							</a>
+							<a href="" data-id="{{ $delivery_price->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+						</td>
 					</tr>
 					@endforeach
 				</tbody>
@@ -140,5 +161,59 @@ $lang = session()->get('locale');
 @endsection
 
 @section('scripts')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	const Toast = Swal.mixin({
+		toast: true,
+		position: 'top-end',
+		showConfirmButton: false,
+		timer: 3000,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+			toast.addEventListener('mouseenter', Swal.stopTimer)
+			toast.addEventListener('mouseleave', Swal.resumeTimer)
+		}
+	})
+	function confirm_deletion() {
+		Swal.fire({
+			title: 'تاكيد الحذف ',
+			text: "هل انت متاكد من حذف مدينه التوصيل ؟",
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'نعم',
+			cancelButtonText: 'لا',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					url: '{{ url('Board/ajax/delete_delivery_price') }}',
+					type: 'POST',
+					dataType: 'json',
+					data: {id:id , _method:"DELETE" , _token:"{{ csrf_token() }}" },
+				})
+				.done(function(data) {
+					Toast.fire({
+						icon: data.status,
+						title: data.msg , 
+					})
+					if (data.status == 'success') {
+						setTimeout(location.reload(), 1000);
+					}
+				});
+				
+			}
+		})
+	}
+
+	$(function() {
+		$('a.delete_item').on('click', function(event) {
+			event.preventDefault();
+			id = $(this).data('id');
+			confirm_deletion();
+
+		});
+	});
+</script>
 
 @endsection

@@ -19,7 +19,8 @@ return [
 	'updated_successfully' => 'updated successfully' , 
 	'delete_price' => 'delete price',
 	'search' => 'search' , 
-	'all_cities' => 'All Cities'
+	'all_cities' => 'All Cities' , 
+	'deleted_success' => 'Deleted successfully' , 
 ];
 
 ?>

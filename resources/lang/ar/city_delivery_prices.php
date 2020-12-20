@@ -20,7 +20,8 @@ return [
 	'updated_successfully' => 'تم التعديل بنجاح' , 
 	'delete_price' => 'حذف السعر' , 
 	'search' => 'بحث' , 
-	'all_cities' => 'جميع المدن'
+	'all_cities' => 'جميع المدن' , 
+	'deleted_success' => 'تم الحذف بنجاح' 
 
 
 

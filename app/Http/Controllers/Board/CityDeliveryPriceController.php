@@ -65,12 +65,7 @@ class CityDeliveryPriceController extends Controller
         
         $city_delivery_price->price = $request->price;
         $city_delivery_price->save();
-
-
         return back()->with('success_msg'  , trans('city_delivery_prices.updated_successfully') );
-
-
-
     }
 
 
@@ -91,18 +86,25 @@ class CityDeliveryPriceController extends Controller
 
     public function get_cities_we_can_set_price_to_it(Request $request)
     {
-
-
         $city_delivery_prices = CityDeliveryPrice::where('from_city' , $request->from_city )->pluck('to_city')->toArray();
-
         $governorate_cities = City::where('governorate_id' , $request->to_governorate_id )->whereNotIn('id' , $city_delivery_prices )->get();
         $lang = session()->get('locale');
         $options = '<option> </option>';
-
         foreach ($governorate_cities as $city) {
             $name = $city['name_'.$lang];
             $options .= '<option value="'.$city->id.'" >'.$name.'</option>';
         }
         return $options;
+    }
+
+
+
+    public function ajax_delete(Request $request)
+    {
+       $city_delivery_price =  CityDeliveryPrice::find($request->id);
+
+       $city_delivery_price->delete();
+
+       return response()->json(  ['status' => 'success'  , 'msg' => trans('city_delivery_prices.deleted_success')  ]  ,  200);
     }
 }
