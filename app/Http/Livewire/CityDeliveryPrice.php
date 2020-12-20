@@ -52,7 +52,7 @@ class CityDeliveryPrice extends Component
 
     public function render()
     {
-        $prices = Prices::query();
+        $prices = Prices::query()->whereNull('market_id');
 
         if ($this->fromCity != 'all') {
             $prices = $prices->where('from_city' , $this->fromCity );
