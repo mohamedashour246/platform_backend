@@ -4,20 +4,28 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+  <style>
+    th{
+      color: white;
+      background-color: #3b8668;
+      text-align: center;
+    }
+  </style>
 </head>
-<body lang="ar" dir="rtl" >
+<body >
   <table>
    <thead>
      <tr>
-       <th>#</th>
-       <th>الراسل</th>
-       <th>المستقبل</th>
-       <th>تاريخ الاستلام</th>
-       <th>تاريخ التسليم</th>
-       <th>السائق</th>
-       <th>سعر الطلب</th>
-       <th>سعر التوصيل</th>
-       <th>طريقه الدفع</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >#</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >الراسل</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >المستقبل</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >تاريخ الاستلام</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >تاريخ التسليم</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >السائق</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >سعر الطلب</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >سعر التوصيل</th>
+       <th  style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >طريقه الدفع</th>
      </tr>
    </thead>
     <tbody>
@@ -39,16 +47,16 @@
   <table border="1" cellspacing="0" cellpadding="0">
     <thead>
       <tr>
-        <th style="background-color:  #3b8668; color: #FFFFFF; text-align: center;width: 18%" >مجموع الكاش </th>
-        <th style="background-color:  #3b8668; color: #FFFFFF; text-align: center;width: 18%" >مجموع التوصيل</th>
-        <th style="background-color:  #3b8668; color: #FFFFFF; text-align: center;width: 18%" >مجموع كى نت</th>
+        <th style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >مجموع الكاش </th>
+        <th style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >مجموع التوصيل</th>
+        <th style="background-color:  #3b8668; color: #FFFFFF; text-align: center; font-weight: bold" >مجموع كى نت</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td> {{ $trips->where('payment_method_id' , 1)->sum('order_price') }} </td>
-        <td>{{ $trips->sum('delivery_price') }} </td>
-        <td> {{  $trips->where('payment_method_id' , 2)->sum('order_price') }}</td>
+        <td style="text-align: center" > {{ $trips->where('payment_method_id' , 1)->sum('order_price') }} </td>
+        <td style="text-align: center" >{{ $trips->sum('delivery_price') }} </td>
+        <td style="text-align: center" > {{  $trips->where('payment_method_id' , 2)->sum('order_price') }}</td>
       </tr>
     </tbody>
   </table>
