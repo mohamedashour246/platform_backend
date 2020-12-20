@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.2.5|^8.0",
         "barryvdh/laravel-debugbar": "^3.5",
-        "carlos-meneses/laravel-mpdf": "^2.1",
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -22,7 +21,8 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
         "livewire/livewire": "^2.3",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "niklasravnsborg/laravel-pdf": "^4.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

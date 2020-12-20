@@ -72,7 +72,18 @@ return [
 	'bank_account_number' => 'Bank Account number' , 
 	'account_owner_name' => 'Bank owner name' , 
 	'delete' => 'Delete' , 
-	'market_emails' => 'Market Emails '
+	'market_emails' => 'Market Emails ' , 
+	'market_delivery_prices' => 'Market Delivery Prices',
+	'add_market_delivery_prices' => 'Add new market delivery prices',
+	'branche' => 'Branch', 
+	'delivery_price' => 'delivery price' , 
+	'delivery_places' => 'Delivery Places' ,
+	'city' => 'City'  , 
+	'choose_city_place' => 'choose city please' , 
+	'delivery_prices_added_successfully' => 'delivery prices added successfully' , 
+	'from_city' => 'From City'  ,
+	 'to_city' => 'To City' , 
+
 
 ];
 

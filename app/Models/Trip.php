@@ -43,10 +43,8 @@ class Trip extends Model
 
 	public function address()
 	{
-		return $this->hasOne(CustomerAddress::class , 'trip_id');
+		return $this->belongsTo(CustomerAddress::class , 'customer_address_id');
 	}
-
-
 
 
     public function add($data  , $address_id)
@@ -64,6 +62,10 @@ class Trip extends Model
     	$this->customer_address_id = $address_id;
     	// $this->notes = $data['notes'];
     	return $this->save();
-
     }
+
+
+
+
+
 }

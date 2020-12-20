@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Board;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Market;
+use App\Models\City;
 use App\Models\Merchant;
 use App\Models\MarketDocument;
-
+use App\Models\Branch;
 use App\Http\Requests\StoreMarketRequest;
 use App\Http\Requests\UpdateMarketRequest;
+use App\Models\CityDeliveryPrice;
 use Hash;
 use Auth;
 class MarketController extends Controller
@@ -164,6 +166,14 @@ class MarketController extends Controller
 
 
 
+    public function row(Request $request)
+    {
+
+        $city = City::find($request->id);
+        $row = view('board.markets.row'  , compact('city') )->render();
+        return response($row,200);
+    }
+
 
     /**
      * Display the specified resource.
@@ -173,12 +183,9 @@ class MarketController extends Controller
      */
     public function delivery_prices(Market $market)
     {
-        $market->load(['bank_accounts' , 'bank_accounts.admin'  ]);
-        return view('board.markets.market_bank_accounts' ,  compact('market'));
+        $market->load(['delivery_prices' , 'delivery_prices.from'  , 'delivery_prices.to' , 'delivery_prices.admin' ]);
+        return view('board.markets.market_delivery_prices' ,  compact('market'));
     }
-
-
-
 
 
 
@@ -257,13 +264,46 @@ class MarketController extends Controller
             return redirect(route('markets.index'))->with('success_msg'  , trans('markets.deleted_success') );
     }
 
-
-
-
-
-
     public function ajax_search(Request $request) {
         $markets = Market::select('name' , 'id')->where('name' , 'like', '%' . $request->q . '%' )->get();
         return $markets;
     }
+
+
+    public function add_delivery_prices(Market $market)
+    {
+        $market->load('branches');
+        return view('board.markets.create_delivery_prices' , compact('market'));
+    }
+
+
+    public function store_delivery_prices(Request $request )
+    {
+        // dd($request->all());
+
+        // first we need to get the bransh city id
+        $branche = Branch::find($request->branche);
+        $branche->load('market' , 'market.delivery_prices');
+        $prices = [];
+        $admin_id = Auth::guard('admin')->id();
+
+        // dd($branche->city_id);
+        
+        for ($i = 0; $i < count($request->city_id) ; $i++) {
+            $prices[] = new CityDeliveryPrice(array(
+                'admin_id' => $admin_id , 
+                'market_id' => $branche->market_id , 
+                'price' => $request->price[$i] , 
+                'from_city' => $branche->city_id , 
+                'to_city' => $request->city_id[$i] , 
+            )); 
+        }
+        $branche->market->delivery_prices()->saveMany($prices);
+      
+
+
+      return redirect(route('market.delivery_prices'  , ['market' => $branche->market_id ] ))->with('success_msg'  , trans('markets.delivery_prices_added_successfully') );
+        
+    }
+
 }

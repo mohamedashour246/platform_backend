@@ -197,12 +197,9 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/ui/moment/moment.min.js') }}"></script>
-
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/anytime.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.js') }}"></script>
-
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.time.js') }}"></script>
-
 {{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_date_rtl.js') }}"></script> --}}
 <script>
 	$(function() {

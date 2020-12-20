@@ -50,6 +50,12 @@ class Market extends Model
 		return $this->hasMany(Branch::class , 'market_id');
 	}
 
+	
+    public function delivery_prices()
+    {
+    	return $this->hasMany(CityDeliveryPrice::class , 'market_id');
+    }
+
 
     public function add($data)
     {

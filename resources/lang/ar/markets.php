@@ -68,23 +68,15 @@ return [
 	'account_owner_name' => 'اسم صاحب الحساب ' , 
 	'delete' => 'حذف' , 
 	'market_emails' => 'البريد الاكترونى الخاص بالمتجر ',
-	'' => ''
-
-
-
-
-	
-
-
-
-
-
-
-	
-
-
-
-
+	'add_market_delivery_prices' => 'إضافه سعر توصيل جديد للمتجر ',
+	'branche' => 'الفرع', 
+	'delivery_price' => 'سعر التوصيل ', 
+	'delivery_places' => 'اماكن التوصيل'  , 
+	'city' => 'المدينه'  , 
+	'choose_city_place' => 'اختر المدينه من فضلك' , 
+	'delivery_prices_added_successfully' => 'تم إضافه اماكن التوصيل و الاسعار بنجاح' , 
+	'from_city' => 'من مدينه'  ,
+	 'to_city' => 'الى ميدنه' , 
 
 
 

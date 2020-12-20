@@ -13,6 +13,7 @@ use App\Http\Resources\DriverResourceCollection;
 use App\Models\Trip;
 use App\Exports\TripsExport;
 use Excel;
+use PDF;
 class DriverController extends Controller
 {
     /**
@@ -169,7 +170,7 @@ class DriverController extends Controller
 
 
         if ($fillters) {
-            $temp_trips = $trips;
+            // $temp_trips = $trips;
             $trips = $trips->with(['market' , 'driver'])->get();
 
             
@@ -179,17 +180,12 @@ class DriverController extends Controller
             $driver_erad = $cashe + $kent + $delivery_total_price;
         }
 
-        if($request->btn_active == 'excel') {
-
-        }
-
         switch ($request->btn_active) {
             case 'excel':
             return Excel::download(new TripsExport($trips), 'trips.xlsx'); 
             break;
             case 'pdf':
-            return Excel::download(new TripsExport($trips), 'trips.pdf'  ,  \Maatwebsite\Excel\Excel::MPDF); 
-            // return (new TripsExport($trips))->download('trips.pdf', \Maatwebsite\Excel\Excel::MPDF);
+            return PDF::loadView('board.drivers.pdf', compact('trips') )->download('trips.pdf');
             break;
             default:
             $payment_methods = PaymentMethod::all();
