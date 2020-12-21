@@ -152,6 +152,15 @@ $lang = session()->get('locale');
 							<td class="font-weight-bold text-dark"> @lang('markets.notes') </td>
 							<td class="text-left font-weight-bold"> {{ $market->notes }} </td>
 						</tr>
+						<tr>
+							<td class="font-weight-bold text-dark"> @lang('markets.contract_image') </td>
+							<td class="text-left font-weight-bold"> 
+
+								<a href="{{ Storage::disk('s3')->url('markets/'.$market->contract_image) }}" data-popup="lightbox">
+				                        <img src="{{ Storage::disk('s3')->url('markets/'.$market->contract_image) }}" class="img-preview rounded">
+			                        </a>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -167,5 +176,7 @@ $lang = session()->get('locale');
 @endsection
 
 @section('scripts')
+	<script src="{{ asset('board_assets/global_assets/js/plugins/media/fancybox.min.js') }}"></script>
 
+	<script src="{{ asset('board_assets/global_assets/js/demo_pages/gallery_library.js') }}"></script>
 @endsection

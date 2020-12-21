@@ -34,6 +34,7 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::resource('/governorates'  , 'GovernorateController');
 	Route::resource('/city_delivery_prices' , 'CityDeliveryPriceController');
 	Route::resource('/push_notifications'  , 'PushNotificationController' );
+	Route::resource('/admin_types' , 'AdminTypeController' );
 	Route::resource('/customers'  , 'CustomerController');
 	Route::get('/governorates/{governorate}/delivery_prices/create'  , 'GovernorateController@delivery_prices_create')->name('governorates.delivery_prices.create');
 	Route::post('/governorates/{governorate}/delivery_prices'  , 'GovernorateController@delivery_prices_store')->name('governorates.delivery_prices.store');
@@ -65,6 +66,9 @@ Route::group(['prefix' => 'Board'  ,  'middleware' => ['admin' , 'lang' ]  , 'na
 	Route::get('/ajax/search_drivers' , 'DriverController@search_drivers');
 	Route::get('get_row'  , 'MarketController@row');
 	Route::delete('ajax/delete_delivery_price'  , 'CityDeliveryPriceController@ajax_delete');
+	Route::delete('ajax/delete_admin_type'  , 'AdminTypeController@ajax_delete');
+
+
 
 
 });

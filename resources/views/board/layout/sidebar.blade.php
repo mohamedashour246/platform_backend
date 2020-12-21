@@ -34,12 +34,13 @@ $lang = session()->get('locale');
 
 			@php
 			$segment = request()->segment(2);
-			$drivers = $admins = $board = $governorates = $cities = $markets = $trips = $city_delivery_prices = '';
+			$drivers = $admins = $board = $governorates = $cities = $markets = $trips = $city_delivery_prices =  '';
 			switch ($segment) {
 				case 'admins':
 				$admins = 'active';
 				break;
 				case 'drivers':
+				case 'push_notifications':
 				$drivers = 'active';
 				break;
 				case 'governorates':
