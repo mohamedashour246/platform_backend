@@ -31,6 +31,18 @@ class Governorates extends Component
 
 
 
+    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
+
+    public function handleItemDeletion($item_id)
+    {
+        Governorate::where('id' , $item_id )->delete();
+        $this->emit('itemDeleted' , $item_id);
+        $this->resetPage();
+    }
+
+
+
+
     public function render()
     {
     	$governorates =  Governorate::latest()->where('name_ar', 'like', '%' . $this->search . '%')->orWhere('name_en', 'like', '%' . $this->search . '%')->simplePaginate($this->paginate);

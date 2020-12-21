@@ -24,9 +24,15 @@ class Trip extends Model
 	}
 
 
+	public function payment_method()
+	{
+		return $this->belongsTo(PaymentMethod::class , 'payment_method_id');
+	}
+
+
 	public function driver()
 	{
-		return $this->belongsTo(Branch::class , 'driver_id');
+		return $this->belongsTo(Driver::class , 'driver_id');
 	}
 
 
@@ -37,10 +43,8 @@ class Trip extends Model
 
 	public function address()
 	{
-		return $this->hasOne(CustomerAddress::class , 'trip_id');
+		return $this->belongsTo(CustomerAddress::class , 'customer_address_id');
 	}
-
-
 
 
     public function add($data  , $address_id)
@@ -51,12 +55,17 @@ class Trip extends Model
     	$this->admin_id = Auth::guard('admin')->id();
     	$this->order_price = $data['order_price'];
     	$this->payment_method_id = $data['payment_method_id'];
-    	$this->delivery_date_to_customer = $data['delivery_date_to_customer'];
-    	$this->receipt_date_from_market = $data['receipt_date_from_market'];
+    	$this->delivery_date_to_customer = $data['delivery_date_to_customer'].' '.$data['delivery_time_to_customer'];
+    	$this->receipt_date_from_market = $data['receipt_date_from_market'].' '.$data['receipt_time_from_market'];
     	$this->status = 1;
+    	$this->driver_id = $data['driver_id'];
     	$this->customer_address_id = $address_id;
     	// $this->notes = $data['notes'];
     	return $this->save();
-
     }
+
+
+
+
+
 }

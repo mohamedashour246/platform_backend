@@ -31,7 +31,7 @@ $lang = session()->get('locale');
 	<div class="col-md-12">
 		@include('board.layout.messages')
 
-	 	<livewire:admins />
+		<livewire:admins />
 	</div>
 </div>
 
@@ -39,21 +39,10 @@ $lang = session()->get('locale');
 
 
 @section('styles')
-  
+
 
 @endsection
 
 @section('scripts')
-
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
-
-{{-- <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script> --}}
-	<script src="{{ asset('board_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
-
-<script>
-	$(function() {
-
-
-});
-</script>
+<script src="{{ asset('board_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
 @endsection

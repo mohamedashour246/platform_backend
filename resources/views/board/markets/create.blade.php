@@ -98,33 +98,30 @@ $lang = session()->get('locale');
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<div class="row">
+								<div class="col-md-4">
+									<label> @lang('markets.contract_image') </label>
+									<input type="file" name="contract_image" class="form-control form-input-styled @error('contract_image') is-invalid @enderror">
+									@error('contract_image')
+									<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
+									@enderror
+									
+								</div>
+
 								<div class="col-md-4">
 									<label> @lang('markets.attach_files') </label>
 									<input type="file" name="files[]" multiple="multiple" class="form-control form-input-styled @error('logo') is-invalid @enderror">
 									@error('logo')
 									<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
 									@enderror
-
 									<p class="text-warning"> @lang('markets.files_type_allowed') </p>
 								</div>
 							</div>
 						</div>
-					</fieldset>
-
-
-
-					
-
-
-
-
-
+					</fieldset>	
 					<fieldset>
 						<legend>  <span class="text-primary">  @lang('markets.martket_admin_login') </span> </legend>
-
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-4">
@@ -197,12 +194,9 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/ui/moment/moment.min.js') }}"></script>
-
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/anytime.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.js') }}"></script>
-
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.time.js') }}"></script>
-
 {{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_date_rtl.js') }}"></script> --}}
 <script>
 	$(function() {

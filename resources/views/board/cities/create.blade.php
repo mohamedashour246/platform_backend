@@ -65,7 +65,6 @@ $lang = session()->get('locale');
 								<label class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
-
 							<div class="col-md-4">
 								<div class="form-group">
 									<label> @lang('cities.governorate') </label>
@@ -80,27 +79,6 @@ $lang = session()->get('locale');
 					</div>
 					<div class="form-group">
 						<div class="row">
-
-							<div class="col-md-4">
-								<label> @lang('cities.price_within_city') </label>
-								<input type="text" name="price_within_city" value="{{ old('price_within_city') }}" class="form-control @error('price_within_city') is-invalid @enderror " >
-								@error('price_within_city')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
-
-
-
-							<div class="col-md-4">
-								<label> @lang('cities.price_outside_city') </label>
-								<input type="text" name="price_outside_city" value="{{ old('price_outside_city') }}" class="form-control @error('price_outside_city') is-invalid @enderror " >
-								@error('price_outside_city')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
-
-
-
 							<div class="col-md-4">
 								<div class="form-check form-check-switchery">
 									<label class="form-check-label">
@@ -109,13 +87,9 @@ $lang = session()->get('locale');
 									</label>
 								</div>
 							</div>
-
 						</div>
 					</div>
-
-
 				</div>
-
 				<div class="card-footer bg-light" >
 					<button type="submit" name="save_and_add_more" value="true" class="btn btn-primary float-right ml-2"> @lang('cities.save_and_add_more')</button>
 					<button type="submit" class="btn btn-primary float-right ml-2"> @lang('cities.add') </button>

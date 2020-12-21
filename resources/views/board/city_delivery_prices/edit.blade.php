@@ -3,7 +3,7 @@ $lang = session()->get('locale');
 @endphp
 @extends('board.layout.master')
 @section('title')
-@lang('cities.edit_city_details')
+@lang('city_delivery_prices.edit_city_delivery_price_details')
 @endsection
 
 
@@ -11,14 +11,14 @@ $lang = session()->get('locale');
 <div class="page-header">
 	<div class="page-header-content header-elements-md-inline">
 		<div class="page-title d-flex">
-			<h4><i class="icon-arrow-right6 mr-2"></i> @lang('cities.cities') </h4>
+			<h4><i class="icon-arrow-right6 mr-2"></i> @lang('city_delivery_prices.city_delivery_prices') </h4>
 			<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
 				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('cities.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('cities.cities') </a>
-				<span class="breadcrumb-item active"> @lang('cities.edit_city_details') </span>
+				<a href="{{ route('city_delivery_prices.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('city_delivery_prices.city_delivery_prices') </a>
+				<span class="breadcrumb-item active"> @lang('city_delivery_prices.edit_city_delivery_price_details') </span>
 			</div>
 		</div>
 	</div>
@@ -34,7 +34,7 @@ $lang = session()->get('locale');
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
-				<h5 class="card-title"> @lang('cities.edit_city_details') </h5>
+				<h5 class="card-title"> @lang('city_delivery_prices.edit_city_delivery_price_details') </h5>
 				<div class="header-elements">
 					<div class="list-icons">
 						<a class="list-icons-item" data-action="collapse"></a>
@@ -43,7 +43,7 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('cities.update' , ['city' => $city->id ] ) }}" method="POST"  enctype="multipart/form-data" >
+			<form action="{{ route('city_delivery_prices.update' , ['city_delivery_price' => $price->id ] ) }}" method="POST"  enctype="multipart/form-data" >
 				<div class="card-body">
 
 					@csrf
@@ -51,64 +51,35 @@ $lang = session()->get('locale');
 					<div class="form-group">
 						<div class="row">
 
-							<div class="col-md-4">
-								<label> @lang('cities.name_ar') </label>
-								<input type="text" name="name_ar" value="{{ $city->name_ar }}" class="form-control @error('name_ar') is-invalid @enderror ">
-								@error('name_ar')
-								<label  class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
 
-							<div class="col-md-4">
-								<label> @lang('cities.name_en') </label>
-								<input type="text" name="name_en" value="{{ $city->name_en }}" class="form-control @error('name_en') is-invalid @enderror " >
-								@error('name_en')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
-
-							<div class="col-md-4">
-								<div class="form-group">
-									<label> @lang('cities.governorate') </label>
-									<select name="governorate_id" class="form-control select" data-fouc>
-										@foreach ($governorates as $governorate)
-										<option value="{{ $governorate->id }}" {{ $governorate->id == $city->governorate_id ? 'selected="selected"' : '' }} >{{ $governorate['name_'.$lang] }}</option>
-										@endforeach
-									</select>
-								</div>
-							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="row">
 
-							<div class="col-md-4">
-								<label> @lang('cities.price_within_city') </label>
-								<input type="text" name="price_within_city" value="{{ $city->price_within_city }}" class="form-control @error('price_within_city') is-invalid @enderror " >
-								@error('price_within_city')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
-
-
 
 							<div class="col-md-4">
-								<label> @lang('cities.price_outside_city') </label>
-								<input type="text" name="price_outside_city" value="{{ $city->price_outside_city }}" class="form-control @error('price_outside_city') is-invalid @enderror " >
-								@error('price_outside_city')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
-
-
-
-							<div class="col-md-4">
-								<div class="form-check form-check-switchery">
-									<label class="form-check-label">
-										<input type="checkbox" name="active" class="form-check-input-switchery" {{ $city->isActive() ? 'checked' : '' }} data-fouc>
-										@lang('cities.active')
-									</label>
+								<div class="form-group">
+									<label> @lang('city_delivery_prices.from_city') </label>
+									<select name="from_city" class="form-control from_city" >
+										<option value="{{ $price->from_city }}"> {{ optional($price->from)['name_'.$lang] }} </option>
+									</select>
 								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label> @lang('city_delivery_prices.to_city') </label>
+									<select name="to_city" class="form-control to_city" >
+										<option value="{{ $price->to_city }}"> {{ optional($price->to)['name_'.$lang] }} </option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label> @lang('city_delivery_prices.delivery_price') </label>
+								<input type="text" name="price" value="{{ $price->price }}" class="form-control @error('price') is-invalid @enderror " >
+								@error('price')
+								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
 							</div>
 
 						</div>
@@ -118,8 +89,8 @@ $lang = session()->get('locale');
 				</div>
 
 				<div class="card-footer bg-light" >
-					<button type="submit" class="btn btn-warning float-right ml-2"> @lang('cities.edit') </button>
-					<a href="{{ route('cities.index') }}" class="btn btn-secondary "> @lang('cities.back') </a>
+					<button type="submit" class="btn btn-warning float-right ml-2"> @lang('city_delivery_prices.edit') </button>
+					<a href="{{ route('city_delivery_prices.index') }}" class="btn btn-secondary "> @lang('city_delivery_prices.back') </a>
 				</div>
 			</form>
 		</div>

@@ -20,6 +20,16 @@ class Admins extends Component
         $this->resetPage();
     }
 
+    protected $listeners = ['deleteAdminConfirmed' => 'handleAdminDeletion'];
+
+
+
+    public function handleAdminDeletion($admin_id)
+    {
+        Admin::where('id' , $admin_id )->delete();
+        $this->resetPage();
+    }
+
 
 	protected $paginationTheme = 'bootstrap';
 
@@ -31,10 +41,5 @@ class Admins extends Component
     }
 
 
-
-    // public function paginationView()
-    // {
-    //     return 'livewire.admins-pagination-links-view';
-    // }
 
 }

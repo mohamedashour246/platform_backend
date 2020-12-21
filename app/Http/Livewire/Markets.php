@@ -22,6 +22,17 @@ class Markets extends Component
     }
 
 
+
+    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
+
+    public function handleItemDeletion($item_id)
+    {
+        Market::where('id' , $item_id )->delete();
+        $this->emit('itemDeleted' , $item_id);
+        $this->resetPage();
+    }
+
+
 	protected $paginationTheme = 'bootstrap';
 
 

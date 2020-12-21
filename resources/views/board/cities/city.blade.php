@@ -73,15 +73,6 @@ $lang = session()->get('locale');
 							<th class="font-weight-bold text-dark">@lang('cities.name_ar')</th>
 							<td class="text-left"> {{ $city->name_ar }} </td>
 						</tr>
-
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('cities.price_within_city') </th>
-							<td class="text-left">	{{ $city->price_within_city }}	</td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('cities.price_outside_city') </th>
-							<td class="text-left">	{{ $city->price_outside_city }}	</td>
-						</tr>
 						<tr>
 							<th class="font-weight-bold text-dark"> @lang('cities.activation') </th>
 							<td class="text-left">	

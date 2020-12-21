@@ -42,8 +42,12 @@ return [
     |
     */
 
+<<<<<<< HEAD
 
     'asset_url'  => 'https://ahmedsamidev.com/platform/public',
+=======
+    'asset_url'  => null,
+>>>>>>> 336bd4e2e9ef1539cd356f61eb854ecbf6a119c8
 
     /*
     |--------------------------------------------------------------------------

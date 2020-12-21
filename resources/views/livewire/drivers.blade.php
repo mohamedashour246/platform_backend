@@ -65,6 +65,16 @@
 							<option value="100">100</option>
 							<option value="150">150</option>
 						</select>
+
+						<select class="form-control form-control-select2 select" wire:model="sort" >
+							<option value="">  ترتيب نتائج العرض حسب </option>
+							<option value="SortByStartTimeASC">  وقت بدياه العمل (تصاعدى) </option>
+							<option value="SortByStartTimeDESC">  وقت بدياه العمل (تنازى) </option>
+							<option value="SortByEndTimeASC">  وقت انتهاء العمل (تصاعدى) </option>
+							<option value="SortByEndTimeDESC">  وقت انتهاء العمل (تنازى) </option>
+							<option value="available"> المتاح للعمل </option>
+						</select>
+
 					</div>
 				</div>
 			</div>
@@ -76,11 +86,12 @@
 							<th>#</th>
 							<th> @lang('drivers.picture') </th>
 							<th> @lang('drivers.driver_name') </th>
+							<th>  @lang('drivers.phone') </th>
+							<th>  @lang('drivers.car_number') </th>
+							<th> @lang('drivers.working_start_time') </th>
+							<th> @lang('drivers.working_end_time') </th>
 							<th> @lang('drivers.code') </th>
 							<th> @lang('drivers.availability') </th>
-							<th> @lang('drivers.added_by') </th>
-							<th> @lang('drivers.activation') </th>
-							<th> @lang('drivers.created_at') </th>
 							<th> @lang('drivers.settings') </th>
 						</tr>
 					</thead>
@@ -93,6 +104,11 @@
 							<td  >{{ $i++ }}</td>
 							<td > <img class="img-thumbnail" width="50" height="50" src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" alt=""> </td>
 							<td> <a href="{{ route('drivers.show'  , ['driver' => $driver->id] ) }}">  {{ $driver->name }} </a> </td>
+							
+							<td> {{ $driver->phone }} </td>
+							<td> {{ $driver->car_number }} </td>
+							<td> {{ \Carbon\Carbon::parse($driver->working_start_time)->format('H:i:s A') }} </td>
+							<td> {{ \Carbon\Carbon::parse($driver->working_end_time)->format('H:i:s A')   }} </td>
 							<td> {{ $driver->code }} </td>
 							<td>
 								@switch($driver->available)
@@ -104,29 +120,15 @@
 								@break
 								@endswitch
 							</td>
-							<td> <a target="_blank" href="{{ route('admins.show'  , ['admin' => $driver->admin_id] ) }}"> {{ optional($driver->admin)->username }} </a> </td>
-							<td>
-								@switch($driver->active)
-								@case(1)
-								<span class="badge badge-primary"> @lang('drivers.active') </span>
-								@break
-								@case(0)
-								<span class="badge badge-secondary"> @lang('drivers.inactive') </span>
-								@break
-								@endswitch
-							</td>
-							<td>{{ $driver->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $driver->created_at->diffForHumans() }} </span> </td>
+
 							<td>
 								<a target="_blank" href="{{ route('drivers.show'  , ['driver' => $driver->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
 									<i class="icon-eye2 text-primary-800"></i>
 								</a>
 								<a target="_blank" href="{{ route('drivers.edit' , ['driver' => $driver->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i></a>
-								<form action="{{ route('drivers.destroy'  , ['driver' => $driver->id] ) }}" class="form-inline float-right" method="POST" >
-									@csrf
-									@method('DELETE')
-									<button type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i></button>
-								</form>
+									<i class="icon-pencil7 text-warning-800"></i>
+								</a>
+								<a href="" data-id="{{ $driver->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
 							</td>
 						</tr>
 
@@ -148,3 +150,68 @@
 
 	</div>
 </div>	
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+
+
+
+
+	$(document).ready(function() {
+
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		
+
+
+		Livewire.on('itemDeleted', itemId => {
+			Toast.fire({
+				icon: 'success',
+				title: "@lang('drivers.deleted_success')", 
+			});
+		})
+
+
+
+
+		$('a.delete_item').on('click',  function(event) {
+			event.preventDefault();
+			item_id = $(this).data('id');
+			confirm_deletion(item_id);
+		});
+
+		function confirm_deletion(item_id) {
+
+			Swal.fire({
+				title: 'تاكيد الحذف ',
+				text: "هل انت متاكد من حذف هذا السائق ؟",
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'نعم',
+				cancelButtonText: 'لا',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Livewire.emit('deleteItemConfirmed'  , item_id );
+				}
+			})
+		}
+
+	});
+
+
+
+
+</script>

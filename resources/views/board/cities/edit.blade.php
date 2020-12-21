@@ -83,26 +83,6 @@ $lang = session()->get('locale');
 						<div class="row">
 
 							<div class="col-md-4">
-								<label> @lang('cities.price_within_city') </label>
-								<input type="text" name="price_within_city" value="{{ $city->price_within_city }}" class="form-control @error('price_within_city') is-invalid @enderror " >
-								@error('price_within_city')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
-
-
-
-							<div class="col-md-4">
-								<label> @lang('cities.price_outside_city') </label>
-								<input type="text" name="price_outside_city" value="{{ $city->price_outside_city }}" class="form-control @error('price_outside_city') is-invalid @enderror " >
-								@error('price_outside_city')
-								<label class="text-danger font-weight-bold " > {{ $message }} </label>
-								@enderror
-							</div>
-
-
-
-							<div class="col-md-4">
 								<div class="form-check form-check-switchery">
 									<label class="form-check-label">
 										<input type="checkbox" name="active" class="form-check-input-switchery" {{ $city->isActive() ? 'checked' : '' }} data-fouc>

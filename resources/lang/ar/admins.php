@@ -1,7 +1,8 @@
 <?php 
 
 return [
-
+	'phone' => 'رقم الجوال' , 
+	'address' => 'العنوان' , 
 	'admins' => 'المشرفين' , 
 	'add_new_admin' => 'إضافه مشرف جديد',
 	'username' => 'اسم المستخدم' , 
@@ -38,16 +39,8 @@ return [
 	'back' => 'تراجع' ,
 	'deleted_success' => 'تم الحذف بنجاح' , 
 	'adding_success' => 'تم إضافه المشرف بنجاح',
-	'adding_error' => 'خطا حاول مره اخرى'
-
-	
-
-
-
-
-
-
-
+	'adding_error' => 'خطا حاول مره اخرى' , 
+	'name' => 'الاسم' , 
 ];
 
- ?>
+?>

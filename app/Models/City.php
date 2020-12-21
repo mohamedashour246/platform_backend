@@ -14,8 +14,6 @@ class City extends Model
     {
     	$this->name_en = $data['name_en'];
     	$this->name_ar = $data['name_ar'];
-    	$this->price_within_city = $data['price_within_city'];
-    	$this->price_outside_city = $data['price_outside_city'];
     	$this->governorate_id = $data['governorate_id'];
     	$this->active = isset($data['active']) ? 1 : 0;
     	$this->admin_id = Auth::guard('admin')->id();
@@ -28,8 +26,6 @@ class City extends Model
     {
     	$this->name_en = $data['name_en'];
     	$this->name_ar = $data['name_ar'];
-    	$this->price_within_city = $data['price_within_city'];
-    	$this->price_outside_city = $data['price_outside_city'];
     	$this->governorate_id = $data['governorate_id'];
     	$this->active = isset($data['active']) ? 1 : 0;
     	return $this->save();

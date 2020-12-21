@@ -29,6 +29,8 @@ $lang = session()->get('locale');
 
 <div class="row">
 	<div class="col-md-12">
+
+		@include('board.layout.messages')
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
@@ -79,20 +81,44 @@ $lang = session()->get('locale');
 						</div>
 						<div class="form-group">
 							<div class="row">
+								
 								<div class="col-md-4">
-									<label> @lang('trips.delivery_date_to_customer') </label>
-									<input type="text" name="delivery_date_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="delivery_date_to_customer" 	value="{{ old('delivery_date_to_customer') }}" >
-									@error('delivery_date_to_customer')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
+									<div class="row">
+										<div class="col-md-9">
+											<label> @lang('trips.receipt_date_from_market') </label>
+											<input type="text" name="receipt_date_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickadate1" 
+											value="{{ old('receipt_date_from_market') }}">
+											@error('receipt_date_from_market')
+											<label class="text-danger font-weight-bold " > {{ $message }} </label>
+											@enderror
+										</div>
+										<div class="col-md-3">
+											<label> @lang('trips.time') </label>
+											<input type="text" name="receipt_time_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickatime1" 
+											value="{{ old('receipt_date_from_market') }}">
+											@error('receipt_date_from_market')
+											<label class="text-danger font-weight-bold " > {{ $message }} </label>
+											@enderror
+										</div>
+									</div>
 								</div>
 								<div class="col-md-4">
-									<label> @lang('trips.receipt_date_from_market') </label>
-									<input type="text" name="receipt_date_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="receipt_date_from_market" 
-									value="{{ old('receipt_date_from_market') }}">
-									@error('receipt_date_from_market')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
+									<div class="row">
+										<div class="col-md-9">
+											<label> @lang('trips.delivery_date_to_customer') </label>
+											<input type="text" name="delivery_date_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickadate" 	value="{{ old('delivery_date_to_customer') }}" >
+											@error('delivery_date_to_customer')
+											<label class="text-danger font-weight-bold " > {{ $message }} </label>
+											@enderror
+										</div>
+										<div class="col-md-3">
+											<label> @lang('trips.time') </label>
+											<input type="text" name="delivery_time_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickatime" 	value="{{ old('delivery_date_to_customer') }}" >
+											@error('delivery_date_to_customer')
+											<label class="text-danger font-weight-bold " > {{ $message }} </label>
+											@enderror
+										</div>
+									</div>
 								</div>
 								<div class="col-md-4">
 									<label> @lang('trips.payment_method') </label>
@@ -108,25 +134,7 @@ $lang = session()->get('locale');
 
 							</div>
 						</div>
-						<div class="form-group">
-							<div class="row">
-								{{-- <div class="col-md-4">
-									<label> @lang('trips.bounce') </label>
-									<input type="text" name="bounce" value="{{ old('bounce') }}" class="form-control @error('bounce') is-invalid @enderror " >
-									@error('bounce')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div> --}}
-								<div class="col-md-4">
-									<div class="form-check form-check-switchery mt-4">
-										<label class="form-check-label">
-											<input type="checkbox" name="collect_the_amount" class="form-check-input-switchery" checked data-fouc>
-											@lang('trips.collect_the_amount')
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
+
 					</fieldset>
 
 
@@ -159,138 +167,36 @@ $lang = session()->get('locale');
 
 
 					<fieldset>
-						<legend>  <span class="text-primary">  @lang('trips.customer_address_details') </span> </legend>
+						<legend>  <span class="text-primary">  @lang('trips.customers') </span> </legend>
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-3">
-									<label> @lang('trips.customer_name') </label>
-									<input type="text" name="customer_name" value="{{ old('customer_name') }}" class="form-control @error('customer_name') is-invalid @enderror " >
-									@error('customer_name')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
-									<label> @lang('trips.phone1') </label>
-									<input type="text" name="phone1" value="{{ old('phone1') }}" class="form-control @error('username') is-invalid @enderror " >
-									@error('phone1')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
-									<label> @lang('trips.phone2') </label>
-									<input type="text" name="phone2" value="{{ old('phone2') }}" class="form-control @error('username') is-invalid @enderror " >
-									@error('phone2')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
-									<label> @lang('trips.governorate') </label>
-									<select name="governorate"  class="form-control governorate select" >
-										@foreach ($governorates as $governorate)
-										<option value="{{ $governorate->id }}">{{ $governorate['name_'.$lang] }}</option>
-										@endforeach
+									<label>@lang('trips.choose_customers') </label>
+									<select name="customers[]" multiple="multiple" class="form-control customers" >
+										<option value=""> اختر المستلم </option>
 									</select>
 									@error('payment_method_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-md-3">
-									<label> @lang('trips.city') </label>
-									<select name="city"  class="form-control city select" >
-										@foreach ($cities as $city)
-										<option value="{{ $city->id }}">{{ $city['name_'.$lang] }}</option>
+								<div class="col-md-2">
+									<a href="" class="add_new_customar mt-4 btn btn-sm btn-primary"> <i class="icon-plus3 " ></i> @lang('trips.add_new_customer') </a> 
+								</div>
+									<div class="col-md-4">
+									<label> @lang('trips.driver') </label>
+									<select name="driver_id"  class="form-control driver_id" >
+										@foreach ($drivers as $driver)
+										<option value="{{ $driver->id }}">{{ $driver->name }}</option>
 										@endforeach
 									</select>
-									@error('payment_method_id')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-
-								<div class="col-md-3">
-									<label> @lang('trips.place_number') </label>
-									<input type="text" name="place_number" value="{{ old('place_number') }}" class="form-control @error('customer_name') is-invalid @enderror " >
-									@error('place_number')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
-									<label> @lang('trips.street_name') </label>
-									<input type="text" name="street_name" value="{{ old('street_name') }}" class="form-control @error('username') is-invalid @enderror " >
-									@error('street_name')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
-									<label> @lang('trips.avenue_number') </label>
-									<input type="text" name="avenue_number" value="{{ old('avenue_number') }}" class="form-control @error('username') is-invalid @enderror " >
-									@error('avenue_number')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-md-3">
-									<label> @lang('trips.building_types') </label>
-									<select name="building_type_id"  class="form-control building_types select" >
-										@foreach ($building_types as $building_type)
-										<option value="{{ $building_type->id }}">{{ $building_type['name_'.$lang] }}</option>
-										@endforeach
-									</select>
-									@error('payment_method_id')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>					
-								<div class="col-md-3">
-									<label> @lang('trips.building_number') </label>
-									<input type="text" name="building_number" value="{{ old('building_number') }}" class="form-control @error('customer_name') is-invalid @enderror " >
-									@error('building_number')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
-									<label> @lang('trips.floor_number') </label>
-									<input type="text" name="floor_number" value="{{ old('floor_number') }}" class="form-control @error('username') is-invalid @enderror " >
-									@error('floor_number')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
-									<label> @lang('trips.apratment_number') </label>
-									<input type="text" name="apratment_number" value="{{ old('apratment_number') }}" class="form-control @error('username') is-invalid @enderror " >
-									@error('apratment_number')
+									@error('driver_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
 							</div>
 						</div>
 					</fieldset>
-
-
-					<fieldset>
-						<legend>  <span class="text-primary">  @lang('trips.customer_address_on_map') </span> </legend>
-
-						<div class="row">
-							<div class="col-md-12">
-								<div id="map" style="width: 100%; height: 400px;"></div>
-								<input type="hidden" id='lat'  name="latitude" value="" >
-								<input type="hidden" id='lng'  name="longitude"  value="" >
-							</div>
-						</div>
-
-					</fieldset>
-
-
-
-
 				</div>
-
 				<div class="card-footer bg-light" >
 					<button type="submit" class="btn btn-primary float-right ml-2"> @lang('trips.add') </button>
 					<a href="{{ route('trips.index') }}" class="btn btn-secondary "> @lang('trips.back') </a>
@@ -303,6 +209,7 @@ $lang = session()->get('locale');
 
 @endsection
 
+@include('board.trips.add-customer-modal')
 
 @section('styles')
 
@@ -316,52 +223,225 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/ui/moment/moment.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/anytime.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.time.js') }}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&callback=initMap&libraries=&v=weekly"
+	defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+{{-- 
 <script type="text/javascript"
 src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&libraries=places">
 </script>
-
+--}}
 <script>
 
-
-
-	$(function() {
+	$(document).ready(function() {
 
 
 
-			var myLatlng = new google.maps.LatLng(29.393343,47.567417);
+		$('#pickatime1').pickatime({
+		});
+		$('#pickatime').pickatime({
+		});
+		$('#pickadate').pickadate({
+			min: true , 
+			format: 'yyyy-mm-dd',
+		});
+		$('#pickadate1').pickadate({
+			min: true , 
+			format: 'yyyy-mm-dd',
 
-			var myOptions = {
-				zoom: 12,
-				center: myLatlng,
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			}
+		});
 
-			var map = new google.maps.Map(document.getElementById("map"), myOptions);
+		$('a.add_new_customar').on('click', function(event) {
+			event.preventDefault();
+			$('#add_new_customar_modal').modal('show');
+		});
 
-			addMarker(myLatlng, 'برجاء سحب العلامه للمكان المطلوب', map);
-
-			map.addListener('click',function(event) {
-				addMarker(event.latLng, 'Click Generated Marker', map);
+		$('button[name="save_customer"]').on('click',  function(event) {
+			event.preventDefault();
+			customer_name = $('input[name="customer_name"]').val();
+			phone1 = $('input[name="phone1"]').val();
+			phone2 = $('input[name="phone2"]').val();
+			governorate = $('select.governorate').val();
+			city = $('select.city').val();
+			building_type_id = $('select[name="building_type_id"]').val();
+			place_number = $('input[name="place_number"]').val();
+			street_name = $('input[name="street_name"]').val();
+			avenue_number = $('input[name="avenue_number"]').val();
+			building_number = $('input[name="building_number"]').val();
+			floor_number = $('input[name="floor_number"]').val();
+			apratment_number = $('input[name="apratment_number"]').val();
+			latitude = $('input[name="latitude"]').val();
+			longitude = $('input[name="longitude"]').val();
+			$.ajax({
+				url: '{{ route("customers.store") }}',
+				placeholder : 'اختر المستلمين',
+				type: 'POST',
+				dataType: 'json',
+				data: { _token:"{{ csrf_token() }}" , customer_name:customer_name , phone2:phone2 , phone1:phone1 , governorate:governorate , city:city, place_number:place_number , street_name:street_name , avenue_number:avenue_number , building_number:building_number, floor_number:floor_number , apratment_number:apratment_number , latitude:latitude , longitude:longitude  , building_type_id:building_type_id},
+			})
+			.done(function(data) {
+				if (data.status == 'success') {
+					$('#add_new_customar_modal').modal('hide');
+					Swal.fire({
+						icon: data.status,
+						text: data.msg,
+						showConfirmButton: false,
+						timer: 1500
+					})
+				} else {
+					Swal.fire({
+						icon: data.status,
+						text: data.msg,
+						showConfirmButton: false,
+						timer: 1500
+					});
+				}
 			});
+		});
+
+		$('.customers').select2({
+			placeholder: "اختر المستلم",
+			minimumInputLength:3,
+			ajax: {
+				url: '/Board/ajax/search_customers',
+				dataType: 'json',
+				type: 'GET' ,
+				data: function (params) {
+					var queryParameters = {
+						q: params.term ,
+					}
+					return queryParameters;
+				},
+				delay: 500,
+				processResults: function (data) {
+					return {
+						results:  $.map(data.data, function (item) {
+							return {
+								text: item.text,
+								id: item.id
+							}
+						})
+					};
+				},
+				cache: true
+			}
+		});
+
+
+		$('select[name="city"]').select2({
+			placeholder: "اختر المدينه",
+			minimumInputLength:2,
+			ajax: {
+				url: '/Board/search_in_cities',
+				dataType: 'json',
+				type: 'GET' ,
+				data: function (params) {
+					var queryParameters = {
+						q: params.term ,
+					}
+					return queryParameters;
+				},
+				delay: 500,
+				processResults: function (data) {
+					return {
+						results:  $.map(data.data, function (item) {
+							return {
+								text: item.text,
+								id: item.id
+							}
+						})
+					};
+				},
+				cache: true
+			}
+		});
+
+	});
+
+
+
+
+// function initMap() {
+// 			map = new google.maps.Map(document.getElementById("map"), {
+// 				center: { lat: 29.393343, lng: 47.567417 },
+// 				zoom: 11,
+// 				address: 'الكويت - Capital Governorate - المنصورية'
+// 			});
+// 		}
+
+function initMap() {
+	const map = new google.maps.Map(document.getElementById("map"), {
+		zoom: 11,
+		center: { lat: 29.393343, lng: 47.567417 },
+	});
+	const geocoder = new google.maps.Geocoder();
+
+	geocodeAddress(geocoder, map);
+
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+	const address = "الكويت - كبد";
+	geocoder.geocode({ address: address }, (results, status) => {
+		if (status === "OK") {
+			resultsMap.setCenter(results[0].geometry.location);
+			new google.maps.Marker({
+				map: resultsMap,
+				position: results[0].geometry.location,
+				draggable:true,
+			});
+		} else {
+			alert("Geocode was not successful for the following reason: " + status);
+		}
+	});
+}
+
+
+
+$(function() {
+
+
+
+
+
+
+		// var myLatlng = new google.maps.LatLng(29.393343,47.567417);
+
+		// var myOptions = {
+		// 	zoom: 12,
+		// 	center: myLatlng,
+		// 	mapTypeId: google.maps.MapTypeId.ROADMAP , 
+		// 	address: 'الكوييت - محافظة العاصمة'
+		// }
+
+		// var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+		// addMarker(myLatlng, 'برجاء سحب العلامه للمكان المطلوب', map);
+
+		// map.addListener('click',function(event) {
+		// 	addMarker(event.latLng, 'Click Generated Marker', map);
+		// });
 		
 
-		function handleEvent(event) {
-			document.getElementById('lat').value = event.latLng.lat();
-			document.getElementById('lng').value = event.latLng.lng();
-		}
+		// function handleEvent(event) {
+		// 	document.getElementById('lat').value = event.latLng.lat();
+		// 	document.getElementById('lng').value = event.latLng.lng();
+		// }
 
-		function addMarker(latlng,title,map) {
-			var marker = new google.maps.Marker({
-				position: latlng,
-				map: map,
-				title: title,
-				draggable:true
-			});
+		// function addMarker(latlng,title,map) {
+		// 	var marker = new google.maps.Marker({
+		// 		position: latlng,
+		// 		map: map,
+		// 		title: title,
+		// 		draggable:true
+		// 	});
 
-			marker.addListener('drag', handleEvent);
-			marker.addListener('dragend', handleEvent);
-		}
+		// 	marker.addListener('drag', handleEvent);
+		// 	marker.addListener('dragend', handleEvent);
+		// }
 
 
 
@@ -387,14 +467,14 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 		});
 
 		  // Date and time
-		  $('#delivery_date_to_customer').AnyTime_picker({
-		  	format: '%Y-%m-%d %H',
-		  	formatSubmit: 'yyyy/mm/dd' , 
-		  });
-		  $('#receipt_date_from_market').AnyTime_picker({
-		  	format: '%Y-%m-%d %H',
-		  	formatSubmit: 'yyyy/mm/dd' , 
-		  });
+		  // $('#delivery_date_to_customer').AnyTime_picker({
+		  // 	format: '%Y-%m-%d %H',
+		  // 	formatSubmit: 'yyyy/mm/dd' , 
+		  // });
+		  // $('#receipt_date_from_market').AnyTime_picker({
+		  // 	format: '%Y-%m-%d %H',
+		  // 	formatSubmit: 'yyyy/mm/dd' , 
+		  // });
 
 		  var market_id = null;
 
@@ -406,6 +486,7 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 
 		  $('.market_id').select2({
 		  	placeholder: "اختر المتجر",
+		  	minimumInputLength:3,
 		  	ajax: {
 		  		url: '/Board/ajax/search_markets',
 		  		dataType: 'json',

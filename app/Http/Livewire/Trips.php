@@ -18,19 +18,28 @@ class Trips extends Component
 	public $paginate = 2;
 
 
-    
-    public function updatingSearch()
+
+    public function updatedSearch()
     {
         $this->resetPage();
     }
 
 
-	protected $paginationTheme = 'bootstrap';
+    public function updatedPaginate()
+    {
+        $this->resetPage();
+    }
 
-	public function mount()
-	{
-		
-	}
+
+
+    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
+
+    public function handleItemDeletion($item_id)
+    {
+        // Trip::where('id' , $item_id )->delete();
+        $this->emit('itemDeleted' , $item_id);
+        $this->resetPage();
+    }
 
     public function render()
     {

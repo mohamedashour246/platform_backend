@@ -25,11 +25,9 @@ class StoreCityRequest extends FormRequest
     {
         return [
             'governorate_id' => 'required',
-            'name_ar' => 'required|unique:cities,name_en',
+            'name_ar' => 'required|unique:cities,name_ar',
             'name_en' => 'required|unique:cities,name_en',
             'active' => 'nullable' ,
-            'price_within_city' => 'required' , 
-            'price_outside_city' => 'required', 
         ];
     }
 }

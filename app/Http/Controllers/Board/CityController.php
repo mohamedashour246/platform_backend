@@ -132,4 +132,14 @@ class CityController extends Controller
         }
         return $cities;
     }
+
+
+    public function search_in_cities(Request $request)
+    {
+        // dd($request->all());
+        $keyword = $request->q;
+        $cities = City::select('name_en' ,'name_ar' , 'id')->where('name_en',  'like', '%' . $keyword . '%')->orWhere('name_ar' ,  'like', '%' . $keyword . '%' )->get();
+        return new CityResourceCollection($cities);
+    }
+
 }

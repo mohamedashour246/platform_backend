@@ -2,7 +2,8 @@
 
 return [
 
-
+	'phone' => 'Phone' , 
+	'address' => 'Address' , 
 	'admins' => 'Admins' , 
 	'add_new_admin' => 'Add New Admin' , 
 	'username' => 'Usernmae' , 
@@ -37,7 +38,8 @@ return [
 	'picture' => 'Picture' , 
 	'back' => 'Back' ,
 	'adding_success' => 'admin added successfully',
-	'adding_error' => 'Error Try again'
+	'adding_error' => 'Error Try again' , 
+	'name' => 'Name' , 
 
 
 

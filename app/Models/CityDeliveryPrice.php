@@ -8,13 +8,13 @@ class CityDeliveryPrice extends Model
 {
     
 
+    protected $fillable = ['admin_id'  , 'from_city' , 'to_city' , 'market_id' , 'price' ];
 
 
     public function from()
     {
     	return $this->belongsTo(City::class , 'from_city' );
     }
-
 
     public function to()
     {

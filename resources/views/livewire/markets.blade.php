@@ -8,9 +8,6 @@
 			</div>
 			<div class="card-body">
 				<a  href="{{ route('markets.create') }}" class="btn btn-primary float-right" > <i class="icon-plus3 "></i> @lang('markets.add_new_market')  </a>
-				{{-- <button class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
-					<i class="icon-filter3"></i> @lang('markets.advanced_search')
-				</button> --}}
 				<div class="form-group">
 					<div class="row">
 						<div class="col-md-12">
@@ -78,9 +75,7 @@
 							<th> @lang('markets.market_name') </th>
 							<th> @lang('markets.address') </th>
 							<th> @lang('markets.phones') </th>
-							<th> @lang('markets.added_by') </th>
 							<th> @lang('markets.activation') </th>
-							<th> @lang('markets.created_at') </th>
 							<th> @lang('markets.settings') </th>
 						</tr>
 					</thead>
@@ -95,8 +90,6 @@
 							<td> <a href="{{ route('markets.show'  , ['market' => $market->id] ) }}">  {{ $market->name }} </a> </td>
 							<td> {{ $market->address }} </td>
 							<td> {{ $market->phones }} </td>
-
-							<td> <a target="_blank" href="{{ route('admins.show'  , ['admin' => $market->admin_id] ) }}"> {{ optional($market->admin)->username }} </a> </td>
 							<td>
 								@switch($market->active)
 								@case(1)
@@ -107,18 +100,14 @@
 								@break
 								@endswitch
 							</td>
-							<td>{{ $market->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $market->created_at->diffForHumans() }} </span> </td>
 							<td>
 								<a target="_blank" href="{{ route('markets.show'  , ['market' => $market->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
 									<i class="icon-eye2 text-primary-800"></i>
 								</a>
 								<a target="_blank" href="{{ route('markets.edit' , ['market' => $market->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i></a>
-								<form action="{{ route('markets.destroy'  , ['market' => $market->id] ) }}" class="form-inline float-right" method="POST" >
-									@csrf
-									@method('DELETE')
-									<button type="submit" class="btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i></button>
-								</form>
+									<i class="icon-pencil7 text-warning-800"></i>
+								</a>
+								<a href="" data-id="{{ $market->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
 							</td>
 						</tr>
 
@@ -135,8 +124,58 @@
 				</div>				
 			</div>
 		</div>
-
-
-
 	</div>
 </div>	
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	$(document).ready(function() {
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000,
+			timerProgressBar: true,
+			didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			}
+		})
+
+		Livewire.on('itemDeleted', itemId => {
+			Toast.fire({
+				icon: 'success',
+				title: "@lang('markets.deleted_success')", 
+			});
+		})
+
+		$(document).on('click', 'a.delete_item' ,  function(event) {
+			event.preventDefault();
+			item_id = $(this).data('id');
+			confirm_deletion(item_id);
+		});
+
+		function confirm_deletion(item_id) {
+			Swal.fire({
+				title: 'تاكيد الحذف ',
+				text: "هل انت متاكد من حذف هذه المتجر ؟",
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'نعم',
+				cancelButtonText: 'لا',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					Livewire.emit('deleteItemConfirmed'  , item_id );
+				}
+			})
+		}
+
+	});
+
+
+
+
+</script>

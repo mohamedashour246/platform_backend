@@ -47,15 +47,23 @@ $lang = session()->get('locale');
 					@csrf
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-6">
-								<label> @lang('admins.username') </label>
-								<input type="text" name="username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror " >
-								@error('username')
+							<div class="col-md-4">
+								<label> @lang('admins.name') </label>
+								<input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror " >
+								@error('name')
 								<label class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
+								<label> @lang('admins.phone') </label>
+								<input type="text" name="phone" value="{{ old('phone') }}" class="form-control @error('phone') is-invalid @enderror " >
+								@error('phone')
+								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
+							</div>
+
+							<div class="col-md-4">
 								<label> @lang('admins.email') </label>
 								<input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror ">
 								@error('email')
@@ -67,7 +75,15 @@ $lang = session()->get('locale');
 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
+								<label> @lang('admins.username') </label>
+								<input type="text" name="username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror " >
+								@error('username')
+								<label class="text-danger font-weight-bold " > {{ $message }} </label>
+								@enderror
+							</div>
+
+							<div class="col-md-4">
 								<label> @lang('admins.password') </label>
 								<input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
 								@error('password')
@@ -75,7 +91,7 @@ $lang = session()->get('locale');
 								@enderror
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<label> @lang('admins.password_confirmation') </label>
 								<input type="password"  name="password_confirmation" class="form-control">
 							</div>
@@ -84,25 +100,46 @@ $lang = session()->get('locale');
 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label> @lang('admins.type') </label>
+									<select name="type" class="form-control select" data-fouc>
+										@foreach ($types as $type)
+										<option value="{{ $type->id }}"> {{ $type['name_'.$lang] }} </option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-4">
+								<label> @lang('admins.address') </label>
+								<input type="text" name="address" value="{{ old('address') }}" class="form-control form-input-styled @error('address') is-invalid @enderror">
+								@error('address')
+								<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
+								@enderror
+							</div>
+
+							<div class="col-md-4">
+								<label> @lang('admins.notes') </label>
+								<input type="text" name="notes" value="{{ old('notes') }}" class="form-control form-input-styled @error('address') is-invalid @enderror">
+								
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-4">
 								<label> @lang('admins.profile_picture') </label>
 								<input type="file" name="profile_picture" class="form-control form-input-styled @error('profile_picture') is-invalid @enderror">
 								@error('profile_picture')
 								<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
 								@enderror
 							</div>
-
-							<div class="col-md-6">
-								<label> @lang('admins.notes') </label>
-								<textarea  name="notes"  class="form-control" rows="2" >{{ old('notes') }}</textarea>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-check form-check-switchery">
 									<label class="form-check-label">
 										<input type="checkbox" name="active" class="form-check-input-switchery" checked data-fouc>
@@ -111,15 +148,7 @@ $lang = session()->get('locale');
 								</div>
 							</div>
 
-							<div class="col-md-6">
-								<div class="form-group">
-									<label> @lang('admins.type') </label>
-									<select name="type" class="form-control select" data-fouc>
-										<option value="admin"> @lang('admins.admin') </option>
-										<option value="superadmin">@lang('admins.super_admin')</option>
-									</select>
-								</div>
-							</div>
+
 						</div>
 					</div>
 

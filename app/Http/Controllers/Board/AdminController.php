@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\PermissionGroup;
 use App\Models\AdminPermission;
+use App\Models\AdminType;
 use App\Http\Requests\Admins\StoreAdminRequest;
 use App\Http\Requests\Admins\UpdateAdminRequest;
 use Auth;
@@ -31,8 +32,8 @@ class AdminController extends Controller
     public function create()
     {
         $groups = PermissionGroup::with('permissions')->get();  
-
-        return view('board.admins.create' , compact('groups'));
+        $types = AdminType::where('active' , 1)->get();
+        return view('board.admins.create' , compact('groups' , 'types'));
     }
 
     /**
@@ -54,7 +55,7 @@ class AdminController extends Controller
             $admin->setImage(basename($path));
         }
 
-        if ($request->type == 'admin') {
+
             $current_logged_in_admin_id = Auth::guard('admin')->id();
             $permissions = [] ;
             foreach ($request->permissions as $permission) {
@@ -65,7 +66,8 @@ class AdminController extends Controller
             }
 
             $admin->permissions()->saveMany($permissions);
-        }
+
+ 
 
         return redirect(route('admins.index'))->with('success_msg'  , trans('admins.adding_success') );
     }
@@ -91,10 +93,11 @@ class AdminController extends Controller
     public function edit(Admin $admin)
     {
         $groups = PermissionGroup::with('permissions')->get(); 
+        $types = AdminType::where('active' , 1)->get();
         $admin->load('permissions');
         $admin_permissions = $admin->permissions()->pluck('permission_id')->toArray();
 
-        return view('board.admins.edit'  , compact('admin' , 'groups' , 'admin_permissions') );
+        return view('board.admins.edit'  , compact('admin' , 'groups' , 'admin_permissions' , 'types') );
     }
 
     /**
