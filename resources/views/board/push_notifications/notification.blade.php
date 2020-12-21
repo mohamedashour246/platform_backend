@@ -3,7 +3,7 @@ $lang = session()->get('locale');
 @endphp
 @extends('board.layout.master')
 @section('title')
-@lang('cities.city_details')
+@lang('push_notifications.push_notification_details')
 @endsection
 
 
@@ -11,14 +11,14 @@ $lang = session()->get('locale');
 <div class="page-header ">
 	<div class="page-header-content header-elements-md-inline">
 		<div class="page-title d-flex">
-			<h4><i class="icon-arrow-right6 mr-2"></i> @lang('cities.cities') </h4>
+			<h4><i class="icon-arrow-right6 mr-2"></i> @lang('push_notifications.send_new_push_notification') </h4>
 			<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
 				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('cities.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('cities.cities') </a>
-				<span class="breadcrumb-item active"> @lang('cities.city_details') </span>
+				<a href="{{ route('push_notifications.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('push_notifications.push_notifications') </a>
+				<span class="breadcrumb-item active"> @lang('push_notifications.push_notification_details') </span>
 			</div>
 		</div>
 	</div>
@@ -32,13 +32,7 @@ $lang = session()->get('locale');
 	<div class="col-md-12 mb-3">
 		<div class="header-elements ">
 			<div class="float-right">
-				<a href="{{ route('cities.create') }}" class="btn btn-primary ml-1"> <i class="icon-user-plus"></i> @lang('cities.add_new_city')  </a>
-				<a href="{{ route('cities.edit'  , ['city' => $city->id ] ) }}" class="btn btn-warning ml-1"> <i class="icon-pencil5"></i> @lang('cities.edit_city_details')  </a>
-				<form action="{{ route('cities.destroy'  , ['city' => $city->id] ) }}" method="POST" class="float-right ml-1">
-					@csrf
-					@method('DELETE')
-					<button href="#" class="btn btn-danger "> <i class="icon-trash"></i> @lang('cities.delete_city') </button>
-				</form>
+				<a href="{{ route('push_notifications.create') }}" class="btn btn-primary ml-1"> <i class="icon-plus3"></i> @lang('push_notifications.send_new_push_notification')  </a>
 			</div>
 		</div>
 	</div>
@@ -52,7 +46,7 @@ $lang = session()->get('locale');
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
-				<h5 class="card-title"> @lang('cities.city_details') {{ $city->username }} </h5>
+				<h5 class="card-title">  </h5>
 				<div class="header-elements">
 					<div class="list-icons">
 						<a class="list-icons-item" data-action="collapse"></a>
@@ -66,33 +60,43 @@ $lang = session()->get('locale');
 				<table class="table  table-xs border-top-0 my-2">
 					<tbody>
 						<tr>
-							<th class="font-weight-bold text-dark">@lang('cities.name_en')</th>
-							<td class="text-left"> {{ $city->name_en }} </td>
+							<th class="font-weight-bold text-dark">@lang('push_notifications.title_ar')</th>
+							<td class="text-left"> {{ $push_notification->title_ar }} </td>
 						</tr>
 						<tr>
-							<th class="font-weight-bold text-dark">@lang('cities.name_ar')</th>
-							<td class="text-left"> {{ $city->name_ar }} </td>
+							<th class="font-weight-bold text-dark">@lang('push_notifications.title_en')</th>
+							<td class="text-left"> {{ $push_notification->title_en }} </td>
+						</tr>
+
+						<tr>
+							<th class="font-weight-bold text-dark">@lang('push_notifications.content_en')</th>
+							<td class="text-left"> {{ $push_notification->content_en }} </td>
 						</tr>
 						<tr>
-							<th class="font-weight-bold text-dark"> @lang('cities.activation') </th>
-							<td class="text-left">	
-								@switch($city->active)
-								@case(1)
-								<label  class="badge badge-success" > @lang('cities.active') </label>
-								@break
-								@case(0)
-								<label  class="badge badge-secondary" > @lang('cities.inactive') </label>
-								@break
-								@endswitch
+							<th class="font-weight-bold text-dark">@lang('push_notifications.content_ar')</th>
+							<td class="text-left"> {{ $push_notification->content_ar }} </td>
+						</tr>
+					
+						<tr>
+							<td class="font-weight-bold text-dark"> @lang('push_notifications.created_at') </td>
+							<td class="text-left"> {{ $push_notification->created_at->toFormattedDateString() }} - {{ $push_notification->created_at->diffForHumans() }} </td>
+						</tr>
+						<tr>
+							<td class="font-weight-bold text-dark"> @lang('push_notifications.send_by') </td>
+							<td class="text-left font-weight-bold"> <a href="{{ route('admins.show'  , ['admin' => $push_notification->admin_id] ) }}"> {{ optional($push_notification->admin)->name }} </a> </td>
+						</tr>
+						<tr>
+							<td class="font-weight-bold text-dark"> @lang('push_notifications.drivers') </td>
+							<td class="text-left">
+								@php
+									$drivers = App\Models\Driver::find(json_decode($push_notification->drivers));
+								@endphp
+								@foreach ($drivers as $driver)
+									<a href="{{ route('drivers.show'  , ['driver' => $driver->id ] ) }}">
+							               <img src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" class="rounded-circle" alt="" width="36" height="36">
+						            </a>
+								@endforeach
 							</td>
-						</tr>
-						<tr>
-							<td class="font-weight-bold text-dark"> @lang('cities.created_at') </td>
-							<td class="text-left"> {{ $city->created_at->toFormattedDateString() }} - {{ $city->created_at->diffForHumans() }} </td>
-						</tr>
-						<tr>
-							<td class="font-weight-bold text-dark"> @lang('cities.added_by') </td>
-							<td class="text-left font-weight-bold"> <a href="{{ route('admins.show'  , ['admin' => $city->admin_id] ) }}"> {{ optional($city->admin)->username }} </a> </td>
 						</tr>
 					</tbody>
 				</table>
@@ -120,7 +124,7 @@ $lang = session()->get('locale');
 		// $("#firstname").attr("disabled", "disabled");
 
 
-		@if ($city->type == 'supercity')
+		@if ($push_notification->type == 'superpush_notification')
 		$('input.permissions').each(function(){
 			$(this).prop('disabled',true);
 			$.uniform.update();
@@ -129,17 +133,17 @@ $lang = session()->get('locale');
 
 		$('select[name="type"]').on('select2:select', function(event) {
 			
-			var city_type = $(event.currentTarget).val();
-			console.log(city_type);
-			if (city_type == 'supercity') {
+			var push_notification_type = $(event.currentTarget).val();
+			console.log(push_notification_type);
+			if (push_notification_type == 'superpush_notification') {
 				$('input.permissions').each(function(){
-					console.log(city_type);
+					console.log(push_notification_type);
 					$(this).prop('disabled',true);
 					$.uniform.update();
 				});
 			} else {
 				$('input.permissions').each(function(){
-					console.log(city_type);
+					console.log(push_notification_type);
 					$(this).prop('disabled',false);
 					$.uniform.update();
 				});

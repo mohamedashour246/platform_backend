@@ -76,7 +76,9 @@ return [
 	'choose_city_place' => 'اختر المدينه من فضلك' , 
 	'delivery_prices_added_successfully' => 'تم إضافه اماكن التوصيل و الاسعار بنجاح' , 
 	'from_city' => 'من مدينه'  ,
-	 'to_city' => 'الى ميدنه' , 
+	'to_city' => 'الى ميدنه' , 
+	'contract_image' => 'contract image' , 
+	
 
 
 

@@ -82,7 +82,8 @@ return [
 	'choose_city_place' => 'choose city please' , 
 	'delivery_prices_added_successfully' => 'delivery prices added successfully' , 
 	'from_city' => 'From City'  ,
-	 'to_city' => 'To City' , 
+	'to_city' => 'To City' , 
+	'contract_image' => 'contract image' , 
 
 
 ];

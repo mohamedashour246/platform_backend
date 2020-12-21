@@ -55,6 +55,16 @@ class MarketController extends Controller
         }
 
 
+        if($request->hasFile('contract_image')) {
+            $path = $request->file('contract_image')->store('markets'  , 's3' );
+            $market->setContractImage(basename($path));
+        }
+
+   
+
+
+
+
         if ($request->hasFile('files')) {
 
             for ($i = 0; $i <count($request->file('files')) ; $i++) {

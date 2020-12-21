@@ -119,6 +119,7 @@ $lang = session()->get('locale');
 							<li class="nav-item"><a href="{{ route('drivers.index') }}" class="nav-link"> <i class="icon-users mr-1"></i>  @lang('drivers.show_all_drivers') </a></li>
 							<li class="nav-item"><a href="{{ route('drivers.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i>  @lang('drivers.add_new_driver') </a></li>
 							<li class="nav-item"><a href="{{ route('drivers.reports') }}" class="nav-link"> <i class="icon-pie-chart mr-1" ></i> @lang('drivers.reports') </a></li>
+							<li class="nav-item"><a href="{{ route('push_notifications.index') }}" class="nav-link"> <i class="icon-mobile2 mr-1" ></i> @lang('push_notifications.push_notifications') </a></li>
 						</ul>
 					</li>
 					<li class="nav-item nav-item-submenu {{ $governorates == 'active' ? 'nav-item-open' : '' }}">

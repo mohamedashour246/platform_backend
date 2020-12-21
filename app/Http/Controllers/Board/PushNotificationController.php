@@ -17,6 +17,8 @@ class PushNotificationController extends Controller
      */
     public function index()
     {
+        $notifications = PushNotification::latest()->get();
+        return view('board.push_notifications.index'  , compact('notifications') );
         
     }
 
@@ -39,7 +41,13 @@ class PushNotificationController extends Controller
      */
     public function store(StorePushNotificationRequest $request)
     {
-            
+        //we need to save it first to database
+        $notification = new PushNotification;
+        $notification->add($request->all());
+        // now we need to send this notification ti firebase
+
+        return back()->with('success_msg'  , trans('push_notifications.send_success') );
+               
 
     }
 
@@ -49,9 +57,11 @@ class PushNotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PushNotification $push_notification)
     {
-        //
+        
+        $push_notification->load('admin');
+        return view('board.push_notifications.notification'  , compact('push_notification') );
     }
 
    

@@ -21,6 +21,8 @@ class Market extends Model
 	}
 
 
+
+
 	public function marketAdmin()
 	{
 		return $this->hasOne(Merchant::class , 'market_id' )->where('type'  , 'superadmin' );
@@ -87,6 +89,12 @@ class Market extends Model
     }
 
 
+
+    public function setContractImage($image)
+    {
+        $this->contract_image = $image;
+        return $this->save();
+    }
 
 
     public function remove()
