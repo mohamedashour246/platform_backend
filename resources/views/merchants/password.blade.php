@@ -1,7 +1,7 @@
 @extends('merchants.layout.master')
 
 @section('title')
-@lang('board.home')
+@lang('merchants.home')
 @endsection
 
 
@@ -14,7 +14,7 @@
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
+				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('merchants.merchants_board') </a>
 				<span class="breadcrumb-item active"> @lang('profile.profile') </span>
 			</div>
 		</div>

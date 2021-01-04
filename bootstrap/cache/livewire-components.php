@@ -7,5 +7,7 @@
   'drivers.reports' => 'App\\Http\\Livewire\\Drivers\\Reports',
   'governorates' => 'App\\Http\\Livewire\\Governorates',
   'markets' => 'App\\Http\\Livewire\\Markets',
+  'merchants.branche' => 'App\\Http\\Livewire\\Merchants\\Branche',
+  'merchants.branches' => 'App\\Http\\Livewire\\Merchants\\Branches',
   'trips' => 'App\\Http\\Livewire\\Trips',
 );

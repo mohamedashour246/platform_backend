@@ -34,7 +34,7 @@ $lang = session()->get('locale');
 
 			@php
 			$segment = request()->segment(2);
-			$drivers = $admins = $board = $governorates = $cities = $markets = $trips = $city_delivery_prices =  '';
+			$drivers = $admins = $board = $governorates = $cities = $branches = $trips = $city_delivery_prices =  '';
 			switch ($segment) {
 				case 'admins':
 				case 'admin_types':
@@ -50,8 +50,8 @@ $lang = session()->get('locale');
 				case 'cities':
 				$cities = 'active';
 				break;
-				case 'markets':
-				$markets = 'active';
+				case 'branches':
+				$branches = 'active';
 				break;
 				case 'trips':
 				$trips = 'active';
@@ -106,12 +106,11 @@ $lang = session()->get('locale');
 					<li class="nav-item nav-item-submenu {{ $admins == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $admins }}"><i class="icon-users4"></i> <span>@lang('admins.admins')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="">
-							<li class="nav-item"><a href="{{ route('admins.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('admins.show_all_admins') </a></li>
-							<li class="nav-item"><a href="{{ route('admins.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('admins.add_new_admin') </a></li>
-							<li class="nav-item"><a href="{{ route('admin_types.index') }}" class="nav-link"> <i class="icon-grid5 mr-1"></i>  @lang('admin_types.admin_types') </a></li>
+							<li class="nav-item"><a href="{{ route('merchants.admins.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('admins.show_all_admins') </a></li>
+							<li class="nav-item"><a href="{{ route('merchants.admins.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('admins.add_new_admin') </a></li>
 						</ul>
 					</li>
-					<li class="nav-item nav-item-submenu {{ $drivers == 'active' ? 'nav-item-open' : '' }}">
+{{-- 					<li class="nav-item nav-item-submenu {{ $drivers == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $drivers }}"><i class="icon-users"></i> <span>@lang('drivers.drivers')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('drivers.index') }}" class="nav-link"> <i class="icon-users mr-1"></i>  @lang('drivers.show_all_drivers') </a></li>
@@ -119,43 +118,44 @@ $lang = session()->get('locale');
 							<li class="nav-item"><a href="{{ route('drivers.reports') }}" class="nav-link"> <i class="icon-pie-chart mr-1" ></i> @lang('drivers.reports') </a></li>
 							<li class="nav-item"><a href="{{ route('push_notifications.index') }}" class="nav-link"> <i class="icon-mobile2 mr-1" ></i> @lang('push_notifications.push_notifications') </a></li>
 						</ul>
-					</li>
-					<li class="nav-item nav-item-submenu {{ $governorates == 'active' ? 'nav-item-open' : '' }}">
+					</li> --}}
+			{{-- 		<li class="nav-item nav-item-submenu {{ $governorates == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $governorates }}"><i class="icon-location3"></i> <span>@lang('governorates.governorates')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('governorates.index') }}" class="nav-link">  <i class="icon-location3 mr-1"></i> @lang('governorates.show_all_governorates') </a></li>
 							<li class="nav-item"><a href="{{ route('governorates.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('governorates.add_new_governorate') </a></li>
 						</ul>
-					</li>
-					<li class="nav-item nav-item-submenu {{ $cities == 'active' ? 'nav-item-open' : '' }}">
+					</li> --}}
+		{{-- 			<li class="nav-item nav-item-submenu {{ $cities == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $cities }}"><i class="icon-map"></i> <span>@lang('cities.cities')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('cities.index') }}" class="nav-link">  <i class="icon-map mr-1"></i> @lang('cities.show_all_cities') </a></li>
 							<li class="nav-item"><a href="{{ route('cities.create') }}" class="nav-link">  <i class="icon-plus3 mr-1"></i> @lang('cities.add_new_city') </a></li>
 						</ul>
-					</li>
-					<li class="nav-item nav-item-submenu {{ $city_delivery_prices == 'active' ? 'nav-item-open' : '' }}">
+					</li> --}}
+				{{-- 	<li class="nav-item nav-item-submenu {{ $city_delivery_prices == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $city_delivery_prices }}"><i class="icon-location4"></i> <span>@lang('city_delivery_prices.city_delivery_prices')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('city_delivery_prices.index') }}" class="nav-link"><i class="icon-location4  mr-1"></i>  @lang('city_delivery_prices.show_all_city_delivery_prices') </a></li>
 							<li class="nav-item"><a href="{{ route('city_delivery_prices.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('city_delivery_prices.add_new_price') </a></li>
 						</ul>
-					</li>
+					</li> --}}
 
-					<li class="nav-item nav-item-submenu {{ $markets == 'active' ? 'nav-item-open' : '' }}">
-						<a href="#" class="nav-link {{ $markets }}"><i class="icon-store"></i> <span>@lang('markets.markets')</span></a>
+					<li class="nav-item nav-item-submenu {{ $branches == 'active' ? 'nav-item-open' : '' }}">
+						<a href="#" class="nav-link {{ $branches }}"><i class="icon-store"></i> <span>@lang('branches.branches')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
-							<li class="nav-item"><a href="{{ route('markets.index') }}" class="nav-link"> <i class="icon-store mr-1"></i> @lang('markets.show_all_markets') </a></li>
-							<li class="nav-item"><a href="{{ route('markets.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('markets.add_new_market') </a></li>
+							<li class="nav-item"><a href="{{ route('merchants.branches.index') }}" class="nav-link"> <i class="icon-store mr-1"></i> @lang('branches.show_all_branches') </a></li>
+							<li class="nav-item"><a href="{{ route('merchants.branches.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('branches.add_new_branch') </a></li>
 						</ul>
 					</li>
-					<li class="nav-item nav-item-submenu {{ $trips == 'active' ? 'nav-item-open' : '' }}">
+
+					{{-- <li class="nav-item nav-item-submenu {{ $trips == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $trips }}"><i class="icon-car"></i> <span>@lang('trips.trips')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('trips.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('trips.show_all_trips') </a></li>
 							<li class="nav-item"><a href="{{ route('trips.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('trips.add_new_trip') </a></li>
 						</ul>
-					</li>
+					</li> --}}
 				</ul>
 			</div>
 			<!-- /main navigation -->

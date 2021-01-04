@@ -2,26 +2,13 @@
 $lang = session()->get('locale');
 @endphp
 <div class="row">
-	
+
 	<div class="col-md-12">
-
-
 		<div class="row">
-{{-- 			<div class="col-md-2">
-				<div class="input-group mb-3">
-					<div class="form-group-feedback form-group-feedback-left">
-						<input type="text"  wire:model="search" class="form-control form-control-lg text-center" placeholder="@lang('admins.search_admins')">
-						<div class="form-control-feedback form-control-feedback-lg">
-							<i class="icon-search4 text-muted"></i>
-						</div>
-					</div>
-				</div>
-			</div> --}}
 			<div class="col-md-12 mb-3">
 				<a  href="{{ route('admins.create') }}" class="btn btn-primary float-right" > <i class="icon-user-plus mr-1"></i>@lang('admins.add_new_admin') </a>
 			</div>
 		</div>
-
 		<div class="card" >
 			<div class="card-header  header-elements-inline  bg-transparent ">
 				<h5 class="card-title"></h5>
@@ -93,14 +80,14 @@ $lang = session()->get('locale');
 				<div class="card-footer bg-light ">
 					<div class="float-right" >
 						{{ $admins->links() }}
-					</div>				
+					</div>
 				</div>
 			</div>
 
 
 
 		</div>
-	</div>	
+	</div>
 	<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script>

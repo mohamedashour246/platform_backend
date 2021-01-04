@@ -1,7 +1,7 @@
 @php
 $lang = session()->get('locale');
 @endphp
-@extends('board.layout.master')
+@extends('merchants.layout.master')
 @section('title')
 @lang('profile.profile')
 @endsection
@@ -16,8 +16,8 @@ $lang = session()->get('locale');
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
+				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('merchants.merchants') </a>
+				<a href="{{ route('merchants.admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
 				<span class="breadcrumb-item active"> @lang('admins.add_new_admin') </span>
 			</div>
 		</div>
@@ -41,9 +41,8 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('admins.store') }}" method="POST"  enctype="multipart/form-data" >
+			<form action="{{ route('merchants.admins.store') }}" method="POST"  enctype="multipart/form-data" >
 				<div class="card-body">
-
 					@csrf
 					<div class="form-group">
 						<div class="row">
@@ -54,7 +53,6 @@ $lang = session()->get('locale');
 								<label class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
-
 							<div class="col-md-4">
 								<label> @lang('admins.phone') </label>
 								<input type="text" name="phone" value="{{ old('phone') }}" class="form-control @error('phone') is-invalid @enderror " >
@@ -62,7 +60,6 @@ $lang = session()->get('locale');
 								<label class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
-
 							<div class="col-md-4">
 								<label> @lang('admins.email') </label>
 								<input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror ">
@@ -100,16 +97,6 @@ $lang = session()->get('locale');
 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label> @lang('admins.type') </label>
-									<select name="type" class="form-control select" data-fouc>
-										@foreach ($types as $type)
-										<option value="{{ $type->id }}"> {{ $type['name_'.$lang] }} </option>
-										@endforeach
-									</select>
-								</div>
-							</div>
 
 							<div class="col-md-4">
 								<label> @lang('admins.address') </label>
@@ -122,7 +109,7 @@ $lang = session()->get('locale');
 							<div class="col-md-4">
 								<label> @lang('admins.notes') </label>
 								<input type="text" name="notes" value="{{ old('notes') }}" class="form-control form-input-styled @error('address') is-invalid @enderror">
-								
+
 							</div>
 
 
@@ -186,7 +173,7 @@ $lang = session()->get('locale');
 
 				<div class="card-footer bg-light" >
 					<button type="submit" class="btn btn-primary float-right ml-2"> @lang('admins.add') </button>
-					<a href="{{ route('admins.index') }}" class="btn btn-secondary "> @lang('admins.back') </a>
+					<a href="{{ route('merchants.admins.index') }}" class="btn btn-secondary "> @lang('admins.back') </a>
 				</div>
 			</form>
 		</div>
@@ -202,38 +189,14 @@ $lang = session()->get('locale');
 @endsection
 
 @section('scripts')
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
-
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
+<script src="{{ asset('merchants_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
+<script src="{{ asset('merchants_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
+<script src="{{ asset('merchants_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
 <script>
 	$(function() {
-		// $("#firstname").attr("disabled", "disabled");
-
-		$('select[name="type"]').on('select2:select', function(event) {
-			
-			var admin_type = $(event.currentTarget).val();
-			console.log(admin_type);
-			if (admin_type == 'superadmin') {
-				$('input.permissions').each(function(){
-					console.log(admin_type);
-					$(this).prop('disabled',true);
-					$.uniform.update();
-				});
-			} else {
-				$('input.permissions').each(function(){
-					console.log(admin_type);
-					$(this).prop('disabled',false);
-					$.uniform.update();
-				});
-			}
-		});
 
 
-		$('.select').select2({
-			minimumResultsForSearch: Infinity
-		});
+
 
 		$('.form-input-styled').uniform({
 			fileButtonClass: 'action btn bg-primary'
@@ -266,7 +229,6 @@ $lang = session()->get('locale');
         $('.form-check-input-switch').bootstrapSwitch();
     };
     _componentSwitchery();
-
 
 
 });

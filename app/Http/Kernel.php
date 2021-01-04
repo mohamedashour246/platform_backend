@@ -67,5 +67,6 @@ class Kernel extends HttpKernel {
 		'merchant'         => \App\Http\Middleware\RedirectMerchantIfNotLoggedInMiddleware::class ,
 		'activeMerchant'   => \App\Http\Middleware\RedirectMerchantIfDeactivatedMiddleware::class ,
 		'activeMarket'     => \App\Http\Middleware\RedirectIfMarketSuspendedMiddleware::class ,
+		'whichMarket'      => \App\Http\Middleware\setWhichMarketThisMerchantBelongsToMiddleware::class ,
 	];
 }
