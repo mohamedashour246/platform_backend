@@ -12,7 +12,7 @@ class BoardController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		return view('merhcants.index');
+		return view('merchants.index');
 	}
 
 	/**

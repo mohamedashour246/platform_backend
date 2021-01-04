@@ -214,18 +214,17 @@
 					</div>
 				</li>
 
-{{-- 				<li class="nav-item dropdown dropdown-user">
+				<li class="nav-item dropdown dropdown-user">
 					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-						<img src="{{ Storage::disk('s3')->url('admins/'.Auth::guard('admin')->user()->image) }}" class="rounded-circle mr-2" height="34" alt="">
-						<span>{{ Auth::guard('admin')->user()->username }}</span>
+						<img src="{{ Storage::disk('s3')->url('merchants/'.Auth::guard('merchant')->user()->image) }}" class="rounded-circle mr-2" height="34" alt="">
+						<span>{{ Auth::guard('merchant')->user()->username }}</span>
 					</a>
-
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="{{ route('board.profile') }}" class="dropdown-item"><i class="icon-user-plus"></i> الملف الشخصى </a>
-						<a href="{{ route('profile.password.edit') }}" class="dropdown-item"><i class="icon-cog5"></i> تغير كلمة المرور </a>
-						<a href="{{ route('board.logout') }}" class="dropdown-item"><i class="icon-switch2"></i>  تسجيل الخروج </a>
+						<a href="{{ route('merchants.profile.edit') }}" class="dropdown-item"><i class="icon-user-plus"></i> الملف الشخصى </a>
+						<a href="{{ route('merchants.password.edit') }}" class="dropdown-item"><i class="icon-cog5"></i> تغير كلمة المرور </a>
+						<a href="{{ route('merchants.logout') }}" class="dropdown-item"><i class="icon-switch2"></i>  تسجيل الخروج </a>
 					</div>
-				</li> --}}
+				</li>
 			</ul>
 		</div>
 	</div>

@@ -14,8 +14,8 @@ class RedirectMerchantIfNotLoggedInMiddleware {
 	 * @return mixed
 	 */
 	public function handle($request, Closure $next) {
-		if (!Auth::guard('merhcant')->check()) {
-			return redirect()          ->route('merhcants.login_view')->with('error_msg', 'برجاء تسجيل الدخول');
+		if (!Auth::guard('merchant')->check()) {
+			return redirect()          ->route('merchants.login_view')->with('error_msg', 'برجاء تسجيل الدخول');
 		}
 
 		return $next($request);

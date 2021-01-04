@@ -15,12 +15,11 @@ class RedirectIfMarketSuspendedMiddleware {
 	 */
 	public function handle($request, Closure $next) {
 
-		$merhcant = Auth::guard('merhcant')->user();
-		$merhcant->load('market');
-
-		if (!$merhcant->market->isActive()) {
-			Auth::guard('merhcant')->logout();
-			return redirect()->route('merhcants.login_view')->with('error_msg', 'تم وقف المتجر عن العمل برجاء التواصل مع الااره');
+		$merchant = Auth::guard('merchant')->user();
+		$merchant->load('market');
+		if (!$merchant->market->isActive()) {
+			Auth::guard('merchant')->logout();
+			return redirect()->route('merchants.login_view')->with('error_msg', 'تم وقف المتجر عن العمل برجاء التواصل مع الااره');
 		}
 		return $next($request);
 	}

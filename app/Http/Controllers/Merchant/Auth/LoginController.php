@@ -15,7 +15,7 @@ class LoginController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function loginView() {
-		return view('merhcants.auth.login');
+		return view('merchants.auth.login');
 	}
 
 	public function login(Request $request) {
@@ -33,10 +33,8 @@ class LoginController extends Controller {
 
 		$credentials = $request->only('username', 'password');
 
-		if (Auth::guard('merhcant')->attempt($credentials)) {
-			echo 'yesd';
-			// Authentication passed...
-			return redirect()->route('merhcants.board');
+		if (Auth::guard('merchant')->attempt($credentials)) {
+			return redirect()         ->route('merchants.board');
 		}
 
 		return back()->with('error_msg', 'عفوا بيانات الدخول غير صحيحه');

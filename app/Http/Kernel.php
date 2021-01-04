@@ -64,7 +64,7 @@ class Kernel extends HttpKernel {
 		'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class ,
 		'admin'            => \App\Http\Middleware\RedirectIfNotAdminMiddleware::class ,
 		'lang'             => \App\Http\Middleware\LanguageMiddleware::class ,
-		'merhcant'         => \App\Http\Middleware\RedirectMerchantIfNotLoggedInMiddleware::class ,
+		'merchant'         => \App\Http\Middleware\RedirectMerchantIfNotLoggedInMiddleware::class ,
 		'activeMerchant'   => \App\Http\Middleware\RedirectMerchantIfDeactivatedMiddleware::class ,
 		'activeMarket'     => \App\Http\Middleware\RedirectIfMarketSuspendedMiddleware::class ,
 	];

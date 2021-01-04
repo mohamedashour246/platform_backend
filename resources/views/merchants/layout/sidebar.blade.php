@@ -72,17 +72,12 @@ $lang = session()->get('locale');
 				<div class="card-body">
 					<div class="media">
 						<div class="mr-3">
-							<a href="#"><img src="{{ Storage::disk('s3')->url('admins/'.Auth::guard('merhcant')->user()->image) }}" width="38" height="38" class="rounded-circle" alt=""></a>
+							<a href="#"><img src="{{ Storage::disk('s3')->url('merchants/'.Auth::guard('merchant')->user()->image) }}" width="38" height="38" class="rounded-circle" alt=""></a>
 						</div>
 						<div class="media-body">
-							<div class="media-title font-weight-semibold">{{ Auth::guard('merhcant')->user()->username }}</div>
+							<div class="media-title font-weight-semibold">{{ Auth::guard('merchant')->user()->username }}</div>
 							<div class="font-size-xs opacity-50">
-								@php
-								$admin = Auth::guard('merhcant')->user();
-								// $admin->load('type');
-
-								@endphp
-								<i class="icon-pin font-size-sm"></i> {{ optional($admin->type)['name_'.$lang] }}
+								welcome
 							</div>
 						</div>
 						<div class="ml-3 align-self-center">
@@ -101,7 +96,7 @@ $lang = session()->get('locale');
 					<!-- Main -->
 					<li class="nav-item-header mt-0 "><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
 					<li class="nav-item ">
-						<a href="{{ url('/Board') }}" class="nav-link slate-800 {{ $board }}">
+						<a href="{{ route('merchants.board') }}" class="nav-link slate-800 {{ $board }}">
 							<i class="icon-home4"></i>
 							<span>
 								@lang('board.board')

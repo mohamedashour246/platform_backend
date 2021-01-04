@@ -44,9 +44,9 @@ return [
 			'driver'   => 'session',
 			'provider' => 'admins',
 		],
-		'merhcant'  => [
+		'merchant'  => [
 			'driver'   => 'session',
-			'provider' => 'merhcants',
+			'provider' => 'merchants',
 		],
 
 		'api'       => [
@@ -82,7 +82,7 @@ return [
 			'driver' => 'eloquent',
 			'model'  => App\Models\Admin::class ,
 		],
-		'merhcants' => [
+		'merchants' => [
 			'driver'   => 'eloquent',
 			'model'    => App\Models\Merchant::class ,
 		],
@@ -116,8 +116,8 @@ return [
 			'expire'   => 60,
 			'throttle' => 60,
 		],
-		'merhcants' => [
-			'provider' => 'merhcants',
+		'merchants' => [
+			'provider' => 'merchants',
 			'table'    => 'password_resets',
 			'expire'   => 60,
 			'throttle' => 60,

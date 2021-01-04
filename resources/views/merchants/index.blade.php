@@ -1,4 +1,4 @@
-@extends('merhcants.layout.master')
+@extends('merchants.layout.master')
 
 @section('title')
 @lang('board.home')

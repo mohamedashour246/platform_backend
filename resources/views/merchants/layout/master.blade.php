@@ -59,14 +59,14 @@
 <body>
 
 
-	@include('merhcants.layout.header')
+	@include('merchants.layout.header')
 
 	@yield('header')
 
 
 	<!-- Page content -->
 	<div class="page-content pt-0">
-		@include('merhcants.layout.sidebar')
+		@include('merchants.layout.sidebar')
 		<!-- Main content -->
 		<div class="content-wrapper">
 			<!-- Content area -->
@@ -78,6 +78,6 @@
 		<!-- /main content -->
 	</div>
 	<!-- /page content -->
-	@include('merhcants.layout.footer')
+	@include('merchants.layout.footer')
 </body>
 </html>
