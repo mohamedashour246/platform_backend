@@ -42,25 +42,10 @@ return [
 	|
 	 */
 
-<<<<<<< HEAD
+	'asset_url' => 'https://ahmedsamidev.com/platform/public',
 
-    'asset_url'  => 'https://ahmedsamidev.com/platform/public',
-
-=======
 	// 'asset_url' => 'https://ahmedsamidev.com/platform/public',
-	'asset_url' => null,
-
-	/*
-	|--------------------------------------------------------------------------
-	| Livewire Endpoint Middleware Group
-	|--------------------------------------------------------------------------
-	|
-	| This value sets the middleware group that will be applied to the main
-	| Livewire "message" endpoint (the endpoint that gets hit everytime
-	| a Livewire component updates). It is set to "web" by default.
-	|
-	 */
->>>>>>> 7669c4856f7843d0ff3b1a4bc11b143d74104e1c
+	// 'asset_url' => null,
 
 	'middleware_group' => 'web',
 
