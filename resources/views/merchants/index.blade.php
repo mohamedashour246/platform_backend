@@ -30,7 +30,7 @@
 
 
 
-		<div class="col-xl-3">
+{{-- 		<div class="col-xl-3">
 			<div class="card">
 				<div class="card-header bg-transparent header-elements-inline">
 					<span class="card-title font-weight-semibold"> احصائيات السائقين </span>
@@ -236,9 +236,9 @@
 				</div>
 			</div>
 		</div>
+ --}}
 
-
-{{-- 		<div class="col-sm-6 col-xl-3">
+		<div class="col-sm-6 col-xl-3">
 			<div class="card card-body">
 				<div class="media">
 					<div class="mr-3 align-self-center">
@@ -247,7 +247,7 @@
 
 					<div class="media-body text-right">
 						<h3 class="font-weight-semibold mb-0">120</h3>
-						<span class="text-uppercase font-size-sm text-muted"> رحله اليوم </span>
+						<span class="text-uppercase font-size-sm text-muted"> طلب توصيل </span>
 					</div>
 				</div>
 			</div>
@@ -261,8 +261,8 @@
 					</div>
 
 					<div class="media-body text-right">
-						<h3 class="font-weight-semibold mb-0">90</h3>
-						<span class="text-uppercase font-size-sm text-muted">رحله قم تم توصيلها</span>
+						<h3 class="font-weight-semibold mb-0">5</h3>
+						<span class="text-uppercase font-size-sm text-muted"> مشرفين </span>
 					</div>
 				</div>
 			</div>
@@ -272,8 +272,8 @@
 			<div class="card card-body">
 				<div class="media">
 					<div class="media-body">
-						<h3 class="font-weight-semibold mb-0">30</h3>
-						<span class="text-uppercase font-size-sm text-muted"> رحله لم يتم التوصيل بعد</span>
+						<h3 class="font-weight-semibold mb-0">3</h3>
+						<span class="text-uppercase font-size-sm text-muted">   فروع </span>
 					</div>
 
 					<div class="ml-3 align-self-center">
@@ -288,7 +288,7 @@
 				<div class="media">
 					<div class="media-body">
 						<h3 class="font-weight-semibold mb-0">500 ريال </h3>
-						<span class="text-uppercase font-size-sm text-muted">ايراد التوصيلات حتى الان</span>
+						<span class="text-uppercase font-size-sm text-muted"> المبلغ المتوفر لك </span>
 					</div>
 
 					<div class="ml-3 align-self-center">
@@ -296,7 +296,7 @@
 					</div>
 				</div>
 			</div>
-		</div> --}}
+		</div>
 	</div>
 
 </div>
