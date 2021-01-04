@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Merchant extends Model
-{
-    //
+class Merchant extends Authenticatable {
+	//
+
+	public function market() {
+
+		return $this->belongsTo(Market::class );
+	}
 }

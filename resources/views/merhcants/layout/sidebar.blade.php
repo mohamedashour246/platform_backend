@@ -72,14 +72,14 @@ $lang = session()->get('locale');
 				<div class="card-body">
 					<div class="media">
 						<div class="mr-3">
-							<a href="#"><img src="{{ Storage::disk('s3')->url('admins/'.Auth::guard('admin')->user()->image) }}" width="38" height="38" class="rounded-circle" alt=""></a>
+							<a href="#"><img src="{{ Storage::disk('s3')->url('admins/'.Auth::guard('merhcant')->user()->image) }}" width="38" height="38" class="rounded-circle" alt=""></a>
 						</div>
 						<div class="media-body">
-							<div class="media-title font-weight-semibold">{{ Auth::guard('admin')->user()->username }}</div>
+							<div class="media-title font-weight-semibold">{{ Auth::guard('merhcant')->user()->username }}</div>
 							<div class="font-size-xs opacity-50">
 								@php
-								$admin = Auth::guard('admin')->user();
-								$admin->load('type');
+								$admin = Auth::guard('merhcant')->user();
+								// $admin->load('type');
 
 								@endphp
 								<i class="icon-pin font-size-sm"></i> {{ optional($admin->type)['name_'.$lang] }}
