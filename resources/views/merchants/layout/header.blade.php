@@ -71,7 +71,7 @@
 							</ul>
 						</div>
 						<div class="dropdown-content-footer bg-light">
-							<a href="{{ url('/notificaions') }}" class="text-grey mr-auto">  الاطلاع على جميع التنبيهات </a>
+							<a href="{{ url('/Merchant/notifications') }}" class="text-grey mr-auto">  الاطلاع على جميع التنبيهات </a>
 						</div>
 					</div>
 				</li>

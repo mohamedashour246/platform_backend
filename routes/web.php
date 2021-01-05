@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-require_once 'merchant-routs.php';
+require_once 'merchant-routes.php';
 /*
 |--------------------------------------------------------------------------
 | Web Routes

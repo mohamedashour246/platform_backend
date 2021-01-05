@@ -18,6 +18,10 @@ class BoardController extends Controller {
 		return view('merchants.index');
 	}
 
+	public function notifications() {
+		return view('merchants.notifications');
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

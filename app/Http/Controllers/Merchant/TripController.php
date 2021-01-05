@@ -92,8 +92,12 @@ class TripController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id) {
-		//
+	public function edit(Trip $trip) {
+		$payment_methods = PaymentMethod::all();
+		$governorates    = Governorate::all();
+		$building_types  = BuildingType::all();
+		$branches        = Branch::where('market_id', session()->get('market_id'))->get();
+		return view('merchants.trips.create', compact('building_types', 'governorates', 'payment_methods', 'branches', 'trip'));
 	}
 
 	/**
@@ -103,8 +107,9 @@ class TripController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id) {
-		//
+	public function update(Request $request, Trip $trip) {
+
+		return redirect(route('merchants.trips.index'))->with('success_msg', trans('trips.editing_success'));
 	}
 
 	/**

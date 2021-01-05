@@ -47,7 +47,7 @@ $lang = session()->get('locale');
 					@method('PATCH')
 					<fieldset>
 						<legend class="font-weight-bold"> <span class="text-primary"> @lang('drivers.basic_data') </span> </legend>
-						
+
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-4">
@@ -73,7 +73,7 @@ $lang = session()->get('locale');
 								</div>
 							</div>
 						</div>
-						
+
 
 						<div class="form-group">
 							<div class="row">
@@ -199,7 +199,7 @@ $lang = session()->get('locale');
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-4">
-								
+
 									<img class="img-responsive img-thumbnail" src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" alt="">
 								</div>
 							</div>

@@ -64,6 +64,7 @@ return [
 	'edit'                      => 'تعديل',
 	'trip_details'              => 'تفاصيل الرحله',
 	'delivery_price'            => 'سعر التوصيل',
+	'editing_success'           => 'تم التعديل بنجاح'
 
 ];
 
