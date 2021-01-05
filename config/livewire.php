@@ -43,9 +43,7 @@ return [
 	 */
 
 	// 'asset_url' => 'https://ahmedsamidev.com/platform/public',
-
-	// 'asset_url' => 'https://ahmedsamidev.com/platform/public',
-	'asset_url' => null,
+	// 'asset_url' => null,
 
 	'middleware_group' => 'web',
 
