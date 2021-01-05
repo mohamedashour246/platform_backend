@@ -81,8 +81,9 @@ class TripController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id) {
-		//
+	public function show(Trip $trip) {
+		$trip->load(['branch', 'market', 'payment_method', 'address.building_type', 'driver', 'address', 'address.governorate', 'address.city']);
+		return view('merchants.trips.trip', compact('trip'));
 	}
 
 	/**

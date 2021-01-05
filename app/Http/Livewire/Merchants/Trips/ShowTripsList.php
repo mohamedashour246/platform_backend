@@ -56,6 +56,17 @@ class ShowTripsList extends Component {
 		$this->market_id = Session::get('market_id');
 	}
 
+	protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
+
+	public function handleItemDeletion($item_id) {
+		$trip = Trip::find($item_id);
+		if ($trip) {
+			$trip->delete();
+		}
+		$this->emit('itemDeleted', $item_id);
+		$this->resetPage();
+	}
+
 	public function filterd_data() {
 
 		$trips = Trip::where('market_id', $this->market_id);

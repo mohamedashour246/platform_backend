@@ -60,6 +60,10 @@ return [
 	'to_delivery_date'          => 'To Delivery Date',
 	'pdf'                       => 'PDf',
 	'excel'                     => 'Excel',
+	'delete_trip'               => 'Delete Trip',
+	'edit'                      => 'Edit',
+	'trip_details'              => 'Trip Details',
+	'delivery_price'            => 'Delivery Price',
 
 ];
 

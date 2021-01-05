@@ -60,6 +60,10 @@ return [
 	'to_delivery_date'          => 'الى (تاريخ التوصيل)',
 	'pdf'                       => 'تصدير الى Pdf',
 	'excel'                     => 'Excel تصدير الى ',
+	'delete_trip'               => 'حذف الرحله',
+	'edit'                      => 'تعديل',
+	'trip_details'              => 'تفاصيل الرحله',
+	'delivery_price'            => 'سعر التوصيل',
 
 ];
 
