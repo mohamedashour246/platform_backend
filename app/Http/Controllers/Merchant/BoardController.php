@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Merchant;
 
 use App;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CustomerResourceCollection;
+use App\Models\CustomerAddress;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller {
@@ -43,6 +45,14 @@ class BoardController extends Controller {
 		App::setLocale(session()->get('locale'));
 
 		return redirect()->back();
+	}
+
+	public function search_customers(Request $request) {
+		$keywords  = $request->q;
+		$market_id = session()->get('market_id');
+		$customers = CustomerAddress::where('market_id', $market_id)->where('name', 'like', '%'.$keywords.'%')->orWhere('phone1', 'like', '%'.$keywords.'%')->orWhere('phone2', 'like', '%'.$keywords.'%')->get();
+		return new CustomerResourceCollection($customers);
+
 	}
 
 }

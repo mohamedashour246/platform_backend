@@ -21,7 +21,9 @@ Route::group(['prefix' => 'Merchant', 'namespace' => 'Merchant', 'middleware' =>
 				Route::get('/profile/edit', 'ProfileController@profile')->name('profile.edit');
 				Route::patch('/profile', 'ProfileController@update_profile')->name('profile.update');
 				Route::get('/', 'BoardController@index')->name('board');
+				Route::get('/ajax/search_customers', 'BoardController@search_customers');
 				Route::resource('/admins', 'AdminController');
 				Route::resource('/branches', 'BranchController');
+				Route::resource('/trips', 'TripController');
 			});
 	});

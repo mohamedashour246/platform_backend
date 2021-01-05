@@ -1,10 +1,10 @@
-<div id="add_new_customar_modal" class="modal fade "  style="overflow:hidden;" >
+<div id="add_new_customar_modal" class="modal fade "  >
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title"> @lang('trips.customer_address_details') </h5>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>		
+				</div>
 					<div class="modal-body">
 						<div class="form-group">
 							<div class="row">
@@ -51,7 +51,7 @@
 								<div class="col-md-6">
 									<label> @lang('trips.city') </label>
 									<select name="city"  class="form-control city " >
-									
+
 									</select>
 									@error('payment_method_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -96,7 +96,7 @@
 									@error('payment_method_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
-								</div>					
+								</div>
 								<div class="col-md-6">
 									<label> @lang('trips.building_number') </label>
 									<input type="text" name="building_number" value="{{ old('building_number') }}" class="form-control @error('building_number') is-invalid @enderror " >
@@ -135,8 +135,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-						<button type="submit" name="save_customer" class="btn bg-primary">Submit form</button>
+						<button type="button" class="btn btn-link" data-dismiss="modal"> @lang('trips.back') </button>
+						<button type="submit" name="save_customer" class="btn bg-primary"> @lang('trips.add') </button>
 					</div>
 			</div>
 		</div>
@@ -147,7 +147,7 @@
 
 
 		$('select[name="city"]').select2({
-			dropdownParent: $('#add_new_customar_modal') , 
+			dropdownParent: $('#add_new_customar_modal') ,
 			placeholder: "اختر المدينه",
 			minimumInputLength:2,
 			ajax: {

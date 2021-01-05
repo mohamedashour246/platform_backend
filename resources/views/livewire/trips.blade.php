@@ -78,11 +78,11 @@
 								<a target="_blank"  data-popup="tooltip" title="@lang('trips.trip_details')" href="{{ route('trips.show',['trip' => $trip->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
 									<i class="icon-eye2 text-primary-800"></i>
 								</a>
-								
+
 								<a target="_blank"  data-popup="tooltip" title="@lang('trips.edit')" href="{{ route('trips.edit' , ['trip' => $trip->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
 									<i class="icon-pencil7 text-warning-800"></i>
 								</a>
-								<a href="" data-id="{{ $trip->id }}" data-popup="tooltip" title="@lang('trips.delete_trip')" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a> 
+								<a href="" data-id="{{ $trip->id }}" data-popup="tooltip" title="@lang('trips.delete_trip')" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
 								</td>
 							</tr>
 
@@ -96,11 +96,11 @@
 				<div class="card-footer bg-light ">
 					<div class="float-right" >
 						{{ $trips->links() }}
-					</div>				
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -121,7 +121,7 @@
 		Livewire.on('itemDeleted', itemId => {
 			Toast.fire({
 				icon: 'success',
-				title: "@lang('trips.delete_success')", 
+				title: "@lang('trips.delete_success')",
 			});
 		})
 
@@ -148,7 +148,6 @@
 		}
 
 	});
-
 
 
 

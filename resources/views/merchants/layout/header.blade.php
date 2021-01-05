@@ -15,11 +15,18 @@
 		<div class="collapse navbar-collapse" id="navbar-mobile">
 			<ul class="navbar-nav">
 
+				<li class="nav-item">
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+						<i class="icon-paragraph-justify3"></i>
+					</a>
+				</li>
+
+
 
 				<li class="nav-item dropdown">
 					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
 						<i class="icon-bell3"></i>
-			{{-- 			<span class="d-md-none ml-2">Activity</span> --}}
+
 						<span class="badge badge-mark border-orange-400 ml-auto ml-md-0">  </span>
 					</a>
 
@@ -70,7 +77,7 @@
 				</li>
 			</ul>
 
-			<span class="badge bg-success-400 badge-pill ml-md-3 mr-md-auto"> Online Now </span>
+			<span class="badge bg-success-400 badge-pill ml-md-3 mr-md-auto">  </span>
 
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">

@@ -1,12 +1,10 @@
 @php
 $lang = session()->get('locale');
 @endphp
-@extends('board.layout.master')
+@extends('merchants.layout.master')
 @section('title')
 @lang('trips.add_new_trip')
 @endsection
-
-
 @section('header')
 <div class="page-header">
 	<div class="page-header-content header-elements-md-inline">
@@ -16,8 +14,8 @@ $lang = session()->get('locale');
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('trips.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('trips.trips') </a>
+				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('merchants.merchants') </a>
+				<a href="{{ route('merchants.trips.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('trips.trips') </a>
 				<span class="breadcrumb-item active"> @lang('trips.add_new_trip') </span>
 			</div>
 		</div>
@@ -30,7 +28,7 @@ $lang = session()->get('locale');
 <div class="row">
 	<div class="col-md-12">
 
-		@include('board.layout.messages')
+		@include('merchants.layout.messages')
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
@@ -43,27 +41,22 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('trips.store') }}" method="POST"  enctype="multipart/form-data" >
+			<form action="{{ route('merchants.trips.store') }}" method="POST"  enctype="multipart/form-data" >
 				<div class="card-body">
 					@csrf
 
 					<fieldset>
 						<legend class="font-weight-bold"> <span class="text-primary"> @lang('trips.trip_basic_data') </span> </legend>
-						
+
 						<div class="form-group">
 							<div class="row">
-								<div class="col-md-4">
-									<label> @lang('trips.market') </label>
-									<select name="market_id"  class="form-control market_id" >
-									</select>
-									@error('market_id')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
+
 								<div class="col-md-4">
 									<label> @lang('trips.branch') </label>
 									<select name="branch_id"  class="form-control branch_id" >
-										<option value=""></option>
+										@foreach ($branches as $branch)
+											<option value="{{ $branch->id }}"> {{ $branch->name }} </option>
+										@endforeach
 									</select>
 									@error('market_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -81,12 +74,12 @@ $lang = session()->get('locale');
 						</div>
 						<div class="form-group">
 							<div class="row">
-								
+
 								<div class="col-md-4">
 									<div class="row">
 										<div class="col-md-9">
 											<label> @lang('trips.receipt_date_from_market') </label>
-											<input type="text" name="receipt_date_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickadate1" 
+											<input type="text" name="receipt_date_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickadate1"
 											value="{{ old('receipt_date_from_market') }}">
 											@error('receipt_date_from_market')
 											<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -94,7 +87,7 @@ $lang = session()->get('locale');
 										</div>
 										<div class="col-md-3">
 											<label> @lang('trips.time') </label>
-											<input type="text" name="receipt_time_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickatime1" 
+											<input type="text" name="receipt_time_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickatime1"
 											value="{{ old('receipt_date_from_market') }}">
 											@error('receipt_date_from_market')
 											<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -180,19 +173,9 @@ $lang = session()->get('locale');
 									@enderror
 								</div>
 								<div class="col-md-2">
-									<a href="" class="add_new_customar mt-4 btn btn-sm btn-primary"> <i class="icon-plus3 " ></i> @lang('trips.add_new_customer') </a> 
+									<a href="" class="add_new_customar mt-4 btn btn-sm btn-primary"> <i class="icon-plus3 " ></i> @lang('trips.add_new_customer') </a>
 								</div>
-									<div class="col-md-4">
-									<label> @lang('trips.driver') </label>
-									<select name="driver_id"  class="form-control driver_id" >
-										@foreach ($drivers as $driver)
-										<option value="{{ $driver->id }}">{{ $driver->name }}</option>
-										@endforeach
-									</select>
-									@error('driver_id')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
+
 							</div>
 						</div>
 					</fieldset>
@@ -209,7 +192,7 @@ $lang = session()->get('locale');
 
 @endsection
 
-@include('board.trips.add-customer-modal')
+@include('merchants.trips.add-customer-modal')
 
 @section('styles')
 
@@ -229,7 +212,7 @@ $lang = session()->get('locale');
 	defer></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-{{-- 
+{{--
 <script type="text/javascript"
 src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&libraries=places">
 </script>
@@ -245,11 +228,11 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 		$('#pickatime').pickatime({
 		});
 		$('#pickadate').pickadate({
-			min: true , 
+			min: true ,
 			format: 'yyyy-mm-dd',
 		});
 		$('#pickadate1').pickadate({
-			min: true , 
+			min: true ,
 			format: 'yyyy-mm-dd',
 
 		});
@@ -306,7 +289,7 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 			placeholder: "اختر المستلم",
 			minimumInputLength:3,
 			ajax: {
-				url: '/Board/ajax/search_customers',
+				url: '/Merchant/ajax/search_customers',
 				dataType: 'json',
 				type: 'GET' ,
 				data: function (params) {
@@ -413,7 +396,7 @@ $(function() {
 		// var myOptions = {
 		// 	zoom: 12,
 		// 	center: myLatlng,
-		// 	mapTypeId: google.maps.MapTypeId.ROADMAP , 
+		// 	mapTypeId: google.maps.MapTypeId.ROADMAP ,
 		// 	address: 'الكوييت - محافظة العاصمة'
 		// }
 
@@ -424,7 +407,7 @@ $(function() {
 		// map.addListener('click',function(event) {
 		// 	addMarker(event.latLng, 'Click Generated Marker', map);
 		// });
-		
+
 
 		// function handleEvent(event) {
 		// 	document.getElementById('lat').value = event.latLng.lat();
@@ -460,7 +443,7 @@ $(function() {
 			event.preventDefault();
 			//we need first to count the number ot items showen to user
 			items_count = $('.items').children().length;
-			
+
 			if (items_count != 1) {
 				$(this).parent().parent().remove();
 			}
@@ -469,76 +452,20 @@ $(function() {
 		  // Date and time
 		  // $('#delivery_date_to_customer').AnyTime_picker({
 		  // 	format: '%Y-%m-%d %H',
-		  // 	formatSubmit: 'yyyy/mm/dd' , 
+		  // 	formatSubmit: 'yyyy/mm/dd' ,
 		  // });
 		  // $('#receipt_date_from_market').AnyTime_picker({
 		  // 	format: '%Y-%m-%d %H',
-		  // 	formatSubmit: 'yyyy/mm/dd' , 
+		  // 	formatSubmit: 'yyyy/mm/dd' ,
 		  // });
 
 		  var market_id = null;
 
-		  $('.market_id').on('change',  function(event) {
-		  	event.preventDefault();
-		  	market_id = $(this).val();
-		  	$('.branch_id').val('').change();
-		  });
 
-		  $('.market_id').select2({
-		  	placeholder: "اختر المتجر",
-		  	minimumInputLength:3,
-		  	ajax: {
-		  		url: '/Board/ajax/search_markets',
-		  		dataType: 'json',
-		  		type: 'GET' ,
-		  		data: function (params) {
-		  			var queryParameters = {
-		  				q: params.term ,
-		  			}
-		  			return queryParameters;
-		  		},
-		  		delay: 500,
-		  		processResults: function (data) {
-		  			return {
-		  				results:  $.map(data, function (item) {
-		  					return {
-		  						text: item.name +  ' ' + item.name ,
-		  						id: item.id
-		  					}
-		  				})
-		  			};
-		  		},
-		  		cache: true
-		  	}
-		  });
 
 
 		  $('.branch_id').select2({
 		  	placeholder: "اختر الفرع",
-		  	ajax: {
-		  		url: '/Board/ajax/search_branches',
-		  		dataType: 'json',
-		  		type: 'GET' ,
-		  		data: function (params) {
-		  			var queryParameters = {
-		  				q: params.term ,
-		  				market_id : market_id , 
-		  			}
-		  			return queryParameters;
-		  		},
-		  		delay: 500,
-		  		processResults: function (data) {
-		  			return {
-		  				results:  $.map(data, function (item) {
-		  					return {
-		  						text: item.name +  ' ' + item.name ,
-		  						id: item.id
-		  					}
-		  				})
-		  			};
-		  		},
-		  		cache: true
-		  	}
 		  });
 
 
