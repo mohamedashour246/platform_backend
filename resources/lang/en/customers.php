@@ -29,7 +29,8 @@ return [
 	'created_at'                    => 'Created At',
 	'address'                       => 'Address',
 	'search'                        => 'Search',
-	'delete_customer'               => 'Delete Customer'
+	'delete_customer'               => 'Delete Customer',
+	'show_all_customers'            => 'Show All Customers'
 
 ];
 

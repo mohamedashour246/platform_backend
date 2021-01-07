@@ -31,6 +31,7 @@ return [
 	'search'                        => 'بحث',
 	'delete_customer'               => 'حذف العميل',
 	''                              => '',
+	'show_all_customers'            => 'عرض كافه العملاء '
 
 ];
 
