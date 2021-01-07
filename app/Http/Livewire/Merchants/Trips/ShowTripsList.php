@@ -69,7 +69,7 @@ class ShowTripsList extends Component {
 
 	public function filterd_data() {
 
-		$trips = Trip::where('market_id', $this->market_id);
+		$trips = Trip::with(['payment_method', 'branch', 'address'])->where('market_id', $this->market_id);
 
 		if ($this->branch != 'all') {
 			$trips = $trips->where('branch_id', $this->branch);

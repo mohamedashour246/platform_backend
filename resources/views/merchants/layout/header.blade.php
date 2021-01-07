@@ -1,5 +1,5 @@
 <!-- Main navbar -->
-	<div class="navbar navbar-expand-md navbar-dark">
+	<div class="navbar navbar-expand-md navbar-dark" style="background-color: #1abc9c !important;" >
 		<div class="navbar-brand wmin-0 mr-5">
 			<a href="{{ route('board.index') }}" class="d-inline-block">
 				<img src="{{ asset('board_assets/logo.png') }}" alt="">

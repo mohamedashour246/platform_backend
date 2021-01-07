@@ -64,7 +64,10 @@ return [
 	'edit'                      => 'Edit',
 	'trip_details'              => 'Trip Details',
 	'delivery_price'            => 'Delivery Price',
-	'editing_success'           => 'Editing successfully'
+	'editing_success'           => 'Editing successfully',
+	'sender'                    => 'sender',
+	'receiver'                  => 'receiver',
+	'payment_status'            => 'Payment Status',
 
 ];
 

@@ -101,7 +101,7 @@ $lang = session()->get('locale');
 		</div>
 
 		<div class="card" >
-			<div class="card-header bg-dark header-elements-inline">
+			<div class="card-header bg-transparent header-elements-inline">
 				<h5 class="card-title"> <i class="icon-users4 mr-1"></i> @lang('trips.trips')</h5>
 				<div class="header-elements">
 					<div class="wmin-200">
@@ -118,41 +118,56 @@ $lang = session()->get('locale');
 				</div>
 			</div>
 
-			<div class="card-body">
-				<table class="table datatable-responsive text-center table-hover ">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th> @lang('trips.trip_code') </th>
-							<th> @lang('trips.branch') </th>
-							<th> @lang('trips.status') </th>
-							<th> @lang('trips.receipt_date_from_market') </th>
-							<th> @lang('trips.delivery_date_to_customer') </th>
-							<th> @lang('trips.settings') </th>
-						</tr>
-					</thead>
-					<tbody>
-						@php
-						$i =1 ;
-						@endphp
-						@foreach ($trips as $trip)
-						<tr>
-							<td  >{{ $i++ }}</td>
-							<td> {{ $trip->code }} </td>
-							<td> {{ optional($trip->branch)->name }} </td>
-							<td>
-								@switch($trip->status)
-								@case(1)
-								<span class="badge badge-primary"> @lang('trips.proccessing') </span>
-								@break
-								@case(0)
-								<span class="badge badge-secondary"> @lang('trips.inactive') </span>
-								@break
-								@endswitch
-							</td>
-							<td> {{ $trip->receipt_date_from_market->toDayDateTimeString() }} </td>
-							<td> {{ $trip->delivery_date_to_customer->toDayDateTimeString() }} </td>
-							<td>
+			<table class="table datatable-responsive  table-bordered text-center table-hover ">
+				<thead class=" bg-dark">
+					<tr>
+						<th>#</th>
+						<th> @lang('trips.sender') </th>
+						<th> @lang('trips.receiver') </th>
+						<th> @lang('trips.receipt_date_from_market') </th>
+						<th> @lang('trips.delivery_date_to_customer') </th>
+						<th> @lang('trips.status') </th>
+						<th> @lang('trips.payment_method') </th>
+						<th> @lang('trips.payment_status') </th>
+						<th> @lang('trips.order_price') </th>
+						<th> @lang('trips.delivery_price') </th>
+					</tr>
+				</thead>
+				<tbody>
+					@php
+					$i =1 ;
+					@endphp
+					@foreach ($trips as $trip)
+					<tr>
+						<td>
+							<a href="#collapse-icon{{ $trip->id }}" class="text-default" data-toggle="collapse">
+								<i class="icon-circle-down2"></i>
+							</a>
+						</td>
+
+						<td> {{ optional($trip->branch)->name }} </td>
+						<td> {{ optional($trip->address)->name }} <img src="{{ Storage::disk('s3')->url('customers/'.optional($trip->address)->image) }}" class="rounded-circle" alt="" width="40" height="40"> </td>
+						<td> {{ $trip->receipt_date_from_market->toDayDateTimeString() }} </td>
+						<td> {{ $trip->delivery_date_to_customer->toDayDateTimeString() }} </td>
+						<td>
+							@switch($trip->status)
+							@case(1)
+							<span class="badge badge-primary"> @lang('trips.proccessing') </span>
+							@break
+							@case(0)
+							<span class="badge badge-secondary"> @lang('trips.inactive') </span>
+							@break
+							@endswitch
+						</td>
+						<td> {{ optional($trip->payment_method)['name_'.$lang] }} </td>
+						<td>  لم يتم الدفع </td>
+						<td> {{ $trip->order_price }} </td>
+						<td> {{ $trip->delivery_price }} </td>
+					</tr>
+					<tr class="collapse " id="collapse-icon{{ $trip->id }}" >
+						<td colspan="100%" >
+
+							<div class="float-left">
 								<a target="_blank"  data-popup="tooltip" title="@lang('trips.trip_details')" href="{{ route('merchants.trips.show',['trip' => $trip->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
 									<i class="icon-eye2 text-primary-800"></i>
 								</a>
@@ -162,12 +177,12 @@ $lang = session()->get('locale');
 								</a>
 								<a href="" data-id="{{ $trip->id }}" data-popup="tooltip" title="@lang('trips.delete_trip')" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>
 								</a>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
+							</div>
+						</td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
 			<div class="card-footer bg-light ">
 				<div class="float-right" >
 					{{ $trips->links() }}
