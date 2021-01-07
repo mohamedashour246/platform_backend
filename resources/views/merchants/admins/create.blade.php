@@ -126,6 +126,19 @@ $lang = session()->get('locale');
 								<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
 								@enderror
 							</div>
+
+							<div class="col-md-4">
+								<label> @lang('admins.type') </label>
+								<select name="type"  class="form-control" required="required">
+									@foreach ($types as $type)
+										<option value="{{ $type->id }}"> {{ $type['name_'.$lang] }} </option>
+									@endforeach
+								</select>
+								@error('type')
+								<label class="text-danger font-weight-bold " for=""> {{ $message }} </label>
+								@enderror
+							</div>
+
 							<div class="col-md-4">
 								<div class="form-check form-check-switchery">
 									<label class="form-check-label">
@@ -189,9 +202,9 @@ $lang = session()->get('locale');
 @endsection
 
 @section('scripts')
-<script src="{{ asset('merchants_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
-<script src="{{ asset('merchants_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
-<script src="{{ asset('merchants_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
 <script>
 	$(function() {
 

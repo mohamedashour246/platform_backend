@@ -13,7 +13,7 @@
 	<link href="{{ asset('board_assets/rtl/assets/css/bootstrap_limitless.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('board_assets/rtl/assets/css/layout.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('board_assets/rtl/assets/css/components.min.css') }}" rel="stylesheet" type="text/css">
-	<link href="{{ asset('board_assets/rtl/assets/css/colors.min.css') }}" rel="stylesheet" type="text/css">
+	{{-- <link href="{{ asset('board_assets/rtl/assets/css/colors.min.css') }}" rel="stylesheet" type="text/css"> --}}
 	<link href="{{ asset('board_assets/rtl/assets/css/lang.css') }}" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
 	@livewireStyles

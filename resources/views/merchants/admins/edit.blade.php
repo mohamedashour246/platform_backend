@@ -1,7 +1,8 @@
 @php
+
 $lang = session()->get('locale');
 @endphp
-@extends('board.layout.master')
+@extends('merchants.layout.master')
 @section('title')
 @lang('admins.edit_admin_details')
 @endsection
@@ -16,8 +17,8 @@ $lang = session()->get('locale');
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
+				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
+				<a href="{{ route('merchants.admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
 				<span class="breadcrumb-item active"> @lang('admins.edit_admin_details') </span>
 			</div>
 		</div>
@@ -45,7 +46,7 @@ $lang = session()->get('locale');
 			</div>
 
 			<div class="card-body">
-				<form action="{{ route('admins.update'  , ['admin' => $admin->id] ) }}" method="POST"  enctype="multipart/form-data" >
+				<form action="{{ route('merchants.admins.update'  , ['admin' => $admin->id] ) }}" method="POST"  enctype="multipart/form-data" >
 					@csrf
 					@method('PATCH')
 					<div class="form-group">
@@ -68,7 +69,7 @@ $lang = session()->get('locale');
 								@enderror
 							</div>
 
-							
+
 
 							<div class="col-md-4">
 								<label> @lang('admins.email') </label>
@@ -77,16 +78,17 @@ $lang = session()->get('locale');
 								<label  class="text-danger font-weight-bold " > {{ $message }} </label>
 								@enderror
 							</div>
-{{-- 
+
 							<div class="col-md-4">
 								<div class="form-group">
 									<label> @lang('admins.type') </label>
 									<select name="type" class="form-control select" data-fouc>
-										<option value="admin" {{ $admin->type == 'admin' ? 'selected="selected"' : '' }} > @lang('admins.admin') </option>
-										<option value="superadmin" {{ $admin->type == 'superadmin' ? 'selected="selected"' : '' }} >@lang('admins.super_admin')</option>
+										@foreach ($types as $type)
+										<option value="{{ $type->id }}" {{ $type->id == $admin->type_id ? 'selected="selected"' : '' }} > {{ $type['name_'.$lang] }} </option>
+									@endforeach
 									</select>
 								</div>
-							</div> --}}
+							</div>
 
 						</div>
 					</div>
@@ -195,12 +197,12 @@ $lang = session()->get('locale');
 
 					<div class="form-group">
 						<div class="row">
-							
+
 
 							<div class="col-md-6">
 								<div class="form-group">
 									<label> @lang('admins.current_profile_picture') </label>
-									<img class="img-thumbnail img-responsive" src="{{ Storage::disk('s3')->url('admins/'.$admin->image) }}" alt="">
+									<img class="img-thumbnail img-responsive" src="{{ Storage::disk('s3')->url('merchants/'.$admin->image) }}" alt="">
 								</div>
 							</div>
 						</div>
@@ -208,7 +210,7 @@ $lang = session()->get('locale');
 
 
 
-			
+
 					<div class="card-footer bg-light" >
 						<button type="submit" class="btn btn-warning float-right ml-2"> @lang('admins.edit') </button>
 						<a href="{{ route('admins.index') }}" class="btn btn-secondary "> @lang('admins.back') </a>
@@ -238,31 +240,6 @@ $lang = session()->get('locale');
 		// $("#firstname").attr("disabled", "disabled");
 
 
-		@if ($admin->type == 'superadmin')
-		$('input.permissions').each(function(){
-			$(this).prop('disabled',true);
-			$.uniform.update();
-		});
-		@endif
-
-		$('select[name="type"]').on('select2:select', function(event) {
-			
-			var admin_type = $(event.currentTarget).val();
-			console.log(admin_type);
-			if (admin_type == 'superadmin') {
-				$('input.permissions').each(function(){
-					console.log(admin_type);
-					$(this).prop('disabled',true);
-					$.uniform.update();
-				});
-			} else {
-				$('input.permissions').each(function(){
-					console.log(admin_type);
-					$(this).prop('disabled',false);
-					$.uniform.update();
-				});
-			}
-		});
 
 
 		$('.select').select2({

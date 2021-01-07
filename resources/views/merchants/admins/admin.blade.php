@@ -1,7 +1,7 @@
 @php
 $lang = session()->get('locale');
 @endphp
-@extends('board.layout.master')
+@extends('merchants.layout.master')
 @section('title')
 @lang('admins.admin_details')
 @endsection
@@ -16,8 +16,8 @@ $lang = session()->get('locale');
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
+				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
+				<a href="{{ route('merchants.admins.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('admins.admins') </a>
 				<span class="breadcrumb-item active"> @lang('admins.admin_details') </span>
 			</div>
 		</div>
@@ -32,13 +32,9 @@ $lang = session()->get('locale');
 	<div class="col-md-12 mb-3">
 		<div class="header-elements ">
 			<div class="float-right">
-				<a href="{{ route('admins.create') }}" class="btn btn-primary ml-1"> <i class="icon-user-plus"></i> @lang('admins.add_new_admin')  </a>
-				<a href="{{ route('admins.edit'  , ['admin' => $admin->id ] ) }}" class="btn btn-warning ml-1"> <i class="icon-pencil5"></i> @lang('admins.edit_admin_details')  </a>
-				<form action="{{ route('admins.destroy'  , ['admin' => $admin->id] ) }}" method="POST" class="float-right ml-1">
-					@csrf
-					@method('DELETE')
-					<button href="#" class="btn btn-danger "> <i class="icon-trash"></i> @lang('admins.delete_admin') </button>
-				</form>
+				<a href="{{ route('merchants.admins.create') }}" class="btn btn-primary ml-1"> <i class="icon-user-plus"></i> @lang('admins.add_new_admin')  </a>
+				<a href="{{ route('merchants.admins.edit'  , ['admin' => $admin->id ] ) }}" class="btn btn-warning ml-1"> <i class="icon-pencil5"></i> @lang('admins.edit_admin_details')  </a>
+
 			</div>
 		</div>
 	</div>
@@ -88,7 +84,7 @@ $lang = session()->get('locale');
 						</tr>
 						<tr>
 							<th class="font-weight-bold text-dark"> @lang('admins.activation') </th>
-							<td class="text-left">	
+							<td class="text-left">
 								@switch($admin->active)
 								@case(1)
 								<label  class="badge badge-success" > @lang('admins.active') </label>
@@ -102,7 +98,7 @@ $lang = session()->get('locale');
 
 						<tr>
 							<th class="font-weight-bold text-dark"> @lang('admins.type') </th>
-							<td class="text-left">	
+							<td class="text-left">
 								<span class="badge badge-primary"> {{ optional($admin->type)['name_'.$lang] }} </span>
 							</td>
 						</tr>
@@ -112,19 +108,12 @@ $lang = session()->get('locale');
 						</tr>
 
 						<tr>
-							<td class="font-weight-bold text-dark"> @lang('admins.added_by') </td>
-							<td class="text-left font-weight-bold"> <a href="{{ route('admins.show'  , ['admin' => $admin->id] ) }}"> {{ optional($admin->addedBy)->username }} </a> </td>
-						</tr>
-
-
-						<tr>
 							<td class="font-weight-bold text-dark"> @lang('admins.notes') </td>
 							<td class="text-left font-weight-bold"> {{ $admin->notes }} </td>
 						</tr>
-
 						<tr>
 							<td class="font-weight-bold text-dark"> @lang('admins.permissions') </td>
-							<td class="text-left font-weight-bold"> 
+							<td class="text-left font-weight-bold">
 								<ul class="list-unstyled">
 									@foreach ($admin->permissions as $permission)
 									<li> <i class="icon-star-full2 text-warning-300"></i> {{ $permission->permission['description_'.$lang] }} </li>
@@ -134,11 +123,10 @@ $lang = session()->get('locale');
 							</td>
 						</tr>
 
-
 						<tr>
 							<td class="font-weight-semibold">  @lang('admins.current_profile_picture') </td>
 							<td class="text-right text-muted">
-								<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('admins/'.$admin->image) }}" alt="">
+								<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('merchants/'.$admin->image) }}" alt="">
 							</td>
 						</tr>
 					</tbody>
@@ -146,7 +134,7 @@ $lang = session()->get('locale');
 			</div>
 			<div class="card-footer bg-white d-flex justify-content-between align-items-center">
 				<button type="button" class="btn btn-outline bg-indigo-400 text-indigo-400 border-indigo-400"> المشرفين </button>
-				<a  href="{{ route('admins.edit'  , ['admin' => $admin->id ] ) }}" class="btn bg-warning">تعديل</a>
+				<a  href="{{ route('merchants.admins.edit'  , ['admin' => $admin->id ] ) }}" class="btn bg-warning">تعديل</a>
 			</div>
 		</div>
 		<!-- /account settings -->
@@ -179,7 +167,7 @@ $lang = session()->get('locale');
 		@endif
 
 		$('select[name="type"]').on('select2:select', function(event) {
-			
+
 			var admin_type = $(event.currentTarget).val();
 			console.log(admin_type);
 			if (admin_type == 'superadmin') {
