@@ -25,6 +25,7 @@ Route::group(['prefix' => 'Merchant', 'namespace' => 'Merchant', 'middleware' =>
 				Route::resource('/admins', 'AdminController');
 				Route::resource('/branches', 'BranchController');
 				Route::resource('/trips', 'TripController');
+				Route::resource('/customers', 'CustomerController');
 				Route::get('/notifications', 'BoardController@notifications');
 			});
 	});

@@ -9,6 +9,7 @@
   'markets' => 'App\\Http\\Livewire\\Markets',
   'merchants.branche' => 'App\\Http\\Livewire\\Merchants\\Branche',
   'merchants.branches' => 'App\\Http\\Livewire\\Merchants\\Branches',
+  'merchants.customer.show-all-customers' => 'App\\Http\\Livewire\\Merchants\\Customer\\ShowAllCustomers',
   'merchants.trips.show-trips-list' => 'App\\Http\\Livewire\\Merchants\\Trips\\ShowTripsList',
   'trips' => 'App\\Http\\Livewire\\Trips',
 );

@@ -38,7 +38,7 @@ $lang = session()->get('locale');
 		<div class="card" >
 
 
-			<table class="table datatable-responsive table-bordered text-center   table-hover ">
+			<table class="table datatable-responsive table-togglable table-bordered text-center   table-hover ">
 				<thead class="bg-dark">
 					<tr>
 						<th>#</th>
@@ -57,7 +57,12 @@ $lang = session()->get('locale');
 					@endphp
 					@foreach ($branches as $branch)
 					<tr>
-						<td  >{{ $i++ }}</td>
+						<td >
+							<a href="#collapse-icon{{ $branch->id }}" class="text-default" data-toggle="collapse">
+								<i class="icon-circle-down2"></i>
+							</a>
+
+						</td>
 						<td  > <a href="{{ route('merchants.branches.show', ['branch' => $branch->id])}}"> {{ $branch->name }} </a> </td>
 						<td >{{ $branch->phones }}</td>
 						<td >{{ $branch->address }}</td>
@@ -79,6 +84,79 @@ $lang = session()->get('locale');
 							</form>
 						</td>
 					</tr>
+					<tr class="collapse " id="collapse-icon{{ $branch->id }}" >
+						<td colspan="100%" >
+							<ul class="media-list">
+								<li class="media">
+									<div class="mr-3">
+										<a href="#" class="btn bg-transparent border-primary text-primary rounded-round border-2 btn-icon">
+											<i class="icon-spinner11"></i>
+										</a>
+									</div>
+
+									<div class="media-body">
+										<a href="#">David Linner</a> requested refund for a double card charge
+										<div class="text-muted font-size-sm">12 minutes ago</div>
+									</div>
+								</li>
+
+								<li class="media">
+									<div class="mr-3">
+										<a href="#" class="btn bg-transparent border-danger text-danger rounded-round border-2 btn-icon">
+											<i class="icon-infinite"></i>
+										</a>
+									</div>
+
+									<div class="media-body">
+										User <a href="#">Christopher Wallace</a> is awaiting for staff reply
+										<div class="text-muted font-size-sm">16 minutes ago</div>
+									</div>
+								</li>
+
+								<li class="media">
+									<div class="mr-3">
+										<a href="#" class="btn bg-transparent border-slate text-slate rounded-round border-2 btn-icon">
+											<i class="icon-cash3"></i>
+										</a>
+									</div>
+
+									<div class="media-body">
+										All sellers have received monthly payouts
+										<div class="text-muted font-size-sm">4 hours ago</div>
+									</div>
+								</li>
+
+								<li class="media">
+									<div class="mr-3">
+										<a href="#" class="btn bg-transparent border-success text-success rounded-round border-2 btn-icon">
+											<i class="icon-checkmark3"></i>
+										</a>
+									</div>
+
+									<div class="media-body">
+										Ticket #43683 has been closed by <a href="#">Victoria Wilson</a>
+										<div class="text-muted font-size-sm">Apr 28, 21:39</div>
+									</div>
+								</li>
+
+								<li class="media">
+									<div class="mr-3">
+										<a href="#" class="btn bg-transparent border-indigo-400 text-indigo-400 rounded-round border-2 btn-icon">
+											<i class="icon-comment"></i>
+										</a>
+									</div>
+
+									<div class="media-body">
+										<a href="#">Beatrix Diaz</a> left a new feedback for Camo backpack
+										<div class="text-muted font-size-sm">Mar 30, 05:46</div>
+									</div>
+								</li>
+							</ul>
+						</td>
+					</tr>
+
+
+
 
 					@endforeach
 
@@ -101,6 +179,10 @@ $lang = session()->get('locale');
 
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/loaders/blockui.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/touch.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/demo_pages/components_collapsible.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 	$(function() {
