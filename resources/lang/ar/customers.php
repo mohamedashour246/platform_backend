@@ -15,7 +15,7 @@ return [
 	'apratment_number'              => 'رقم الشقه',
 	'building_number'               => 'رقم المبنى',
 	'avenue_number'                 => 'رقم الجاده',
-	'place_number'                  => 'رقم المكان',
+	'place_number'                  => 'رقم القطعه',
 	'building_type'                 => 'نوع المبنى',
 	'add'                           => 'إضافه',
 	'edit'                          => 'تعديل',

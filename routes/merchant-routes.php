@@ -23,12 +23,12 @@ Route::group(['prefix' => 'Merchant', 'namespace' => 'Merchant', 'middleware' =>
 				Route::get('/', 'BoardController@index')->name('board');
 				Route::get('/ajax/search_customers', 'BoardController@search_customers');
 				Route::post('/admins/change_status', 'AdminController@change_status');
-
 				Route::resource('/admins', 'AdminController');
 				Route::resource('/branches', 'BranchController');
 				Route::resource('/trips', 'TripController');
 				Route::resource('/customers', 'CustomerController');
 				Route::get('/notifications', 'BoardController@notifications');
+				Route::get('/get_governorate_cities', 'AjaxController@get_governorate_cities');
 
 			});
 	});
