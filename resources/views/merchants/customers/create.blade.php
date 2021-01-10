@@ -294,7 +294,7 @@ $lang = session()->get('locale');
 			governorate_id = $(this).find('option:selected').val();
 			governorate = $(this).find('option:selected').text();
 			address = country + ' - ' + governorate ;
-			initialize(address , 10);
+			initialize(address , 15);
 
 			$.ajax({
 				url: '{{ url("/Merchant/get_governorate_cities") }}',
@@ -313,7 +313,7 @@ $lang = session()->get('locale');
 			event.preventDefault();
 			city = $(this).find('option:selected').text();
 			address = country + ' - ' + governorate + ' - ' + city;
-			initialize(address , 12);
+			initialize(address , 16);
 		});
 
 
@@ -321,7 +321,7 @@ $lang = session()->get('locale');
 			event.preventDefault();
 			place_number = $(this).val();
 			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number;
-			initialize(address , 13);
+			initialize(address , 17);
 		});
 
 
@@ -329,7 +329,7 @@ $lang = session()->get('locale');
 			event.preventDefault();
 			street_name = $(this).val();
 			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع ' + street_name;
-			initialize(address , 14);
+			initialize(address , 18);
 		});
 
 
@@ -338,7 +338,7 @@ $lang = session()->get('locale');
 			event.preventDefault();
 			avenue_number = $(this).val();
 			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع ' + street_name + ' - جاده ' + avenue_number ;
-			initialize(address , 15);
+			initialize(address , 19);
 		});
 
 
@@ -346,7 +346,7 @@ $lang = session()->get('locale');
 			event.preventDefault();
 			building_number = $(this).val();
 			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع ' + street_name + ' - جاده ' + avenue_number + ' - مبنى ' + building_number ;
-			initialize(address , 16);
+			initialize(address , 20);
 		});
 
 
