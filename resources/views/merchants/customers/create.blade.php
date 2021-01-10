@@ -219,6 +219,10 @@ $lang = session()->get('locale');
 
 
 
+
+
+
+
 		var geocoder;
 		var map;
 		var address = "";
@@ -260,8 +264,12 @@ $lang = session()->get('locale');
 							var marker = new google.maps.Marker({
 								position: results[0].geometry.location,
 								map: map,
-								title: address
+								title: address ,
+								draggable: true,
+								animation: google.maps.Animation.DROP,
+
 							});
+
 							google.maps.event.addListener(marker, 'click', function() {
 								infowindow.open(map, marker);
 							});
@@ -320,7 +328,7 @@ $lang = session()->get('locale');
 		$('input[name="street_name"]').on('change',  function(event) {
 			event.preventDefault();
 			street_name = $(this).val();
-			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع' + street_name;
+			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع ' + street_name;
 			initialize(address , 14);
 		});
 
