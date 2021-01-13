@@ -320,7 +320,7 @@ $lang = session()->get('locale');
 		$('input[name="place_number"]').on('change',  function(event) {
 			event.preventDefault();
 			place_number = $(this).val();
-			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number;
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number;
 			initialize(address , 17);
 		});
 
@@ -328,7 +328,7 @@ $lang = session()->get('locale');
 		$('input[name="street_name"]').on('change',  function(event) {
 			event.preventDefault();
 			street_name = $(this).val();
-			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع ' + street_name;
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name;
 			initialize(address , 18);
 		});
 
@@ -337,7 +337,7 @@ $lang = session()->get('locale');
 		$('input[name="avenue_number"]').on('change',  function(event) {
 			event.preventDefault();
 			avenue_number = $(this).val();
-			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع ' + street_name + ' - جاده ' + avenue_number ;
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number ;
 			initialize(address , 19);
 		});
 
@@ -345,7 +345,7 @@ $lang = session()->get('locale');
 		$('input[name="building_number"]').on('change',  function(event) {
 			event.preventDefault();
 			building_number = $(this).val();
-			address = country + ' - ' + governorate + ' - ' + city + ' - منطقه  ' + place_number + '- شارع ' + street_name + ' - جاده ' + avenue_number + ' - مبنى ' + building_number ;
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number + ' - مبنى ' + building_number ;
 			initialize(address , 20);
 		});
 
