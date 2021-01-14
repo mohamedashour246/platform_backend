@@ -34,6 +34,7 @@ return [
 	'customer_details'              => 'Customer Details',
 	'added_by'                      => 'Added By',
 	'code'                          => 'Code',
+	'business_type'                 => 'business Type'
 
 ];
 

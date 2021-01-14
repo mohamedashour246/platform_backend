@@ -30,6 +30,7 @@ Route::group(['prefix' => 'Merchant', 'namespace' => 'Merchant', 'middleware' =>
 				Route::resource('/customers', 'CustomerController');
 				Route::get('/notifications', 'BoardController@notifications');
 				Route::get('/get_governorate_cities', 'AjaxController@get_governorate_cities');
+				Route::post('/add_new_customar_via_ajax', 'AjaxController@add_new_customar_via_ajax');
 
 			});
 	});

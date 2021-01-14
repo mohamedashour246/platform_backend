@@ -202,15 +202,157 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.time.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&callback=initMap&libraries=&v=weekly"
-defer></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-{{--
-<script type="text/javascript"
-src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&libraries=places">
-</script>
---}}
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places"></script>
+
+	<script>
+		$(document).ready(function() {
+
+
+
+
+
+		var geocoder;
+		var map;
+		var address = "";
+		var country = "الكويت";
+		var governorate = '';
+		var city = '';
+		var street_name = '';
+		var avenue_number = '';
+		var place_number = '';
+		var building_number = '';
+
+		function initialize(address , zome ) {
+			geocoder = new google.maps.Geocoder();
+			var latlng = new google.maps.LatLng(29.378586, 47.990341);
+			var myOptions = {
+				zoom: zome,
+				center: latlng,
+				mapTypeControl: true,
+				mapTypeControlOptions: {
+					style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+				},
+				navigationControl: true,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			map = new google.maps.Map(document.getElementById("map"), myOptions);
+			if (geocoder) {
+				geocoder.geocode({
+					'address': address
+				}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+							map.setCenter(results[0].geometry.location);
+
+							var infowindow = new google.maps.InfoWindow({
+								content: '<b>' + address + '</b>',
+								size: new google.maps.Size(150, 50)
+							});
+
+							var marker = new google.maps.Marker({
+								position: results[0].geometry.location,
+								map: map,
+								title: address ,
+								draggable: true,
+								animation: google.maps.Animation.DROP,
+
+							});
+							var lat = results[0].geometry.location.lat();
+							var lng = results[0].geometry.location.lng();
+							$('input[name="longitude"]').val(lng);
+							$('input[name="latitude"]').val(lat);
+							google.maps.event.addListener(marker, 'click', function() {
+								infowindow.open(map, marker);
+							});
+							google.maps.event.addListener(marker, 'dragend', function (event) {
+								document.getElementById("latitude").value = this.getPosition().lat();
+								document.getElementById("longitude").value = this.getPosition().lng();
+							});
+
+						} else {
+							alert("No results found");
+						}
+					} else {
+						alert("Geocode was not successful for the following reason: " + status);
+					}
+				});
+			}
+		}
+		initialize( country , 11);
+		$('.select').select2({
+			minimumResultsForSearch: Infinity
+		});
+
+
+		$('select[name="governorate"]').on('change',  function(event) {
+			event.preventDefault();
+			governorate_id = $(this).find('option:selected').val();
+			governorate = $(this).find('option:selected').text();
+			address = country + ' - ' + governorate ;
+			initialize(address , 15);
+
+			$.ajax({
+				url: '{{ url("/Merchant/get_governorate_cities") }}',
+				type: 'GET',
+				dataType: 'html',
+				data: {governorate:governorate_id},
+			})
+			.done(function(data) {
+				$('select.city').empty();
+				$('select.city').append(data);
+			});
+		});
+
+
+		$('select[name="city"]').on('change',  function(event) {
+			event.preventDefault();
+			city = $(this).find('option:selected').text();
+			address = country + ' - ' + governorate + ' - ' + city;
+			initialize(address , 16);
+		});
+
+
+
+
+		$('input[name="place_number"]').on('change',  function(event) {
+			event.preventDefault();
+			place_number = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number;
+			initialize(address , 17);
+		});
+
+
+		$('input[name="street_name"]').on('change',  function(event) {
+			event.preventDefault();
+			street_name = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name;
+			initialize(address , 18);
+		});
+
+
+
+		$('input[name="avenue_number"]').on('change',  function(event) {
+			event.preventDefault();
+			avenue_number = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number ;
+			initialize(address , 19);
+		});
+
+
+		$('input[name="building_number"]').on('change',  function(event) {
+			event.preventDefault();
+			building_number = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number + ' - مبنى ' + building_number ;
+			initialize(address , 20);
+		});
+
+
+
+		});
+	</script>
+
 <script>
 
 	$(document).ready(function() {
@@ -238,7 +380,7 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 
 		$('button[name="save_customer"]').on('click',  function(event) {
 			event.preventDefault();
-			customer_name = $('input[name="customer_name"]').val();
+			name = $('input[name="name"]').val();
 			phone1 = $('input[name="phone1"]').val();
 			phone2 = $('input[name="phone2"]').val();
 			governorate = $('select.governorate').val();
@@ -250,14 +392,16 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 			building_number = $('input[name="building_number"]').val();
 			floor_number = $('input[name="floor_number"]').val();
 			apratment_number = $('input[name="apratment_number"]').val();
+			business_type = $('input[name="business_type"]').val();
+
 			latitude = $('input[name="latitude"]').val();
 			longitude = $('input[name="longitude"]').val();
 			$.ajax({
-				url: '{{ route("customers.store") }}',
+				url: '{{ url("Merchant/add_new_customar_via_ajax") }}',
 				placeholder : 'اختر المستلمين',
 				type: 'POST',
 				dataType: 'json',
-				data: { _token:"{{ csrf_token() }}" , customer_name:customer_name , phone2:phone2 , phone1:phone1 , governorate:governorate , city:city, place_number:place_number , street_name:street_name , avenue_number:avenue_number , building_number:building_number, floor_number:floor_number , apratment_number:apratment_number , latitude:latitude , longitude:longitude  , building_type_id:building_type_id},
+				data: { _token:"{{ csrf_token() }}" , name:name , phone2:phone2  , business_type:business_type, phone1:phone1 , governorate:governorate , city:city, place_number:place_number , street_name:street_name , avenue_number:avenue_number , building_number:building_number, floor_number:floor_number , apratment_number:apratment_number , latitude:latitude , longitude:longitude  , building_type:building_type_id},
 			})
 			.done(function(data) {
 				if (data.status == 'success') {
@@ -308,33 +452,33 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 		});
 
 
-		$('select[name="city"]').select2({
-			placeholder: "اختر المدينه",
-			minimumInputLength:2,
-			ajax: {
-				url: '/Board/search_in_cities',
-				dataType: 'json',
-				type: 'GET' ,
-				data: function (params) {
-					var queryParameters = {
-						q: params.term ,
-					}
-					return queryParameters;
-				},
-				delay: 500,
-				processResults: function (data) {
-					return {
-						results:  $.map(data.data, function (item) {
-							return {
-								text: item.text,
-								id: item.id
-							}
-						})
-					};
-				},
-				cache: true
-			}
-		});
+		// $('select[name="city"]').select2({
+		// 	placeholder: "اختر المدينه",
+		// 	minimumInputLength:2,
+		// 	ajax: {
+		// 		url: '/Board/search_in_cities',
+		// 		dataType: 'json',
+		// 		type: 'GET' ,
+		// 		data: function (params) {
+		// 			var queryParameters = {
+		// 				q: params.term ,
+		// 			}
+		// 			return queryParameters;
+		// 		},
+		// 		delay: 500,
+		// 		processResults: function (data) {
+		// 			return {
+		// 				results:  $.map(data.data, function (item) {
+		// 					return {
+		// 						text: item.text,
+		// 						id: item.id
+		// 					}
+		// 				})
+		// 			};
+		// 		},
+		// 		cache: true
+		// 	}
+		// });
 
 	});
 
@@ -349,32 +493,7 @@ src="//maps.googleapis.com/maps/api/js?region=SA&language={{$lang}}&key=AIzaSyBu
 // 			});
 // 		}
 
-function initMap() {
-	const map = new google.maps.Map(document.getElementById("map"), {
-		zoom: 11,
-		center: { lat: 29.393343, lng: 47.567417 },
-	});
-	const geocoder = new google.maps.Geocoder();
 
-	geocodeAddress(geocoder, map);
-
-}
-
-function geocodeAddress(geocoder, resultsMap) {
-	const address = "الكويت - كبد";
-	geocoder.geocode({ address: address }, (results, status) => {
-		if (status === "OK") {
-			resultsMap.setCenter(results[0].geometry.location);
-			new google.maps.Marker({
-				map: resultsMap,
-				position: results[0].geometry.location,
-				draggable:true,
-			});
-		} else {
-			alert("Geocode was not successful for the following reason: " + status);
-		}
-	});
-}
 
 
 
@@ -384,41 +503,6 @@ $(function() {
 
 
 
-
-		// var myLatlng = new google.maps.LatLng(29.393343,47.567417);
-
-		// var myOptions = {
-		// 	zoom: 12,
-		// 	center: myLatlng,
-		// 	mapTypeId: google.maps.MapTypeId.ROADMAP ,
-		// 	address: 'الكوييت - محافظة العاصمة'
-		// }
-
-		// var map = new google.maps.Map(document.getElementById("map"), myOptions);
-
-		// addMarker(myLatlng, 'برجاء سحب العلامه للمكان المطلوب', map);
-
-		// map.addListener('click',function(event) {
-		// 	addMarker(event.latLng, 'Click Generated Marker', map);
-		// });
-
-
-		// function handleEvent(event) {
-		// 	document.getElementById('lat').value = event.latLng.lat();
-		// 	document.getElementById('lng').value = event.latLng.lng();
-		// }
-
-		// function addMarker(latlng,title,map) {
-		// 	var marker = new google.maps.Marker({
-		// 		position: latlng,
-		// 		map: map,
-		// 		title: title,
-		// 		draggable:true
-		// 	});
-
-		// 	marker.addListener('drag', handleEvent);
-		// 	marker.addListener('dragend', handleEvent);
-		// }
 
 
 
@@ -443,17 +527,7 @@ $(function() {
 			}
 		});
 
-		  // Date and time
-		  // $('#delivery_date_to_customer').AnyTime_picker({
-		  // 	format: '%Y-%m-%d %H',
-		  // 	formatSubmit: 'yyyy/mm/dd' ,
-		  // });
-		  // $('#receipt_date_from_market').AnyTime_picker({
-		  // 	format: '%Y-%m-%d %H',
-		  // 	formatSubmit: 'yyyy/mm/dd' ,
-		  // });
-
-		  var market_id = null;
+				  var market_id = null;
 
 
 

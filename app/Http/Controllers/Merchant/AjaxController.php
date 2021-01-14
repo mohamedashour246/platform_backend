@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Merchant;
 use App\Http\Controllers\Controller;
 
 use App\Models\City;
+use App\Models\CustomerAddress;
+use Auth;
 use Illuminate\Http\Request;
+use Validator;
 
 class AjaxController extends Controller {
 	/**
@@ -33,8 +36,39 @@ class AjaxController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create() {
-		//
+	public function add_new_customar_via_ajax(Request $request) {
+		$validator = Validator::make($request->all(), [
+				'governorate'     => 'required',
+				'city'            => 'required',
+				'building_type'   => 'nullable',
+				'street_name'     => 'nullable',
+				'phone2'          => 'nullable',
+				'phone1'          => 'required',
+				'name'            => 'required',
+				'avenue_number'   => 'nullable',
+				'building_number' => 'nullable',
+				'floor_number'    => 'nullable',
+				'place_number'    => 'nullable',
+				'longitude'       => 'required',
+				'latitude'        => 'required',
+				'business_type'   => 'nullable',
+			]);
+
+		if ($validator    ->fails()) {
+			return response()->json(['status' => 'error', 'msg' => 'من فضلك قم بملىئ البيانات'], 200);
+		}
+
+		// dd($request->all());
+
+		$market_id = session()->get('market_id');
+		$user_id   = Auth::guard('merchant')->id();
+
+		$customer_address = new CustomerAddress;
+		if (!$customer_address->add($request->all(), $market_id, $user_id, 'merchant')) {
+			return response()->json(['status' => 'error', 'msg' => trans('trips.adding_customer_address_error')], 200);
+		}
+
+		return response()->json(['status' => 'success', 'msg' => trans('trips.customer_added')], 200);
 	}
 
 	/**

@@ -33,7 +33,8 @@ return [
 	'customer_details'              => 'بيانات العميل ',
 	'show_all_customers'            => 'عرض كافه العملاء ',
 	'added_by'                      => 'تم الاضافه بواسطته',
-	'code'                          => 'كود العميل'
+	'code'                          => 'كود العميل',
+	'business_type'                 => 'نوع النشاط'
 
 ];
 
