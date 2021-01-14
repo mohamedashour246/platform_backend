@@ -55,7 +55,7 @@ $lang = session()->get('locale');
 									<label> @lang('trips.branch') </label>
 									<select name="branch_id"  class="form-control branch_id" >
 										@foreach ($branches as $branch)
-											<option value="{{ $branch->id }}"> {{ $branch->name }} </option>
+										<option value="{{ $branch->id }}"> {{ $branch->name }} </option>
 										@endforeach
 									</select>
 									@error('market_id')
@@ -70,49 +70,6 @@ $lang = session()->get('locale');
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="row">
-
-								<div class="col-md-4">
-									<div class="row">
-										<div class="col-md-9">
-											<label> @lang('trips.receipt_date_from_market') </label>
-											<input type="text" name="receipt_date_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickadate1"
-											value="{{ old('receipt_date_from_market') }}">
-											@error('receipt_date_from_market')
-											<label class="text-danger font-weight-bold " > {{ $message }} </label>
-											@enderror
-										</div>
-										<div class="col-md-3">
-											<label> @lang('trips.time') </label>
-											<input type="text" name="receipt_time_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickatime1"
-											value="{{ old('receipt_date_from_market') }}">
-											@error('receipt_date_from_market')
-											<label class="text-danger font-weight-bold " > {{ $message }} </label>
-											@enderror
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="row">
-										<div class="col-md-9">
-											<label> @lang('trips.delivery_date_to_customer') </label>
-											<input type="text" name="delivery_date_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickadate" 	value="{{ old('delivery_date_to_customer') }}" >
-											@error('delivery_date_to_customer')
-											<label class="text-danger font-weight-bold " > {{ $message }} </label>
-											@enderror
-										</div>
-										<div class="col-md-3">
-											<label> @lang('trips.time') </label>
-											<input type="text" name="delivery_time_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickatime" 	value="{{ old('delivery_date_to_customer') }}" >
-											@error('delivery_date_to_customer')
-											<label class="text-danger font-weight-bold " > {{ $message }} </label>
-											@enderror
-										</div>
-									</div>
-								</div>
 								<div class="col-md-4">
 									<label> @lang('trips.payment_method') </label>
 									<select name="payment_method_id"  class="form-control payment_method_id" >
@@ -124,6 +81,43 @@ $lang = session()->get('locale');
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+
+								<div class="col-md-3">
+									<label> @lang('trips.receipt_date_from_market') </label>
+									<input type="text" name="receipt_date_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickadate1"
+									value="{{ old('receipt_date_from_market') }}">
+									@error('receipt_date_from_market')
+									<label class="text-danger font-weight-bold " > {{ $message }} </label>
+									@enderror
+								</div>
+								<div class="col-md-3">
+									<label> @lang('trips.time') </label>
+									<input type="text" name="receipt_time_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickatime1"
+									value="{{ old('receipt_date_from_market') }}">
+									@error('receipt_date_from_market')
+									<label class="text-danger font-weight-bold " > {{ $message }} </label>
+									@enderror
+								</div>
+
+								<div class="col-md-3">
+									<label> @lang('trips.delivery_date_to_customer') </label>
+									<input type="text" name="delivery_date_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickadate" 	value="{{ old('delivery_date_to_customer') }}" >
+									@error('delivery_date_to_customer')
+									<label class="text-danger font-weight-bold " > {{ $message }} </label>
+									@enderror
+								</div>
+								<div class="col-md-3">
+									<label> @lang('trips.time') </label>
+									<input type="text" name="delivery_time_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickatime" 	value="{{ old('delivery_date_to_customer') }}" >
+									@error('delivery_date_to_customer')
+									<label class="text-danger font-weight-bold " > {{ $message }} </label>
+									@enderror
+								</div>
+
 
 							</div>
 						</div>
@@ -208,9 +202,9 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/pickadate/picker.time.js') }}"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&callback=initMap&libraries=&v=weekly"
-	defer></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&callback=initMap&libraries=&v=weekly"
+defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 {{--
 <script type="text/javascript"
