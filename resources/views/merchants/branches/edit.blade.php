@@ -49,28 +49,22 @@ $lang = session()->get('locale');
 						<legend class="font-weight-bold"> <span class="text-primary"> @lang('branches.branch_data') </span> </legend>
 						<div class="form-group">
 							<div class="row">
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<label> @lang('branches.branch_name') </label>
 									<input type="text" name="branch_name" value="{{  $branch->name }}" class="form-control @error('branch_name') is-invalid @enderror " >
 									@error('branch_name')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<label> @lang('branches.phones') </label>
 									<input type="text" name="phones" value="{{  $branch->phones }}" class="form-control @error('phones') is-invalid @enderror " >
 									@error('phones')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
-								<div class="col-md-3">
-									<label> @lang('branches.address') </label>
-									<input type="text" name="address" value="{{  $branch->address }}" class="form-control @error('address') is-invalid @enderror " >
-									@error('address')
-									<label class="text-danger font-weight-bold " > {{ $message }} </label>
-									@enderror
-								</div>
-								<div class="col-md-3">
+
+								<div class="col-md-4">
 									<label> @lang('branches.governorate') </label>
 									<select name="governorate_id"  class="form-control select" required="required">
 

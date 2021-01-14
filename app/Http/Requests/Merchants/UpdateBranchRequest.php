@@ -25,7 +25,6 @@ class UpdateBranchRequest extends FormRequest {
 			'latitude'         => 'required',
 			'longitude'        => 'required',
 			'phones'           => 'nullable',
-			'address'          => 'required',
 			'governorate_id'   => 'required',
 			'city_id'          => 'required',
 			'street_name'      => 'nullable',

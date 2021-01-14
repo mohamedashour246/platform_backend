@@ -11,7 +11,6 @@ class Branch extends Model {
 	public function add($data) {
 		$this->name             = $data['branch_name'];
 		$this->phones           = $data['phones'];
-		$this->address          = $data['address'];
 		$this->governorate_id   = $data['governorate_id'];
 		$this->city_id          = $data['city_id'];
 		$this->latitude         = $data['latitude'];
@@ -32,7 +31,6 @@ class Branch extends Model {
 	public function edit($data) {
 		$this->name             = $data['branch_name'];
 		$this->phones           = $data['phones'];
-		$this->address          = $data['address'];
 		$this->governorate_id   = $data['governorate_id'];
 		$this->city_id          = $data['city_id'];
 		$this->latitude         = $data['latitude'];
