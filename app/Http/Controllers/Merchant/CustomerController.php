@@ -30,8 +30,8 @@ class CustomerController extends Controller {
 	public function create() {
 		$building_types = BuildingType::latest()->get();
 		$governorates   = Governorate::where('active', 1)->latest()->get();
-		$cities         = City::where('active', 1)->latest()->get();
-		return view('merchants.customers.create', compact('governorates', 'cities', 'building_types'));
+
+		return view('merchants.customers.create', compact('governorates', 'building_types'));
 	}
 
 	/**

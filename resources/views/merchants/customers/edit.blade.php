@@ -174,11 +174,9 @@ $lang = session()->get('locale');
 						</div>
 
 						<div class="form-group">
-							<input type="text" class="form-control" id="us3-address">
-							{{-- <div class="map-container locationpicker-default"></div> --}}
-							<div id="us3" class="map-container"></div>
-							<input type="hidden" name="latitude" value="{{ $customer->latitude }}"  id="us3-lat" >
-							<input type="hidden" name="longitude" value="{{ $customer->longitude }}" id="us3-lon" >
+							<div id="map" style="width: 100%; height: 400px;" ></div>
+							<input type="hidden" name="latitude" value="{{ $customer->latitude }}"  id="latitude" >
+							<input type="hidden" name="longitude" value="{{ $customer->longitude }}" id="longitude" >
 						</div>
 
 					</fieldset>
@@ -203,49 +201,165 @@ $lang = session()->get('locale');
 @section('scripts')
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places"></script>
 
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/widgets.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/typeahead_addresspicker.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/autocomplete_addresspicker.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/location.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/ui/prism.min.js') }}"></script>
+
 
 {{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_location.js') }}"></script> --}}
 
 <script>
 	$(function() {
 
-
-		$('#us3').locationpicker({
-			location: {latitude: {{ $customer->latitude }}, longitude: {{ $customer->longitude }}},
-			radius: 0,
-			scrollwheel: true,
+			map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 13,
+			center: { lat: {{ $customer->latitude }}, lng: {{ $customer->longitude }} },
+		});
+		marker = new google.maps.Marker({
+			map,
 			draggable: true,
-			// addressFormat : 'الكويت  محافظه الجهراء' ,
-			inputBinding: {
-				latitudeInput: $('#us3-lat'),
-				longitudeInput: $('#us3-lon'),
-				radiusInput: $('#us3-radius'),
-				locationNameInput: $('#us3-address')
-			},
-			geodecoder: new google.maps.Geocoder({
-				'address': "" + "محافظه الجهراء " + ", الكويت"
-			}) ,
-			enableAutocomplete: true,
-			enableReverseGeocode : true ,
-			onchanged: function(currentLocation, radius, isMarkerDropped) {
-				console.log(currentLocation);
-				$('input[name="latitude"]').val(currentLocation.latitude);
-				$('input[name="longitude"]').val(currentLocation.longitude);
-			}
+			animation: google.maps.Animation.DROP,
+			position: { lat: {{ $customer->latitude }}, lng: {{ $customer->longitude }} },
+		});
+
+		google.maps.event.addListener(marker, 'dragend', function (event) {
+			document.getElementById("latitude").value = this.getPosition().lat();
+			document.getElementById("longitude").value = this.getPosition().lng();
 		});
 
 
+		var geocoder;
+		var map;
+		var address = "";
+		var country = "الكويت";
+		var governorate = '';
+		var city = '';
+		var street_name = '';
+		var avenue_number = '';
+		var place_number = '';
+		var building_number = '';
 
+		function initialize(address , zome ) {
+			geocoder = new google.maps.Geocoder();
+			var latlng = new google.maps.LatLng(29.378586, 47.990341);
+			var myOptions = {
+				zoom: zome,
+				center: latlng,
+				mapTypeControl: true,
+				mapTypeControlOptions: {
+					style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+				},
+				navigationControl: true,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			map = new google.maps.Map(document.getElementById("map"), myOptions);
+			if (geocoder) {
+				geocoder.geocode({
+					'address': address
+				}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+							map.setCenter(results[0].geometry.location);
+
+							var infowindow = new google.maps.InfoWindow({
+								content: '<b>' + address + '</b>',
+								size: new google.maps.Size(150, 50)
+							});
+
+							var marker = new google.maps.Marker({
+								position: results[0].geometry.location,
+								map: map,
+								title: address ,
+								draggable: true,
+								animation: google.maps.Animation.DROP,
+
+							});
+							var lat = results[0].geometry.location.lat();
+							var lng = results[0].geometry.location.lng();
+							$('input[name="longitude"]').val(lng);
+							$('input[name="latitude"]').val(lat);
+							google.maps.event.addListener(marker, 'click', function() {
+								infowindow.open(map, marker);
+							});
+							google.maps.event.addListener(marker, 'dragend', function (event) {
+								document.getElementById("latitude").value = this.getPosition().lat();
+								document.getElementById("longitude").value = this.getPosition().lng();
+							});
+
+						} else {
+							alert("No results found");
+						}
+					} else {
+						alert("Geocode was not successful for the following reason: " + status);
+					}
+				});
+			}
+		}
+		// initialize( country , 11);
 		$('.select').select2({
 			minimumResultsForSearch: Infinity
 		});
+
+
+		$('select[name="governorate"]').on('change',  function(event) {
+			event.preventDefault();
+			governorate_id = $(this).find('option:selected').val();
+			governorate = $(this).find('option:selected').text();
+			address = country + ' - ' + governorate ;
+			initialize(address , 15);
+
+			$.ajax({
+				url: '{{ url("/Merchant/get_governorate_cities") }}',
+				type: 'GET',
+				dataType: 'html',
+				data: {governorate:governorate_id},
+			})
+			.done(function(data) {
+				$('select.city').empty();
+				$('select.city').append(data);
+			});
+		});
+
+
+		$('select[name="city"]').on('change',  function(event) {
+			event.preventDefault();
+			city = $(this).find('option:selected').text();
+			address = country + ' - ' + governorate + ' - ' + city;
+			initialize(address , 16);
+		});
+
+
+
+
+		$('input[name="place_number"]').on('change',  function(event) {
+			event.preventDefault();
+			place_number = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number;
+			initialize(address , 17);
+		});
+
+
+		$('input[name="street_name"]').on('change',  function(event) {
+			event.preventDefault();
+			street_name = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name;
+			initialize(address , 18);
+		});
+
+
+
+		$('input[name="avenue_number"]').on('change',  function(event) {
+			event.preventDefault();
+			avenue_number = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number ;
+			initialize(address , 19);
+		});
+
+
+		$('input[name="building_number"]').on('change',  function(event) {
+			event.preventDefault();
+			building_number = $(this).val();
+			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number + ' - مبنى ' + building_number ;
+			initialize(address , 20);
+		});
+
 
 
 

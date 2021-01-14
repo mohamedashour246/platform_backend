@@ -174,9 +174,6 @@ $lang = session()->get('locale');
 
 
 						<div class="form-group">
-
-							{{-- <div class="map-container locationpicker-default"></div> --}}
-							{{-- <div id="us3" class="map-container"></div> --}}
 							<div id="map" style="width: 100%; height: 400px;" ></div>
 							<input type="hidden" name="latitude" value=""  id="latitude" >
 							<input type="hidden" name="longitude" value="" id="longitude" >
