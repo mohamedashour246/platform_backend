@@ -32,7 +32,8 @@ return [
 	'delete_customer'               => 'حذف العميل',
 	'customer_details'              => 'بيانات العميل ',
 	'show_all_customers'            => 'عرض كافه العملاء ',
-	'added_by'                      => 'تم الاضافه بواسطته'
+	'added_by'                      => 'تم الاضافه بواسطته',
+	'code'                          => 'كود العميل'
 
 ];
 

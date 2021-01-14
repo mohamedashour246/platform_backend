@@ -23,6 +23,7 @@ Route::group(['prefix' => 'Merchant', 'namespace' => 'Merchant', 'middleware' =>
 				Route::get('/', 'BoardController@index')->name('board');
 				Route::get('/ajax/search_customers', 'BoardController@search_customers');
 				Route::post('/admins/change_status', 'AdminController@change_status');
+				Route::get('/admins/{admin}/trips', 'AdminController@admin_trips')->name('trips');
 				Route::resource('/admins', 'AdminController');
 				Route::resource('/branches', 'BranchController');
 				Route::resource('/trips', 'TripController');

@@ -32,7 +32,8 @@ return [
 	'delete_customer'               => 'Delete Customer',
 	'show_all_customers'            => 'Show All Customers',
 	'customer_details'              => 'Customer Details',
-	'added_by'                      => 'Added By'
+	'added_by'                      => 'Added By',
+	'code'                          => 'Code',
 
 ];
 

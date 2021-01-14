@@ -79,6 +79,17 @@ $lang = session()->get('locale');
 						</tr>
 
 						<tr>
+							<th class="font-weight-bold text-dark">@lang('admins.trips_daily_count')</th>
+							<td class="text-left"> {{ $admin->trips()->whereDay('created_at'  , Carbon\Carbon::today() )->count() }} </td>
+						</tr>
+
+						<tr>
+							<th class="font-weight-bold text-dark">@lang('admins.all_trips_count')</th>
+							<td class="text-left"> {{ $admin->trips()->count() }} </td>
+						</tr>
+
+
+						<tr>
 							<th class="font-weight-bold text-dark"> @lang('admins.email') </th>
 							<td class="text-left">	{{ $admin->email }}	</td>
 						</tr>

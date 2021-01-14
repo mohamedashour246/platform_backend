@@ -48,6 +48,7 @@ $lang = session()->get('locale');
 						<tr>
 							<th>#</th>
 							<th> @lang('customers.customer_name') </th>
+							<th> @lang('customers.code') </th>
 							<th> @lang('customers.business_type') </th>
 							<th> @lang('customers.phone1') </th>
 							<th> @lang('customers.phone2') </th>
@@ -67,6 +68,7 @@ $lang = session()->get('locale');
 								</a>
 							</td>
 							<td  > <a href="{{ route('merchants.customers.show', ['customer' => $customer->id])}}"> {{ $customer->name }} </a> </td>
+							<td> {{ $customer->code }} </td>
 							<td >{{ $customer->business_type }}</td>
 							<td >{{ $customer->phone1 }}</td>
 							<td >{{ $customer->phone2 }}</td>

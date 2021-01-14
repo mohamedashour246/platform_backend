@@ -46,7 +46,12 @@ return [
 	'trips_count'             => 'trips count',
 	'bills_count'             => 'bills count',
 	'drivers_count'           => 'drivers count',
-	'status'                  => 'Status'
+	'status'                  => 'Status',
+	'trips_daily_count'       => 'Trips Daily Count',
+	'all_trips_count'         => 'All Trips Count',
+	'show_all_admin_trips'    => 'Show All Admin Trips',
+	'start_date'              => 'Start Date',
+	'end_date'                => 'End Date',
 
 ];
 

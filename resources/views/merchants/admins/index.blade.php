@@ -95,13 +95,21 @@ $lang = session()->get('locale');
 							<div class="float-left">
 								@lang('admins.settings') :
 
-								<a target="_blank" href="{{ route('merchants.admins.show'  , ['admin' => $admin->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
-									<i class="icon-eye2 text-primary-800"></i>
+								<a target="_blank" href="{{ route('merchants.admins.show'  , ['admin' => $admin->id ] ) }}"
+									class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+									<i class="icon-eye2 "></i>
 								</a>
-								<a target="_blank" href="{{ route('merchants.admins.edit' , ['admin' => $admin->id ] ) }}" class="btn btn-outline bg-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i>
+								<a target="_blank" href="{{ route('merchants.admins.edit' , ['admin' => $admin->id ] ) }}"
+									class="btn btn-outline bg-warning border-warning text-warning-800 btn-icon ml-2">
+									<i class="icon-pencil7 "></i>
 								</a>
-								<a href="" data-id="{{ $admin->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+								<a href="" data-id="{{ $admin->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash "></i>  </a>
+
+
+								<a target="_blank" href="{{ url('Merchant/admins/'.$admin->id.'/trips') }}"
+									class="btn btn-outline bg-info border-info text-info-800 btn-icon ml-2">
+									<i class="icon-car2 "></i>
+								</a>
 
 								<form name="deleteFormNumber{{ $admin->id }}" action="{{ route('merchants.admins.destroy' , ['admin' => $admin->id ]) }}" method="POST" >
 

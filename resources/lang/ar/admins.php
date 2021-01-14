@@ -49,6 +49,11 @@ return [
 	'drivers_count'           => ' عدد السائقين',
 	'status'                  => 'الحاله',
 	'editing_success'         => ' تم التعديل بنجاح',
+	'trips_daily_count'       => 'عدد الرحلات ',
+	'all_trips_count'         => 'اجمالى الرحلات',
+	'show_all_admin_trips'    => 'عرض جميع رحلات المشرف',
+	'start_date'              => 'تاريخ البدايه',
+	'end_date'                => 'تاريخ النهايه',
 
 ];
 

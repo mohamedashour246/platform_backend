@@ -23,6 +23,7 @@ class CustomerAddress extends Model {
 	}
 	public function add($data, $market_id, $user_id, $user_type) {
 		$this->name             = $data['name'];
+		$this->code             = 'Cu'.time().mt_rand(0, 20);
 		$this->phone1           = $data['phone1'];
 		$this->phone2           = $data['phone2'];
 		$this->governorate_id   = $data['governorate'];

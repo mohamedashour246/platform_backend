@@ -9,6 +9,7 @@ use App\Models\AdminType;
 use App\Models\Merchant;
 use App\Models\MerchantPermission;
 use App\Models\PermissionGroup;
+use App\Models\Trip;
 
 use Auth;
 use Illuminate\Http\Request;
@@ -150,5 +151,12 @@ class AdminController extends Controller {
 			$admin->save();
 
 		}
+	}
+
+	public function admin_trips(Merchant $admin) {
+
+		$trips = Trip::where('admin_id', $admin->id)->latest()->get();
+
+		return view('merchants.admins.admin_trips', compact('trips'));
 	}
 }
