@@ -105,6 +105,10 @@ $lang = session()->get('locale');
 							<td class="text-left"> {{ $trip->created_at->toFormattedDateString() }} - {{ $trip->created_at->diffForHumans() }} </td>
 						</tr>
 						<tr>
+							<td class="font-weight-bold text-dark"> @lang('trips.added_by') </td>
+							<td class="text-left"> {{ optional($trip->user)->name }} </td>
+						</tr>
+						<tr>
 							<td class="font-weight-semibold">  @lang('trips.image') </td>
 							<td class="text-right text-muted">
 								<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('trips/'.$trip->image) }}" alt="">
@@ -189,8 +193,8 @@ $lang = session()->get('locale');
 						</tr>
 
 						<tr>
-							<th class="font-weight-bold text-dark"> @lang('trips.customer_address_on_map') </th>
-							<td><div class="map-container locationpicker-default"></div></td>
+
+							<td colspan="5" ><div class="map-container locationpicker-default"></div></td>
 						</tr>
 
 

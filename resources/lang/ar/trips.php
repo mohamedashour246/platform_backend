@@ -68,6 +68,8 @@ return [
 	'sender'                    => 'المرسل',
 	'receiver'                  => 'المستقبل',
 	'payment_status'            => 'حاله الدفع',
+	'created_at'                => 'تاريخ الاضافه',
+	'added_by'                  => 'تم الاضافه بواسطته'
 
 ];
 

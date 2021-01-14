@@ -68,6 +68,8 @@ return [
 	'sender'                    => 'sender',
 	'receiver'                  => 'receiver',
 	'payment_status'            => 'Payment Status',
+	'created_at'                => 'Created At',
+	'added_by'                  => 'Added By'
 
 ];
 
