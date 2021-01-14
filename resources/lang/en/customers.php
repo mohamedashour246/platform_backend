@@ -30,7 +30,9 @@ return [
 	'address'                       => 'Address',
 	'search'                        => 'Search',
 	'delete_customer'               => 'Delete Customer',
-	'show_all_customers'            => 'Show All Customers'
+	'show_all_customers'            => 'Show All Customers',
+	'customer_details'              => 'Customer Details',
+	'added_by'                      => 'Added By'
 
 ];
 

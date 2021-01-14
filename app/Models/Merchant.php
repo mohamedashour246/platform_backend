@@ -30,6 +30,10 @@ class Merchant extends Authenticatable {
 		return $this->save();
 	}
 
+	public function trips() {
+		return $this->hasMany(Trip::class , 'admin_id');
+	}
+
 	public function isActive() {
 		return $this->active == 1?true:false;
 	}

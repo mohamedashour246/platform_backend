@@ -30,8 +30,9 @@ return [
 	'address'                       => 'العنوان',
 	'search'                        => 'بحث',
 	'delete_customer'               => 'حذف العميل',
-	''                              => '',
-	'show_all_customers'            => 'عرض كافه العملاء '
+	'customer_details'              => 'بيانات العميل ',
+	'show_all_customers'            => 'عرض كافه العملاء ',
+	'added_by'                      => 'تم الاضافه بواسطته'
 
 ];
 

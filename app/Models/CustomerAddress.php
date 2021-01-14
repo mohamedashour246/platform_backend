@@ -14,6 +14,10 @@ class CustomerAddress extends Model {
 		return $this->belongsTo(City::class , 'city_id');
 	}
 
+	public function user() {
+		return $this->belongsTo(Merchant::class , 'user_id');
+	}
+
 	public function building_type() {
 		return $this->belongsTo(BuildingType::class );
 	}

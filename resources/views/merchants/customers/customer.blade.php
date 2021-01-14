@@ -73,12 +73,16 @@ $lang = session()->get('locale');
 							<td class="text-left"> {{ $customer->name }} </td>
 						</tr>
 						<tr>
-							<th class="font-weight-bold text-dark"> @lang('customers.phones') </th>
-							<td class="text-left">	{{ $customer->phones }}	</td>
+							<th class="font-weight-bold text-dark"> @lang('customers.business_type') </th>
+							<td class="text-left">	{{ $customer->business_type }}	</td>
 						</tr>
 						<tr>
-							<th class="font-weight-bold text-dark"> @lang('customers.address') </th>
-							<td class="text-left">	{{ $customer->address }}	</td>
+							<th class="font-weight-bold text-dark"> @lang('customers.phone1') </th>
+							<td class="text-left">	{{ $customer->phone1 }}	</td>
+						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.phone2') </th>
+							<td class="text-left">	{{ $customer->phone2 }}	</td>
 						</tr>
 						<tr>
 							<th class="font-weight-bold text-dark"> @lang('customers.governorate') </th>
@@ -88,14 +92,56 @@ $lang = session()->get('locale');
 							<th class="font-weight-bold text-dark"> @lang('customers.city') </th>
 							<td class="text-left">	{{ optional($customer->city)['name_'.$lang] }}	</td>
 						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.place_number') </th>
+							<td class="text-left">	{{ $customer->place_number }}	</td>
+						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.street_name') </th>
+							<td class="text-left">	{{ $customer->street_name }}	</td>
+						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.avenue_number') </th>
+							<td class="text-left">	{{ $customer->avenue_number }}	</td>
+						</tr>
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.building_number') </th>
+							<td class="text-left">	{{ $customer->building_number }}	</td>
+						</tr>
+
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.building_number') </th>
+							<td class="text-left">	{{ $customer->building_number }}	</td>
+						</tr>
+
+
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.floor_number') </th>
+							<td class="text-left">	{{ $customer->floor_number }}	</td>
+						</tr>
+
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.apratment_number') </th>
+							<td class="text-left">	{{ $customer->apratment_number }}	</td>
+						</tr>
+
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.building_type') </th>
+							<td class="text-left">	{{ optional($customer->building_type)['name_'.$lang] }}	</td>
+						</tr>
+
+						<tr>
+							<th class="font-weight-bold text-dark"> @lang('customers.added_by') </th>
+							<td class="text-left">	{{ optional($customer->user)->name }}	</td>
+						</tr>
 
 						<tr>
 							<td class="font-weight-bold text-dark"> @lang('customers.created_at') </td>
 							<td class="text-left"> {{ $customer->created_at->toFormattedDateString() }} - {{ $customer->created_at->diffForHumans() }} </td>
 						</tr>
 						<tr>
-							<td class="font-weight-bold text-dark"> @lang('customers.location_on_map') </td>
-							<td>
+
+							<td colspan="5">
 								<div class="map-container locationpicker-default"></div>
 							</td>
 						</tr>

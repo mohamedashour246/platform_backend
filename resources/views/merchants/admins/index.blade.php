@@ -54,8 +54,6 @@ $lang = session()->get('locale');
 							<th> @lang('admins.status') </th>
 							<th> @lang('admins.governorate') </th>
 							<th> @lang('admins.trips_count') </th>
-							<th> @lang('admins.bills_count') </th>
-							<th> @lang('admins.drivers_count') </th>
 							<th> @lang('admins.created_at') </th>
 						</tr>
 					</thead>
@@ -84,9 +82,8 @@ $lang = session()->get('locale');
 							</div>
 						</td>
 						<td> {{ optional($admin->governorate)['name_'.$lang] }} </td>
-						<td> 0 </td>
-						<td> 0 </td>
-						<td> 0 </td>
+
+						<td> {{ $admin->trips()->whereDay('created_at'  , Carbon\Carbon::today() )->count() }} </td>
 						<td>{{ $admin->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $admin->created_at->diffForHumans() }} </span> </td>
 
 					</tr>
