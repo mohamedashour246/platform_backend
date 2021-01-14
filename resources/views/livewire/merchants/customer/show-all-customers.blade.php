@@ -72,7 +72,7 @@ $lang = session()->get('locale');
 							<td >{{ $customer->phone2 }}</td>
 							<td >
 								@lang('customers.governorate') {{ optional($customer->governorate)['name_'.$lang] }}
-								@lang('customers.city') {{ optional($customer->governorate)['name_'.$lang] }}
+								@lang('customers.city') {{ optional($city->governorate)['name_'.$lang] }}
 								@lang('customers.place_number') {{ $customer->place_number }}
 								@lang('customers.street_name') {{ $customer->street_name }}
 								@lang('customers.avenue_number') {{$customer->avenue_number }}

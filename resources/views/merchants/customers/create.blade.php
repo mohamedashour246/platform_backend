@@ -172,13 +172,14 @@ $lang = session()->get('locale');
 							</div>
 						</div>
 
+
 						<div class="form-group">
-							<input type="text" class="form-control" id="us3-address">
+
 							{{-- <div class="map-container locationpicker-default"></div> --}}
 							{{-- <div id="us3" class="map-container"></div> --}}
 							<div id="map" style="width: 100%; height: 400px;" ></div>
-							<input type="hidden" name="latitude" value=""  id="us3-lat" >
-							<input type="hidden" name="longitude" value="" id="us3-lon" >
+							<input type="hidden" name="latitude" value=""  id="latitude" >
+							<input type="hidden" name="longitude" value="" id="longitude" >
 						</div>
 
 					</fieldset>
@@ -204,12 +205,12 @@ $lang = session()->get('locale');
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places"></script>
 
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/widgets.min.js') }}"></script>
+{{-- <script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/widgets.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/typeahead_addresspicker.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/autocomplete_addresspicker.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/location.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/ui/prism.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/ui/prism.min.js') }}"></script> --}}
 
 {{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_location.js') }}"></script> --}}
 
@@ -269,9 +270,16 @@ $lang = session()->get('locale');
 								animation: google.maps.Animation.DROP,
 
 							});
-
+							var lat = results[0].geometry.location.lat();
+							var lng = results[0].geometry.location.lng();
+							$('input[name="longitude"]').val(lng);
+							$('input[name="latitude"]').val(lat);
 							google.maps.event.addListener(marker, 'click', function() {
 								infowindow.open(map, marker);
+							});
+							google.maps.event.addListener(marker, 'dragend', function (event) {
+								document.getElementById("latitude").value = this.getPosition().lat();
+								document.getElementById("longitude").value = this.getPosition().lng();
 							});
 
 						} else {
@@ -283,7 +291,7 @@ $lang = session()->get('locale');
 				});
 			}
 		}
-		initialize( country , 8);
+		initialize( country , 11);
 		$('.select').select2({
 			minimumResultsForSearch: Infinity
 		});
@@ -315,6 +323,8 @@ $lang = session()->get('locale');
 			address = country + ' - ' + governorate + ' - ' + city;
 			initialize(address , 16);
 		});
+
+
 
 
 		$('input[name="place_number"]').on('change',  function(event) {

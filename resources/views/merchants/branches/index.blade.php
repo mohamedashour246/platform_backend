@@ -46,9 +46,8 @@ $lang = session()->get('locale');
 						<th> @lang('branches.branch_name') </th>
 						<th> @lang('branches.phones') </th>
 						<th> @lang('branches.address') </th>
-						<th> @lang('branches.governorate') </th>
-						<th> @lang('branches.city') </th>
-						<th> @lang('branches.settings') </th>
+						<th> @lang('branches.added_by') </th>
+						<th> @lang('branches.created_at') </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,11 +64,23 @@ $lang = session()->get('locale');
 						</td>
 						<td  > <a href="{{ route('merchants.branches.show', ['branch' => $branch->id])}}"> {{ $branch->name }} </a> </td>
 						<td >{{ $branch->phones }}</td>
-						<td >{{ $branch->address }}</td>
-						<td >{{ optional($branch->governorate)['name_'.$lang] }}</td>
-						<td >{{ optional($branch->city)['name_'.$lang] }}</td>
-						<td>
-							<a target="_blank" href="{{ route('merchants.branches.show'  , ['branch' => $branch->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+						<td >
+							@lang('customers.governorate') {{ optional($branch->governorate)['name_'.$lang] }}
+								@lang('customers.city') {{ optional($branch->city)['name_'.$lang] }}
+								@lang('customers.place_number') {{ $branch->place_number }}
+								@lang('customers.street_name') {{ $branch->street_name }}
+								@lang('customers.avenue_number') {{$branch->avenue_number }}
+								@lang('customers.building_number') {{$branch->building_number }}
+								@lang('customers.building_type') {{ optional($branch->building_type)['name_'] }}
+						</td>
+						<td >{{ optional($branch->merchant)->name }}</td>
+						<td >{{ $branch->created_at->toFormattedDateString() }} - {{ $branch->created_at->diffForHumans() }} </td>
+
+					</tr>
+					<tr class="collapse " id="collapse-icon{{ $branch->id }}" >
+						<td colspan="100%" >
+							<div class="float-left">
+								<a target="_blank" href="{{ route('merchants.branches.show'  , ['branch' => $branch->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
 								<i class="icon-eye2 text-primary-800"></i>
 							</a>
 							<a target="_blank" href="{{ route('merchants.branches.edit' , ['branch' => $branch->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
@@ -82,76 +93,7 @@ $lang = session()->get('locale');
 								@method('DELETE')
 								@csrf
 							</form>
-						</td>
-					</tr>
-					<tr class="collapse " id="collapse-icon{{ $branch->id }}" >
-						<td colspan="100%" >
-							<ul class="media-list">
-								<li class="media">
-									<div class="mr-3">
-										<a href="#" class="btn bg-transparent border-primary text-primary rounded-round border-2 btn-icon">
-											<i class="icon-spinner11"></i>
-										</a>
-									</div>
-
-									<div class="media-body">
-										<a href="#">David Linner</a> requested refund for a double card charge
-										<div class="text-muted font-size-sm">12 minutes ago</div>
-									</div>
-								</li>
-
-								<li class="media">
-									<div class="mr-3">
-										<a href="#" class="btn bg-transparent border-danger text-danger rounded-round border-2 btn-icon">
-											<i class="icon-infinite"></i>
-										</a>
-									</div>
-
-									<div class="media-body">
-										User <a href="#">Christopher Wallace</a> is awaiting for staff reply
-										<div class="text-muted font-size-sm">16 minutes ago</div>
-									</div>
-								</li>
-
-								<li class="media">
-									<div class="mr-3">
-										<a href="#" class="btn bg-transparent border-slate text-slate rounded-round border-2 btn-icon">
-											<i class="icon-cash3"></i>
-										</a>
-									</div>
-
-									<div class="media-body">
-										All sellers have received monthly payouts
-										<div class="text-muted font-size-sm">4 hours ago</div>
-									</div>
-								</li>
-
-								<li class="media">
-									<div class="mr-3">
-										<a href="#" class="btn bg-transparent border-success text-success rounded-round border-2 btn-icon">
-											<i class="icon-checkmark3"></i>
-										</a>
-									</div>
-
-									<div class="media-body">
-										Ticket #43683 has been closed by <a href="#">Victoria Wilson</a>
-										<div class="text-muted font-size-sm">Apr 28, 21:39</div>
-									</div>
-								</li>
-
-								<li class="media">
-									<div class="mr-3">
-										<a href="#" class="btn bg-transparent border-indigo-400 text-indigo-400 rounded-round border-2 btn-icon">
-											<i class="icon-comment"></i>
-										</a>
-									</div>
-
-									<div class="media-body">
-										<a href="#">Beatrix Diaz</a> left a new feedback for Camo backpack
-										<div class="text-muted font-size-sm">Mar 30, 05:46</div>
-									</div>
-								</li>
-							</ul>
+							</div>
 						</td>
 					</tr>
 

@@ -8,6 +8,7 @@ use App\Http\Requests\Merchants\StoreBranchRequest;
 use App\Http\Requests\Merchants\UpdateBranchRequest;
 
 use App\Models\Branch;
+use App\Models\BuildingType;
 use App\Models\City;
 use App\Models\Governorate;
 use Session;
@@ -19,7 +20,7 @@ class BranchController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$branches = Branch::where('market_id', Session::get('market_id'))->latest()->get();
+		$branches = Branch::with(['merchant', 'building_type', 'city', 'governorate'])->where('market_id', Session::get('market_id'))->latest()->get();
 		return view('merchants.branches.index', compact('branches'));
 	}
 
@@ -29,9 +30,9 @@ class BranchController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		$governorates = Governorate::where('active', 1)->latest()->get();
-		$cities       = City::where('active', 1)->latest()->get();
-		return view('merchants.branches.create', compact('governorates', 'cities'));
+		$governorates   = Governorate::where('active', 1)->latest()->get();
+		$building_types = BuildingType::get();
+		return view('merchants.branches.create', compact('governorates', 'building_types'));
 	}
 
 	/**
@@ -57,7 +58,7 @@ class BranchController extends Controller {
 	 */
 	public function show(Branch $branch) {
 
-		$branch->load(['governorate', 'city']);
+		$branch->load(['governorate', 'city', 'merchant', 'building_type']);
 		return view('merchants.branches.branch', compact('branch'));
 	}
 
@@ -68,9 +69,10 @@ class BranchController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(Branch $branch) {
-		$governorates = Governorate::where('active', 1)->latest()->get();
-		$cities       = City::where('active', 1)->latest()->get();
-		return view('merchants.branches.edit', compact('branch', 'cities', 'governorates'));
+		$governorates   = Governorate::where('active', 1)->latest()->get();
+		$cities         = City::where('active', 1)->where('governorate_id', $branch->governorate_id)->latest()->get();
+		$building_types = BuildingType::get();
+		return view('merchants.branches.edit', compact('branch', 'cities', 'governorates', 'building_types'));
 	}
 
 	/**
@@ -81,6 +83,7 @@ class BranchController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(UpdateBranchRequest $request, Branch $branch) {
+		// dd($request->all());
 		if ($branch->edit($request->all())) {
 			return redirect(route('merchants.branches.index'))->with('success_msg', trans('branches.branche_edited'));
 		}

@@ -48,7 +48,7 @@ $lang = session()->get('locale');
 		</div>
 	</div>
 
- --}}
+	--}}
 
 
 	<div class="col-md-12">
@@ -65,44 +65,79 @@ $lang = session()->get('locale');
 				</div>
 			</div>
 
-			<div class="card-body">
-				<table class="table  table-xs border-top-0 my-2">
-					<tbody>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('branches.branch_name')</th>
-							<td class="text-left"> {{ $branch->name }} </td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('branches.phones') </th>
-							<td class="text-left">	{{ $branch->phones }}	</td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('branches.address') </th>
-							<td class="text-left">	{{ $branch->address }}	</td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('branches.governorate') </th>
-							<td class="text-left">	{{ optional($branch->governorate)['name_'.$lang] }}	</td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('branches.city') </th>
-							<td class="text-left">	{{ optional($branch->city)['name_'.$lang] }}	</td>
-						</tr>
 
+			<table class="table  table-xs border-top-0 my-2">
+				<tbody>
+					<tr>
+						<th class="font-weight-bold text-dark">@lang('branches.branch_name')</th>
+						<td class="text-left"> {{ $branch->name }} </td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('branches.phones') </th>
+						<td class="text-left">	{{ $branch->phones }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('branches.address') </th>
+						<td class="text-left">	{{ $branch->address }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('branches.governorate') </th>
+						<td class="text-left">	{{ optional($branch->governorate)['name_'.$lang] }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('branches.city') </th>
+						<td class="text-left">	{{ optional($branch->city)['name_'.$lang] }}	</td>
+					</tr>
 						<tr>
-							<td class="font-weight-bold text-dark"> @lang('branches.created_at') </td>
-							<td class="text-left"> {{ $branch->created_at->toFormattedDateString() }} - {{ $branch->created_at->diffForHumans() }} </td>
-						</tr>
-						<tr>
-							<td class="font-weight-bold text-dark"> @lang('branches.location_on_map') </td>
-							<td>
-								<div class="map-container locationpicker-default"></div>
-							</td>
-						</tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.place_number') </th>
+						<td class="text-left">	{{ $branch->place_number }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.street_name') </th>
+						<td class="text-left">	{{ $branch->street_name }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.avenue_number') </th>
+						<td class="text-left">	{{ $branch->avenue_number }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.building_number') </th>
+						<td class="text-left">	{{  $branch->building_number  }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.floor_number') </th>
+						<td class="text-left">	{{  $branch->floor_number  }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.apratment_number') </th>
+						<td class="text-left">	{{ $branch->apratment_number  }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.apratment_number') </th>
+						<td class="text-left">	{{ $branch->apratment_number  }}	</td>
+					</tr>
+					<tr>
+						<th class="font-weight-bold text-dark"> @lang('customers.building_type') </th>
+						<td class="text-left">	{{ optional($branch->building_type)['name_'.$lang]  }}	</td>
+					</tr>
+					<tr>
+						<td class="font-weight-bold text-dark"> @lang('customers.created_at') </td>
+						<td class="text-left"> {{ $branch->created_at->toFormattedDateString() }} - {{ $branch->created_at->diffForHumans() }} </td>
+					</tr>
+					<tr>
+						<td class="font-weight-bold text-dark"> @lang('branches.added_by') </td>
+						<td class="text-left"> {{  optional($branch->merchant)->name   }} </td>
+					</tr>
+					<tr>
 
-					</tbody>
-				</table>
-			</div>
+						<td colspan="5">
+							<div id="map" style="width: 100%; height: 400px;" ></div>
+						</td>
+
+					</tr>
+
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
@@ -118,26 +153,24 @@ $lang = session()->get('locale');
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places"></script>
 
 
-<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/typeahead_addresspicker.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/autocomplete_addresspicker.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/location.js') }}"></script>
-<script src="{{ asset('board_assets/global_assets/js/plugins/ui/prism.min.js') }}"></script>
-{{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_location.js') }}"></script> --}}
 
 <script>
 	$(function() {
 
 
-		$('.locationpicker-default').locationpicker({
-			radius: 150,
-			scrollwheel: false,
-			draggable: true,
-			zoom: 10 ,
-			location: {
-				latitude: {{ $branch->latitude }} ,
-				longitude: {{ $branch->longitude }}
-			}
+
+		map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 13,
+			center: { lat: {{ $branch->latitude }}, lng: {{ $branch->longitude }} },
 		});
+		marker = new google.maps.Marker({
+			map,
+			draggable: true,
+			animation: google.maps.Animation.DROP,
+			position: { lat: {{ $branch->latitude }}, lng: {{ $branch->longitude }} },
+		});
+
+
 	});
 </script>
 @endsection

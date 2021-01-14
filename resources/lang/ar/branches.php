@@ -26,7 +26,8 @@ return [
 	'deleted_success'     => 'تم حذف الفرع بنجاح',
 	'delete_error'        => 'خطا حاول مره اخرى',
 	'created_at'          => 'تاريخ الاضافه',
-	'branch_details'      => 'بيانات الفرع'
+	'branch_details'      => 'بيانات الفرع',
+	'added_by'            => 'تم الاضافه بواسطته',
 
 ];
 

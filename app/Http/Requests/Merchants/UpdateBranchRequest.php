@@ -21,13 +21,20 @@ class UpdateBranchRequest extends FormRequest {
 	 */
 	public function rules() {
 		return [
-			'branch_name'    => 'required',
-			'latitude'       => 'required',
-			'longitude'      => 'required',
-			'phones'         => 'nullable',
-			'address'        => 'required',
-			'governorate_id' => 'required',
-			'city_id'        => 'required',
+			'branch_name'      => 'required',
+			'latitude'         => 'required',
+			'longitude'        => 'required',
+			'phones'           => 'nullable',
+			'address'          => 'required',
+			'governorate_id'   => 'required',
+			'city_id'          => 'required',
+			'street_name'      => 'nullable',
+			'building_type'    => 'nullable',
+			'floor_number'     => 'nullable',
+			'apratment_number' => 'nullable',
+			'building_number'  => 'nullable',
+			'avenue_number'    => 'nullable',
+			'place_number'     => 'nullable'
 		];
 	}
 }

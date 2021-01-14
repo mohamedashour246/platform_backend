@@ -28,7 +28,8 @@ return [
 	'deleted_success'     => 'branche deleted successfully',
 	'delete_error'        => 'Error , Try Again',
 	'created_at'          => 'Created At',
-	'branch_details'      => 'Brach Details'
+	'branch_details'      => 'Brach Details',
+	'added_by'            => 'Added By',
 ];
 
 ?>
