@@ -12,7 +12,7 @@ class Markets extends Component
 	use WithPagination;
 
 	public $search;
-	public $paginate = 2;
+	public $paginate = 10;
 
 
     

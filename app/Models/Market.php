@@ -30,7 +30,7 @@ class Market extends Model
 
 	public function marketAdmin()
 	{
-		return $this->hasOne(Merchant::class , 'market_id' )->where('type'  , 'superadmin' );
+		return $this->hasOne(Merchant::class , 'market_id' )->where('type_id' , 1 );
 	}
 
 

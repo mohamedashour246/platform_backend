@@ -69,7 +69,11 @@ return [
 	'receiver'                  => 'المستقبل',
 	'payment_status'            => 'حاله الدفع',
 	'created_at'                => 'تاريخ الاضافه',
-	'added_by'                  => 'تم الاضافه بواسطته'
+	'added_by'                  => 'تم الاضافه بواسطته' , 
+		'payment_completed' => 'مكتمل' , 
+	'payment_completed' => 'غير مكتمل' , 
+	'driver_total_income' => 'ايراد السائق'
+
 
 ];
 

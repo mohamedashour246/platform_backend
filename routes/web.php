@@ -67,8 +67,13 @@ function () {
 		Route::get('get_row', 'MarketController@row');
 		Route::delete('ajax/delete_delivery_price', 'CityDeliveryPriceController@ajax_delete');
 		Route::delete('ajax/delete_admin_type', 'AdminTypeController@ajax_delete');
+		Route::get('/get_governorate_cities', 'AjaxController@get_governorate_cities');
+		Route::post('/save_customer'  , 'AjaxController@add_new_customar_via_ajax' );
+
 	});
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/Board/login', 'Board\Auth\LoginController@login_form')->name('Board.login_form');
 Route::post('/Board/login', 'Board\Auth\LoginController@login')->name('Board.login');
+
+

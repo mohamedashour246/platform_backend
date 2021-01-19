@@ -84,6 +84,8 @@ return [
 	'from_city' => 'From City'  ,
 	'to_city' => 'To City' , 
 	'contract_image' => 'contract image' , 
+	'market_owner' => 'Market Owner' , 
+	''
 
 
 ];

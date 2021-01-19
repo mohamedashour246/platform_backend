@@ -49,12 +49,12 @@
 	
 	<div class="col-md-12">
 		<div class="card" >
-			<div class="card-header bg-dark header-elements-inline">
+			<div class="card-header  header-elements-inline">
 				<h5 class="card-title"> <i class="icon-users4 mr-1"></i> @lang('markets.markets')</h5>
 				<div class="header-elements">
 					<div class="wmin-200">
 						<select class="form-control form-control-select2 select" wire:model="paginate" >
-							<option value="2">2 </option>
+							<option value="10">10 </option>
 							<option value="15">15 </option>
 							<option value="30">30</option>
 							<option value="50">50</option>
@@ -66,56 +66,75 @@
 				</div>
 			</div>
 
-			<div class="card-body">
-				<table class="table datatable-responsive  text-center   table-hover ">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th> @lang('markets.logo') </th>
-							<th> @lang('markets.market_name') </th>
-							<th> @lang('markets.address') </th>
-							<th> @lang('markets.phones') </th>
-							<th> @lang('markets.activation') </th>
-							<th> @lang('markets.settings') </th>
-						</tr>
-					</thead>
-					<tbody>
-						@php
-						$i =1 ;
-						@endphp
-						@foreach ($markets as $market)
-						<tr>
-							<td  >{{ $i++ }}</td>
-							<td > <img class="img-thumbnail" width="50" height="50" src="{{ Storage::disk('s3')->url('markets/'.$market->logo) }}" alt=""> </td>
-							<td> <a href="{{ route('markets.show'  , ['market' => $market->id] ) }}">  {{ $market->name }} </a> </td>
-							<td> {{ $market->address }} </td>
-							<td> {{ $market->phones }} </td>
-							<td>
-								@switch($market->active)
-								@case(1)
-								<span class="badge badge-primary"> @lang('markets.active') </span>
-								@break
-								@case(0)
-								<span class="badge badge-secondary"> @lang('markets.inactive') </span>
-								@break
-								@endswitch
-							</td>
-							<td>
-								<a target="_blank" href="{{ route('markets.show'  , ['market' => $market->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
-									<i class="icon-eye2 text-primary-800"></i>
-								</a>
-								<a target="_blank" href="{{ route('markets.edit' , ['market' => $market->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i>
-								</a>
-								<a href="" data-id="{{ $market->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
-							</td>
-						</tr>
+			<table class="table datatable-responsive table-bordered  text-center   table-hover ">
+				<thead>
+					<tr>
+						<th>
 
-						@endforeach
+						</th>
+						<th>#</th>
+						<th> @lang('markets.logo') </th>
+						<th> @lang('markets.market_name') </th>
+						<th> @lang('markets.market_owner') </th>
+						<th> @lang('markets.address') </th>
+						<th> @lang('markets.phones') </th>
+						<th> @lang('markets.activation') </th>
+		
+					</tr>
+				</thead>
+				<tbody>
+					@php
+					$i =1 ;
+					@endphp
+					@foreach ($markets as $market)
+					<tr>
+						<td>
+							<a href="#collapse-icon{{ $market->id }}" class="text-default" data-toggle="collapse">
+								<i class="icon-circle-down2"></i>
+							</a>
+						</td>
+						<td  >{{ $i++ }}</td>
+						<td > <img class="img-thumbnail" width="50" height="50" src="{{ Storage::disk('s3')->url('markets/'.$market->logo) }}" alt=""> </td>
+						<td> <a href="{{ route('markets.show'  , ['market' => $market->id] ) }}">  {{ $market->name }} </a> </td>
+						<td> {{ optional($market->marketAdmin)->name }} </td>
+						<td> {{ $market->address }} </td>
+						<td> {{ $market->phones }} </td>
+						<td>
+							@switch($market->active)
+							@case(1)
+							<span class="badge badge-primary"> @lang('markets.active') </span>
+							@break
+							@case(0)
+							<span class="badge badge-secondary"> @lang('markets.inactive') </span>
+							@break
+							@endswitch
+						</td>
 
-					</tbody>
-				</table>
-			</div>
+					</tr>
+
+
+					<tr class="collapse " id="collapse-icon{{ $market->id }}" >
+						<td colspan="100%" >
+
+
+							<div class="float-left">
+								@lang('admins.settings') :
+
+							<a target="_blank" href="{{ route('markets.show'  , ['market' => $market->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+								<i class="icon-eye2 text-primary-800"></i>
+							</a>
+							<a target="_blank" href="{{ route('markets.edit' , ['market' => $market->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+								<i class="icon-pencil7 text-warning-800"></i>
+							</a>
+							<a href="" data-id="{{ $market->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+							</div>
+						</td>
+					</tr>
+
+					@endforeach
+
+				</tbody>
+			</table>
 
 
 			<div class="card-footer bg-light ">

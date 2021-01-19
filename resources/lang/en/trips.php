@@ -69,7 +69,10 @@ return [
 	'receiver'                  => 'receiver',
 	'payment_status'            => 'Payment Status',
 	'created_at'                => 'Created At',
-	'added_by'                  => 'Added By'
+	'added_by'                  => 'Added By' , 
+	'payment_completed' => 'Payment Completed' , 
+	'payment_completed' => 'payment not Completed' , 
+	'driver_total_income' => 'Total income'
 
 ];
 

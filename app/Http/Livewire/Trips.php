@@ -12,31 +12,21 @@ class Trips extends Component
 {
 
 	use WithPagination;
-
-
 	public $search;
-	public $paginate = 2;
-
-
-
+	public $paginate = 10;
     public function updatedSearch()
     {
         $this->resetPage();
     }
-
-
     public function updatedPaginate()
     {
         $this->resetPage();
     }
 
-
-
     protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
 
     public function handleItemDeletion($item_id)
     {
-        // Trip::where('id' , $item_id )->delete();
         $this->emit('itemDeleted' , $item_id);
         $this->resetPage();
     }

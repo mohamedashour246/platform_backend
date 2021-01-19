@@ -78,6 +78,7 @@ return [
 	'from_city' => 'من مدينه'  ,
 	'to_city' => 'الى ميدنه' , 
 	'contract_image' => 'صوره العقد' , 
+	'market_owner' => 'صاحب المتجر' , 
 ];
 
 ?>
