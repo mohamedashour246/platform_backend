@@ -45,6 +45,8 @@ return [
 	'delivery_prices_add_successfully' => 'تم إضافه اسعار التوصيل الى المحافظات الاخر بنجاح' , 
 	'from_governorate' => 'من محافظه'  , 
 	'to_governorate' => 'الى محافظه'  , 
+	'cities_count' => 'عدد المدن'
+
 
 
 

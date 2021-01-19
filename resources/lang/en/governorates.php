@@ -46,6 +46,7 @@ return [
 	'delivery_prices_add_successfully' => 'delivery prices to other governorates added successfully' , 
 	'from_governorate' => 'From Governorate'  , 
 	'to_governorate' => 'To governorate'  , 
+	'cities_count' => 'cities Count'
 
 	
 ];

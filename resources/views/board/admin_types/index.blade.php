@@ -48,12 +48,12 @@ $lang = session()->get('locale');
 			<table class="table  table-xs table-bordered">
 				<thead class="bg-dark">
 					<tr>
+						<th></th>
 						<th> # </th>
 						<th> @lang('admin_types.name_en') </th>
 						<th> @lang('admin_types.name_ar') </th>
 						<th> @lang('admin_types.added_by') </th>
 						<th> @lang('admin_types.created_at') </th>
-						<th> @lang('admin_types.settings') </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,21 +62,39 @@ $lang = session()->get('locale');
 					@endphp
 					@foreach ($types as $type)
 					<tr>
+						<td>
+							<a href="#collapse-icon{{ $type->id }}" class="text-default" data-toggle="collapse">
+								<i class="icon-circle-down2"></i>
+							</a>
+						</td>
 						<td> {{ $i++ }} </td>
 						<td>  {{ $type->name_ar }} </td>
 						<td> {{ $type->name_en }} </td>
 						<td> {{ optional($type->admin)->name }} </td>
 						<td> <span data-popup="tooltip" title="{{ $type->created_at->diffForHumans() }}" >  {{ $type->created_at->toFormattedDateString() }} </span> </td>
-						<td> 
-							<a target="_blank" href="{{ route('admin_types.edit' , ['admin_type' => $type->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-								<i class="icon-pencil7 text-warning-800"></i>
-							</a>
 
-							@if ($type->deletable)
-							<a href="" data-id="{{ $type->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
-							@endif
+					</tr>
+
+
+
+					<tr class="collapse " id="collapse-icon{{ $type->id }}" >
+						<td colspan="100%" >
+
+							<div class="float-left">
+								@lang('admin_types.settings') :
+								<a target="_blank" href="{{ route('admin_types.edit' , ['admin_type' => $type->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+									<i class="icon-pencil7 text-warning-800"></i>
+								</a>
+								@if ($type->deletable)
+								<a href="" data-id="{{ $type->id }}" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+							</div>
 						</td>
 					</tr>
+
+
+
+
+					@endif
 					@endforeach
 				</tbody>
 			</table>

@@ -63,7 +63,8 @@ $lang = session()->get('locale');
 						@endphp
 						@foreach ($admins as $admin)
 						<tr>
-							<td> <a href="#collapse-icon{{ $admin->id }}" class="text-default" data-toggle="collapse">
+							<td>
+							 <a href="#collapse-icon{{ $admin->id }}" class="text-default" data-toggle="collapse">
 								<i class="icon-circle-down2"></i>
 							</a>
 						</td>

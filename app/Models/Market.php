@@ -9,6 +9,11 @@ class Market extends Model
     
 
 
+    protected $dates = [
+        'expiration_date'
+    ];
+
+
 
 	public function admin()
 	{

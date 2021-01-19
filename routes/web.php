@@ -24,6 +24,8 @@ function () {
 		Route::get('/password', 'ProfileController@edit_password')->name('profile.password.edit');
 		Route::patch('/password', 'ProfileController@change_password')->name('profile.password.change');
 		Route::resource('/admins', 'AdminController');
+		Route::post('/admins/change_status', 'AdminController@change_status');
+		Route::post('/drivers/change_status', 'DriverController@change_status');
 		Route::get('/drivers/reports', 'DriverController@reports')->name('drivers.reports');
 		Route::resource('/drivers', 'DriverController');
 		Route::resource('/markets', 'MarketController');

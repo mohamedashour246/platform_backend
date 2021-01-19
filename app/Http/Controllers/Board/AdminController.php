@@ -19,9 +19,11 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('board.admins.index');
+        
+        $admins = Admin::withCount('dailyTrips')->latest()->get();
+        return view('board.admins.index' , compact('admins'));
     }
 
     /**
@@ -149,5 +151,17 @@ class AdminController extends Controller
     {
         if($admin->remove())
             return redirect(route('admins.index'))->with('success_msg' , trans('admins.deleted_success') );
+    }
+
+
+    public function change_status(Request $request)
+    {
+        $admin = Admin::find($request->admin_id);
+
+        if ($admin) {
+            $admin->active = $request->status;
+            $admin->save();
+        }
+
     }
 }

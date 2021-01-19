@@ -55,6 +55,19 @@ class Admin extends Authenticatable
     }
 
 
+    public function trips()
+    {
+        return $this->hasMany(Trip::class );
+    }
+
+
+
+    public function dailyTrips()
+    {
+        return $this->hasMany(Trip::class)->whereDate('created_at'  , today() );
+    }
+
+
     public function add($data)
     {
         $this->email = $data['email'];

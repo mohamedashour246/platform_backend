@@ -134,6 +134,19 @@ class DriverController extends Controller
 
 
 
+    public function change_status(Request $request)
+    {
+       
+       $driver = Driver::find($request->driver_id);
+
+       if ($driver) {
+           $driver->available = $request->status;
+           dd($driver->save());
+       }
+    }
+
+
+
 
     public function reports(Request $request)
     {

@@ -57,6 +57,8 @@ return [
 	'date_from'               => 'Date From ',
 	'date_to'                 => 'Date To ',
 	'payment_method'          => 'Payment Method',
+	'trips_count' => 'trips count' , 
+	'bills_count' => 'bills count'
 
 ];
 

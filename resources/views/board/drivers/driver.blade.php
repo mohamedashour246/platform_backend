@@ -45,6 +45,105 @@ $lang = session()->get('locale');
 
 
 
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-sm-6 col-xl-2">
+				<div class="card card-body">
+					<div class="media">
+						<div class="media-body">
+							<h3 class="font-weight-semibold mb-0">0</h3>
+							<span class="text-uppercase font-size-sm text-blue-600"> الرحلات الكاش </span>
+						</div>
+
+						<div class="ml-3 align-self-center">
+							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-6 col-xl-2">
+				<div class="card card-body">
+					<div class="media">
+						<div class="media-body">
+							<h3 class="font-weight-semibold mb-0">0</h3>
+							<span class="text-uppercase font-size-sm text-blue-600">  الرحلات الكى نت </span>
+						</div>
+
+						<div class="ml-3 align-self-center">
+							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-sm-6 col-xl-2">
+				<div class="card card-body">
+					<div class="media">
+						<div class="media-body">
+							<h3 class="font-weight-semibold mb-0">0</h3>
+							<span class="text-uppercase font-size-sm text-blue-600"> سعر التوصيل</span>
+						</div>
+
+						<div class="ml-3 align-self-center">
+							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-6 col-xl-2">
+				<div class="card card-body">
+					<div class="media">
+						<div class="media-body">
+							<h3 class="font-weight-semibold mb-0">0</h3>
+							<span class="text-uppercase font-size-sm text-blue-600"> ايراد السائق</span>
+						</div>
+
+						<div class="ml-3 align-self-center">
+							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-6 col-xl-2">
+				<div class="card card-body">
+					<div class="media">
+						<div class="media-body">
+							<h3 class="font-weight-semibold mb-0">0</h3>
+							<span class="text-uppercase font-size-sm text-blue-600">  عدد الفواتير</span>
+						</div>
+
+						<div class="ml-3 align-self-center">
+							<i class="icon-credit-card2   icon-3x text-blue-400"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-sm-6 col-xl-2">
+				<div class="card card-body">
+					<div class="media">
+						<div class="media-body">
+							<h3 class="font-weight-semibold mb-0">0</h3>
+							<span class="text-uppercase font-size-sm text-blue-600"> عدد الرحلات </span>
+						</div>
+
+						<div class="ml-3 align-self-center">
+							<i class="icon-car  icon-3x text-blue-400"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
 
 	<div class="col-md-12">
 

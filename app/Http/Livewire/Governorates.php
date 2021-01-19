@@ -45,7 +45,9 @@ class Governorates extends Component
 
     public function render()
     {
-    	$governorates =  Governorate::latest()->where('name_ar', 'like', '%' . $this->search . '%')->orWhere('name_en', 'like', '%' . $this->search . '%')->simplePaginate($this->paginate);
+    	$governorates =  Governorate::withCount('cities')->latest()->where('name_ar', 'like', '%' . $this->search . '%')->orWhere('name_en', 'like', '%' . $this->search . '%')->simplePaginate($this->paginate);
+
+
         return view('livewire.governorates' , compact('governorates'));
     }
 }

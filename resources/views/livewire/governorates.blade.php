@@ -8,7 +8,7 @@
 			</div>
 			<div class="card-body">
 				<a  href="{{ route('governorates.create') }}" class="btn btn-primary float-right" >
-				 <i class="icon-plus3 "></i> @lang('governorates.add_new_governorate')  </a>
+					<i class="icon-plus3 "></i> @lang('governorates.add_new_governorate')  </a>
 				{{-- <button class="btn btn-dark float-right mr-2" data-toggle="collapse" data-target="#filters">
 					<i class="icon-filter3"></i> @lang('governorates.advanced_search')
 				</button> --}}
@@ -24,7 +24,7 @@
 	</div>
 	<div class="col-md-12">
 		<div class="card" >
-			<div class="card-header bg-dark header-elements-inline">
+			<div class="card-header header-elements-inline">
 				<h5 class="card-title"> <i class="icon-users4 mr-1"></i> @lang('governorates.governorates')</h5>
 				<div class="header-elements">
 					<div class="wmin-200">
@@ -41,77 +41,92 @@
 				</div>
 			</div>
 
-			<div class="card-body">
-				<table class="table datatable-responsive  text-center   table-hover ">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th> @lang('governorates.name_ar') </th>
-							<th> @lang('governorates.name_en') </th>
-							<th> @lang('governorates.added_by') </th>
-							<th> @lang('governorates.activation') </th>
-							<th> @lang('governorates.created_at') </th>
-							<th> @lang('governorates.settings') </th>
-						</tr>
-					</thead>
-					<tbody>
-						@php
-						$i =1 ;
-						@endphp
-						@foreach ($governorates as $governorate)
-						<tr>
-							<td  >{{ $i++ }}</td>
-							<td> {{ $governorate->name_ar }} </td>
-							<td> {{ $governorate->name_en }} </td>
+			<table class="table datatable-responsive  text-center  table-bordered  table-hover ">
+				<thead>
+					<tr>
+						<th> 
 
-							<td> <a target="_blank" href="{{ route('admins.show'  , ['admin' => $governorate->admin_id] ) }}"> {{ optional($governorate->admin)->username }} </a> </td>
-							<td>
-								@switch($governorate->active)
-								@case(1)
-								<span class="badge badge-primary"> @lang('governorates.active') </span>
-								@break
-								@case(0)
-								<span class="badge badge-secondary"> @lang('governorates.inactive') </span>
-								@break
-								@endswitch
-							</td>
-							<td>{{ $governorate->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $governorate->created_at->diffForHumans() }} </span> </td>
-							<td>
+						</th>
+						<th>#</th>
+						<th> @lang('governorates.name_ar') </th>
+						<th> @lang('governorates.name_en') </th>
+						<th> @lang('governorates.added_by') </th>
+						<th> @lang('governorates.activation') </th>
+						<th> @lang('governorates.created_at') </th>
+						<th> @lang('governorates.cities_count') </th>
+					</tr>
+				</thead>
+				<tbody>
+					@php
+					$i =1 ;
+					@endphp
+					@foreach ($governorates as $governorate)
+					<tr>
+						<td>
+							<a href="#collapse-icon{{ $governorate->id }}" class="text-default" data-toggle="collapse">
+								<i class="icon-circle-down2"></i>
+							</a>
+						</td>
+						<td  >{{ $i++ }}</td>
+						<td> {{ $governorate->name_ar }} </td>
+						<td> {{ $governorate->name_en }} </td>
+
+						<td> <a target="_blank" href="{{ route('admins.show'  , ['admin' => $governorate->admin_id] ) }}"> {{ optional($governorate->admin)->username }} </a> </td>
+						<td>
+							@switch($governorate->active)
+							@case(1)
+							<span class="badge badge-primary"> @lang('governorates.active') </span>
+							@break
+							@case(0)
+							<span class="badge badge-secondary"> @lang('governorates.inactive') </span>
+							@break
+							@endswitch
+						</td>
+						<td>
+							{{ $governorate->created_at->toFormattedDateString() }} - <span class="text-muted"> {{ $governorate->created_at->diffForHumans() }} </span>
+						</td>
+						<td> {{ $governorate->cities_count }} </td>
+					</tr>
+					<tr  class="collapse " id="collapse-icon{{ $governorate->id }}" >
+
+						<td colspan="100%">
+							<div class="float-left">
 								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.governorate_details')" href="{{ route('governorates.show',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
-									<i class="icon-eye2 text-primary-800"></i>
-								</a>
-								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.delivery_prices')" href="{{ route('governorates.delivery_prices.index',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-info text-info-800 btn-icon ml-2">
-									<i class="icon-cash3 text-info-800"></i>
-								</a>
-								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.add_delivery_prices_to_governorate')" href="{{ route('governorates.delivery_prices.create',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon ml-2">
-									<i class="icon-plus3 text-primary-800"></i>
-								</a>
-								<a target="_blank"  data-popup="tooltip" title="@lang('governorates.edit')" href="{{ route('governorates.edit' , ['governorate' => $governorate->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i>
-								</a>
+							<i class="icon-eye2 text-primary-800"></i>
+						</a>
+						<a target="_blank"  data-popup="tooltip" title="@lang('governorates.delivery_prices')" href="{{ route('governorates.delivery_prices.index',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-info text-info-800 btn-icon ml-2">
+							<i class="icon-cash3 text-info-800"></i>
+						</a>
+						<a target="_blank"  data-popup="tooltip" title="@lang('governorates.add_delivery_prices_to_governorate')" href="{{ route('governorates.delivery_prices.create',['governorate' => $governorate->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon ml-2">
+							<i class="icon-plus3 text-primary-800"></i>
+						</a>
+						<a target="_blank"  data-popup="tooltip" title="@lang('governorates.edit')" href="{{ route('governorates.edit' , ['governorate' => $governorate->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+							<i class="icon-pencil7 text-warning-800"></i>
+						</a>
 
-								<a href="" data-id="{{ $governorate->id }}"  data-popup="tooltip" title="@lang('governorates.delete_governorate')" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>								
-								</td>
-							</tr>
+						<a href="" data-id="{{ $governorate->id }}"  data-popup="tooltip" title="@lang('governorates.delete_governorate')" class=" delete_item btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>	
+							</div>
+						</td>
+						
+						
+					</tr>
 
-							@endforeach
+					@endforeach
 
-						</tbody>
-					</table>
-				</div>
+				</tbody>
+			</table>
 
-
-				<div class="card-footer bg-light ">
-					<div class="float-right" >
-						{{ $governorates->links() }}
-					</div>				
-				</div>
+			<div class="card-footer bg-light ">
+				<div class="float-right" >
+					{{ $governorates->links() }}
+				</div>				
 			</div>
-
-
-
 		</div>
-	</div>	
+
+
+
+	</div>
+</div>	
 
 
 
