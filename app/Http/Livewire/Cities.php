@@ -11,7 +11,7 @@ class Cities extends Component
 
 
     public $search;
-    public $paginate = 2;
+    public $paginate = 10;
     public $active;
 
     protected $paginationTheme = 'bootstrap';
@@ -41,7 +41,7 @@ class Cities extends Component
 
     public function render()
     {
-    	$cities =  City::with(['governorate'  , 'admin'])->latest()->where('name_ar', 'like', '%' . $this->search . '%')->orWhere('name_en', 'like', '%' . $this->search . '%')->simplePaginate($this->paginate);
+    	$cities =  City::with(['governorate'  , 'admin'])->withCount('addresses')->latest()->where('name_ar', 'like', '%' . $this->search . '%')->orWhere('name_en', 'like', '%' . $this->search . '%')->simplePaginate($this->paginate);
         return view('livewire.cities' , compact('cities'));
     }
 }

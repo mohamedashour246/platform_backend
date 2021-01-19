@@ -13,7 +13,7 @@ class Governorates extends Component
 
 
 	public $search;
-	public $paginate = 2;
+	public $paginate = 10;
 	public $active;
 
 	protected $paginationTheme = 'bootstrap';

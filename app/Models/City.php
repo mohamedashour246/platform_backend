@@ -45,6 +45,13 @@ class City extends Model
     }
 
 
+
+    public function addresses()
+    {
+        return $this->hasMany(CustomerAddress::class , 'city_id');
+    }
+
+
     public function isActive()
     {
     	return $this->active == 1 ? true : 0;

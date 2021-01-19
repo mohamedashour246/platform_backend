@@ -29,7 +29,7 @@
 				<div class="header-elements">
 					<div class="wmin-200">
 						<select class="form-control form-control-select2 select" wire:model="paginate" >
-							<option value="2">2 </option>
+							<option value="10"> 10 </option>
 							<option value="15">15 </option>
 							<option value="30">30</option>
 							<option value="50">50</option>
