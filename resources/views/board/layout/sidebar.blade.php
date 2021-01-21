@@ -62,6 +62,7 @@ $lang = session()->get('locale');
 				$city_delivery_prices = 'active';
 				break;
 				case 'bills':
+				case 'bill_types':
 				$bills = 'active';
 				break;
 				case null:
@@ -172,6 +173,8 @@ $lang = session()->get('locale');
 						<a href="#" class="nav-link {{ $bills }}"><i class="icon-newspaper "></i> <span>@lang('bills.bills')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('bills.index') }}" class="nav-link">  <i class="icon-newspaper  mr-1"></i> @lang('bills.show_all_bills') </a></li>
+							<li class="nav-item"><a href="{{ route('bill_types.create') }}" class="nav-link">  <i class="icon-plus3  mr-1"></i> @lang('bill_types.add_new_type') </a></li>
+							<li class="nav-item"><a href="{{ route('bill_types.index') }}" class="nav-link">  <i class="icon-newspaper  mr-1"></i> @lang('bill_types.show_all_bill_types') </a></li>
 							
 						</ul>
 					</li>
