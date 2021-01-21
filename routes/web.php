@@ -73,6 +73,7 @@ function () {
 
 		Route::get('/admins_notifications/create'   , 'AdminNotificationController@create' )->name('admins_notifications.create');
 		Route::post('/admins_notifications'   , 'AdminNotificationController@store' )->name('admins_notifications.store');
+		Route::get('/notifications'  , 'ProfileController@notifications');
 
 	});
 Auth::routes();

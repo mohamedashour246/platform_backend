@@ -9,6 +9,7 @@ use App\Http\Requests\ChangePasswordRequest;
 use Auth;
 use Image;
 use Hash;
+use App\Models\AdminNotification;
 class ProfileController extends Controller
 {
 
@@ -45,11 +46,11 @@ class ProfileController extends Controller
         $admin = Auth::guard('admin')->user();
 
         if ($request->hasFile('profile_picture')) {
-           $path =  $request->file('profile_picture')->store('admins' , 's3');
+            $path =  $request->file('profile_picture')->store('admins' , 's3');
 
-           $admin->image = basename($path);
+            $admin->image = basename($path);
         }
-        
+
         $admin->username = $request->username;
         $admin->email = $request->email;
         $admin->save();
@@ -65,6 +66,18 @@ class ProfileController extends Controller
     {
         $admin = Auth::guard('admin')->user();
         return view('board.password'  , compact('admin') );       
+    }
+
+
+
+
+
+    public function notifications()
+    {
+        AdminNotification::where('admin_id'  , Auth::guard('admin')->id() )->update(['seen' =>1]);
+        $admin = Auth::guard('admin')->user();
+        $notifications = AdminNotification::with('addedBy')->where('admin_id'  , Auth::guard('admin')->id() )->latest()->get();
+        return view('board.notifications'  , compact('notifications' , 'admin') );
     }
 
 
