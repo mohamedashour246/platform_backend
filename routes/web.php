@@ -68,6 +68,8 @@ function () {
 		Route::get('get_row', 'MarketController@row');
 		Route::delete('ajax/delete_delivery_price', 'CityDeliveryPriceController@ajax_delete');
 		Route::delete('ajax/delete_admin_type', 'AdminTypeController@ajax_delete');
+		Route::delete('ajax/delete_bill_type', 'BillTypeController@ajax_delete');
+
 		Route::get('/get_governorate_cities', 'AjaxController@get_governorate_cities');
 		Route::post('/save_customer'  , 'AjaxController@add_new_customar_via_ajax' );
 		Route::get('/admins_notifications/create'   , 'AdminNotificationController@create' )->name('admins_notifications.create');
@@ -77,6 +79,7 @@ function () {
 		Route::get('/notifications'  , 'ProfileController@notifications');
 		Route::get('/bills'  , 'BillController@index' )->name('bills.index');
 		Route::get('/bills/{bill}'  , 'BillController@show' )->name('bills.show');
+		Route::resource('/bill_types' , 'BillTypeController');
 
 	});
 Auth::routes();
