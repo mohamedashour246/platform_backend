@@ -24,6 +24,7 @@ function () {
 		Route::get('/password', 'ProfileController@edit_password')->name('profile.password.edit');
 		Route::patch('/password', 'ProfileController@change_password')->name('profile.password.change');
 		Route::resource('/admins', 'AdminController');
+		// Route::get('/')
 		Route::post('/admins/change_status', 'AdminController@change_status');
 		Route::post('/drivers/change_status', 'DriverController@change_status');
 		Route::get('/drivers/reports', 'DriverController@reports')->name('drivers.reports');
@@ -69,6 +70,9 @@ function () {
 		Route::delete('ajax/delete_admin_type', 'AdminTypeController@ajax_delete');
 		Route::get('/get_governorate_cities', 'AjaxController@get_governorate_cities');
 		Route::post('/save_customer'  , 'AjaxController@add_new_customar_via_ajax' );
+
+		Route::get('/admins_notifications/create'   , 'AdminNotificationController@create' )->name('admins_notifications.create');
+		Route::post('/admins_notifications'   , 'AdminNotificationController@store' )->name('admins_notifications.store');
 
 	});
 Auth::routes();

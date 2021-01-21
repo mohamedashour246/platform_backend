@@ -52,6 +52,16 @@ return [
 	'show_all_admin_trips'    => 'Show All Admin Trips',
 	'start_date'              => 'Start Date',
 	'end_date'                => 'End Date',
+	'title_en' => 'English Title'  , 
+	'title_ar' => 'arabic title' , 
+	'content_en' => 'English content' , 
+	'content_ar' => 'arabic content' , 
+	'admins' => 'Admins' , 
+	'admins_notifications' => 'Admins Notifications' , 
+	'send_new_notification' => 'Send New Notification' , 
+	'send' => 'Send' , 
+	'all' => 'All' , 
+	'notification_send_successfully' => 'notification send successfully'
 
 ];
 
