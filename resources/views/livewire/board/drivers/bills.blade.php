@@ -3,7 +3,7 @@ $lang = session()->get('locale');
 @endphp
 <div class="card ">
 	<div class="card-header bg-white header-elements-sm-inline">
-		<h6 class="card-title"> @lang('bills.bills') </h6>
+		<h6 class="card-title"> <span class="text-primary" >  عرض فواتير السائق : {{ $driver->name }}  </span> </h6>
 		<div class="header-elements col-3">
 			<div class="col-md-9">
 				<div class="form-group">

@@ -28,6 +28,8 @@ function () {
 		Route::post('/admins/change_status', 'AdminController@change_status');
 		Route::post('/drivers/change_status', 'DriverController@change_status');
 		Route::get('/drivers/reports', 'DriverController@reports')->name('drivers.reports');
+		Route::get('/drivers/{driver}/bills', 'DriverController@driver_bills')->name('drivers.bills');
+
 		Route::resource('/drivers', 'DriverController');
 		Route::resource('/markets', 'MarketController');
 		Route::resource('/branches', 'BranchController');

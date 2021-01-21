@@ -11,6 +11,7 @@ use App\Models\Driver;
 use App\Models\PaymentMethod;
 use App\Http\Resources\DriverResourceCollection;
 use App\Models\Trip;
+use App\Models\Bill;
 use App\Exports\TripsExport;
 use Excel;
 use PDF;
@@ -55,11 +56,16 @@ class DriverController extends Controller
             $path = $request->file('profile_picture')->store('drivers' , 's3' );
             $driver->setImage(basename($path));
         }
-
-
         return redirect(route('drivers.index'))->with('success_msg' , trans('drivers.added_success'));
+    }
 
 
+
+
+
+    public function driver_bills(Driver $driver)
+    {
+        return view('board.drivers.driver_bills' , compact('driver') );
     }
 
     /**
@@ -70,8 +76,10 @@ class DriverController extends Controller
      */
     public function show(Driver $driver)
     {
+        $total_trips_count = Trip::where('driver_id'  , $driver->id )->count();
+        $total_bills_count = Bill::where('driver_id'  , $driver->id )->count();
         $driver->load(['country' , 'admin']);
-        return view('board.drivers.driver' , compact('driver'));
+        return view('board.drivers.driver' , compact('driver' , 'total_bills_count' , 'total_trips_count'));
     }
 
     /**
