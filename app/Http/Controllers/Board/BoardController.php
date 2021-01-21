@@ -10,6 +10,7 @@ use App\Models\CustomerAddress;
 use App\Models\Driver;
 use App\Models\Governorate;
 use App\Models\Market;
+use App\Models\Bill;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -36,19 +37,13 @@ class BoardController extends Controller {
 		$call_center_count  = Admin::where('type_id', 4)->count();
         $trips_count = Trip::count();
         $days = 10;
-
         $today_total_trips_count = Trip::whereDate('delivery_date_to_customer' , '='  , today() )->count();
-        // $about_to_expire_markets = Market::whereRaw(' (DATEDIFF(expiration_date,?) <= ?) ')
-        //     ->setBindings([ today() , $days ])
-        //     ->pluck('id');
-
         $markets_about_to_expire = Market::whereBetween('expiration_date'  , [Carbon::today() , Carbon::today()->addDays(10) ])->get();
-
         $expired_markets_subscription = Market::whereDate('expiration_date'  , '<='  , today() )->get();
-
-        // dd($expired_markets_subscription);
-		// dd($customers_count);
-		return view('board.index', compact('customers_count', 'markets_count', 'governorates_count', 'cities_count', 'admins_count', 'drivers_count', 'accountants_count', 'call_center_count' , 'trips_count' , 'markets_about_to_expire' , 'expired_markets_subscription' , 'today_total_trips_count'));
+        $accepted_bills_count = Bill::whereMonth('created_at'  , '=' , date('m') )->where('status' ,1 )->count();
+        $waiting_bills_count = Bill::whereMonth('created_at'  , '=' , date('m') )->where('status' ,0 )->count();
+        $refused_bills_count = Bill::whereMonth('created_at'  , '=' , date('m') )->where('status' , 2)->count();
+		return view('board.index', compact('customers_count', 'markets_count', 'governorates_count', 'cities_count', 'admins_count', 'drivers_count', 'accountants_count', 'call_center_count' , 'trips_count' , 'markets_about_to_expire' , 'expired_markets_subscription' , 'today_total_trips_count' , 'accepted_bills_count'  , 'waiting_bills_count' , 'refused_bills_count' ));
 	}
 
 	/**
