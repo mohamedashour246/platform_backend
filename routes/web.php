@@ -73,6 +73,10 @@ function () {
 
 		Route::get('/admins_notifications/create'   , 'AdminNotificationController@create' )->name('admins_notifications.create');
 		Route::post('/admins_notifications'   , 'AdminNotificationController@store' )->name('admins_notifications.store');
+
+		Route::get('/markets_notifications/create'   , 'MerchantNotificationController@create' )->name('markets_notifications.create');
+		Route::post('/markets_notifications'   , 'MerchantNotificationController@store' )->name('markets_notifications.store');
+
 		Route::get('/notifications'  , 'ProfileController@notifications');
 
 	});

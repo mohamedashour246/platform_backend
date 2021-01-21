@@ -38,6 +38,7 @@ $lang = session()->get('locale');
 			switch ($segment) {
 				case 'admins':
 				case 'admin_types':
+				case 'admins_notifications':
 				$admins = 'active';
 				break;
 				case 'drivers':
@@ -51,6 +52,7 @@ $lang = session()->get('locale');
 				$cities = 'active';
 				break;
 				case 'markets':
+				case 'markets_notifications':
 				$markets = 'active';
 				break;
 				case 'trips':
@@ -113,6 +115,7 @@ $lang = session()->get('locale');
 						<ul class="nav nav-group-sub" data-submenu-title="">
 							<li class="nav-item"><a href="{{ route('admins.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('admins.show_all_admins') </a></li>
 							<li class="nav-item"><a href="{{ route('admins.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('admins.add_new_admin') </a></li>
+							<li class="nav-item"><a href="{{ route('admins_notifications.create') }}" class="nav-link"> <i class="icon-bell3 mr-1"></i> @lang('admins.send_new_notification') </a></li>
 							<li class="nav-item"><a href="{{ route('admin_types.index') }}" class="nav-link"> <i class="icon-grid5 mr-1"></i>  @lang('admin_types.admin_types') </a></li>
 						</ul>
 					</li>
@@ -151,6 +154,7 @@ $lang = session()->get('locale');
 						<a href="#" class="nav-link {{ $markets }}"><i class="icon-store"></i> <span>@lang('markets.markets')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('markets.index') }}" class="nav-link"> <i class="icon-store mr-1"></i> @lang('markets.show_all_markets') </a></li>
+							<li class="nav-item"><a href="{{ route('markets_notifications.create') }}" class="nav-link"> <i class="icon-bell3 mr-1"></i> @lang('markets.send_new_notification') </a></li>
 							<li class="nav-item"><a href="{{ route('markets.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('markets.add_new_market') </a></li>
 						</ul>
 					</li>
