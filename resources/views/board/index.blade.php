@@ -169,7 +169,7 @@
 			<div class="card-body">
 				<ul class="list-unstyled mb-0">
 					<li class="text-center font-size-xl">
-						<span class="badge bg-info-400 " style="font-size:40px;"> 0 </span>
+						<span class="badge bg-info-400 " style="font-size:40px;"> {{ $total_bills_count }} </span>
 					</li>
 					<li class="mb-3">
 						<div class="d-flex align-items-center mb-1">  مقبول  <span class="text-muted ml-auto">  {{ $accepted_bills_count }}  </span></div>

@@ -43,7 +43,8 @@ class BoardController extends Controller {
         $accepted_bills_count = Bill::whereMonth('created_at'  , '=' , date('m') )->where('status' ,1 )->count();
         $waiting_bills_count = Bill::whereMonth('created_at'  , '=' , date('m') )->where('status' ,0 )->count();
         $refused_bills_count = Bill::whereMonth('created_at'  , '=' , date('m') )->where('status' , 2)->count();
-		return view('board.index', compact('customers_count', 'markets_count', 'governorates_count', 'cities_count', 'admins_count', 'drivers_count', 'accountants_count', 'call_center_count' , 'trips_count' , 'markets_about_to_expire' , 'expired_markets_subscription' , 'today_total_trips_count' , 'accepted_bills_count'  , 'waiting_bills_count' , 'refused_bills_count' ));
+        $total_bills_count = Bill::whereMonth('created_at'  , '=' , date('m') )->count();
+		return view('board.index', compact('customers_count', 'markets_count', 'governorates_count', 'cities_count', 'admins_count', 'drivers_count', 'accountants_count', 'call_center_count' , 'trips_count' , 'markets_about_to_expire' , 'expired_markets_subscription' , 'today_total_trips_count' , 'accepted_bills_count'  , 'waiting_bills_count' , 'refused_bills_count' , 'total_bills_count' ));
 	}
 
 	/**
