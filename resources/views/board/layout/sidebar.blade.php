@@ -34,7 +34,7 @@ $lang = session()->get('locale');
 
 			@php
 			$segment = request()->segment(2);
-			$drivers = $admins = $board = $governorates = $cities = $markets = $trips = $city_delivery_prices =  '';
+			$drivers = $admins = $board = $governorates = $cities = $markets = $trips = $city_delivery_prices = $bills = '';
 			switch ($segment) {
 				case 'admins':
 				case 'admin_types':
@@ -60,6 +60,9 @@ $lang = session()->get('locale');
 				break;
 				case 'city_delivery_prices':
 				$city_delivery_prices = 'active';
+				break;
+				case 'bills':
+				$bills = 'active';
 				break;
 				case null:
 				$board = 'active';
@@ -163,6 +166,13 @@ $lang = session()->get('locale');
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('trips.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('trips.show_all_trips') </a></li>
 							<li class="nav-item"><a href="{{ route('trips.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('trips.add_new_trip') </a></li>
+						</ul>
+					</li>
+					<li class="nav-item nav-item-submenu {{ $bills == 'active' ? 'nav-item-open' : '' }}">
+						<a href="#" class="nav-link {{ $bills }}"><i class="icon-newspaper "></i> <span>@lang('bills.bills')</span></a>
+						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
+							<li class="nav-item"><a href="{{ route('bills.index') }}" class="nav-link">  <i class="icon-newspaper  mr-1"></i> @lang('bills.show_all_bills') </a></li>
+							
 						</ul>
 					</li>
 				</ul>

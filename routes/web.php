@@ -70,14 +70,13 @@ function () {
 		Route::delete('ajax/delete_admin_type', 'AdminTypeController@ajax_delete');
 		Route::get('/get_governorate_cities', 'AjaxController@get_governorate_cities');
 		Route::post('/save_customer'  , 'AjaxController@add_new_customar_via_ajax' );
-
 		Route::get('/admins_notifications/create'   , 'AdminNotificationController@create' )->name('admins_notifications.create');
 		Route::post('/admins_notifications'   , 'AdminNotificationController@store' )->name('admins_notifications.store');
-
 		Route::get('/markets_notifications/create'   , 'MerchantNotificationController@create' )->name('markets_notifications.create');
 		Route::post('/markets_notifications'   , 'MerchantNotificationController@store' )->name('markets_notifications.store');
-
 		Route::get('/notifications'  , 'ProfileController@notifications');
+		Route::get('/bills'  , 'BillController@index' )->name('bills.index');
+		Route::get('/bills/{bill}'  , 'BillController@show' )->name('bills.show');
 
 	});
 Auth::routes();
