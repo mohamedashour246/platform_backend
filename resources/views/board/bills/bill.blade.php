@@ -120,7 +120,12 @@ $lang = session()->get('locale');
 						<tr>
 							<td class="font-weight-semibold">  @lang('bills.bill_image') </td>
 							<td class="text-right text-muted">
-								<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('bills/'.$bill->image) }}" alt="">
+								{{-- <img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('bills/'.$bill->image) }}" alt=""> --}}
+
+								<a href="{{ Storage::disk('s3')->url('bills/'.$bill->image) }}" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('bills/'.$bill->image) }}" alt="">
+									</a>
+
 							</td>
 						</tr>
 					</tbody>
@@ -137,4 +142,6 @@ $lang = session()->get('locale');
 @section('styles')
 @endsection
 @section('scripts')
+<script src="{{ asset('board_assets/global_assets/js/plugins/media/fancybox.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/demo_pages/gallery.js') }}"></script>
 @endsection
