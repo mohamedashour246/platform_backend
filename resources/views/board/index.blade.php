@@ -169,24 +169,24 @@
 			<div class="card-body">
 				<ul class="list-unstyled mb-0">
 					<li class="text-center font-size-xl">
-						<span class="badge bg-info-400 " style="font-size:40px;"> 0 </span>
+						<span class="badge bg-info-400 " style="font-size:40px;"> {{ $total_bills_count }} </span>
 					</li>
 					<li class="mb-3">
-						<div class="d-flex align-items-center mb-1">  مقبول  <span class="text-muted ml-auto"> 0 </span></div>
+						<div class="d-flex align-items-center mb-1">  مقبول  <span class="text-muted ml-auto">  {{ $accepted_bills_count }}  </span></div>
 						<div class="progress" style="height: 0.375rem;">
 							<div class="progress-bar bg-success" style="width: 100%">
 							</div>
 						</div>
 					</li>
 					<li class="mb-3">
-						<div class="d-flex align-items-center mb-1">  مرفوض  <span class="text-muted ml-auto">0</span> </div>
+						<div class="d-flex align-items-center mb-1">  مرفوض  <span class="text-muted ml-auto">  {{ $refused_bills_count }} </span> </div>
 						<div class="progress" style="height: 0.375rem;">
 							<div class="progress-bar bg-danger" style="width: 100%">
 							</div>
 						</div>
 					</li>
 					<li class="mb-3">
-						<div class="d-flex align-items-center mb-1"> قيد التنفيذ   <span class="text-muted ml-auto">6</span> </div>
+						<div class="d-flex align-items-center mb-1"> قيد التنفيذ   <span class="text-muted ml-auto"> {{ $waiting_bills_count }} </span> </div>
 						<div class="progress" style="height: 0.375rem;">
 							<div class="progress-bar bg-warning" style="width: 100%">
 							</div>

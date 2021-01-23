@@ -85,7 +85,15 @@ return [
 	'to_city' => 'To City' , 
 	'contract_image' => 'contract image' , 
 	'market_owner' => 'Market Owner' , 
-	''
+	'title_ar' => 'arabic title' , 
+	'title_en' => 'english title' , 
+	'content_ar' => 'arabic content' , 
+	'content_en' => 'english content' , 
+	'send_new_notification' => 'send new notification' , 
+	'markets_notifications' => 'Markets Notifications' , 
+	'send' => 'Send' , 
+	'all' => 'All' , 
+	'notification_send_successfully' => 'notification sent successfully '
 
 
 ];

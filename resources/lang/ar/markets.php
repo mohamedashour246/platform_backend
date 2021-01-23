@@ -79,6 +79,17 @@ return [
 	'to_city' => 'الى ميدنه' , 
 	'contract_image' => 'صوره العقد' , 
 	'market_owner' => 'صاحب المتجر' , 
+	'title_ar' => 'العنوان بالعربيه' , 
+	'title_en' => 'العنوان بالانجليزيه' , 
+	'content_ar' => 'المحتوى بالاجليزيه' , 
+	'content_en' => 'المحتوى بالعربيه' , 
+	'send_new_notification' => 'ارسال اشعار جديد' , 
+	'markets_notifications' => 'اشعارات المتاجر' , 
+	'send' => 'ارسال' , 
+	'all' => 'الكل' , 
+	'notification_send_successfully' => 'تم ارسال الاشعار بنجاح'
+
+
 ];
 
 ?>

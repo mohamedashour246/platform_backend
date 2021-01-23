@@ -54,7 +54,9 @@ return [
 	'date_to' => 'تاريخ النهايه' , 
 	'payment_method' => 'طريق الدفع' ,
 	'trips_count' => 'عدد الحرلات' , 
-	'bills_count' => 'عدد الفواتير'
+	'bills_count' => 'عدد الفواتير' , 
+	'driver_trips' => 'رحلات السائق' , 
+	'driver_bills' => 'فواتير السائق' , 
 ];
 
 ?>

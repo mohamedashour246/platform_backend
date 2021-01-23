@@ -58,7 +58,9 @@ return [
 	'date_to'                 => 'Date To ',
 	'payment_method'          => 'Payment Method',
 	'trips_count' => 'trips count' , 
-	'bills_count' => 'bills count'
+	'bills_count' => 'bills count' , 
+	'driver_trips' => 'Driver Trips' , 
+	'driver_bills' => 'Driver Bills' , 
 
 ];
 

@@ -68,6 +68,15 @@ class Admin extends Authenticatable
     }
 
 
+
+
+    public function notifications()
+    {
+        return $this->hasMany(AdminNotification::class , 'admin_id');
+    }
+
+   
+
     public function add($data)
     {
         $this->email = $data['email'];

@@ -54,6 +54,15 @@ return [
 	'show_all_admin_trips'    => 'عرض جميع رحلات المشرف',
 	'start_date'              => 'تاريخ البدايه',
 	'end_date'                => 'تاريخ النهايه',
+	'title_en' => 'العنوان بالانجليزيه'  , 
+	'title_ar' => 'العنوان بالعربيه' , 
+	'content_en' => 'المحتوى بالانجليزيه' , 
+	'content_ar' => 'المحتوى بالعربيه' , 
+	'admins_notifications' => 'اشعارات المشرفين' , 
+	'send_new_notification' => 'ارسال اشعار جديد' , 
+	'send' => 'ارسال' , 
+	'all' => 'الكل' , 
+	'notification_send_successfully' => 'تم ارسال الاشعار بنجح'
 
 ];
 

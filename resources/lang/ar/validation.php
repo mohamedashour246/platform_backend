@@ -168,6 +168,12 @@ return [
 		'receipt_date_from_market'  => 'تاريخ الاستلام من المترج',
 		'receipt_time_from_market'  => 'وقت الاستلام من المتجر',
 		'delivery_time_to_customer' => 'وقت التسليم للعميل',
+		'title_en' => 'العنوان بالانجليزيه' ,
+		'title_ar' => 'العنوان بالعربيه' ,
+		'content_en' => 'المحتوى بالعربيه' ,
+		'content_ar' => 'المحتوى بالانجليزيه' ,
+		'admins' => 'المشرفين' , 
+		'markets' => 'المتاجر'
 
 	],
 
