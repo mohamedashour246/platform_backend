@@ -77,3 +77,16 @@ Route::get('/Board/login', 'Board\Auth\LoginController@login_form')->name('Board
 Route::post('/Board/login', 'Board\Auth\LoginController@login')->name('Board.login');
 
 
+
+
+Route::group([ 'middleware' => ['lang']], function () {
+
+    Route::get('/language/{lang}', 'BoardController@change_language');
+
+
+
+Route::resource('subCategories', 'merchantDashbaord\SubCategoryController');
+
+
+Route::resource('products', 'merchantDashbaord\ProductController');
+});

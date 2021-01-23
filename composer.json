@@ -22,7 +22,15 @@
         "league/flysystem-cached-adapter": "~1.0",
         "livewire/livewire": "^2.3",
         "maatwebsite/excel": "^3.1",
-        "niklasravnsborg/laravel-pdf": "^4.0"
+        "niklasravnsborg/laravel-pdf": "^4.0",
+                "infyomlabs/adminlte-templates": "7.0.x-dev",
+                        "infyomlabs/laravel-generator": "7.0.x-dev",
+                         "laravelcollective/html": "^6.1",
+        "yajra/laravel-datatables": "1.5",
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "infyomlabs/generator-builder": "dev-master"
+
+
     },
     "require-dev": {
         "facade/ignition": "^2.0",
