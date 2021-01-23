@@ -26,4 +26,6 @@ return [
     'edit_product'                     => ' Edit Product ',
     'product'                     => ' Product ',
     'code'                     => ' Code ',
+    'add_category'                     => ' Add Category ',
+    'categories'                     => ' Categories ',
     ];

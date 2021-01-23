@@ -26,4 +26,7 @@ return [
     'add_new_product'                     => ' اضافة منتج ',
     'edit_product'                     => ' تعديل المنتج ',
     'product'                     => ' منتج ',
+    'add_category'                     => ' اضافة فئة ',
+    'categories'                     => ' الفئات ',
+    'Code'                     => ' الكود ',
     ];
