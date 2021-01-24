@@ -8,7 +8,7 @@ class CityDeliveryPrice extends Model
 {
     
 
-    protected $fillable = ['admin_id'  , 'from_city' , 'to_city' , 'market_id' , 'price' ];
+    protected $fillable = ['admin_id'  , 'from_city' , 'to_city' , 'market_id' , 'price'  , 'branch_id'];
 
 
     public function from()
@@ -24,6 +24,19 @@ class CityDeliveryPrice extends Model
     public function admin()
     {
     	return $this->belongsTo(Admin::class , 'admin_id');
+    }
+
+
+
+    public function market()
+    {
+        return $this->belongsTo(Market::class , 'market_id');
+    }
+
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class , 'branch_id');
     }
 
 }

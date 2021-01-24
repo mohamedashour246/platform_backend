@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Market;
 use App\Models\City;
+use App\Models\Governorate;
 use App\Models\Merchant;
 use App\Models\MarketDocument;
 use App\Models\Branch;
@@ -60,7 +61,6 @@ class MarketController extends Controller
             $market->setContractImage(basename($path));
         }
 
-   
 
 
 
@@ -176,7 +176,26 @@ class MarketController extends Controller
 
 
 
-    public function row(Request $request)
+
+    public function available_cities_to_add_to_this_market(Request $request)
+    {
+        // dd($request->all());
+        $delivery_cities = CityDeliveryPrice::where('branch_id' , $request->branch_id )->pluck('to_city')->toArray();
+        $lang = session()->get('locale');
+        $cities = City::select('name_'.$lang , 'id')->where('governorate_id' , $request->governorate)->whereNotIn('id'  , $delivery_cities )->get();
+     
+        $options = '<option> </option>';
+        foreach ($cities as $city) {
+            $name = $city['name_'.$lang];
+            $options .= '<option value="'.$city->id.'" >'.$name.'</option>';
+        }
+
+       return $options;     
+    }
+
+
+
+    public function get_city_delivery_price_row(Request $request)
     {
 
         $city = City::find($request->id);
@@ -193,7 +212,7 @@ class MarketController extends Controller
      */
     public function delivery_prices(Market $market)
     {
-        $market->load(['delivery_prices' , 'delivery_prices.from'  , 'delivery_prices.to' , 'delivery_prices.admin' ]);
+        $market->load(['delivery_prices' , 'delivery_prices.from' , 'delivery_prices.branch'  , 'delivery_prices.to' , 'delivery_prices.admin' ]);
         return view('board.markets.market_delivery_prices' ,  compact('market'));
     }
 
@@ -283,7 +302,8 @@ class MarketController extends Controller
     public function add_delivery_prices(Market $market)
     {
         $market->load('branches');
-        return view('board.markets.create_delivery_prices' , compact('market'));
+        $governorates = Governorate::all();
+        return view('board.markets.create_delivery_prices' , compact('market' , 'governorates'));
     }
 
 
@@ -303,16 +323,14 @@ class MarketController extends Controller
             $prices[] = new CityDeliveryPrice(array(
                 'admin_id' => $admin_id , 
                 'market_id' => $branche->market_id , 
+                'branch_id' => $request->branche , 
                 'price' => $request->price[$i] , 
                 'from_city' => $branche->city_id , 
                 'to_city' => $request->city_id[$i] , 
             )); 
         }
         $branche->market->delivery_prices()->saveMany($prices);
-      
-
-
-      return redirect(route('market.delivery_prices'  , ['market' => $branche->market_id ] ))->with('success_msg'  , trans('markets.delivery_prices_added_successfully') );
+        return redirect(route('market.delivery_prices'  , ['market' => $branche->market_id ] ))->with('success_msg'  , trans('markets.delivery_prices_added_successfully') );
         
     }
 

@@ -87,7 +87,12 @@ return [
 	'markets_notifications' => 'اشعارات المتاجر' , 
 	'send' => 'ارسال' , 
 	'all' => 'الكل' , 
-	'notification_send_successfully' => 'تم ارسال الاشعار بنجاح'
+	'notification_send_successfully' => 'تم ارسال الاشعار بنجاح' ,
+	'choose_branch' => 'اختر الفرع' , 
+	'choose_governorate' => 'اختر المحافظه' , 
+	'governorate' => 'المحافظه' , 
+	'branch' => 'فرع'
+
 
 
 ];
