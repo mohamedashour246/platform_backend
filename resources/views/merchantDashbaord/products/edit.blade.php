@@ -3,22 +3,25 @@
 @endphp
 @extends('merchantDashbaord.layout.master')
 @section('title')
-    @lang('categories.add_new_product')
+    @lang('merchantDashbaord.add_new_product')
 @endsection
 
 
 @section('header')
+
+
     <div class="page-header">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('customers.customers') </h4>
+                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('merchantDashbaord.product') </h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none py-0 mb-3 mb-md-0">
                 <div class="breadcrumb">
                     <a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-                    <a href="{{ route('merchants.customers.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('customers.customers') </a>
-                    <span class="breadcrumb-item active"> @lang('customers.add_new_customer') </span>
+
+                    <a href="{{ route('products.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.product') </a>
+                    <span class="breadcrumb-item active"> @lang('merchantDashbaord.edit_product') </span>
                 </div>
             </div>
         </div>
@@ -86,7 +89,7 @@
                                     <select class="form-control" name="subcategory_id">
 
                                         @foreach($subCategories as $subCategory)
-                                            <option @isset($subCategory) @if($product->sub_category_id == $subCategory->id) selected  @endif @endisset value="{{$subCategory->id}}">{{$subCategory->name_ar}}</option>
+                                            <option @isset($subCategory) @if($product->sub_category_id == $subCategory->id) selected  @endif @endisset value="{{$subCategory->id}}">{{$subCategory['name_'.$lang]}}</option>
                                         @endforeach
 
                                     </select>
@@ -169,7 +172,7 @@
                     </div>
                     <div class="form-group col-sm-12">
                         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                        <a href="{{ route('subCategories.index') }}" class="btn btn-default">Cancel</a>
+                        <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
                     </div>
                 {!! Form::close() !!}
 
