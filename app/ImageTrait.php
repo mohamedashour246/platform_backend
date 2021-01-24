@@ -15,6 +15,16 @@ Trait ImageTrait
 
         return $file_name;
     }
+    function generateRandomCode(  $length=3,$length1=5){
+
+
+
+        $poolChar = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $poolNum = '0123456789';
+        $code = substr(str_shuffle(str_repeat($poolChar, 3)), 0, $length) .'-'.substr(str_shuffle(str_repeat($poolNum, 5)), 0, $length1);
+
+        return $code;
+    }
 }
 
 

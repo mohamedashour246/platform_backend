@@ -37,6 +37,14 @@ class SubCategory extends Model
      *
      * @var array
      */
+    public function isActive()
+    {
+        return $this->status == 1 ? true : false;
+    }
+    public function isStatus ()
+    {
+        return $this->status == 1 ? trans('merchantDashbaord.active') : trans('merchantDashbaord.deactive');
+    }
     public static $rules = [
         'name_ar' => 'required',
         'name_en' => 'required',

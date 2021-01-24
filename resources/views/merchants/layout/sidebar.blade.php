@@ -32,41 +32,47 @@ $lang = session()->get('locale');
 				</div>
 			</div>
 
-			@php
-			$segment = request()->segment(2);
-			$admins = $board = $branches = $customers = $trips = '';
-			switch ($segment) {
-				case 'admins':
-				case 'admin_types':
-				$admins = 'active';
-				break;
-				case 'drivers':
-				case 'push_notifications':
-				$drivers = 'active';
-				break;
-				case 'governorates':
-				$governorates = 'active';
-				break;
-				case 'cities':
-				$cities = 'active';
-				break;
-				case 'branches':
-				$branches = 'active';
-				break;
-				case 'trips':
-				$trips = 'active';
-				break;
-				case 'city_delivery_prices':
-				$city_delivery_prices = 'active';
-				break;
-				case null:
-				$board = 'active';
-				break;
-				default:
-				break;
-			}
-			@endphp
 
+        @php
+            $segment = request()->segment(2);
+            $admins = $board = $branches = $customers = $trips =$products=$categories ='';
+            switch ($segment) {
+                case 'admins':
+                case 'admin_types':
+                $admins = 'active';
+                break;
+                case 'drivers':
+                case 'push_notifications':
+                $drivers = 'active';
+                break;
+                case 'governorates':
+                $governorates = 'active';
+                break;
+                case 'cities':
+                $cities = 'active';
+                break;
+                case 'branches':
+                $branches = 'active';
+                break;
+                case 'trips':
+                $trips = 'active';
+                break;
+                case 'categories':
+                $categories = 'active';
+                break;
+                case 'products':
+                $products = 'active';
+                break;
+                case 'city_delivery_prices':
+                $city_delivery_prices = 'active';
+                break;
+                case null:
+                $board = 'active';
+                break;
+                default:
+                break;
+            }
+        @endphp
 			<!-- User menu -->
 			<div class="sidebar-user">
 				<div class="card-body">
@@ -117,6 +123,21 @@ $lang = session()->get('locale');
 							<li class="nav-item"><a href="{{ route('merchants.customers.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('customers.add_new_customer') </a></li>
 						</ul>
 					</li>
+
+                    <li class="nav-item nav-item-submenu {{ $categories == 'active' ? 'nav-item-open' : '' }}">
+                        <a href="#" class="nav-link {{ $categories }}"><i class="icon-car"></i> <span>@lang('merchantDashbaord.categories')</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('subCategories.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.show_all_categories') </a></li>
+                            <li class="nav-item"><a href="{{ route('subCategories.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('merchantDashbaord.add_new_category') </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-submenu {{ $products == 'active' ? 'nav-item-open' : '' }}">
+                        <a href="#" class="nav-link {{ $products }}"><i class="icon-car"></i> <span>@lang('merchantDashbaord.products')</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('products.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.show_all_product') </a></li>
+                            <li class="nav-item"><a href="{{ route('products.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('merchantDashbaord.add_new_product') </a></li>
+                        </ul>
+                    </li>
 
 {{-- 					<li class="nav-item nav-item-submenu {{ $drivers == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $drivers }}"><i class="icon-users"></i> <span>@lang('drivers.drivers')</span></a>

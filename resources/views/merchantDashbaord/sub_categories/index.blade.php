@@ -33,7 +33,7 @@
             @include('merchants.layout.messages')
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <a  href="{{ route('subCategories.create') }}" class="btn btn-primary float-right" > <i class="icon-plus3  mr-1"></i>@lang('branches.add_new_branch') </a>
+                    <a  href="{{ route('subCategories.create') }}" class="btn btn-primary float-right" > <i class="icon-plus3  mr-1"></i>@lang('merchantDashbaord.add_new_category') </a>
                 </div>
             </div>
             <div class="card" >
@@ -69,7 +69,7 @@
                             <td>{{$subCategory->name_en}}</td>
                             <td>{{@$subCategory->merchant->name}}</td>
                             <td>{{$subCategory->discount}}</td>
-                            <td>{{$subCategory->status}}</td>
+                            <td>{{$subCategory->isStatus()}}</td>
                             <td >{{ $subCategory->created_at->toFormattedDateString() }} - {{ $subCategory->created_at->diffForHumans() }} </td>
 
                         </tr>

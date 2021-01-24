@@ -66,7 +66,7 @@
 
 	<!-- Page content -->
 	<div class="page-content pt-0">
-		@include('merchants.layout.sidebar')
+		@include('merchantDashbaord.layout.sidebar')
 		<!-- Main content -->
 		<div class="content-wrapper">
 			<!-- Content area -->
@@ -78,6 +78,6 @@
 		<!-- /main content -->
 	</div>
 	<!-- /page content -->
-	@include('merchants.layout.footer')
+	@include('merchantDashbaord.layout.footer')
 </body>
 </html>
