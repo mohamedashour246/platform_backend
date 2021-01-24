@@ -26,6 +26,7 @@ $lang = session()->get('locale');
 @endsection
 
 @section('content')
+	@include('board.layout.messages')
 
 <div class="row">
 
@@ -44,7 +45,6 @@ $lang = session()->get('locale');
 	</div>
 
 
-	@include('board.layout.messages')
 
 	<div class="col-md-2">
 		<div class="card">
@@ -112,17 +112,17 @@ $lang = session()->get('locale');
 
 
 		<div class="card ">
-
 			<table class="table  table-xs table-bordered">
 				<thead class="bg-dark">
 					<tr>
-						<th> # </th>
-						<th> @lang('markets.from_city') </th>
-						<th> @lang('markets.to_city') </th>
-						<th> @lang('markets.delivery_price') </th>
-						<th> @lang('markets.added_by') </th>
-						<th> @lang('markets.created_at') </th>
-						<th> @lang('markets.settings') </th>
+						<th class="text-center"> # </th>
+						<th class="text-center" > @lang('markets.branch') </th>
+						<th class="text-center" > @lang('markets.from_city') </th>
+						<th class="text-center" > @lang('markets.to_city') </th>
+						<th class="text-center" > @lang('markets.delivery_price') </th>
+						<th class="text-center" > @lang('markets.added_by') </th>
+						<th class="text-center" > @lang('markets.created_at') </th>
+						<th class="text-center" > @lang('markets.settings') </th>
 					</tr>
 				</thead>
 				<tbody>
@@ -131,13 +131,14 @@ $lang = session()->get('locale');
 					@endphp
 					@foreach ($market->delivery_prices as $delivery_price)
 					<tr>
-						<td> {{ $i++ }} </td>
-						<td> {{ optional($delivery_price->from)['name_'.$lang] }}  </td>
-						<td> {{ optional($delivery_price->to)['name_'.$lang] }}  </td>
-						<td> {{ $delivery_price->price }} </td>
-						<td> {{ optional($delivery_price->admin)->name }} </td>
-						<td> <span data-popup="tooltip" title="{{ $delivery_price->created_at->diffForHumans() }}" >  {{ $delivery_price->created_at->toFormattedDateString() }} </span> </td>
-						<td> 
+						<td class="text-center" > {{ $i++ }} </td>
+						<td class="text-center" > {{ optional($delivery_price->branch)->name }} </td>
+						<td class="text-center" > {{ optional($delivery_price->from)['name_'.$lang] }}  </td>
+						<td class="text-center" > {{ optional($delivery_price->to)['name_'.$lang] }}  </td>
+						<td class="text-center" > {{ $delivery_price->price }} </td>
+						<td class="text-center" > {{ optional($delivery_price->admin)->name }} </td>
+						<td class="text-center" > <span data-popup="tooltip" title="{{ $delivery_price->created_at->diffForHumans() }}" >  {{ $delivery_price->created_at->toFormattedDateString() }} </span> </td>
+						<td class="text-center" > 
 							<a target="_blank" href="{{ route('city_delivery_prices.edit' , ['city_delivery_price' => $delivery_price->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
 								<i class="icon-pencil7 text-warning-800"></i>
 							</a>

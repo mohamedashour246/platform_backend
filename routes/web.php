@@ -67,7 +67,8 @@ function () {
 		Route::get('/ajax/search_branches', 'BranchController@get_market_branches_via_ajax');
 		Route::get('/ajax/search_customers', 'CustomerController@ajax_search_customers');
 		Route::get('/ajax/search_drivers', 'DriverController@search_drivers');
-		Route::get('get_row', 'MarketController@row');
+		Route::get('/markets_get_city_delivery_price_row', 'MarketController@get_city_delivery_price_row');
+		Route::get('/available_cities_to_add_to_this_market', 'MarketController@available_cities_to_add_to_this_market');
 		Route::delete('ajax/delete_delivery_price', 'CityDeliveryPriceController@ajax_delete');
 		Route::delete('ajax/delete_admin_type', 'AdminTypeController@ajax_delete');
 		Route::delete('ajax/delete_bill_type', 'BillTypeController@ajax_delete');

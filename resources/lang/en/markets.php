@@ -93,7 +93,12 @@ return [
 	'markets_notifications' => 'Markets Notifications' , 
 	'send' => 'Send' , 
 	'all' => 'All' , 
-	'notification_send_successfully' => 'notification sent successfully '
+	'notification_send_successfully' => 'notification sent successfully ' , 
+	'choose_branch' => 'Choose Branch' , 
+	'choose_governorate' => 'Choose Governorate' , 
+	'governorate' => 'Governorate' , 
+	'branch' => 'Branch'
+
 
 
 ];

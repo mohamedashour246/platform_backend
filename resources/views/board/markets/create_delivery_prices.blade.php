@@ -110,9 +110,10 @@ $lang = session()->get('locale');
 						<legend class="font-weight-bold"> <span class="text-primary"> @lang('markets.market_data') </span> </legend>
 						<div class="form-group">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<label> @lang('markets.branche') </label>
-									<select name="branche" id="inputBran" class="form-control branche" required="required">
+									<select name="branche" id="branche" class="form-control" required="required">
+										<option value=""></option>
 										@foreach ($market->branches as $branche)
 										<option value="{{ $branche->id }}"> {{ $branche->name }} </option>
 										@endforeach
@@ -121,9 +122,23 @@ $lang = session()->get('locale');
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
-								<div class="col-md-6">
+
+								<div class="col-md-4">
+									<label> @lang('markets.governorate') </label>
+									<select name="governorate" id="governorate" disabled="disabled" class="form-control">
+										<option value=""></option>
+										@foreach ($governorates as $governorate)
+										<option value="{{ $governorate->id }}"> {{ $governorate['name_'.$lang] }} </option>
+										@endforeach
+									</select>
+									@error('city')
+									<label class="text-danger font-weight-bold " > {{ $message }} </label>
+									@enderror
+								</div>
+
+								<div class="col-md-4">
 									<label> @lang('markets.city') </label>
-									<select name="city" id="inputBran" class="form-control city">
+									<select name="city" id="city" class="form-control" multiple="multiple">
 									</select>
 									@error('city')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -162,7 +177,56 @@ $lang = session()->get('locale');
 <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
 <script>
 	$(function() {
-		
+
+
+		var branch_id = null;
+		var governorate_id = null;
+		// var governorate_id = null;
+
+
+		$('select#branche').select2({
+			placeholder : "@lang('markets.choose_branch')" , 
+		});
+		$('select#governorate').select2({
+			placeholder : "@lang('markets.choose_governorate')" , 
+
+		});
+
+		$('select#city').select2({
+			placeholder : "@lang('markets.choose_city_place')" , 
+		});
+
+		$('select#branche').on('change',  function(event) {
+			event.preventDefault();
+			branch_id = $(this).val();
+			$('select#governorate').attr('disabled',false);
+		});
+
+
+		$('select#governorate').on('change', function(event) {
+			event.preventDefault();
+			governorate_id = $(this).val();
+			$('select#city').select2('destroy');
+
+			$.ajax({
+				url: '{{ url('Board/available_cities_to_add_to_this_market') }}',
+				type: 'GET',
+				dataType: 'html',
+				data: {governorate:governorate_id , branch_id:branch_id},
+			})
+			.done(function(data) {
+				$('select#city').find('option').remove();
+				$('select#city').append(data);
+				$('select#city').select2({
+					placeholder : "@lang('markets.choose_city_place')" , 
+				});
+			});
+			
+			
+		});
+
+
+
 
 
 		$(document).on('click', 'button.delete_item', function(event) {
@@ -171,13 +235,11 @@ $lang = session()->get('locale');
 		});
 
 		
-		$('.city').on('change', function(event) {
+		$('select#city').on('select2:select', function(event) {
 			event.preventDefault();
-			id = $(this).val(); 
-			$(this).empty();
-
+			id = $("option:selected:last",this).val();
 			$.ajax({
-				url: '{{ url('/Board/get_row') }}',
+				url: '{{ url('/Board/markets_get_city_delivery_price_row') }}',
 				type: 'GET',
 				dataType: 'html',
 				data: {id:id},
@@ -185,40 +247,7 @@ $lang = session()->get('locale');
 			.done(function(data) {
 				$('.items').append(data);
 			});
-			
 		});
-
-
-		$('.branche').select2();
-
-		$('.city').select2({
-			minimumInputLength:3,
-			placeholder : "@lang('markets.choose_city_place')" , 
-			ajax: {
-				url: '/Board/search_in_cities',
-				dataType: 'json',
-				type: 'GET' ,
-				data: function (params) {
-					var queryParameters = {
-						q: params.term ,
-					}
-					return queryParameters;
-				},
-				delay: 500,
-				processResults: function (data) {
-					return {
-						results:  $.map(data.data, function (item) {
-							return {
-								text: item.text,
-								id: item.id
-							}
-						})
-					};
-				},
-				cache: true
-			}
-		});
-
 	});
 </script>
 @endsection
