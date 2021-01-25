@@ -69,29 +69,9 @@
                                     @enderror
                                 </div>
 
-                                <!-- Merchant Id Field -->
-                                <div class="form-group col-sm-6">
-                                    {!! Form::label('merchant_id',__('merchantDashbaord.merchant_id')) !!}
-                                    <select class="form-control" name="merchant_id">
 
-                                        @foreach($merchants as $merchant)
-                                            <option @isset($merchant) @if($merchant->id == $subCategory->merchant_id) selected  @endif @endisset value="{{$merchant->id}}">{{$merchant->name}}</option>
-                                        @endforeach
 
-                                    </select>
-                                    @error('merchant_id')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
 
-                                <!-- Code Field -->
-                                <div class="form-group col-sm-6">
-                                    {!! Form::label('code', __('merchantDashbaord.code')) !!}
-                                    {!! Form::number('code', null, ['class' => 'form-control']) !!}
-                                    @error('code')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
 
                                 <!-- Discount Field -->
                                 <div class="form-group col-sm-6">
@@ -112,12 +92,13 @@
                                 </div>
 
                                 <!-- Status Field -->
-                                <div class="form-group col-sm-6">
-                                    {!! Form::label('status', __('merchantDashbaord.status')) !!}
-                                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
-                                    @error('order')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-switchery mt-4">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" name="status" class="form-check-input-switchery " {{ $subCategory->isActive() ? 'checked' : '' }} data-fouc>
+                                            @lang('merchantDashbaord.status')
+                                        </label>
+                                    </div>
                                 </div>
 
                                 <!-- Submit Field -->
@@ -147,17 +128,55 @@
 @endsection
 
 @section('scripts')
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places"></script>
+    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 
+    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
+    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
     <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-    {{-- <script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/widgets.min.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/typeahead_addresspicker.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/autocomplete_addresspicker.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/location.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/ui/prism.min.js') }}"></script> --}}
-
-    {{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_location.js') }}"></script> --}}
+    <script>
+        $(function() {
+            // $("#firstname").attr("disabled", "disabled");
 
 
+
+            $('.select').select2({
+                minimumResultsForSearch: Infinity
+            });
+
+            $('.form-input-styled').uniform({
+                fileButtonClass: 'action btn bg-primary'
+            });
+
+
+            var _componentSwitchery = function() {
+                if (typeof Switchery == 'undefined') {
+                    console.warn('Warning - switchery.min.js is not loaded.');
+                    return;
+                }
+
+
+                var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
+                elems.forEach(function(html) {
+                    var switchery = new Switchery(html);
+                });
+
+                var primary = document.querySelector('.form-check-input-switchery-primary');
+                var switchery = new Switchery(primary, { color: '#2196F3' });
+            };
+            // Bootstrap switch
+            var _componentBootstrapSwitch = function() {
+                if (!$().bootstrapSwitch) {
+                    console.warn('Warning - switch.min.js is not loaded.');
+                    return;
+                }
+
+                // Initialize
+                $('.form-check-input-switch').bootstrapSwitch();
+            };
+            _componentSwitchery();
+
+
+
+        });
+    </script>
 @endsection

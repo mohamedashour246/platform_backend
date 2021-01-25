@@ -31,7 +31,23 @@ Route::group(['prefix' => 'Merchant', 'namespace' => 'Merchant', 'middleware' =>
 				Route::get('/notifications', 'BoardController@notifications');
 				Route::get('/get_governorate_cities', 'AjaxController@get_governorate_cities');
 				Route::post('/add_new_customar_via_ajax', 'AjaxController@add_new_customar_via_ajax');
-		
+
 
 			});
 	});
+
+Route::group(['middleware' => ['merchant', 'activeMerchant', 'activeMarket', 'whichMarket'], ], function () {
+
+    Route::group(['prefix' => 'merchantDashbaord', 'middleware' => ['lang']], function () {
+
+        Route::get('/language/{lang}', 'BoardController@change_language');
+
+
+        Route::get('/', 'merchantDashbaord\HomeController@index')->name('merchantDashbaord');
+        Route::resource('subCategories', 'merchantDashbaord\SubCategoryController');
+
+
+        Route::resource('products', 'merchantDashbaord\ProductController');
+    });
+});
+

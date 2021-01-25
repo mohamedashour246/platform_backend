@@ -26,6 +26,8 @@
 @endsection
 
 @section('content')
+    @include('merchantDashbaord.layout.partials._session')
+
 
     <div class="row">
         <div class="col-md-12">
@@ -43,6 +45,7 @@
                     <tr>
                         <th>#</th>
 
+                        <th> @lang('merchantDashbaord.image') </th>
                         <th> @lang('merchantDashbaord.name_ar') </th>
                         <th> @lang('merchantDashbaord.name_en') </th>
                         <th> @lang('merchantDashbaord.category') </th>
@@ -63,12 +66,14 @@
                                 </a>
 
                             </td>
+                            <td> <img class="img-thumbnail" width="50" height="50" src=" {{ $product->image_path}}" /></td>
+
                             {{--                            <td  > <a href="{{ route('merchants.branches.show', ['branch' => $product->id])}}"> {{ $product->name }} </a> </td>--}}
                             <td>{{$product->name_ar}}</td>
                             <td>{{$product->name_en}}</td>
                             <td>{{@$product->subCategory['name_'.$lang]}}</td>
                             <td>{{$product->discount}}</td>
-                            <td>{{$product->status}}</td>
+                            <td>{{$product->isStatus()}}</td>
                             <td >{{ $product->created_at->toFormattedDateString() }} - {{ $product->created_at->diffForHumans() }} </td>
 
                         </tr>

@@ -70,29 +70,9 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Merchant Id Field -->
-                                    <div class="form-group col-sm-6">
-                                        {!! Form::label('merchant_id', __('merchantDashbaord.merchant_id'))  !!}
-                                        <select class="form-control" name="merchant_id">
 
-                                            @foreach($merchants as $merchant)
-                                                <option @isset($merchant) @if(old('merchant_id') == $merchant->id) selected  @endif @endisset value="{{$merchant->id}}">{{$merchant->name}}</option>
-                                            @endforeach
 
-                                        </select>
-                                        @error('merchant_id')
-                                        <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                        @enderror
-                                    </div>
 
-                                    <!-- Code Field -->
-                                    <div class="form-group col-sm-6">
-                                        {!! Form::label('code', __('merchantDashbaord.code'))!!}
-                                        {!! Form::number('code', null, ['class' => 'form-control']) !!}
-                                        @error('code')
-                                        <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                        @enderror
-                                    </div>
 
                                     <!-- Discount Field -->
                                     <div class="form-group col-sm-6">
@@ -112,14 +92,8 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Status Field -->
-                                    <div class="form-group col-sm-6">
-                                        {!! Form::label('status',__('merchantDashbaord.status')) !!}
-                                        {!! Form::text('status', null, ['class' => 'form-control']) !!}
-                                        @error('order')
-                                        <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                        @enderror
-                                    </div>
+                                    <input type="hidden" value="1" name="status">
+
 
                                     <!-- Submit Field -->
 

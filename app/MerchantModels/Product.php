@@ -15,11 +15,22 @@ class Product extends Model
     protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
     public function getImagePathAttribute()
     {
-        return asset('uploads/merchantDashbaord/' . $this->image);
+        if($this->image){
+            return asset('uploads/merchantDashbaord/' . $this->image);
+        }else{
+            return asset('uploads/merchantDashbaord/no_image.png');
+        }
 
 
     }
-
+    public function isActive()
+    {
+        return $this->status == 1 ? true : false;
+    }
+    public function isStatus ()
+    {
+        return $this->status == 1 ? trans('merchantDashbaord.active') : trans('merchantDashbaord.deactive');
+    }
     public function subCategory()
     {
         return $this->belongsTo(SubCategory::class);

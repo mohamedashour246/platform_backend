@@ -21,8 +21,7 @@
 
 
 
-
-{{-- 
+{{--
 <div class="alert alert-danger alert-styled-left alert-dismissible">
 	<button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 	<span class="font-weight-semibold">Oh snap!</span> Change a few things up and <a href="#" class="alert-link">try submitting again</a>.

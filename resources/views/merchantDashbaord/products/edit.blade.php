@@ -98,13 +98,14 @@
                                     @enderror
                                 </div>
 
-                                <!-- Status Field -->
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('status', __('merchantDashbaord.status')) !!}
-                                    {!! Form::select('status', ['active' => 'active','deactive' => 'deactive'], null, ['class' => 'form-control']) !!}
-                                    @error('active')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
+
+                                <div class="col-md-4">
+                                    <div class="form-check form-check-switchery mt-4">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" name="status" class="form-check-input-switchery " {{ $product->isActive() ? 'checked' : '' }} data-fouc>
+                                            @lang('merchantDashbaord.status')
+                                        </label>
+                                    </div>
                                 </div>
 
                                 <!-- Type Field -->
@@ -139,6 +140,13 @@
                                     {!! Form::label('price', __('merchantDashbaord.price')) !!}
                                     {!! Form::number('price', null, ['class' => 'form-control']) !!}
                                     @error('price')
+                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    {!! Form::label('order',__('merchantDashbaord.order')) !!}
+                                    {!! Form::number('order', null, ['class' => 'form-control']) !!}
+                                    @error('order')
                                     <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                     @enderror
                                 </div>
@@ -190,17 +198,68 @@
 @endsection
 
 @section('scripts')
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places"></script>
+    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
 
+    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switchery.min.js') }}"></script>
+    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/switch.min.js') }}"></script>
     <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-    {{-- <script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/widgets.min.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/typeahead_addresspicker.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/autocomplete_addresspicker.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/location.js') }}"></script>
-    <script src="{{ asset('board_assets/global_assets/js/plugins/ui/prism.min.js') }}"></script> --}}
-
-    {{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_location.js') }}"></script> --}}
+    <script>
+        $(function() {
+            // $("#firstname").attr("disabled", "disabled");
 
 
+            // image preview
+            $(".image").change(function () {
+
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.image-preview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                }
+
+            });
+            $('.select').select2({
+                minimumResultsForSearch: Infinity
+            });
+
+            $('.form-input-styled').uniform({
+                fileButtonClass: 'action btn bg-primary'
+            });
+
+
+            var _componentSwitchery = function() {
+                if (typeof Switchery == 'undefined') {
+                    console.warn('Warning - switchery.min.js is not loaded.');
+                    return;
+                }
+
+
+                var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
+                elems.forEach(function(html) {
+                    var switchery = new Switchery(html);
+                });
+
+                var primary = document.querySelector('.form-check-input-switchery-primary');
+                var switchery = new Switchery(primary, { color: '#2196F3' });
+            };
+            // Bootstrap switch
+            var _componentBootstrapSwitch = function() {
+                if (!$().bootstrapSwitch) {
+                    console.warn('Warning - switch.min.js is not loaded.');
+                    return;
+                }
+
+                // Initialize
+                $('.form-check-input-switch').bootstrapSwitch();
+            };
+            _componentSwitchery();
+
+
+
+        });
+    </script>
 @endsection

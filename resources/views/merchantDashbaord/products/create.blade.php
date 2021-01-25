@@ -94,16 +94,11 @@
                                    @error('sub_category_id')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                    @enderror
+                                   <input type="hidden" value="1" name="status">
+
                                </div>
 
-                               <!-- Status Field -->
-                               <div class="form-group col-sm-4">
-                                   {!! Form::label('status', __('merchantDashbaord.status')) !!}
-                                   {!! Form::select('status', ['active' => 'active','deactive' => 'deactive'], null, ['class' => 'form-control']) !!}
-                                   @error('active')
-                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                   @enderror
-                               </div>
+
 
                                <!-- Type Field -->
                                <div class="form-group col-sm-4">
@@ -140,23 +135,34 @@
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                    @enderror
                                </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('order',__('merchantDashbaord.order')) !!}
+                                   {!! Form::number('order', null, ['class' => 'form-control']) !!}
+                                   @error('order')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+
 
                                <!-- Discount Field -->
-                               <div class="form-group col-sm-6">
+                               <div class="form-group col-sm-4">
                                    {!! Form::label('discount', __('merchantDashbaord.discount'))!!}
                                    {!! Form::number('discount', null, ['class' => 'form-control']) !!}
                                    @error('discount')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                    @enderror
                                </div>
-                               <div class="form-group col-sm-6">
+                               <div class="form-group col-sm-4">
                                    {!! Form::label('image', __('merchantDashbaord.image')) !!}
-                                   {!! Form::file('image', null, ['class' => 'form-control']) !!}
+                                   {!! Form::file('image',['class' => 'form-control image']) !!}
                                    @error('image')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                    @enderror
                                </div>
-
+                               <div class="form-group col-sm-4">
+                                   <img src="{{asset('uploads/merchantDashbaord/no_image.png')}}" style="width: 100px"
+                                        class="img-thumbnail image-preview" alt="">
+                               </div>
 
                            </div>
 
@@ -193,5 +199,63 @@
 
     {{-- <script src="{{ asset('board_assets/global_assets/js/demo_pages/picker_location.js') }}"></script> --}}
 
+    <script>
+        $(function() {
+            // $("#firstname").attr("disabled", "disabled");
 
+
+            // image preview
+            $(".image").change(function () {
+
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.image-preview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                }
+
+            });
+            $('.select').select2({
+                minimumResultsForSearch: Infinity
+            });
+
+            $('.form-input-styled').uniform({
+                fileButtonClass: 'action btn bg-primary'
+            });
+
+
+            var _componentSwitchery = function() {
+                if (typeof Switchery == 'undefined') {
+                    console.warn('Warning - switchery.min.js is not loaded.');
+                    return;
+                }
+
+
+                var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
+                elems.forEach(function(html) {
+                    var switchery = new Switchery(html);
+                });
+
+                var primary = document.querySelector('.form-check-input-switchery-primary');
+                var switchery = new Switchery(primary, { color: '#2196F3' });
+            };
+            // Bootstrap switch
+            var _componentBootstrapSwitch = function() {
+                if (!$().bootstrapSwitch) {
+                    console.warn('Warning - switch.min.js is not loaded.');
+                    return;
+                }
+
+                // Initialize
+                $('.form-check-input-switch').bootstrapSwitch();
+            };
+            _componentSwitchery();
+
+
+
+        });
+    </script>
 @endsection

@@ -25,7 +25,8 @@ class ProductController extends AppBaseController
      */
     public function index(ProductDataTable $productDataTable)
     {
-        $products=Product::all();
+
+        $products=Product::where('merchant_id',auth()->guard('merchant')->id())->get();
         return view('merchantDashbaord.products.index',compact('products'));
     }
 
@@ -50,7 +51,11 @@ class ProductController extends AppBaseController
      */
     public function store(CreateProductRequest $request)
     {
-        $input = $request->all();
+        $input= $request->all();
+        $input['merchant_id'] = auth()->guard('merchant')->id();
+        $input['code'] =   $this->generateRandomCode();
+        $input['status'] =   1;
+
 
         /** @var Product $product */
         if ($request->image) {
@@ -59,9 +64,9 @@ class ProductController extends AppBaseController
         }
         $product = Product::create($input);
 
-        Flash::success('Product saved successfully.');
 
-        return redirect(route('products.index'));
+
+        return redirect(route('products.index'))->with('success_msg' , trans('merchantDashbaord.added_successfully'));
     }
 
     /**
@@ -75,11 +80,15 @@ class ProductController extends AppBaseController
     {
         /** @var Product $product */
         $product = Product::find($id);
+//        dd($product);
+        if($product->merchant_id!=auth()->guard('merchant')->id()){
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_permitted'));
+
+        }
 
         if (empty($product)) {
-            Flash::error('Product not found');
 
-            return redirect(route('products.index'));
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_foundd'));
         }
 
         return view('merchantDashbaord.products.show')->with('product', $product);
@@ -97,11 +106,14 @@ class ProductController extends AppBaseController
         /** @var Product $product */
         $product = Product::find($id);
         $subCategories=SubCategory::all();
+        if($product->merchant_id!=auth()->guard('merchant')->id()){
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_permitted'));
+
+        }
 
         if (empty($product)) {
-            Flash::error('Product not found');
 
-            return redirect(route('products.index'));
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_found'));
         }
 
         return view('merchantDashbaord.products.edit')->with(['product'=>$product,'subCategories'=>$subCategories]);
@@ -119,13 +131,24 @@ class ProductController extends AppBaseController
     {
         /** @var Product $product */
         $product = Product::find($id);
+        if($product->merchant_id!=auth()->guard('merchant')->id()){
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_permitted'));
+
+        }
 
         if (empty($product)) {
-            Flash::error('Product not found');
 
-            return redirect(route('products.index'));
+
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_found'));
         }
-        $input = $request->all();
+        $input= $request->all();
+        if ($request->status=='on'){
+            $input['status'] =1;
+        }else{
+            $input['status'] =0;
+
+        }
+        $input['merchant_id'] = auth()->guard('merchant')->id();
 
         /** @var Product $product */
         if ($request->image) {
@@ -135,9 +158,8 @@ class ProductController extends AppBaseController
         $product->fill($input);
         $product->save();
 
-        Flash::success('Product updated successfully.');
 
-        return redirect(route('products.index'));
+        return redirect(route('products.index'))->with('success_msg' , trans('merchantDashbaord.updated_successfully'));
     }
 
     /**
@@ -154,16 +176,18 @@ class ProductController extends AppBaseController
         /** @var Product $product */
         $product = Product::find($id);
 
-        if (empty($product)) {
-            Flash::error('Product not found');
+        if($product->merchant_id!=auth()->guard('merchant')->id()){
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_permitted'));
 
-            return redirect(route('products.index'));
+        }
+        if (empty($product)) {
+
+            return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_found'));
         }
 
         $product->delete();
 
-        Flash::success('Product deleted successfully.');
 
-        return redirect(route('products.index'));
+        return redirect(route('products.index'))->with('success_msg' , trans('merchantDashbaord.deleted_successfully'));
     }
 }
