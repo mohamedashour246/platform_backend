@@ -19,7 +19,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('name_en')->nullable();
             $table->unsignedBigInteger('merchant_id');
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->integer('code')->nullable();
+            $table->string('code')->nullable();
             $table->integer('selling_counter')->nullable();
             $table->integer('discount')->nullable();
             $table->integer('order')->nullable();

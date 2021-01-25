@@ -109,7 +109,7 @@ $lang = session()->get('locale');
 							</span>
 						</a>
 					</li>
-					<li class="nav-item nav-item-submenu {{ $admins == 'active' ? 'nav-item-open' : '' }}">
+					<!-- <li class="nav-item nav-item-submenu {{ $admins == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $admins }}"><i class="icon-users4"></i> <span>@lang('admins.admins')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="">
 							<li class="nav-item"><a href="{{ route('merchants.admins.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('admins.show_all_admins') </a></li>
@@ -122,7 +122,7 @@ $lang = session()->get('locale');
 							<li class="nav-item"><a href="{{ route('merchants.customers.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('customers.show_all_customers') </a></li>
 							<li class="nav-item"><a href="{{ route('merchants.customers.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('customers.add_new_customer') </a></li>
 						</ul>
-					</li>
+					</li> -->
 
                     <li class="nav-item nav-item-submenu {{ $categories == 'active' ? 'nav-item-open' : '' }}">
                         <a href="#" class="nav-link {{ $categories }}"><i class="icon-car"></i> <span>@lang('merchantDashbaord.categories')</span></a>
@@ -170,7 +170,7 @@ $lang = session()->get('locale');
 						</ul>
 					</li> --}}
 
-					<li class="nav-item nav-item-submenu {{ $branches == 'active' ? 'nav-item-open' : '' }}">
+					<!-- <li class="nav-item nav-item-submenu {{ $branches == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $branches }}"><i class="icon-store"></i> <span>@lang('branches.branches')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('merchants.branches.index') }}" class="nav-link"> <i class="icon-store mr-1"></i> @lang('branches.show_all_branches') </a></li>
@@ -184,7 +184,7 @@ $lang = session()->get('locale');
 							<li class="nav-item"><a href="{{ route('merchants.trips.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('trips.show_all_trips') </a></li>
 							<li class="nav-item"><a href="{{ route('merchants.trips.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('trips.add_new_trip') </a></li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<!-- /main navigation -->
