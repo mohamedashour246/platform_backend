@@ -26,7 +26,7 @@ $lang = session()->get('locale');
 @endsection
 
 @section('content')
-	@include('board.layout.messages')
+@include('board.layout.messages')
 
 <div class="row">
 

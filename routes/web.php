@@ -32,7 +32,7 @@ function () {
 
 		Route::resource('/drivers', 'DriverController');
 		Route::resource('/markets', 'MarketController');
-		Route::resource('/branches', 'BranchController');
+		// Route::resource('/branches', 'BranchController');
 		Route::resource('/trips', 'TripController');
 		Route::resource('/cities', 'CityController');
 		Route::resource('/governorates', 'GovernorateController');
@@ -44,7 +44,7 @@ function () {
 		Route::post('/governorates/{governorate}/delivery_prices', 'GovernorateController@delivery_prices_store')->name('governorates.delivery_prices.store');
 		Route::get('/governorates/{governorate}/delivery_prices/', 'GovernorateController@delivery_prices')->name('governorates.delivery_prices.index');
 		Route::get('/markets/{market}/admin', 'MarketController@admin')->name('market.admin');
-		Route::get('/markets/{market}/branches', 'MarketController@branches')->name('market.branches');
+		Route::get('/markets/{market}/branches', 'MarketController@branches')->name('market.branches.index');
 		Route::get('/markets/{market}/trips', 'MarketController@trips')->name('market.trips');
 		Route::get('/markets/{market}/documents', 'MarketController@documents')->name('market.documents');
 		Route::get('/markets/{market}/emails', 'MarketController@emails')->name('market.emails');
@@ -83,6 +83,15 @@ function () {
 		Route::get('/bills'  , 'BillController@index' )->name('bills.index');
 		Route::get('/bills/{bill}'  , 'BillController@show' )->name('bills.show');
 		Route::resource('/bill_types' , 'BillTypeController');
+		Route::get('/markets/{market}/branches/create'  , 'BranchController@create' )->name('market.branches.create');
+		Route::post('/markets/{market}/branches'  , 'BranchController@store' )->name('market.branches.store');
+		Route::get('/markets/{market}/branches/{branch}/edit'  , 'BranchController@edit' )->name('market.branches.edit');
+		Route::patch('/markets/{market}/branches/{branch}'  , 'BranchController@update' )->name('market.branches.update');
+		Route::get('/markets/{market}/branches/{branch}'  , 'BranchController@show' )->name('market.branches.show');
+
+		Route::delete('/markets/{market}/branches/{branch}' , 'BranchController@destroy')->name('market.branches.destroy');
+
+
 
 	});
 Auth::routes();
