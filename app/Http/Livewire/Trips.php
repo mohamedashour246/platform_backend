@@ -23,13 +23,14 @@ class Trips extends Component
         $this->resetPage();
     }
 
-    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'];
+    protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'  , 'driverAddedToTrip' => '$refresh'];
 
     public function handleItemDeletion($item_id)
     {
         $this->emit('itemDeleted' , $item_id);
         $this->resetPage();
     }
+
 
     public function render()
     {
@@ -38,8 +39,8 @@ class Trips extends Component
 
     	$cities = City::all();
     	$governorates = Governorate::all();
-    	$drivers = Driver::all();
+    	// $drivers = Driver::all();
 
-        return view('livewire.trips' , compact('trips' , 'cities' , 'governorates' , 'drivers'));
+        return view('livewire.trips' , compact('trips' , 'cities' , 'governorates'));
     }
 }
