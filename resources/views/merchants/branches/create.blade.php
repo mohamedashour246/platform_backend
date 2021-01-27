@@ -191,13 +191,6 @@ $lang = session()->get('locale');
 
 <script>
 	$(function() {
-
-
-
-
-
-
-
 		var geocoder;
 		var map;
 		var address = "";

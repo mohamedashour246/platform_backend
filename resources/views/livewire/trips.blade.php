@@ -77,7 +77,7 @@ $lang = session()->get('locale');
 							<td> 
 
 								@if (is_null($trip->driver))
-								<a href="#" class="btn btn-outline bg-grey border-grey text-grey-600 btn-icon rounded-round border-2"><i class="icon-plus2"></i></a>
+								<a href="#" data-toggle="modal" wire:click="$emitTo('board.trips.add-driver-to-trip', 'userAboutToChooseDriver',{{ $trip->id }})" data-target="#drivers_modal"  class="btn btn-outline bg-grey border-grey text-grey-600 btn-icon rounded-round border-2"><i class="icon-plus2"></i></a>
 								@else
 								{{ optional($trip->driver)->name }} </td>
 								
@@ -96,10 +96,10 @@ $lang = session()->get('locale');
 								<td>
 									@switch($trip->paid)
 									@case(1)
-									<span class="badge badge-primary"> @lang('trips.payment_completed') </span>
+									<span class="badge bg-success"> @lang('trips.payment_completed') </span>
 									@break
 									@case(0)
-									<span class="badge badge-secondary"> @lang('trips.payment_completed') </span>
+									<span class="badge bg-danger"> @lang('trips.payment_completed') </span>
 									@break
 									@endswitch
 								</td>
@@ -147,6 +147,10 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
+
+
+			
+			<livewire:board.trips.add-driver-to-trip  />
 		</div>
 
 
@@ -170,7 +174,22 @@ $lang = session()->get('locale');
 						icon: 'success',
 						title: "@lang('trips.delete_success')",
 					});
+				});
+
+
+				Livewire.on('driverAddedToTrip', itemId => {
+
+					$('#drivers_modal').modal('hide');
+					Toast.fire({
+						icon: 'success',
+						title: "@lang('trips.driver_added_to_tip')",
+					});
 				})
+
+
+
+
+				
 
 				$(document).on('click', 'a.delete_item' ,  function(event) {
 					event.preventDefault();
