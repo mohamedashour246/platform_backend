@@ -62,28 +62,28 @@ class MarketController extends Controller
         }
 
 
+        // dd($request->file('files'));
 
 
+        // if ($request->hasFile('files')) {
 
-        if ($request->hasFile('files')) {
+        //     for ($i = 0; $i <count($request->file('files')) ; $i++) {
+        //         $files = [];
+        //         $path = $request->file('files')[$i]->store('markets_documents'  , 's3' );
+        //         $files[] = new MarketDocument([
+        //             'file' => basename($path) , 
+        //             'market_id' => $market->id , 
+        //             'admin_id' => Auth::guard('admin')->id(),
+        //         ]);
+        //     }
 
-            for ($i = 0; $i <count($request->file('files')) ; $i++) {
-                $files = [];
-                $path = $request->file('files')[$i]->store('markets_documents'  , 's3' );
-                $files[] = new MarketDocument([
-                    'file' => basename($path) , 
-                    'market_id' => $market->id , 
-                    'admin_id' => Auth::guard('admin')->id(),
-                ]);
-            }
-
-            $market->documents()->saveMany($files);
-        }
+        //     $market->documents()->saveMany($files);
+        // }
 
         $merchant = new Merchant;
         $merchant->username = $request->username;
         $merchant->password = Hash::make($request->password);
-        $merchant->type = 'superadmin';
+        $merchant->type_id = 1;
         $merchant->market_id = $market->id;
         $merchant->email = $request->email;
         $merchant->phone = $request->phone;
