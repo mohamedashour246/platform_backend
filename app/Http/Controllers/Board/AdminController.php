@@ -57,7 +57,7 @@ class AdminController extends Controller
             $admin->setImage(basename($path));
         }
 
-   
+        
         if ($request->permissions != null) {
             $current_logged_in_admin_id = Auth::guard('admin')->id();
             $permissions = [] ;
@@ -122,8 +122,10 @@ class AdminController extends Controller
             $admin->setImage(basename($path));
         }
 
-        if ($request->type == 'admin') {
-            $admin->permissions()->delete();
+
+        $admin->permissions()->delete();
+
+        if ($request->permissions != null) {
             $current_logged_in_admin_id = Auth::guard('admin')->id();
             $permissions = [] ;
             foreach ($request->permissions as $permission) {
@@ -135,6 +137,7 @@ class AdminController extends Controller
 
             $admin->permissions()->saveMany($permissions);
         }
+        
 
 
         return back()->with('success_msg'  , trans('admins.updating_success') );

@@ -45,7 +45,7 @@ class TripController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTripRequest $request)
     {   
         foreach ($request->customers as $customer) {
             $trip = new Trip;

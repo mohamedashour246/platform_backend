@@ -65,7 +65,7 @@ $lang = session()->get('locale');
 									<select name="branch_id"  class="form-control branch_id" >
 										<option value=""></option>
 									</select>
-									@error('market_id')
+									@error('branch_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
@@ -175,7 +175,7 @@ $lang = session()->get('locale');
 									<select name="customers[]" multiple="multiple" class="form-control customers" >
 										<option value=""> اختر المستلم </option>
 									</select>
-									@error('payment_method_id')
+									@error('customers')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
@@ -185,6 +185,7 @@ $lang = session()->get('locale');
 								<div class="col-md-4">
 									<label> @lang('trips.driver') </label>
 									<select name="driver_id"  class="form-control driver_id" >
+										<option value=""></option>
 										@foreach ($drivers as $driver)
 										<option value="{{ $driver->id }}">{{ $driver->name }}</option>
 										@endforeach

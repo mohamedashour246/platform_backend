@@ -125,7 +125,7 @@ $lang = session()->get('locale');
 									<label> @lang('admins.type') </label>
 									<select name="type" class="form-control select" data-fouc>
 										@foreach ($types as $type)
-										<option value="{{ $type->id }}"> {{ $type['name_'.$lang] }} </option>
+										<option value="{{ $type->id }}" {{ $admin->type_id == $type->id ? 'selected="selected"' : '' }} > {{ $type['name_'.$lang] }} </option>
 										@endforeach
 									</select>
 								</div>
@@ -238,31 +238,6 @@ $lang = session()->get('locale');
 		// $("#firstname").attr("disabled", "disabled");
 
 
-		@if ($admin->type == 'superadmin')
-		$('input.permissions').each(function(){
-			$(this).prop('disabled',true);
-			$.uniform.update();
-		});
-		@endif
-
-		$('select[name="type"]').on('select2:select', function(event) {
-			
-			var admin_type = $(event.currentTarget).val();
-			console.log(admin_type);
-			if (admin_type == 'superadmin') {
-				$('input.permissions').each(function(){
-					console.log(admin_type);
-					$(this).prop('disabled',true);
-					$.uniform.update();
-				});
-			} else {
-				$('input.permissions').each(function(){
-					console.log(admin_type);
-					$(this).prop('disabled',false);
-					$.uniform.update();
-				});
-			}
-		});
 
 
 		$('.select').select2({

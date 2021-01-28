@@ -173,7 +173,10 @@ return [
 		'content_en' => 'المحتوى بالعربيه' ,
 		'content_ar' => 'المحتوى بالانجليزيه' ,
 		'admins' => 'المشرفين' , 
-		'markets' => 'المتاجر'
+		'markets' => 'المتاجر' , 
+		'market_id' => 'المتجر' , 
+		'branch_id' => 'الفرع',
+		'customers' => 'العملاء'
 
 	],
 
