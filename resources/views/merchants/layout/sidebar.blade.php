@@ -139,6 +139,16 @@ $lang = session()->get('locale');
                         </ul>
                     </li>
 
+
+
+                    <li class="nav-item nav-item-submenu {{ $products == 'active' ? 'nav-item-open' : '' }}">
+                        <a href="#" class="nav-link {{ $products }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.products')</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('products.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.show_all_product') </a></li>
+                            <li class="nav-item"><a href="{{ route('products.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('merchantDashbaord.add_new_product') </a></li>
+                        </ul>
+                    </li>
+
 {{-- 					<li class="nav-item nav-item-submenu {{ $drivers == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $drivers }}"><i class="icon-users"></i> <span>@lang('drivers.drivers')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
