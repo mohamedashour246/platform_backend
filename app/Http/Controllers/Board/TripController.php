@@ -22,7 +22,8 @@ class TripController extends Controller
      */
     public function index()
     {
-        return view('board.trips.index');
+        $trips = Trip::all();
+        return view('board.trips.index'  , compact('trips') );
     }
 
     /**
