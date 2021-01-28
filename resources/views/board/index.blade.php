@@ -140,7 +140,7 @@
 						</div>
 					</li>
 					<li class="mb-3">
-						<div class="d-flex align-items-center mb-1"> قيد التنفيذ   <span class="text-muted ml-auto">6</span> </div>
+						<div class="d-flex align-items-center mb-1"> قيد التنفيذ   <span class="text-muted ml-auto"> {{ $today_total_trips_count }} </span> </div>
 						<div class="progress" style="height: 0.375rem;">
 							<div class="progress-bar bg-warning" style="width: 100%">
 							</div>
