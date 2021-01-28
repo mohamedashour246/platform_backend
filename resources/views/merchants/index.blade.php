@@ -262,7 +262,7 @@
                                 <div class="d-flex justify-content-between">
                                     <a href="{{ route('orders.show'  , $order->id  ) }}"> {{@$order->owner->name }} </a>
 
-                                    <span class="font-size-sm text-muted"> {{ @$order->total.' $' }} </span>
+                                    <span class="font-size-sm text-muted"> {{ @$order->total.' '}} @lang('merchantDashbaord.KWD') </span>
                                     <span class="font-size-sm text-muted"> {{ @ $order->created_at->diffForHumans() }} </span>
                                 </div>
 
