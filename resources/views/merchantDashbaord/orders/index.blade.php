@@ -71,7 +71,7 @@
                             <td>{{$order->owner->name}}</td>
                             <td>{{$order->total}}</td>
                             <td>{{$order->discount}}</td>
-                            <td>{{$order->order_status}}</td>
+                            <td>{{$order->currentStatus()}}</td>
                             <td >{{ $order->created_at->toFormattedDateString() }} - {{ $order->created_at->diffForHumans() }} </td>
 
                         </tr>

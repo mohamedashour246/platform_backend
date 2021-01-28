@@ -9,9 +9,6 @@ use Auth;
 
 class OrderController extends Controller
 {
-
-
-
     public function index(){
         $orders = Order::where('merchant_id' , auth()->guard('merchant')->id())->get();
         return view('merchantDashbaord.orders.index' , compact('orders'));
