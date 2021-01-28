@@ -40,6 +40,9 @@ class Trip extends Model {
 		return $this->belongsTo(CustomerAddress::class , 'customer_address_id');
 	}
 
+
+
+
 	public function add($data, $address_id) {
 		$this->market_id                 = $data['market_id'];
 		$this->branch_id                 = $data['branch_id'];

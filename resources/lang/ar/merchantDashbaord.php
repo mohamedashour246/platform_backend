@@ -45,4 +45,14 @@ return [
     'added_successfully'                     => ' تم الاضافة بنجاح ',
     'not_permitted'                     => '   محاولة الوصول للمحتوي غير موجود  ',
 
+
+    'client_name'                     => ' العميل ',
+    'total_price'                     => '   المبلغ الكلى',
+
+
+//    order_status
+    'delivered'               => '  تم التوصيل',
+    'in_progress'             => 'قيد التحضير',
+    'new'                     => 'جديد',
+//---------------
 ];
