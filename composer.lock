@@ -64,6 +64,18 @@
         },
         {
             "name": "aws/aws-sdk-php",
+<<<<<<< HEAD
+            "version": "3.172.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "5a5e66c4d54c392042820703eeb8a6bd3d222924"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5a5e66c4d54c392042820703eeb8a6bd3d222924",
+                "reference": "5a5e66c4d54c392042820703eeb8a6bd3d222924",
+=======
             "version": "3.172.1",
             "source": {
                 "type": "git",
@@ -74,6 +86,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/28a0929598be6e9e0b652091712068d37acd9d0a",
                 "reference": "28a0929598be6e9e0b652091712068d37acd9d0a",
+>>>>>>> aebf0a4ccab2bbfb5405a62103cc28e8ae9051b4
                 "shasum": ""
             },
             "require": {
@@ -148,9 +161,15 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.172.0"
+            },
+            "time": "2021-01-22T19:21:38+00:00"
+=======
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.172.1"
             },
             "time": "2021-01-26T19:11:49+00:00"
+>>>>>>> aebf0a4ccab2bbfb5405a62103cc28e8ae9051b4
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2867,6 +2886,18 @@
         },
         {
             "name": "markbaker/matrix",
+<<<<<<< HEAD
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MarkBaker/PHPMatrix.git",
+                "reference": "35a2d1a919a1de732402f694925168c53c17c838"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MarkBaker/PHPMatrix/zipball/35a2d1a919a1de732402f694925168c53c17c838",
+                "reference": "35a2d1a919a1de732402f694925168c53c17c838",
+=======
             "version": "2.1.2",
             "source": {
                 "type": "git",
@@ -2877,6 +2908,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/MarkBaker/PHPMatrix/zipball/361c0f545c3172ee26c3d596a0aa03f0cef65e6a",
                 "reference": "361c0f545c3172ee26c3d596a0aa03f0cef65e6a",
+>>>>>>> aebf0a4ccab2bbfb5405a62103cc28e8ae9051b4
                 "shasum": ""
             },
             "require": {
@@ -2935,9 +2967,15 @@
             ],
             "support": {
                 "issues": "https://github.com/MarkBaker/PHPMatrix/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/MarkBaker/PHPMatrix/tree/2.1.1"
+            },
+            "time": "2021-01-21T13:53:09+00:00"
+=======
                 "source": "https://github.com/MarkBaker/PHPMatrix/tree/2.1.2"
             },
             "time": "2021-01-23T16:37:31+00:00"
+>>>>>>> aebf0a4ccab2bbfb5405a62103cc28e8ae9051b4
         },
         {
             "name": "maximebf/debugbar",
