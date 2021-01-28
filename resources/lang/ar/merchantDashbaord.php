@@ -29,7 +29,9 @@ return [
     'deactive'                     => ' غير مفعل ',
     'active'                     => '  مفعل ',
     'orders'                     => '  الطلبات ',
-
+    'last_orders'                     => '  أخر الطلبات  ',
+    'last_products'                     => '  أخر المنتجات المضافة  ',
+    'last_categories'                     => '  أخر الفئات المضافة ',
 
     'edit_category'                     => ' تعديل فئة ',
     'show_category'                     => ' عرض الفئة  ',

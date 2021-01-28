@@ -20,6 +20,9 @@ return [
     'category'                     => ' Category ',
     'discount'                     => ' Discount ',
     'orders'                     => '  Orders ',
+    'last_orders'                     => '  Last Orders ',
+    'last_products'                     => '  Last Products ',
+    'last_categories'                     => '  Last Categories ',
 
     'show_all_categories'                     => ' Show All Categories        ',
     'show_all_product'                     => '  Show All Products      ',
