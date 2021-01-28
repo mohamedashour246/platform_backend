@@ -65,6 +65,9 @@ return [
     'city'                     => 'المدينه',
     'Extras'                     => 'اضافات',
     'NoDataFound'                     => 'لا يوجد بيانات',
+    'statics_yearly'                     => 'رسم بيانى شهرى وسنوى للطلبات ',
+    'delivered_orders'                     => 'طلبات تم توصيلها ',
+    'new_orders'                     => 'طلبات حديثه ',
 
 
 

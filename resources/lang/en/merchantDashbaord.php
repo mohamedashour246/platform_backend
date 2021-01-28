@@ -62,6 +62,9 @@ return [
     'delivery_fees'                     => 'delivery fees',
     'time_to_arrive'                     => 'time to arrive and deliver',
     'city'                     => 'City',
+    'statics_yearly'                     => 'statics monthly and yearly for orders',
+    'delivered_orders'                     => 'delivered orders',
+    'new_orders'                     => 'new orders  ',
 
 
     'orders'                     => ' Orders',

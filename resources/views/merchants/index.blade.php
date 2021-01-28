@@ -55,6 +55,120 @@
             </div>
         </div>
     </div>
+
+
+
+    <div>
+        <div id="container" style="min-width: 100%; height: 400px; margin: 0 auto"></div>
+
+        <script>
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '{{ trans("merchantDashbaord.statics_yearly") }}'
+                },
+                subtitle: {
+                    text: 'Devloped By : Mohamed ِArafa'
+                },
+                xAxis: {
+                    categories: [
+                        '{{ $sub_11_month }}',
+                        '{{ $sub_10_month }}',
+                        '{{ $sub_9_month }}',
+                        '{{ $sub_8_month }}',
+                        '{{ $sub_7_month }}',
+                        '{{ $sub_6_month }}',
+                        '{{ $sub_5_month }}',
+                        '{{ $sub_4_month }}',
+                        '{{ $sub_3_month }}',
+                        '{{ $sub_2_month }}',
+                        '{{ $sub_1_month }}',
+                        '{{ $current_month }}'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Count'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: '{{ trans("merchantDashbaord.new_orders") }}',
+                    data: [
+                        {{ $normal_user_count_sub_11_month }},
+                        {{ $normal_user_count_sub_10_month }},
+                        {{ $normal_user_count_sub_9_month }},
+                        {{ $normal_user_count_sub_8_month }},
+                        {{ $normal_user_count_sub_7_month }},
+                        {{ $normal_user_count_sub_6_month }},
+                        {{ $normal_user_count_sub_5_month }},
+                        {{ $normal_user_count_sub_4_month }},
+                        {{ $normal_user_count_sub_3_month }},
+                        {{ $normal_user_count_sub_2_month }},
+                        {{ $normal_user_count_sub_1_month }},
+                        {{ $normal_user_count_current_month }},
+                    ]
+
+                },
+                        {{--{--}}
+                        {{--name: '{{ trans("dash.orders") }}',--}}
+                        {{--data: [--}}
+                        {{--{{ $order_count_sub_11_month }},--}}
+                        {{--{{ $order_count_sub_10_month }},--}}
+                        {{--{{ $order_count_sub_9_month }},--}}
+                        {{--{{ $order_count_sub_8_month }},--}}
+                        {{--{{ $order_count_sub_7_month }},--}}
+                        {{--{{ $order_count_sub_6_month }},--}}
+                        {{--{{ $order_count_sub_5_month }},--}}
+                        {{--{{ $order_count_sub_4_month }},--}}
+                        {{--{{ $order_count_sub_3_month }},--}}
+                        {{--{{ $order_count_sub_2_month }},--}}
+                        {{--{{ $order_count_sub_1_month }},--}}
+                        {{--{{ $order_count_current_month }},--}}
+                        {{--]--}}
+
+                        {{--},--}}
+                    {
+                        name: '{{ trans("merchantDashbaord.delivered_orders") }}',
+                        data: [
+                            {{ $provider_count_sub_11_month }},
+                            {{ $provider_count_sub_10_month }},
+                            {{ $provider_count_sub_9_month }},
+                            {{ $provider_count_sub_8_month }},
+                            {{ $provider_count_sub_7_month }},
+                            {{ $provider_count_sub_6_month }},
+                            {{ $provider_count_sub_5_month }},
+                            {{ $provider_count_sub_4_month }},
+                            {{ $provider_count_sub_3_month }},
+                            {{ $provider_count_sub_2_month }},
+                            {{ $provider_count_sub_1_month }},
+                            {{ $provider_count_current_month }},
+                        ]
+
+                    }]
+            });
+        </script>
+    </div>
+
+<br>
+<br>
     <div class="row" >
         <div class="col-xl-4">
 
