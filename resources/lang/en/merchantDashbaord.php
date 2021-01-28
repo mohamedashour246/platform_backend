@@ -19,6 +19,8 @@ return [
     'created_at'                     => ' Craeted At  ',
     'category'                     => ' Category ',
     'discount'                     => ' Discount ',
+    'orders'                     => '  Orders ',
+
     'show_all_categories'                     => ' Show All Categories        ',
     'show_all_product'                     => '  Show All Products      ',
     'add_new_category'                     => ' Add New Category ',

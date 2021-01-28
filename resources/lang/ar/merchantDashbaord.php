@@ -28,6 +28,7 @@ return [
     'show'                     => '      عرض       ',
     'deactive'                     => ' غير مفعل ',
     'active'                     => '  مفعل ',
+    'orders'                     => '  الطلبات ',
 
 
     'edit_category'                     => ' تعديل فئة ',
