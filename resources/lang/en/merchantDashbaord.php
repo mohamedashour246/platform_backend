@@ -44,4 +44,10 @@ return [
     'updated_successfully'                     => ' Updated Successfully',
     'added_successfully'                     => ' Added Successfully',
     'categories'                     => ' Categories ',
+
+    'client_name'                     => ' Client Name ',
+    'total_price'                     => ' total price',
+    'delivered'                     => ' delivered',
+    'in_progress'                     => 'in_progress',
+    'new'                     => 'New',
     ];
