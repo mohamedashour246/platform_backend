@@ -51,11 +51,20 @@ return [
 
     'client_name'                     => ' العميل ',
     'total_price'                     => '   المبلغ الكلى',
+    'duration'                     => 'مده التوصيل',
+    'pay_type'                     => 'طريقه الدفع',
+    'delivery_fees'                     => 'تكاليف التوصيل',
+    'time_to_arrive'                     => 'وقت التوصيل والتسليم',
 
 
     'orders'                     => ' الطلبات',
+    'single_order'                     => ' تفاصيل الطلب',
     'orders_show'                     => ' عرض كل الطلبات',
     'actions'                     => 'عرض',
+    'KWD'                     => 'د.ك',
+    'city'                     => 'المدينه',
+    'Extras'                     => 'اضافات',
+    'NoDataFound'                     => 'لا يوجد بيانات',
 
 
 

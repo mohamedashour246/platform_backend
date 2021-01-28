@@ -35,7 +35,39 @@ class Order extends Model
         }
         return $status;
     }
+
+    public function orderPayment(){
+        $status = "";
+        if (app()->getLocale()== 'en'){
+            if ($this->payment_type == 'cash'){
+                $status= 'cash during delivered';
+            }
+            elseif ($this->payment_type == 'visa'){
+                $status= 'visa';
+            }
+        }
+
+        if (app()->getLocale()== 'ar'){
+            if ($this->payment_type == 'cash'){
+                $status= 'كاش وقت الاستلام';
+            }
+            elseif ($this->payment_type == 'visa'){
+                $status= 'فيزا';
+            }
+        }
+        return $status;
+    }
+
+
     public function owner() {
         return $this->belongsTo(User::class , 'client_id');
+    }
+
+    public function city() {
+        return $this->belongsTo(City::class , 'city_id');
+    }
+
+    public function order_products() {
+        return $this->hasMany(OrderProduct::class , 'order_id');
     }
 }

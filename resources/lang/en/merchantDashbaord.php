@@ -35,10 +35,12 @@ return [
     'products'                     => ' Products ',
     'category_detail'                     => ' Category Detail ',
     'product_detail'                     => '      Droduct Detail       ',
+    'Extras'                     => 'Extras',
     'show'                     => '      Show ',
     'deactive'                     => ' De Active ',
     'active'                     => '  Active ',
     'code'                     => ' Code ',
+    'NoDataFound'                     => ' No Data Found ',
     'not_permitted'                     => ' Attempt to access content not found',
 
     'add_category'                     => ' Add Category ',
@@ -53,9 +55,16 @@ return [
     'delivered'                     => ' delivered',
     'in_progress'                     => 'in_progress',
     'new'                     => 'New',
-    'actions'                     => 'عرض',
+    'actions'                     => 'actions',
+    'KWD'                     => 'KWD',
+    'duration'                     => 'duration',
+    'pay_type'                     => 'payment type',
+    'delivery_fees'                     => 'delivery fees',
+    'time_to_arrive'                     => 'time to arrive and deliver',
+    'city'                     => 'City',
 
 
     'orders'                     => ' Orders',
+    'single_order'                     => ' single  order',
     'orders_show'                     => ' show All Orders',
     ];

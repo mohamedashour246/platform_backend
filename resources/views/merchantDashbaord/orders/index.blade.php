@@ -65,7 +65,7 @@
 
                             <td>{{ auth()->guard('merchant')->user()->name }}</td>
                             <td>{{$order->owner->name}}</td>
-                            <td>{{$order->total}}</td>
+                            <td>{{ $order->total .' ' }} @lang('merchantDashbaord.KWD')</td>
                             <td>{{$order->discount}}</td>
                             <td>{{$order->currentStatus()}}</td>
                             <td >{{ $order->created_at->toFormattedDateString() }} - {{ $order->created_at->diffForHumans() }} </td>

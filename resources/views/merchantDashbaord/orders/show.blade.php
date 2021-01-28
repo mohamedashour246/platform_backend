@@ -3,7 +3,7 @@
 @endphp
 @extends('merchantDashbaord.layout.master')
 @section('title')
-    @lang('categories.add_new_category')
+    @lang('categories.single_order')
 @endsection
 
 
@@ -13,14 +13,14 @@
     <div class="page-header">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('merchantDashbaord.product') </h4>
+                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('merchantDashbaord.orders') </h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none py-0 mb-3 mb-md-0">
                 <div class="breadcrumb">
                     <a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 
-                    <a href="{{ route('products.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.product') </a>
+                    <a href="{{ route('orders.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.order') </a>
                     <span class="breadcrumb-item active"> @lang('merchantDashbaord.show') </span>
                 </div>
             </div>
@@ -35,7 +35,7 @@
         <!-- Account settings -->
         <div class="card">
             <div class="card-header bg-dark header-elements-inline">
-                <h5 class="card-title"> @lang('merchantDashbaord.product_detail') :  {{$product['name_'.$lang]}} </h5>
+                <h5 class="card-title"> @lang('merchantDashbaord.single_order') </h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -49,69 +49,110 @@
                 <table class="table  table-xs border-top-0 my-2">
                     <tbody>
                     <tr>
-                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.name_ar')</th>
-                        <td class="text-left"> {{ $product->name_ar }} </td>
+                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.client_name')</th>
+                        <td class="text-left"> {{ $order->owner->name }} </td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.name_en') </th>
-                        <td class="text-left">	{{ $product->name_en }}	</td>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.merchant') </th>
+                        <td class="text-left">	{{ auth()->guard('merchant')->user()->name }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.description_ar')</th>
-                        <td class="text-left"> {{ $product->description_ar }} </td>
+                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.total_price')</th>
+                        <td class="text-left"> {{ $order->total .' ' }} @lang('merchantDashbaord.KWD') </td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.description_en') </th>
-                        <td class="text-left">	{{ $product->description_en }}	</td>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.duration') </th>
+                        <td class="text-left">	{{ $order->duration }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.category') </th>
-                        <td class="text-left">	{{ $product->subCategory['name_'.$lang] }}	</td>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.pay_type') </th>
+                        <td class="text-left">	{{ $order->orderPayment() }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.deliver_services') </th>
-                        <td class="text-left">	{{ $product->deliver_services }}	</td>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.delivery_fees') </th>
+                        <td class="text-left">	{{ $order->delivery_fees .' ' }} @lang('merchantDashbaord.KWD')	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.type') </th>
-                        <td class="text-left">	{{ $product->type }}	</td>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.time_to_arrive') </th>
+                        <td class="text-left">	{{ $order->time_to_arrive }}</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.unit_type') </th>
-                        <td class="text-left">	{{ $product->unit_type }}	</td>
-                    </tr>
-                    <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.code') </th>
-                        <td class="text-left">	{{ $product->code }}	</td>
-                    </tr>
-                    <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.price') </th>
-                        <td class="text-left">	{{ $product->price }}	</td>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.city') </th>
+                        <td class="text-left">	{{ $order->city->$name }}	</td>
                     </tr>
                     <tr>
                         <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.discount') </th>
-                        <td class="text-left">	{{ $product->discount }}	</td>
-                    </tr>
-                    <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.order') </th>
-                        <td class="text-left">	{{ $product->order }}	</td>
+                        <td class="text-left">	{{ $order->discount }}	</td>
                     </tr>
                     <tr>
                         <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.status') </th>
-                        <td class="text-left">	{{$product->isStatus()}}	</td>
+                        <td class="text-left">	{{$order->currentStatus()}}	</td>
                     </tr>
 
 
 
                     <tr>
-                        <td class="font-weight-bold text-dark"> @lang('merchantDashbaord.created_at') </td>
-                        <td class="text-left"> {{ $product->created_at->toFormattedDateString() }} - {{ $product->created_at->diffForHumans() }} </td>
-                    </tr>
-                    <tr>
-                        <td class="font-weight-semibold">  @lang('merchantDashbaord.image') </td>
-                        <td class="text-right text-muted">
+                        <td class="font-weight-bold text-dark"> @lang('merchantDashbaord.products') </td>
+                        <td class="text-left">
+                            <div class="card" >
 
-                            <img class="img-responsive img-thumbnail" width="300" height="300" src="{{ $product->image_path}}" alt="">
+
+                                <table class="table datatable-responsive table-togglable table-bordered text-center   table-hover ">
+                                    <thead class="bg-dark">
+                                    <tr>
+                                        <th>#</th>
+
+                                        <th> @lang('merchantDashbaord.image') </th>
+                                        <th> @lang('merchantDashbaord.name_ar') </th>
+                                        <th> @lang('merchantDashbaord.name_en') </th>
+                                        <th> @lang('merchantDashbaord.Extras') </th>
+
+                                    </tr>
+                                    </thead>
+                                    @php
+                                        $i =1 ;
+                                    @endphp
+
+                                    @foreach ($order->order_products as $order_product)
+                                        <tr>
+                                            <td >
+                                                <a href="#collapse-icon{{ $order_product->product->id }}" class="text-default" data-toggle="collapse">
+                                                    <i class="icon-circle-down2"></i>
+                                                </a>
+
+                                            </td>
+                                            <td> <img class="img-thumbnail" width="50" height="50" src=" {{ $order_product->product->image_path}}" /></td>
+
+                                            {{--                            <td  > <a href="{{ route('merchants.branches.show', ['branch' => $product->id])}}"> {{ $product->name }} </a> </td>--}}
+                                            <td>{{$order_product->product->name_ar}}</td>
+                                            <td>{{$order_product->product->name_en}}</td>
+                                            <td>
+                                               @forelse($extras->where('product_id',$order_product->product->id) as $extra)
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>{{ $extra->product_data->$name }}</th>
+                                                    </tr>
+                                                </table>
+                                                @empty
+                                                @lang('merchantDashbaord.NoDataFound')
+                                                @endforelse
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse " id="collapse-icon{{ $order_product->product->id }}" >
+                                            <td colspan="100%" >
+                                                <div class="float-left">
+                                                    <a target="_blank" href="{{ route('products.show'  , [$order_product->product->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+                                                        <i class="icon-eye2 text-primary-800"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        @endforeach
+
+                                        </tbody>
+                                </table>
+                            </div>
                         </td>
                     </tr>
 
