@@ -30,7 +30,13 @@ $lang = session()->get('locale');
 <div class="row">
 	<div class="col-md-12">
 		@include('board.layout.messages')
-		<livewire:trips />
+		@php
+
+		// dd(request()->all());
+			$filter_type = 'all';
+			$filter_value = 'all';
+		@endphp
+		<livewire:trips  :filter_value="$filter_value"  :filter_type="$filter_type" />
 	</div>
 </div>
 

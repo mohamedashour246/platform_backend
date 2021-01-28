@@ -1,7 +1,7 @@
 @php
 $lang = session()->get('locale');
 @endphp
-@extends('merchants.layout.master')
+@extends('board.layout.master')
 @section('title')
 @lang('branches.add_new_branch')
 @endsection
@@ -16,8 +16,9 @@ $lang = session()->get('locale');
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('merchants.branches.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('branches.branches') </a>
+				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
+				<a href="{{ route('markets.show'  , ['market' => $market->id] ) }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  {{ $market->name }} </a>
+				<a href="{{ route('market.branches.index'  , ['market' => $market->id ] ) }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('branches.branches') </a>
 				<span class="breadcrumb-item active"> @lang('branches.add_new_branch') </span>
 			</div>
 		</div>
@@ -41,7 +42,7 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('merchants.branches.store') }}" method="POST"  enctype="multipart/form-data" >
+			<form action="{{ route('market.branches.store' , ['market' => $market->id ]) }}" method="POST"  enctype="multipart/form-data" >
 				<div class="card-body">
 					@csrf
 					<fieldset>
@@ -191,6 +192,13 @@ $lang = session()->get('locale');
 
 <script>
 	$(function() {
+
+
+
+
+
+
+
 		var geocoder;
 		var map;
 		var address = "";
@@ -272,7 +280,7 @@ $lang = session()->get('locale');
 			initialize(address , 15);
 
 			$.ajax({
-				url: '{{ url("/Merchant/get_governorate_cities") }}',
+				url: '{{ url("/Board/get_governorate_cities") }}',
 				type: 'GET',
 				dataType: 'html',
 				data: {governorate:governorate_id},

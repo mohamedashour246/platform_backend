@@ -21,7 +21,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $admins = Admin::withCount('dailyTrips')->latest()->get();
         return view('board.admins.index' , compact('admins'));
     }
@@ -57,7 +57,8 @@ class AdminController extends Controller
             $admin->setImage(basename($path));
         }
 
-
+        
+        if ($request->permissions != null) {
             $current_logged_in_admin_id = Auth::guard('admin')->id();
             $permissions = [] ;
             foreach ($request->permissions as $permission) {
@@ -68,8 +69,9 @@ class AdminController extends Controller
             }
 
             $admin->permissions()->saveMany($permissions);
+        }
 
- 
+
 
         return redirect(route('admins.index'))->with('success_msg'  , trans('admins.adding_success') );
     }
@@ -120,8 +122,10 @@ class AdminController extends Controller
             $admin->setImage(basename($path));
         }
 
-        if ($request->type == 'admin') {
-            $admin->permissions()->delete();
+
+        $admin->permissions()->delete();
+
+        if ($request->permissions != null) {
             $current_logged_in_admin_id = Auth::guard('admin')->id();
             $permissions = [] ;
             foreach ($request->permissions as $permission) {
@@ -133,6 +137,7 @@ class AdminController extends Controller
 
             $admin->permissions()->saveMany($permissions);
         }
+        
 
 
         return back()->with('success_msg'  , trans('admins.updating_success') );

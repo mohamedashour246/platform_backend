@@ -27,7 +27,7 @@ class UpdateAdminRequest extends FormRequest
         return [
             'name' => 'required|unique:admins,name,'.$id , 
             'username' => 'required|unique:admins,username,'.$id,
-            'email' => 'required|email|unique:admins,email,'.$id,
+            'email' => 'nullable|email|unique:admins,email,'.$id,
             'password' => 'nullable|confirmed|min:8',
             'profile_picture' => 'nullable|image',
             'notes' => 'nullable' , 

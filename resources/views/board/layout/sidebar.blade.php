@@ -167,6 +167,18 @@ $lang = session()->get('locale');
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">
 							<li class="nav-item"><a href="{{ route('trips.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('trips.show_all_trips') </a></li>
 							<li class="nav-item"><a href="{{ route('trips.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('trips.add_new_trip') </a></li>
+							<li class="nav-item nav-item-submenu">
+								<a href="#" class="nav-link">Blog</a>
+								<ul class="nav nav-group-sub">
+									<li class="nav-item"><a href="blog_classic_v.html" class="nav-link">Classic vertical</a></li>
+									<li class="nav-item"><a href="blog_classic_h.html" class="nav-link">Classic horizontal</a></li>
+									<li class="nav-item"><a href="blog_grid.html" class="nav-link">Grid</a></li>
+									<li class="nav-item"><a href="blog_single.html" class="nav-link">Single post</a></li>
+									<li class="nav-item-divider"></li>
+									<li class="nav-item"><a href="blog_sidebar_left.html" class="nav-link">Left sidebar</a></li>
+									<li class="nav-item"><a href="blog_sidebar_right.html" class="nav-link">Right sidebar</a></li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 					<li class="nav-item nav-item-submenu {{ $bills == 'active' ? 'nav-item-open' : '' }}">

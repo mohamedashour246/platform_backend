@@ -72,7 +72,11 @@ return [
 	'added_by'                  => 'Added By' , 
 	'payment_completed' => 'Payment Completed' , 
 	'payment_completed' => 'payment not Completed' , 
-	'driver_total_income' => 'Total income'
+	'driver_total_income' => 'Total income' , 
+	'confirm' => 'Confirm' , 
+	'choose_driver_to_trip' => 'Choose A driver for trip' , 
+	'driver_added_to_tip' => 'Driver Added to trip '
+
 
 ];
 

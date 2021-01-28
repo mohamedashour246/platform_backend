@@ -8,7 +8,7 @@ use Session;
 
 class Branch extends Model {
 
-	public function add($data) {
+	public function add($data , $market) {
 		$this->name             = $data['branch_name'];
 		$this->phones           = $data['phones'];
 		$this->governorate_id   = $data['governorate_id'];
@@ -22,13 +22,12 @@ class Branch extends Model {
 		$this->building_number  = $data['building_number'];
 		$this->avenue_number    = $data['avenue_number'];
 		$this->place_number     = $data['place_number'];
-		$this->merchant_id      = Auth::guard('merchant')->id();
-
-		$this->market_id = Session::get('market_id');
+		$this->admin_id      = Auth::guard('admin')->id();
+		$this->market_id = $market;
 		return $this->save();
 	}
 
-	public function edit($data) {
+	public function edit($data ) {
 		$this->name             = $data['branch_name'];
 		$this->phones           = $data['phones'];
 		$this->governorate_id   = $data['governorate_id'];
@@ -61,8 +60,8 @@ class Branch extends Model {
 		return $this->belongsTo(BuildingType::class );
 	}
 
-	public function merchant() {
-		return $this->belongsTo(Merchant::class );
+	public function admin() {
+		return $this->belongsTo(Admin::class , 'admin_id' );
 	}
 
 	public function remove() {

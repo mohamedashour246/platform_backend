@@ -26,10 +26,10 @@ $lang = session()->get('locale');
 @endsection
 
 @section('content')
-@include('merchants.layout.messages')
+
 <div class="row">
 	<div class="col-md-12">
-		
+		@include('merchants.layout.messages')
 		<div class="row">
 			<div class="col-md-12 mb-3">
 				<a  href="{{ route('merchants.branches.create') }}" class="btn btn-primary float-right" > <i class="icon-plus3  mr-1"></i>@lang('branches.add_new_branch') </a>
@@ -42,6 +42,7 @@ $lang = session()->get('locale');
 				<thead class="bg-dark">
 					<tr>
 						<th>#</th>
+
 						<th> @lang('branches.branch_name') </th>
 						<th> @lang('branches.phones') </th>
 						<th> @lang('branches.address') </th>
@@ -65,12 +66,12 @@ $lang = session()->get('locale');
 						<td >{{ $branch->phones }}</td>
 						<td >
 							@lang('customers.governorate') {{ optional($branch->governorate)['name_'.$lang] }}
-							@lang('customers.city') {{ optional($branch->city)['name_'.$lang] }}
-							@lang('customers.place_number') {{ $branch->place_number }}
-							@lang('customers.street_name') {{ $branch->street_name }}
-							@lang('customers.avenue_number') {{$branch->avenue_number }}
-							@lang('customers.building_number') {{$branch->building_number }}
-							@lang('customers.building_type') {{ optional($branch->building_type)['name_'] }}
+								@lang('customers.city') {{ optional($branch->city)['name_'.$lang] }}
+								@lang('customers.place_number') {{ $branch->place_number }}
+								@lang('customers.street_name') {{ $branch->street_name }}
+								@lang('customers.avenue_number') {{$branch->avenue_number }}
+								@lang('customers.building_number') {{$branch->building_number }}
+								@lang('customers.building_type') {{ optional($branch->building_type)['name_'] }}
 						</td>
 						<td >{{ optional($branch->merchant)->name }}</td>
 						<td >{{ $branch->created_at->toFormattedDateString() }} - {{ $branch->created_at->diffForHumans() }} </td>
@@ -80,18 +81,18 @@ $lang = session()->get('locale');
 						<td colspan="100%" >
 							<div class="float-left">
 								<a target="_blank" href="{{ route('merchants.branches.show'  , ['branch' => $branch->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
-									<i class="icon-eye2 text-primary-800"></i>
-								</a>
-								<a target="_blank" href="{{ route('merchants.branches.edit' , ['branch' => $branch->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-									<i class="icon-pencil7 text-warning-800"></i>
-								</a>
-								<a href="" data-id="{{ $branch->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+								<i class="icon-eye2 text-primary-800"></i>
+							</a>
+							<a target="_blank" href="{{ route('merchants.branches.edit' , ['branch' => $branch->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+								<i class="icon-pencil7 text-warning-800"></i>
+							</a>
+							<a href="" data-id="{{ $branch->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
 
-								<form name="deleteFormNumber{{ $branch->id }}" action="{{ route('merchants.branches.destroy' , ['branch' => $branch->id ]) }}" method="POST" >
+							<form name="deleteFormNumber{{ $branch->id }}" action="{{ route('merchants.branches.destroy' , ['branch' => $branch->id ]) }}" method="POST" >
 
-									@method('DELETE')
-									@csrf
-								</form>
+								@method('DELETE')
+								@csrf
+							</form>
 							</div>
 						</td>
 					</tr>

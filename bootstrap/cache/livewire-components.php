@@ -2,6 +2,7 @@
   'admins' => 'App\\Http\\Livewire\\Admins',
   'board.bills' => 'App\\Http\\Livewire\\Board\\Bills',
   'board.drivers.bills' => 'App\\Http\\Livewire\\Board\\Drivers\\Bills',
+  'board.trips.add-driver-to-trip' => 'App\\Http\\Livewire\\Board\\Trips\\AddDriverToTrip',
   'cities' => 'App\\Http\\Livewire\\Cities',
   'city-delivery-price' => 'App\\Http\\Livewire\\CityDeliveryPrice',
   'customers.add-customer' => 'App\\Http\\Livewire\\Customers\\AddCustomer',

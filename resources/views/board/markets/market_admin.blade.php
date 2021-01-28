@@ -67,7 +67,7 @@ $lang = session()->get('locale');
 					<i class="icon-user mr-3"></i>
 					@lang('markets.market_admin')
 				</a>
-				<a href="{{ route('market.branches'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action text-dark">
+				<a href="{{ route('market.branches.index'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action text-dark">
 					<i class="icon-git-branch  mr-3"></i>
 					@lang('markets.branches')
 				</a>

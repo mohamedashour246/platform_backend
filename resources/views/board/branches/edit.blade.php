@@ -1,9 +1,9 @@
 @php
 $lang = session()->get('locale');
 @endphp
-@extends('merchants.layout.master')
+@extends('board.layout.master')
 @section('title')
-@lang('branches.add_new_branch')
+@lang('branches.edit_branch_details')
 @endsection
 
 
@@ -16,9 +16,9 @@ $lang = session()->get('locale');
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('merchants.branches.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('branches.branches') </a>
-				<span class="breadcrumb-item active"> @lang('branches.add_new_branch') </span>
+				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
+				<a href="{{ route('market.branches.index'  , ['market' => $market->id ] ) }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('branches.branches') </a>
+				<span class="breadcrumb-item active"> @lang('branches.edit_branch_details') </span>
 			</div>
 		</div>
 	</div>
@@ -32,7 +32,7 @@ $lang = session()->get('locale');
 		<!-- Account settings -->
 		<div class="card">
 			<div class="card-header bg-dark header-elements-inline">
-				<h5 class="card-title"> @lang('branches.add_new_branch') </h5>
+				<h5 class="card-title"> @lang('branches.edit_branch_details') </h5>
 				<div class="header-elements">
 					<div class="list-icons">
 						<a class="list-icons-item" data-action="collapse"></a>
@@ -41,36 +41,38 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 			</div>
-			<form action="{{ route('merchants.branches.store') }}" method="POST"  enctype="multipart/form-data" >
+			<form action="{{ route('market.branches.update'  , ['branch' => $branch->id  , 'market' => $market->id ] ) }}" method="POST"  enctype="multipart/form-data" >
 				<div class="card-body">
 					@csrf
+					@method('PATCH')
 					<fieldset>
 						<legend class="font-weight-bold"> <span class="text-primary"> @lang('branches.branch_data') </span> </legend>
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-4">
 									<label> @lang('branches.branch_name') </label>
-									<input type="text" name="branch_name" value="{{ old('branch_name') }}" class="form-control @error('branch_name') is-invalid @enderror " >
+									<input type="text" name="branch_name" value="{{  $branch->name }}" class="form-control @error('branch_name') is-invalid @enderror " >
 									@error('branch_name')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
 								<div class="col-md-4">
 									<label> @lang('branches.phones') </label>
-									<input type="text" name="phones" value="{{ old('phones') }}" class="form-control @error('phones') is-invalid @enderror " >
+									<input type="text" name="phones" value="{{  $branch->phones }}" class="form-control @error('phones') is-invalid @enderror " >
 									@error('phones')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
+
 								<div class="col-md-4">
 									<label> @lang('branches.governorate') </label>
-									<select name="governorate_id"  class="form-control " required="required">
-										<option value=""></option>
+									<select name="governorate_id"  class="form-control select" required="required">
+
 										@foreach ($governorates as $governorate)
-										<option value="{{ $governorate->id }}"> {{ $governorate['name_'.$lang] }} </option>
+										<option value="{{ $governorate->id }}" {{ $branch->governorate_id == $governorate->id ? 'selected="selected"' : '' }} > {{ $governorate['name_'.$lang] }} </option>
 										@endforeach
 									</select>
-									@error('governorate')
+									@error('governorate_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
@@ -80,10 +82,13 @@ $lang = session()->get('locale');
 
 						<div class="form-group">
 							<div class="row">
+
 								<div class="col-md-3">
 									<label> @lang('branches.city') </label>
-									<select name="city_id"  class="form-control city" required="required">
-										<option value=""></option>
+									<select name="city_id"  class="form-control select city" required="required">
+										@foreach ($cities as $city)
+										<option value="{{ $city->id }}" {{ $branch->city_id == $city->id ? 'selected="selected"' : '' }} > {{ $city['name_'.$lang] }} </option>
+										@endforeach
 									</select>
 									@error('city_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -91,25 +96,26 @@ $lang = session()->get('locale');
 								</div>
 								<div class="col-md-3">
 									<label> @lang('customers.place_number') </label>
-									<input type="text" name="place_number" value="{{ old('place_number') }}" class="form-control @error('place_number') is-invalid @enderror " >
+									<input type="text" name="place_number" value="{{ $branch->place_number }}" class="form-control @error('place_number') is-invalid @enderror " >
 									@error('place_number')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
 								<div class="col-md-3">
 									<label> @lang('customers.street_name') </label>
-									<input type="text" name="street_name" value="{{ old('street_name') }}" class="form-control @error('street_name') is-invalid @enderror " >
+									<input type="text" name="street_name" value="{{ $branch->street_name }}" class="form-control @error('street_name') is-invalid @enderror " >
 									@error('street_name')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
 								<div class="col-md-3">
 									<label> @lang('customers.avenue_number') </label>
-									<input type="text" name="avenue_number" value="{{ old('avenue_number') }}" class="form-control @error('avenue_number') is-invalid @enderror " >
+									<input type="text" name="avenue_number" value="{{ $branch->avenue_number }}" class="form-control @error('avenue_number') is-invalid @enderror " >
 									@error('avenue_number')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
+
 							</div>
 						</div>
 						<div class="form-group">
@@ -117,7 +123,7 @@ $lang = session()->get('locale');
 
 								<div class="col-md-3">
 									<label> @lang('customers.building_number') </label>
-									<input type="text" name="building_number" value="{{ old('building_number') }}" class="form-control @error('building_number') is-invalid @enderror " >
+									<input type="text" name="building_number" value="{{ $branch->building_number }}" class="form-control @error('building_number') is-invalid @enderror " >
 									@error('building_number')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
@@ -126,14 +132,14 @@ $lang = session()->get('locale');
 
 								<div class="col-md-3">
 									<label> @lang('customers.floor_number') </label>
-									<input type="text" name="floor_number" value="{{ old('floor_number') }}" class="form-control @error('floor_number') is-invalid @enderror " >
+									<input type="text" name="floor_number" value="{{ $branch->floor_number }}" class="form-control @error('floor_number') is-invalid @enderror " >
 									@error('floor_number')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
 								<div class="col-md-3">
 									<label> @lang('customers.apratment_number') </label>
-									<input type="text" name="apratment_number" value="{{ old('apratment_number') }}" class="form-control @error('apratment_number') is-invalid @enderror " >
+									<input type="text" name="apratment_number" value="{{ $branch->apratment_number }}" class="form-control @error('apratment_number') is-invalid @enderror " >
 									@error('apratment_number')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
@@ -142,7 +148,7 @@ $lang = session()->get('locale');
 									<label> @lang('customers.building_type') </label>
 									<select name="building_type"  class="form-control select" required="required">
 										@foreach ($building_types as $building_type)
-										<option value="{{ $building_type->id }}"> {{ $building_type['name_'.$lang] }} </option>
+										<option value="{{ $building_type->id }}"  {{ $branch->building_type_id == $building_type->id ? 'selected="selected"' : '' }} > {{ $building_type['name_'.$lang] }} </option>
 										@endforeach
 									</select>
 									@error('building_type')
@@ -152,18 +158,17 @@ $lang = session()->get('locale');
 							</div>
 						</div>
 
+
 						<div class="form-group">
-
-
 							<div id="map" style="width: 100%; height: 400px;" ></div>
-							<input type="hidden" name="latitude" value=""  id="latitude" >
-							<input type="hidden" name="longitude" value="" id="longitude" >
+							<input type="hidden" name="latitude" value="{{ $branch->latitude }}"  id="latitude" >
+							<input type="hidden" name="longitude" value="{{ $branch->longitude }}" id="longitude" >
 						</div>
 
 					</fieldset>
 				</div>
 				<div class="card-footer bg-light" >
-					<button type="submit" class="btn btn-primary float-right ml-2"> @lang('branches.add') </button>
+					<button type="submit" class="btn btn-primary float-right ml-2"> @lang('branches.edit') </button>
 					<a href="{{ route('merchants.branches.index') }}" class="btn btn-secondary "> @lang('branches.back') </a>
 				</div>
 			</form>
@@ -181,9 +186,8 @@ $lang = session()->get('locale');
 
 @section('scripts')
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBuQymvDTcNgdRWQN0RhT2YxsJeyh8Bys4&amp;libraries=places"></script>
-
-<script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-{{-- <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/typeahead_addresspicker.js') }}"></script>
+{{-- <script src="{{ asset('board_assets/global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/typeahead_addresspicker.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/autocomplete_addresspicker.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/pickers/location/location.js') }}"></script>
 <script src="{{ asset('board_assets/global_assets/js/plugins/ui/prism.min.js') }}"></script> --}}
@@ -191,6 +195,31 @@ $lang = session()->get('locale');
 
 <script>
 	$(function() {
+
+
+
+
+		map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 13,
+			center: { lat: {{ $branch->latitude }}, lng: {{ $branch->longitude }} },
+		});
+		marker = new google.maps.Marker({
+			map,
+			draggable: true,
+			animation: google.maps.Animation.DROP,
+			position: { lat: {{ $branch->latitude }}, lng: {{ $branch->longitude }} },
+		});
+
+		google.maps.event.addListener(marker, 'dragend', function (event) {
+			document.getElementById("latitude").value = this.getPosition().lat();
+			document.getElementById("longitude").value = this.getPosition().lng();
+		});
+
+
+
+
+
+
 		var geocoder;
 		var map;
 		var address = "";
@@ -202,9 +231,28 @@ $lang = session()->get('locale');
 		var place_number = '';
 		var building_number = '';
 
+		// governorate = $('select[name="governorate_id"]').find('option:selected').text();
+		// governorate_id = $('select[name="governorate_id"]').find('option:selected').val();
+		// city = $('select[name="city_id"]').find('option:selected').text();
+
+		// street_name = $('input[name="street_name"]').val();
+		// place_number = $('input[name="place_number"]').val();
+		// avenue_number = $('input[name="avenue_number"]').val();
+
+
+		// address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number ;
+
+
+		// event.preventDefault();
+		// 	governorate_id = $(this).find('option:selected').val();
+		// 	governorate = $(this).find('option:selected').text();
+		// 	address = country + ' - ' + governorate ;
+
+
+
 		function initialize(address , zome ) {
 			geocoder = new google.maps.Geocoder();
-			var latlng = new google.maps.LatLng(29.378586, 47.990341);
+			var latlng = new google.maps.LatLng({{ $branch->latitude }}, {{ $branch->longitude }});
 			var myOptions = {
 				zoom: zome,
 				center: latlng,
@@ -258,10 +306,8 @@ $lang = session()->get('locale');
 				});
 			}
 		}
-		initialize( country , 11);
-		$('.select').select2({
-			minimumResultsForSearch: Infinity
-		});
+		// initialize( address , 11);
+
 
 
 		$('select[name="governorate_id"]').on('change',  function(event) {
@@ -272,7 +318,7 @@ $lang = session()->get('locale');
 			initialize(address , 15);
 
 			$.ajax({
-				url: '{{ url("/Merchant/get_governorate_cities") }}',
+				url: '{{ url("/Board/get_governorate_cities") }}',
 				type: 'GET',
 				dataType: 'html',
 				data: {governorate:governorate_id},
@@ -325,7 +371,6 @@ $lang = session()->get('locale');
 			address = country + ' - ' + governorate + ' - ' + city + ' - قطعه  ' + place_number + ' - شارع ' + street_name + ' - جاده ' + avenue_number + ' - مبنى ' + building_number ;
 			initialize(address , 20);
 		});
-
 
 
 

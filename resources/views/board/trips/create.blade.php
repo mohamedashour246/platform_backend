@@ -65,7 +65,7 @@ $lang = session()->get('locale');
 									<select name="branch_id"  class="form-control branch_id" >
 										<option value=""></option>
 									</select>
-									@error('market_id')
+									@error('branch_id')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
@@ -95,8 +95,8 @@ $lang = session()->get('locale');
 										<div class="col-md-3">
 											<label> @lang('trips.time') </label>
 											<input type="text" name="receipt_time_from_market" class="form-control @error('receipt_date_from_market') is-invalid @enderror" id="pickatime1" 
-											value="{{ old('receipt_date_from_market') }}">
-											@error('receipt_date_from_market')
+											value="{{ old('receipt_time_from_market') }}">
+											@error('receipt_time_from_market')
 											<label class="text-danger font-weight-bold " > {{ $message }} </label>
 											@enderror
 										</div>
@@ -113,8 +113,8 @@ $lang = session()->get('locale');
 										</div>
 										<div class="col-md-3">
 											<label> @lang('trips.time') </label>
-											<input type="text" name="delivery_time_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickatime" 	value="{{ old('delivery_date_to_customer') }}" >
-											@error('delivery_date_to_customer')
+											<input type="text" name="delivery_time_to_customer" class="form-control @error('delivery_date_to_customer') is-invalid @enderror" id="pickatime" 	value="{{ old('delivery_time_to_customer') }}" >
+											@error('delivery_time_to_customer')
 											<label class="text-danger font-weight-bold " > {{ $message }} </label>
 											@enderror
 										</div>
@@ -175,7 +175,7 @@ $lang = session()->get('locale');
 									<select name="customers[]" multiple="multiple" class="form-control customers" >
 										<option value=""> اختر المستلم </option>
 									</select>
-									@error('payment_method_id')
+									@error('customers')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
@@ -185,6 +185,7 @@ $lang = session()->get('locale');
 								<div class="col-md-4">
 									<label> @lang('trips.driver') </label>
 									<select name="driver_id"  class="form-control driver_id" >
+										<option value=""></option>
 										@foreach ($drivers as $driver)
 										<option value="{{ $driver->id }}">{{ $driver->name }}</option>
 										@endforeach

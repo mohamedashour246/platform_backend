@@ -70,9 +70,14 @@ return [
 	'payment_status'            => 'حاله الدفع',
 	'created_at'                => 'تاريخ الاضافه',
 	'added_by'                  => 'تم الاضافه بواسطته' , 
-		'payment_completed' => 'مكتمل' , 
+	'payment_completed' => 'مكتمل' , 
 	'payment_completed' => 'غير مكتمل' , 
-	'driver_total_income' => 'ايراد السائق'
+	'driver_total_income' => 'ايراد السائق' , 
+	'confirm' => 'تاكيد' , 
+	'choose_driver_to_trip' => 'تعيين سائق للرحله'  ,
+	'driver_added_to_tip' => 'تم إضافه السائق للرحله بنجاح'
+
+
 
 
 ];

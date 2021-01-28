@@ -26,8 +26,10 @@ $lang = session()->get('locale');
 @endsection
 
 @section('content')
+	@include('board.layout.messages')
 
 <div class="row">
+
 
 	<div class="col-md-12 mb-3">
 		<div class="header-elements ">
@@ -44,7 +46,7 @@ $lang = session()->get('locale');
 	</div>
 
 
-	@include('board.layout.messages')
+	
 
 	<div class="col-md-2">
 		<div class="card">
@@ -67,7 +69,7 @@ $lang = session()->get('locale');
 					<i class="icon-user mr-3"></i>
 					@lang('markets.market_admin')
 				</a>
-				<a href="{{ route('market.branches'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action active text-white">
+				<a href="{{ route('market.branches.index'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action active text-white">
 					<i class="icon-git-branch  mr-3"></i>
 					@lang('markets.branches')
 				</a>
@@ -95,45 +97,83 @@ $lang = session()->get('locale');
 		</div>
 	</div>
 	<div class="col-md-10">
-		<!-- Account settings -->
-		<div class="card">
-			<div class="card-header bg-dark header-elements-inline">
-				<h5 class="card-title"> @lang('markets.market_branches') </h5>
-				<div class="header-elements">
-					<div class="list-icons">
-						<a class="list-icons-item" data-action="collapse"></a>
-						<a class="list-icons-item" data-action="reload"></a>
-						<a class="list-icons-item" data-action="remove"></a>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="header-elements  ">
+					<div class="float-right">
+						<a href="{{ route('market.branches.create', ['market' => $market->id ] ) }}" class="btn btn-primary ml-1"> <i class="icon-plus3"></i>  @lang('branches.add_new_branch') </a>
 					</div>
 				</div>
 			</div>
+			<hr>
+			<br>
 
-			<div class="card-body">
-				<table class="table  table-xs border-top-0 my-2">
+		</div>
 
-					<thead>
-						<tr>
-							<th> # </th>
-							<th> @lang('branches.branch_name') </th>
-							<th> @lang('branches.branch_phones') </th>
-							<th> @lang('branches.branch_email') </th>
-						</tr>
-					</thead>
-					<tbody>
-						@php
-							$i = 1;
-						@endphp
-						@foreach ($market->branches as $branch)
-							<tr>
-								<td> {{ $i++ }} </td>
-								<td> <a target="_blank" href="{{ route('branches.show'  , ['branch' => $branch->id ] ) }}">  {{ $branch->name }} </a>  </td>
-								<td> {{ $branch->phones }} </td>
-								<td> {{ $branch->email }} </td>
-							</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
+		<!-- Account settings -->
+		<div class="card">
+			<table class="table table-bordered table-xs ">
+				<thead class="bg-dark text-center">
+					<tr>
+						<th> </th>
+						<th> @lang('branches.branch_name') </th>
+						<th> @lang('branches.phones') </th>
+						<th> @lang('branches.address') </th>
+						<th> @lang('branches.added_by') </th>
+						<th> @lang('branches.created_at') </th>
+					</tr>
+				</thead>
+				<tbody class="text-center">
+					@php
+					$i = 1;
+					@endphp
+					@foreach ($market->branches as $branch)
+					<tr>
+						<td> 
+							<a href="#collapse-icon{{ $branch->id }}" class="text-default" data-toggle="collapse">
+								<i class="icon-circle-down2"></i>
+							</a>
+						</td>
+						<td>   {{ $branch->name }}  </td>
+						<td >{{ $branch->phones }}</td>
+						<td >
+							@lang('customers.governorate') {{ optional($branch->governorate)['name_'.$lang] }}
+							@lang('customers.city') {{ optional($branch->city)['name_'.$lang] }}
+							@lang('customers.place_number') {{ $branch->place_number }}
+							@lang('customers.street_name') {{ $branch->street_name }}
+							@lang('customers.avenue_number') {{$branch->avenue_number }}
+							@lang('customers.building_number') {{$branch->building_number }}
+							@lang('customers.building_type') {{ optional($branch->building_type)['name_'] }}
+						</td>
+						<td > <a target='_blank' href="{{ route('admins.show'  , ['admin' => $branch->admin_id ] ) }}"> {{ optional($branch->admin)->name }} </a> </td>
+						<td >{{ $branch->created_at->toFormattedDateString() }} - {{ $branch->created_at->diffForHumans() }} </td>
+					</tr>
+					<tr class="collapse " id="collapse-icon{{ $branch->id }}" >
+						<td colspan="100%" >
+
+
+							<div class="float-left">
+								@lang('admins.settings') :
+
+								<a target="_blank" href="{{ route('market.branches.show'  , ['branch' => $branch->id , 'market' => $market->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+									<i class="icon-eye2 text-primary-800"></i>
+								</a>
+								<a target="_blank" href="{{ route('market.branches.edit' , ['branch' => $branch->id ,  'market' => $market->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+									<i class="icon-pencil7 text-warning-800"></i>
+								</a>
+								<a href="" data-id="{{ $branch->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+
+								<form name="deleteFormNumber{{ $branch->id }}" action="{{ route('market.branches.destroy' , ['branch' => $branch->id , 'market' => $market->id ]) }}" method="POST" >
+									@method('DELETE')
+									@csrf
+								</form>
+							</div>
+						</td>
+					</tr>
+
+					@endforeach
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
@@ -146,5 +186,36 @@ $lang = session()->get('locale');
 @endsection
 
 @section('scripts')
+<script src="{{ asset('board_assets/global_assets/js/plugins/forms/styling/uniform.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/demo_pages/content_cards_header.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/loaders/blockui.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/plugins/extensions/jquery_ui/touch.min.js') }}"></script>
+<script src="{{ asset('board_assets/global_assets/js/demo_pages/components_collapsible.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	$(function() {
+		$('a.delete_branch').on('click', function(event) {
+			event.preventDefault();
+			id = $(this).data('id');
+			console.log(id);
+			Swal.fire({
 
+				text: "هل انت متاكد من رغبتك فى حذف الفرع",
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'نعم',
+				cancelButtonText: 'لا'
+			}).then((result) => {
+				if (result.isConfirmed) {
+
+					name = "deleteFormNumber" + id;
+					$('form[name="'+ name +'"]').submit();
+
+				}
+			})
+		});
+	});
+</script>
 @endsection
