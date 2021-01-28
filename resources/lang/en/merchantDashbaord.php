@@ -48,4 +48,9 @@ return [
     'delivered'                     => ' delivered',
     'in_progress'                     => 'in_progress',
     'new'                     => 'New',
+    'actions'                     => 'عرض',
+
+
+    'orders'                     => ' Orders',
+    'orders_show'                     => ' show All Orders',
     ];

@@ -50,6 +50,12 @@ return [
     'total_price'                     => '   المبلغ الكلى',
 
 
+    'orders'                     => ' الطلبات',
+    'orders_show'                     => ' عرض كل الطلبات',
+    'actions'                     => 'عرض',
+
+
+
 //    order_status
     'delivered'               => '  تم التوصيل',
     'in_progress'             => 'قيد التحضير',

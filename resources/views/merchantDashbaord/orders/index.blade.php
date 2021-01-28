@@ -51,7 +51,7 @@
                         <th> @lang('merchantDashbaord.discount') </th>
                         <th> @lang('merchantDashbaord.status') </th>
                         <th> @lang('merchantDashbaord.created_at') </th>
-                        {{--                        <th> @lang('branches.action') </th>--}}
+                        <th> @lang('merchantDashbaord.actions') </th>
                     </tr>
                     </thead>
                     @php
@@ -59,44 +59,25 @@
                     @endphp
                     @foreach ($orders as $order)
                         <tr>
-                            <td >
-                                <a href="#collapse-icon{{ $order->id }}" class="text-default" data-toggle="collapse">
-                                    <i class="icon-circle-down2"></i>
-                                </a>
-
+                            <td>
+                                {{ $loop->iteration }}
                             </td>
 
-                            {{--                            <td  > <a href="{{ route('merchants.branches.show', ['branch' => $order->id])}}"> {{ $order->name }} </a> </td>--}}
                             <td>{{ auth()->guard('merchant')->user()->name }}</td>
                             <td>{{$order->owner->name}}</td>
                             <td>{{$order->total}}</td>
                             <td>{{$order->discount}}</td>
                             <td>{{$order->currentStatus()}}</td>
                             <td >{{ $order->created_at->toFormattedDateString() }} - {{ $order->created_at->diffForHumans() }} </td>
-
-                        </tr>
-                        <tr class="collapse " id="collapse-icon{{ $order->id }}" >
-                            <td colspan="100%" >
+                            <td >
                                 <div class="float-left">
                                     <a target="_blank" href="{{ route('orders.show'  , [$order->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
                                         <i class="icon-eye2 text-primary-800"></i>
                                     </a>
-                                    <a target="_blank" href="{{ route('orders.edit' , [ $order->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
-                                        <i class="icon-pencil7 text-warning-800"></i>
-                                    </a>
-                                    <a href="" data-id="{{ $order->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
-
-                                    <form name="deleteFormNumber{{ $order->id }}" action="{{ route('orders.destroy' , [$order->id ]) }}" method="POST" >
-
-                                        @method('DELETE')
-                                        @csrf
-                                    </form>
                                 </div>
                             </td>
+
                         </tr>
-
-
-
 
                         @endforeach
 
