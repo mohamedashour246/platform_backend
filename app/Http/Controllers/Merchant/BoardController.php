@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use App;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\merchantDashbaord\SubCategoryController;
 use App\Http\Resources\CustomerResourceCollection;
 use App\Models\CustomerAddress;
 use Illuminate\Http\Request;
@@ -15,8 +16,10 @@ class BoardController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		return view('merchants.index');
-	}
+        $categories    = App\MerchantModels\SubCategory::latest()->where('merchant_id',auth()->guard('merchant')->id())->get();
+        $products      = App\MerchantModels\Product::latest()->where('merchant_id',auth()->guard('merchant')->id())->get();
+        $orders = App\Models\Order::latest()->where('merchant_id',auth()->guard('merchant')->id())->get();
+        return view('merchants.index', compact('categories','products','orders'));	}
 
 	public function notifications() {
 		return view('merchants.notifications');
