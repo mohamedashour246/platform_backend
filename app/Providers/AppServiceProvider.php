@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\TripStatus;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,9 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       $data['status'] = TripStatus::all();
 
-
-       view()->share('shardData'  , $data );
     }
 }
