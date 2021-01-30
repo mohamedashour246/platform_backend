@@ -57,6 +57,8 @@ return [
 	'bills_count' => 'عدد الفواتير' , 
 	'driver_trips' => 'رحلات السائق' , 
 	'driver_bills' => 'فواتير السائق' , 
+	'today_trips_count' => 'عدد رحلات اليوم' , 
+	'total_trips_count' => 'عدد الرحلات الكلى' , 
 ];
 
 ?>

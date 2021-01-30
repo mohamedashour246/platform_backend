@@ -61,6 +61,8 @@ return [
 	'bills_count' => 'bills count' , 
 	'driver_trips' => 'Driver Trips' , 
 	'driver_bills' => 'Driver Bills' , 
+	'today_trips_count' => 'Today trips Count' , 
+	'total_trips_count' => 'Total Trips Count' , 
 
 ];
 

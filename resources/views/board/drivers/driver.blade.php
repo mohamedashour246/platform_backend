@@ -32,7 +32,7 @@ $lang = session()->get('locale');
 	<div class="col-md-12 mb-3">
 		<div class="header-elements ">
 			<div class="float-right">
-			
+
 				<a href="{{ route('drivers.create') }}" class="btn btn-info ml-1"> <i class="icon-car"></i> @lang('drivers.driver_trips')  </a>
 				<a href="{{ route('drivers.bills'  , ['driver' => $driver->id ] ) }}" class="btn btn-success ml-1"> <i class="icon-newspaper"></i> @lang('drivers.driver_bills')  </a>
 				<a href="{{ route('drivers.edit'  , ['driver' => $driver->id ] ) }}" class="btn btn-warning ml-1"> <i class="icon-pencil5"></i> @lang('drivers.edit_driver_details')  </a>
@@ -46,227 +46,247 @@ $lang = session()->get('locale');
 	</div>
 
 
+	<div class="row">
+				<div class="col-md-6">
 
-	<div class="col-md-12">
-		<div class="row">
-			<div class="col-sm-6 col-xl-2">
-				<div class="card card-body">
-					<div class="media">
-						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0">0</h3>
-							<span class="text-uppercase font-size-sm text-blue-600"> الرحلات الكاش </span>
-						</div>
-
-						<div class="ml-3 align-self-center">
-							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-xl-2">
-				<div class="card card-body">
-					<div class="media">
-						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0">0</h3>
-							<span class="text-uppercase font-size-sm text-blue-600">  الرحلات الكى نت </span>
-						</div>
-
-						<div class="ml-3 align-self-center">
-							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+			@include('board.layout.messages')
+			<!-- Account settings -->
+			<div class="card">
+				<div class="card-header bg-dark header-elements-inline">
+					<h5 class="card-title"> @lang('drivers.driver_details') {{ $driver->username }} </h5>
+					<div class="header-elements">
+						<div class="list-icons">
+							<a class="list-icons-item" data-action="collapse"></a>
+							<a class="list-icons-item" data-action="reload"></a>
+							<a class="list-icons-item" data-action="remove"></a>
 						</div>
 					</div>
 				</div>
-			</div>
+
+				<div class="card-body">
+					<table class="table  table-xs border-top-0 my-2">
+						<tbody>
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.code')</th>
+								<td class="text-left"> {{ $driver->code }} </td>
+							</tr>
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.phone')</th>
+								<td class="text-left"> {{ $driver->phone }} </td>
+							</tr>
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.username')</th>
+								<td class="text-left"> {{ $driver->username }} </td>
+							</tr>
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.name')</th>
+								<td class="text-left"> {{ $driver->name }} </td>
+							</tr>
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.working_start_time')</th>
+								<td class="text-left"> {{ $driver->working_start_time->toTimeString() }} </td>
+							</tr>
+
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.working_end_time')</th>
+								<td class="text-left"> {{ $driver->working_end_time->toTimeString() }} </td>
+							</tr>
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.car_number')</th>
+								<td class="text-left"> {{ $driver->car_number }} </td>
+							</tr>
+							<tr>
+								<th class="font-weight-bold text-dark">@lang('drivers.country')</th>
+								<td class="text-left"> {{ optional($driver->country)['name_'.$lang] }} </td>
+							</tr>
 
 
-			<div class="col-sm-6 col-xl-2">
-				<div class="card card-body">
-					<div class="media">
-						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0">0</h3>
-							<span class="text-uppercase font-size-sm text-blue-600"> سعر التوصيل</span>
-						</div>
+							<tr>
+								<th class="font-weight-bold text-dark"> @lang('drivers.activation') </th>
+								<td class="text-left">	
+									@switch($driver->active)
+									@case(1)
+									<label  class="badge badge-success" > @lang('drivers.active') </label>
+									@break
+									@case(0)
+									<label  class="badge badge-secondary" > @lang('drivers.inactive') </label>
+									@break
+									@endswitch
+								</td>
+							</tr>
 
-						<div class="ml-3 align-self-center">
-							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
-						</div>
-					</div>
+							<tr>
+								<td class="font-weight-bold text-dark"> @lang('drivers.bounce') </td>
+								<td class="text-left"> {{ $driver->bounce }} </td>
+							</tr>
+
+
+
+							<tr>
+								<th class="font-weight-bold text-dark"> @lang('drivers.activation') </th>
+								<td class="text-left">	
+									@switch($driver->available)
+									@case(1)
+									<label  class="badge badge-primary" > @lang('drivers.available') </label>
+									@break
+									@case(0)
+									<label  class="badge badge-danger" > @lang('drivers.unavailable') </label>
+									@break
+									@endswitch
+								</td>
+							</tr>
+
+
+							<tr>
+								<td class="font-weight-bold text-dark"> @lang('drivers.created_at') </td>
+								<td class="text-left"> {{ $driver->created_at->toFormattedDateString() }} - {{ $driver->created_at->diffForHumans() }} </td>
+							</tr>
+
+							<tr>
+								<td class="font-weight-bold text-dark"> @lang('drivers.added_by') </td>
+								<td class="text-left font-weight-bold"> <a href="{{ route('drivers.show'  , ['driver' => $driver->id] ) }}"> {{ optional($driver->admin)->username }} </a> </td>
+							</tr>
+
+
+							<tr>
+								<td class="font-weight-bold text-dark"> @lang('drivers.notes') </td>
+								<td class="text-left font-weight-bold"> {{ $driver->notes }} </td>
+							</tr>
+
+
+
+							<tr>
+								<td class="font-weight-semibold">  @lang('drivers.current_profile_picture') </td>
+								<td class="text-right text-muted">
+									<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" alt="">
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-
-			<div class="col-sm-6 col-xl-2">
-				<div class="card card-body">
-					<div class="media">
-						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0">0</h3>
-							<span class="text-uppercase font-size-sm text-blue-600"> ايراد السائق</span>
-						</div>
-
-						<div class="ml-3 align-self-center">
-							<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-xl-2">
-				<div class="card card-body">
-					<div class="media">
-						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0"> {{ $today_total_bills_count }} </h3>
-							<span class="text-uppercase font-size-sm text-blue-600">  عدد الفواتير</span>
-						</div>
-
-						<div class="ml-3 align-self-center">
-							<i class="icon-credit-card2   icon-3x text-blue-400"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="col-sm-6 col-xl-2">
-				<div class="card card-body">
-					<div class="media">
-						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0"> {{ $today_total_trips_count }} </h3>
-							<span class="text-uppercase font-size-sm text-blue-600"> عدد الرحلات </span>
-						</div>
-
-						<div class="ml-3 align-self-center">
-							<i class="icon-car  icon-3x text-blue-400"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			<!-- /account settings -->
 		</div>
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-sm-6 col-xl-4">
+					<div class="card card-body">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="font-weight-semibold mb-0"> {{ $total_cash_money }} دينار</h3>
+								<span class="text-uppercase font-size-sm text-blue-600"> الرحلات الكاش </span>
+							</div>
+
+							<div class="ml-3 align-self-center">
+								<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-sm-6 col-xl-4">
+					<div class="card card-body">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="font-weight-semibold mb-0"> {{ $total_kent_money }} دينار</h3>
+								<span class="text-uppercase font-size-sm text-blue-600">  الرحلات الكى نت </span>
+							</div>
+
+							<div class="ml-3 align-self-center">
+								<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-sm-6 col-xl-4">
+					<div class="card card-body">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="font-weight-semibold mb-0"> {{ $total_delivery_price }} دينار</h3>
+								<span class="text-uppercase font-size-sm text-blue-600"> سعر التوصيل</span>
+							</div>
+
+							<div class="ml-3 align-self-center">
+								<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-xl-4">
+					<div class="card card-body">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="font-weight-semibold mb-0"> {{ $total_driver_income_today }} دينار</h3>
+								<span class="text-uppercase font-size-sm text-blue-600"> ايراد السائق</span>
+							</div>
+
+							<div class="ml-3 align-self-center">
+								<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-xl-4">
+					<div class="card card-body">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="font-weight-semibold mb-0"> {{ $today_total_bills_count }} </h3>
+								<span class="text-uppercase font-size-sm text-blue-600">  عدد الفواتير</span>
+							</div>
+
+							<div class="ml-3 align-self-center">
+								<i class="icon-credit-card2   icon-3x text-blue-400"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-sm-6 col-xl-4">
+					<div class="card card-body">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="font-weight-semibold mb-0"> {{ $today_total_trips_count }} </h3>
+								<span class="text-uppercase font-size-sm text-blue-600"> @lang('drivers.today_trips_count') </span>
+							</div>
+
+							<div class="ml-3 align-self-center">
+								<i class="icon-car  icon-3x text-blue-400"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-xl-4">
+					<div class="card card-body">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="font-weight-semibold mb-0"> {{ $total_trips_count }} </h3>
+								<span class="text-uppercase font-size-sm text-blue-600"> @lang('drivers.total_trips_count') </span>
+							</div>
+							<div class="ml-3 align-self-center">
+								<i class="icon-car  icon-3x text-blue-400"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
 	</div>
 
 
-
-
-	<div class="col-md-12">
-
-		@include('board.layout.messages')
-		<!-- Account settings -->
-		<div class="card">
-			<div class="card-header bg-dark header-elements-inline">
-				<h5 class="card-title"> @lang('drivers.driver_details') {{ $driver->username }} </h5>
-				<div class="header-elements">
-					<div class="list-icons">
-						<a class="list-icons-item" data-action="collapse"></a>
-						<a class="list-icons-item" data-action="reload"></a>
-						<a class="list-icons-item" data-action="remove"></a>
-					</div>
-				</div>
-			</div>
-
-			<div class="card-body">
-				<table class="table  table-xs border-top-0 my-2">
-					<tbody>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.code')</th>
-							<td class="text-left"> {{ $driver->code }} </td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.phone')</th>
-							<td class="text-left"> {{ $driver->phone }} </td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.username')</th>
-							<td class="text-left"> {{ $driver->username }} </td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.name')</th>
-							<td class="text-left"> {{ $driver->name }} </td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.working_start_time')</th>
-							<td class="text-left"> {{ $driver->working_start_time->toTimeString() }} </td>
-						</tr>
-
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.working_end_time')</th>
-							<td class="text-left"> {{ $driver->working_end_time->toTimeString() }} </td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.car_number')</th>
-							<td class="text-left"> {{ $driver->car_number }} </td>
-						</tr>
-						<tr>
-							<th class="font-weight-bold text-dark">@lang('drivers.country')</th>
-							<td class="text-left"> {{ optional($driver->country)['name_'.$lang] }} </td>
-						</tr>
-
-
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('drivers.activation') </th>
-							<td class="text-left">	
-								@switch($driver->active)
-								@case(1)
-								<label  class="badge badge-success" > @lang('drivers.active') </label>
-								@break
-								@case(0)
-								<label  class="badge badge-secondary" > @lang('drivers.inactive') </label>
-								@break
-								@endswitch
-							</td>
-						</tr>
-
-						<tr>
-							<td class="font-weight-bold text-dark"> @lang('drivers.bounce') </td>
-							<td class="text-left"> {{ $driver->bounce }} </td>
-						</tr>
-
-
-
-						<tr>
-							<th class="font-weight-bold text-dark"> @lang('drivers.activation') </th>
-							<td class="text-left">	
-								@switch($driver->available)
-								@case(1)
-								<label  class="badge badge-primary" > @lang('drivers.available') </label>
-								@break
-								@case(0)
-								<label  class="badge badge-danger" > @lang('drivers.unavailable') </label>
-								@break
-								@endswitch
-							</td>
-						</tr>
-
-
-						<tr>
-							<td class="font-weight-bold text-dark"> @lang('drivers.created_at') </td>
-							<td class="text-left"> {{ $driver->created_at->toFormattedDateString() }} - {{ $driver->created_at->diffForHumans() }} </td>
-						</tr>
-
-						<tr>
-							<td class="font-weight-bold text-dark"> @lang('drivers.added_by') </td>
-							<td class="text-left font-weight-bold"> <a href="{{ route('drivers.show'  , ['driver' => $driver->id] ) }}"> {{ optional($driver->admin)->username }} </a> </td>
-						</tr>
-
-
-						<tr>
-							<td class="font-weight-bold text-dark"> @lang('drivers.notes') </td>
-							<td class="text-left font-weight-bold"> {{ $driver->notes }} </td>
-						</tr>
-
-
-
-						<tr>
-							<td class="font-weight-semibold">  @lang('drivers.current_profile_picture') </td>
-							<td class="text-right text-muted">
-								<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" alt="">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<!-- /account settings -->
-	</div>
 </div>
 
 @endsection

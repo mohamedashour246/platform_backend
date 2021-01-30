@@ -76,10 +76,22 @@ class DriverController extends Controller
      */
     public function show(Driver $driver)
     {
+
+
+        $total_cash_money = Trip::whereDate('delivery_date_to_customer' , '=' , today())->where('driver_id'  , $driver->id )->where('status_id' , 4)->where('payment_method_id' , 1)->sum('order_price');
+
+        $total_kent_money = Trip::whereDate('delivery_date_to_customer' , '=' , today())->where('driver_id'  , $driver->id )->where('status_id' , 4)->where('payment_method_id' , 2)->sum('order_price');
+
+        $total_delivery_price = Trip::whereDate('delivery_date_to_customer' , '=' , today())->where('driver_id'  , $driver->id )->where('status_id' , 4)->sum('delivery_price');
+
+        $total_driver_income_today = $total_cash_money + $total_delivery_price;
+
+        $total_trips_count = Trip::where('driver_id'  , $driver->id )->where('status_id' , 4)->count();
+
         $today_total_trips_count = Trip::whereDate('delivery_date_to_customer' , '=' , today())->where('driver_id'  , $driver->id )->where('status_id' , 4)->count();
         $today_total_bills_count = Bill::whereDate('created_at' , '=' , today())->where('driver_id'  , $driver->id )->count();
         $driver->load(['country' , 'admin']);
-        return view('board.drivers.driver' , compact('driver' , 'today_total_trips_count' , 'today_total_bills_count'));
+        return view('board.drivers.driver' , compact('driver' , 'today_total_trips_count' , 'today_total_bills_count' , 'total_trips_count' , 'total_cash_money' , 'total_kent_money'  , 'total_delivery_price' , 'total_driver_income_today'));
     }
 
     /**
