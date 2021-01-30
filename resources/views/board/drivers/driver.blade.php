@@ -32,7 +32,7 @@ $lang = session()->get('locale');
 	<div class="col-md-12 mb-3">
 		<div class="header-elements ">
 			<div class="float-right">
-				<a href="{{ route('drivers.create') }}" class="btn btn-primary ml-1"> <i class="icon-user-plus"></i> @lang('drivers.add_new_driver')  </a>
+			
 				<a href="{{ route('drivers.create') }}" class="btn btn-info ml-1"> <i class="icon-car"></i> @lang('drivers.driver_trips')  </a>
 				<a href="{{ route('drivers.bills'  , ['driver' => $driver->id ] ) }}" class="btn btn-success ml-1"> <i class="icon-newspaper"></i> @lang('drivers.driver_bills')  </a>
 				<a href="{{ route('drivers.edit'  , ['driver' => $driver->id ] ) }}" class="btn btn-warning ml-1"> <i class="icon-pencil5"></i> @lang('drivers.edit_driver_details')  </a>
@@ -114,7 +114,7 @@ $lang = session()->get('locale');
 				<div class="card card-body">
 					<div class="media">
 						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0"> {{ $total_bills_count }} </h3>
+							<h3 class="font-weight-semibold mb-0"> {{ $today_total_bills_count }} </h3>
 							<span class="text-uppercase font-size-sm text-blue-600">  عدد الفواتير</span>
 						</div>
 
@@ -130,7 +130,7 @@ $lang = session()->get('locale');
 				<div class="card card-body">
 					<div class="media">
 						<div class="media-body">
-							<h3 class="font-weight-semibold mb-0"> {{ $total_trips_count }} </h3>
+							<h3 class="font-weight-semibold mb-0"> {{ $today_total_trips_count }} </h3>
 							<span class="text-uppercase font-size-sm text-blue-600"> عدد الرحلات </span>
 						</div>
 

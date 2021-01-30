@@ -76,10 +76,10 @@ class DriverController extends Controller
      */
     public function show(Driver $driver)
     {
-        $total_trips_count = Trip::where('driver_id'  , $driver->id )->count();
-        $total_bills_count = Bill::where('driver_id'  , $driver->id )->count();
+        $today_total_trips_count = Trip::whereDate('delivery_date_to_customer' , '=' , today())->where('driver_id'  , $driver->id )->where('status_id' , 4)->count();
+        $today_total_bills_count = Bill::whereDate('created_at' , '=' , today())->where('driver_id'  , $driver->id )->count();
         $driver->load(['country' , 'admin']);
-        return view('board.drivers.driver' , compact('driver' , 'total_bills_count' , 'total_trips_count'));
+        return view('board.drivers.driver' , compact('driver' , 'today_total_trips_count' , 'today_total_bills_count'));
     }
 
     /**

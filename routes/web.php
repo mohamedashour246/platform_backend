@@ -24,6 +24,7 @@ function () {
 		Route::get('/password', 'ProfileController@edit_password')->name('profile.password.edit');
 		Route::patch('/password', 'ProfileController@change_password')->name('profile.password.change');
 		Route::resource('/admins', 'AdminController');
+		// Route::resource('/trip_statuses', 'TripStatusController');
 		// Route::get('/')
 		Route::post('/admins/change_status', 'AdminController@change_status');
 		Route::post('/drivers/change_status', 'DriverController@change_status');
@@ -88,8 +89,9 @@ function () {
 		Route::get('/markets/{market}/branches/{branch}/edit'  , 'BranchController@edit' )->name('market.branches.edit');
 		Route::patch('/markets/{market}/branches/{branch}'  , 'BranchController@update' )->name('market.branches.update');
 		Route::get('/markets/{market}/branches/{branch}'  , 'BranchController@show' )->name('market.branches.show');
-
 		Route::delete('/markets/{market}/branches/{branch}' , 'BranchController@destroy')->name('market.branches.destroy');
+
+
 
 
 
