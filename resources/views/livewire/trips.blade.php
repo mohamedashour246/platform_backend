@@ -10,8 +10,8 @@ $lang = session()->get('locale');
 			<ul class="list-inline mb-0 float-right">
 
 				<li class="list-inline-item">
-					<a  data-toggle="collapse" href="#search_by_trip_code_div" class="btn btn-success float-right" >
-						<i class="icon-search4  "></i> @lang('trips.search_with_trip_code')
+					<a  data-toggle="collapse" href="#advanced_search_div" class="btn btn-success float-right" >
+						<i class="icon-filter4 "></i> @lang('trips.advanced_search')
 					</a>
 				</li>
 				<li class="list-inline-item">
@@ -26,25 +26,81 @@ $lang = session()->get('locale');
 	<br>
 
 	<div class="col-md-12">
-		<div class="card collapse" id="search_by_trip_code_div" wire:ignore>
+		<div class="card collapse" id="advanced_search_div" wire:ignore>
+			<div class="card-header bg-dark">
+				@lang('trips.advanced_search')
+			</div>
 			<div class="card-body">
 				<div class="form-group">
 					<div class="row">
-						<div class="col-md-12">
-							<input type="text" id="search" wire:model="search" placeholder="@lang('trips.search_trips') ....." class="form-control" >
+						<div class="col-md-2">
+							<label> @lang('trips.trip_period') </label>
+							<select wire:model="trip_period" class="form-control trip_period" >
+								<option value="trips_of_today" selected="selected"> @lang('trips.trips_of_today') </option>
+								<option value="future_trips"> @lang('trips.future_trips') </option>
+								<option value="all"> @lang('trips.all_trips') </option>
+								<option value="a_certain_period"> @lang('trips.a_certain_period') </option>							
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label> @lang('trips.payment_method') </label>
+							<select wire:model="payment_method" class="form-control " >
+								<option value="all"> @lang('trips.all_payment_methods') </option>
+								@foreach ($payment_methods as $payment_method)
+								<option value="{{ $payment_method->id }}"> {{ $payment_method['name_'.$lang] }} </option>
+								@endforeach
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label> @lang('trips.payment_status') </label>
+							<select wire:model="payment_status" class="form-control " >
+								<option value="all"> @lang('trips.all') </option>
+								<option value="1"> @lang('trips.paid')  </option>
+								<option value="0"> @lang('trips.unpaid') </option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label> @lang('trips.status') </label>
+							<select wire:model="status" class="form-control " >
+								<option value="all"> @lang('trips.all_status') </option>
+								@foreach ($trips_statuses as $status)
+								<option value="{{ $status->id }}"> {{ $status['name_'.$lang]  }} </option>
+								@endforeach
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label> @lang('trips.from_delivery_date') </label>
+							<input type="date"  wire:model="from_delivery_date" class="form-control  ">
+
+						</div>
+						<div class="col-md-2">
+							<label> @lang('trips.to_delivery_date') </label>
+							<input type="date"  wire:model="to_delivery_date"  class="form-control  ">
+
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="card-footer">
+
+				<a wire:click="generatePDF" class="btn btn-primary text-white float-right ml-1" >
+					<i class="icon-file-pdf"></i> @lang('trips.pdf')
+				</a>
+				<a  wire:click="generateExcel" class="btn btn-primary text-white float-right" >
+					<i class="icon-file-excel"></i> @lang('trips.excel')
+				</a>
+			</div>
 		</div>
 	</div>
+
+
 	<hr>
 	<div class="col-md-12">
 		<div class="card" >
 			<div class="card-header  header-elements-inline">
 				<h5 class="card-title"> <i class="icon-users4 mr-1"></i>    عرض  <span class="badge bg-primary" > {{ $trips->count() }} </span>   من اجمالى  <span class="badge bg-primary" > {{ $trips->total() }} </span> </h5>
 				<div class="header-elements">
-					
+
 					<div class="row">
 						<div class="form-group mb-0">
 							<div class="form-group-feedback form-group-feedback-right">
@@ -67,7 +123,7 @@ $lang = session()->get('locale');
 							</select>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 
@@ -116,25 +172,23 @@ $lang = session()->get('locale');
 
 						@endif
 						<td>
-							@switch($trip->status)
-							@case(1)
-							<span class="badge badge-primary"> @lang('trips.proccessing') </span>
-							@break
-							@case(0)
-							<span class="badge badge-secondary"> @lang('trips.inactive') </span>
-							@break
-							@endswitch
+							<span class="badge" style="background-color: {{ optional($trip->status)->color }};color: white" > {{ optional($trip->status)['name_'.$lang] }} </span>
 						</td>
 						<td> <span class="badge badge-info"> {{ optional($trip->payment_method)['name_'.$lang] }} </span>  </td>
 						<td>
-							@switch($trip->paid)
+							{{-- @switch($trip->paid)
 							@case(1)
 							<span class="badge bg-success"> @lang('trips.payment_completed') </span>
 							@break
 							@case(0)
 							<span class="badge bg-danger"> @lang('trips.payment_completed') </span>
 							@break
-							@endswitch
+							@endswitch --}}
+
+							<select class="form-control select"  >
+								<option value="1" {{ $trip->payment_status == 1 ? 'selected="selected"' : '' }} > @lang('trips.paid')  </option>
+								<option value="0" {{ $trip->payment_status == 0 ? 'selected="selected"' : '' }} > @lang('trips.unpaid') </option>
+							</select>
 						</td>
 						<td> {{ $trip->order_price }} </td>
 						<td> {{ $trip->delivery_price }} </td>
@@ -151,6 +205,11 @@ $lang = session()->get('locale');
 									<li  class="list-group-item list-group-item-action"> @lang('trips.trip_code') : {{ $trip->code }} </li>
 									<li  class="list-group-item list-group-item-action"> @lang('trips.added_by') : {{ optional($trip->admin)->name }} </li>
 									<li  class="list-group-item list-group-item-action"> @lang('trips.created_at') : {{ $trip->created_at->toDayDateTimeString() }} </li>
+									@if ($trip->payment_status == 0)
+									<li  class="list-group-item list-group-item-action"> @lang('trips.generate_payment_link') :  
+										<a href="" onclick="MyWindow=window.open('https://deliverina.cbk.com/merchant/Admin/Login','MyWindow','width=1000,height=500'); return false;" >  <i class="icon-unlink2 " ></i> @lang('trips.click_here') </a>  
+									</li>
+									@endif
 								</ul>
 								@lang('trips.settings') :
 								<a target="_blank"  data-popup="tooltip" title="@lang('trips.trip_details')" href="{{ route('trips.show',['trip' => $trip->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
@@ -183,16 +242,17 @@ $lang = session()->get('locale');
 			</div>
 		</div>
 	</div>
-
-
-
 	<livewire:board.trips.add-driver-to-trip  />
 </div>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 	$(document).ready(function() {
+
+
 		const Toast = Swal.mixin({
 			toast: true,
 			position: 'top-end',
@@ -214,7 +274,6 @@ $lang = session()->get('locale');
 
 
 		Livewire.on('driverAddedToTrip', itemId => {
-
 			$('#drivers_modal').modal('hide');
 			Toast.fire({
 				icon: 'success',

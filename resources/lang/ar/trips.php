@@ -75,7 +75,19 @@ return [
 	'driver_total_income' => 'ايراد السائق' , 
 	'confirm' => 'تاكيد' , 
 	'choose_driver_to_trip' => 'تعيين سائق للرحله'  ,
-	'driver_added_to_tip' => 'تم إضافه السائق للرحله بنجاح'
+	'driver_added_to_tip' => 'تم إضافه السائق للرحله بنجاح' , 
+	'trip_period' => 'وقت الرحلات' , 
+	'trips_of_today' => ' رحلات اليوم ', 
+	'future_trips' => 'الرحلات المستقبليه' ,
+	'all_trips' => 'جميع الرحلات' , 
+	'a_certain_period' => 'تحديد فتره معينه' , 
+	'paid' => 'تم الدفع' , 
+	'unpaid' => 'لم يتم الدفع' , 
+	'all' => 'الجميع'  , 
+
+	'generate_payment_link' => 'توليد رابط فع' , 
+	'click_here' => 'اضغط هنا' , 
+
 
 
 

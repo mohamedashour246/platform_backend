@@ -40,6 +40,11 @@ class Trip extends Model {
 		return $this->belongsTo(CustomerAddress::class , 'customer_address_id');
 	}
 
+	public function status()
+	{
+		return $this->belongsTo(TripStatus::class , 'status_id');
+	}
+
 
 
 

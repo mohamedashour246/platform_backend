@@ -15,5 +15,6 @@
   'merchants.branches' => 'App\\Http\\Livewire\\Merchants\\Branches',
   'merchants.customer.show-all-customers' => 'App\\Http\\Livewire\\Merchants\\Customer\\ShowAllCustomers',
   'merchants.trips.show-trips-list' => 'App\\Http\\Livewire\\Merchants\\Trips\\ShowTripsList',
+  'trip' => 'App\\Http\\Livewire\\Trip',
   'trips' => 'App\\Http\\Livewire\\Trips',
 );

@@ -12,7 +12,9 @@ use App\Models\Governorate;
 use App\Models\BuildingType;
 use App\Models\PaymentMethod;
 use App\Models\CustomerAddress;
+use App\Models\TripStatus;
 use App\Http\Requests\StoreTripRequest;
+use PDF;
 class TripController extends Controller
 {
     /**
@@ -22,8 +24,12 @@ class TripController extends Controller
      */
     public function index()
     {
-        $trips = Trip::all();
-        return view('board.trips.index'  , compact('trips') );
+
+        // $trips = Trip::all();
+
+        // return PDF::loadView('board.drivers.pdf', compact('trips'))->download('trips.pdf');
+        
+        return view('board.trips.index');
     }
 
     /**

@@ -75,7 +75,22 @@ return [
 	'driver_total_income' => 'Total income' , 
 	'confirm' => 'Confirm' , 
 	'choose_driver_to_trip' => 'Choose A driver for trip' , 
-	'driver_added_to_tip' => 'Driver Added to trip '
+	'driver_added_to_tip' => 'Driver Added to trip ' , 
+	'trip_period' => 'trip period' , 
+	'trips_of_today' => 'Todays\'s trips' , 
+	'future_trips' => 'future trips' , 
+	'all_trips' => 'All Trips' ,
+	'a_certain_period ' => 'A certain period '  , 
+	'paid' => 'Paid' , 
+	'unpaid' => 'Un PAid' , 
+	'all' => 'All'  , 
+
+	'generate_payment_link' => 'Generate Payment Link' , 
+	'click_here' => 'Click here' , 
+
+
+
+
 
 
 ];
