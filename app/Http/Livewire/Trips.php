@@ -27,6 +27,8 @@ class Trips extends Component
         $this->resetPage();
     }
 
+    protected $paginationTheme = 'bootstrap';
+
     protected $listeners = ['deleteItemConfirmed' => 'handleItemDeletion'  , 'driverAddedToTrip' => '$refresh'];
 
     public function handleItemDeletion($item_id)
@@ -35,18 +37,11 @@ class Trips extends Component
         $this->resetPage();
     }
 
-
-    public function mount($filter_value , $filter_type)
-    {
-        $this->filter_type = $filter_type;
-        $this->filter_value = $filter_value;      
-    }
-
     public function render()
     {
 
         // dd($this->tripsStatus , $this->tripsType);
-    	$trips = Trip::with(['market' , 'branch'])->latest()->where('code' ,  'like', '%' . $this->search . '%' )->simplePaginate($this->paginate);
+    	$trips = Trip::whereDate('delivery_date_to_customer' , '=' , today() )->with(['market' , 'branch'])->latest()->where('code' ,  'like', '%' . $this->search . '%' )->paginate($this->paginate);
     	$cities = City::all();
     	$governorates = Governorate::all();
         $payment_methods = PaymentMethod::all();
