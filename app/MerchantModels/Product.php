@@ -2,6 +2,8 @@
 
 namespace App\MerchantModels;
 
+use App\Models\Extra;
+use App\Models\OrderProduct;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -36,4 +38,10 @@ class Product extends Model
         return $this->belongsTo(SubCategory::class);
 
     }//end fo
+
+    public function product_order()
+    {
+        return $this->hasMany(OrderProduct::class);
+
+    }
 }

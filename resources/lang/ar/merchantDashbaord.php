@@ -28,7 +28,10 @@ return [
     'show'                     => '      عرض       ',
     'deactive'                     => ' غير مفعل ',
     'active'                     => '  مفعل ',
-
+    'orders'                     => '  الطلبات ',
+    'last_orders'                     => '  أخر الطلبات  ',
+    'last_products'                     => '  أخر المنتجات المضافة  ',
+    'last_categories'                     => '  أخر الفئات المضافة ',
 
     'edit_category'                     => ' تعديل فئة ',
     'show_category'                     => ' عرض الفئة  ',
@@ -45,4 +48,32 @@ return [
     'added_successfully'                     => ' تم الاضافة بنجاح ',
     'not_permitted'                     => '   محاولة الوصول للمحتوي غير موجود  ',
 
+
+    'client_name'                     => ' العميل ',
+    'total_price'                     => '   المبلغ الكلى',
+    'duration'                     => 'مده التوصيل',
+    'pay_type'                     => 'طريقه الدفع',
+    'delivery_fees'                     => 'تكاليف التوصيل',
+    'time_to_arrive'                     => 'وقت التوصيل والتسليم',
+
+
+    'orders'                     => ' الطلبات',
+    'single_order'                     => ' تفاصيل الطلب',
+    'orders_show'                     => ' عرض كل الطلبات',
+    'actions'                     => 'عرض',
+    'KWD'                     => 'د.ك',
+    'city'                     => 'المدينه',
+    'Extras'                     => 'اضافات',
+    'NoDataFound'                     => 'لا يوجد بيانات',
+    'statics_yearly'                     => 'رسم بيانى شهرى وسنوى للطلبات ',
+    'delivered_orders'                     => 'طلبات تم توصيلها ',
+    'new_orders'                     => 'طلبات حديثه ',
+
+
+
+//    order_status
+    'delivered'               => '  تم التوصيل',
+    'in_progress'             => 'قيد التحضير',
+    'new'                     => 'جديد',
+//---------------
 ];

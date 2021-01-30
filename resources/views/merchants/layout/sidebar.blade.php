@@ -35,7 +35,7 @@ $lang = session()->get('locale');
 
         @php
             $segment = request()->segment(2);
-            $admins = $board = $branches = $customers = $trips =$products=$categories ='';
+            $admins = $board = $branches = $customers = $trips =$products= $orders = $categories ='';
             switch ($segment) {
                 case 'admins':
                 case 'admin_types':
@@ -59,6 +59,9 @@ $lang = session()->get('locale');
                 break;
                 case 'categories':
                 $categories = 'active';
+                break;
+                case 'orders':
+                $orders = 'active';
                 break;
                 case 'products':
                 $products = 'active';
@@ -136,6 +139,15 @@ $lang = session()->get('locale');
                         <ul class="nav nav-group-sub" data-submenu-title="Layouts">
                             <li class="nav-item"><a href="{{ route('products.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.show_all_product') </a></li>
                             <li class="nav-item"><a href="{{ route('products.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('merchantDashbaord.add_new_product') </a></li>
+                        </ul>
+                    </li>
+
+
+
+                    <li class="nav-item nav-item-submenu {{ $orders == 'active' ? 'nav-item-open' : '' }}">
+                        <a href="#" class="nav-link {{ $orders }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.orders')</span></a>
+                        <ul class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('orders.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.orders_show') </a></li>
                         </ul>
                     </li>
 

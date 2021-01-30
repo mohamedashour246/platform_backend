@@ -66,7 +66,7 @@
 
 	<!-- Page content -->
 	<div class="page-content pt-0">
-		@include('merchantDashbaord.layout.sidebar')
+		@include('merchants.layout.sidebar')
 		<!-- Main content -->
 		<div class="content-wrapper">
 			<!-- Content area -->

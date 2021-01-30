@@ -24,6 +24,10 @@
 
 	@livewireScripts
 	<!-- Core JS files -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
 	<script src="{{ asset('board_assets/global_assets/js/main/jquery.min.js') }}"></script>
 	<script src="{{ asset('board_assets/global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('board_assets/global_assets/js/plugins/loaders/blockui.min.js') }}"></script>
@@ -49,6 +53,7 @@
 	<script src="{{ asset('board_assets/global_assets/js/demo_charts/pages/dashboard/light/heatmaps.js') }}"></script>
 	<script src="{{ asset('board_assets/global_assets/js/demo_charts/pages/dashboard/light/pies.js') }}"></script>
 	<script src="{{ asset('board_assets/global_assets/js/demo_charts/pages/dashboard/light/bullets.js') }}"></script>
+
 	<!-- /theme JS files -->
 
 

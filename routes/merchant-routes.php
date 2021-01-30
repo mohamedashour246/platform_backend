@@ -38,6 +38,17 @@ Route::group(['prefix' => 'Merchant', 'namespace' => 'Merchant', 'middleware' =>
 
 Route::group(['middleware' => ['merchant', 'activeMerchant', 'activeMarket', 'whichMarket'], ], function () {
 
+    Route::group(['prefix' => 'merchantDashboard', 'middleware' => ['lang']], function () {
+
+        Route::get('/language/{lang}', 'BoardController@change_language');
+
+        Route::resource('orders', 'merchantDashboard\OrderController');
+
+    });
+});
+
+Route::group(['middleware' => ['merchant', 'activeMerchant', 'activeMarket', 'whichMarket'], ], function () {
+
     Route::group(['prefix' => 'merchantDashbaord', 'middleware' => ['lang']], function () {
 
         Route::get('/language/{lang}', 'BoardController@change_language');
