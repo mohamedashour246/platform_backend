@@ -5,7 +5,7 @@ $lang = session()->get('locale');
 
 <div class="row">
 
-	
+	{{-- 
 	<div class="col-md-12 mb-3">
 		<div class="header-elements ">
 			<div class="float-right">
@@ -21,9 +21,9 @@ $lang = session()->get('locale');
 		</div>
 	</div>
 	<br>
+ --}}
 
-
-	<div class="col-sm-6 col-xl-3">
+	<div class="col-sm-6 col-xl-4">
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
@@ -40,7 +40,7 @@ $lang = session()->get('locale');
 
 
 
-	<div class="col-sm-6 col-xl-3">
+	<div class="col-sm-6 col-xl-4">
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
@@ -56,7 +56,7 @@ $lang = session()->get('locale');
 	</div>
 
 
-	<div class="col-sm-6 col-xl-3">
+	<div class="col-sm-6 col-xl-4">
 		<div class="card card-body">
 			<div class="media">
 				<div class="media-body">
@@ -71,20 +71,6 @@ $lang = session()->get('locale');
 		</div>
 	</div>
 
-	<div class="col-sm-6 col-xl-3">
-		<div class="card card-body">
-			<div class="media">
-				<div class="media-body">
-					<h3 class="font-weight-semibold mb-0"> {{ $total_driver_income_today }} دينار</h3>
-					<span class="text-uppercase font-size-sm text-blue-600"> ايراد السائق</span>
-				</div>
-
-				<div class="ml-3 align-self-center">
-					<i class="icon-coin-dollar  icon-3x text-blue-400"></i>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="col-md-12">
 		<div class="card " id="advanced_search_div" wire:ignore>
@@ -94,7 +80,16 @@ $lang = session()->get('locale');
 			<div class="card-body">
 				<div class="form-group">
 					<div class="row">
-						
+						<div class="col-md-2">
+							<label> @lang('trips.branch') </label>
+							<select wire:model="branch" class="form-control " >
+								<option value="all"> @lang('trips.all_branches') </option>
+								@foreach ($branches as $branch)
+								<option value="{{ $branch->id }}"> {{ $branch['name'] }} </option>
+								@endforeach
+							</select>
+						</div>
+
 						<div class="col-md-2">
 							<label> @lang('trips.payment_method') </label>
 							<select wire:model="payment_method" class="form-control " >
@@ -121,15 +116,13 @@ $lang = session()->get('locale');
 								@endforeach
 							</select>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<label> @lang('trips.from_delivery_date') </label>
 							<input type="date"  wire:model="from_delivery_date" class="form-control  ">
-
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<label> @lang('trips.to_delivery_date') </label>
 							<input type="date"  wire:model="to_delivery_date"  class="form-control  ">
-
 						</div>
 					</div>
 				</div>

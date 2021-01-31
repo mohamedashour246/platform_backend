@@ -1,47 +1,69 @@
 <?php
 
-namespace App\Http\Livewire\Board\Driver;
+namespace App\Http\Livewire\Board\Markets;
 
 use Livewire\Component;
 use App\Models\Trip;
-use App\Models\Driver;
-use App\Models\Governorate;
+use App\Models\Market;
+use App\Models\Branch;
 use App\Models\PaymentMethod;
 use App\Models\TripStatus;
-use App\Models\City;
 use Livewire\WithPagination;
 use PDF;
 use Excel;
 use App\Exports\TripsExport;
-class DriverTrips extends Component
+class MartketTrips extends Component
 {
 	use WithPagination;
 	public $search;
 
+	public $branch = 'all';
 	public $status = 'all';
 	public $payment_status = 'all' ;
 	public $payment_method = 'all' ;
 	public $from_delivery_date = 'all' ;
 	public $to_delivery_date = 'all' ;
 	public $paginate = 10;
-	public $driver;
+	public $market;
 	public $total_cash_money= 0;
 	public $total_kent_money= 0;
 	public $total_delivery_price= 0;
-	public $total_driver_income_today= 0;
 
 
 
-	public function mount($driver)
-	{
+
+	public function mount($market)
+	{	
+		
 
 		$this->from_delivery_date = today();
 		$this->to_delivery_date = today();
-		$this->driver = $driver;
+		$this->market = $market;
 	}
 
 
 	public function updatedSearch()
+	{
+		$this->resetPage();
+	}
+
+	public function updatedBranch()
+	{
+		$this->resetPage();
+	}
+
+	public function updatedStatus()
+	{
+		$this->resetPage();
+	}
+
+
+	public function updatedPaymentMethod()
+	{
+		$this->resetPage();
+	}
+
+	public function updatedPaymentStatus()
 	{
 		$this->resetPage();
 	}
@@ -79,7 +101,7 @@ class DriverTrips extends Component
 	public function filterd_data() {
 		$trips = Trip::query();
 
-		$trips->where('driver_id'  , $this->driver );
+		$trips->where('market_id'  , $this->market );
 		$trips->with(['market'  , 'status' , 'driver' , 'address' , 'payment_method' ]);
 
 		if ($this->from_delivery_date != 'all')  {
@@ -88,6 +110,11 @@ class DriverTrips extends Component
 
 		if ($this->to_delivery_date != 'all')  {
 			$trips->whereDate('delivery_date_to_customer', '<=', $this->to_delivery_date);
+		}
+
+
+		if ($this->branch != 'all')  {
+			$trips->where('branch_id',  $this->branch);
 		}
 		
 
@@ -123,7 +150,6 @@ class DriverTrips extends Component
 		$this->total_delivery_price= $total_delivery_price->sum('delivery_price');
 		$this->total_kent_money=$total_kent_money->where('payment_method_id' , 2)->sum('order_price');
 		$this->total_cash_money=$total_cash_money->where('payment_method_id' , 1)->sum('order_price');
-		$this->total_driver_income_today = $this->total_cash_money + $this->total_delivery_price;
 		return $trips;
 
 	}
@@ -142,16 +168,14 @@ class DriverTrips extends Component
 		return  response()->download($pdfFilePath);
 	}
 
-	public function render()
-	{
-		$trips = $this->filterd_data();
+    public function render()
+    {
+    	$trips = $this->filterd_data();
 	
 		$payment_methods = PaymentMethod::all();
 		$trips_statuses = TripStatus::all();
-
-		$driver = Driver::find($this->driver);
-
-		// dd($driver);
-		return view('livewire.board.driver.driver-trips'  , compact('trips' ,  'payment_methods'  , 'trips_statuses'  , 'driver') );
-	}
+		$market = Market::find($this->market);
+		$branches = Branch::where('market_id'  , $this->market )->get(); 
+        return view('livewire.board.markets.martket-trips'  ,  compact('trips' ,  'payment_methods'  , 'trips_statuses'  , 'market' ,'branches'));
+    }
 }

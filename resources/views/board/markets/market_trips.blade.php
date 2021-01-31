@@ -75,7 +75,7 @@ $lang = session()->get('locale');
 					<i class="icon-files-empty  mr-3"></i>
 					@lang('markets.documents')
 				</a>
-				<a href="{{ route('market.trips'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action text-dark">
+				<a href="{{ route('market.trips'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action text-white active">
 					<i class="icon-location3  mr-3"></i>
 					@lang('markets.trips')
 				</a>
@@ -83,7 +83,7 @@ $lang = session()->get('locale');
 					<i class="icon-coin-dollar  mr-3"></i>
 					@lang('markets.bank_accounts')
 				</a>
-				<a href="{{ route('market.emails'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action active text-white">
+				<a href="{{ route('market.emails'  , ['market' => $market->id ] ) }}" class="list-group-item list-group-item-action  text-dark">
 					<i class="icon-mail-read  mr-3"></i>
 					@lang('markets.emails')
 				</a>
@@ -95,8 +95,10 @@ $lang = session()->get('locale');
 		</div>
 	</div>
 	<div class="col-md-10">
-		<!-- Account settings -->
 		
+
+		<livewire:board.markets.martket-trips :market="$market->id"  />
+
 	</div>
 </div>
 

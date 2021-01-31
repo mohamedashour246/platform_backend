@@ -3,6 +3,7 @@
   'board.bills' => 'App\\Http\\Livewire\\Board\\Bills',
   'board.driver.driver-trips' => 'App\\Http\\Livewire\\Board\\Driver\\DriverTrips',
   'board.drivers.bills' => 'App\\Http\\Livewire\\Board\\Drivers\\Bills',
+  'board.markets.martket-trips' => 'App\\Http\\Livewire\\Board\\Markets\\MartketTrips',
   'board.trips.add-driver-to-trip' => 'App\\Http\\Livewire\\Board\\Trips\\AddDriverToTrip',
   'cities' => 'App\\Http\\Livewire\\Cities',
   'city-delivery-price' => 'App\\Http\\Livewire\\CityDeliveryPrice',
