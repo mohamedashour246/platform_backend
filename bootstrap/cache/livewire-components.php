@@ -1,6 +1,7 @@
 <?php return array (
   'admins' => 'App\\Http\\Livewire\\Admins',
   'board.bills' => 'App\\Http\\Livewire\\Board\\Bills',
+  'board.driver.driver-trips' => 'App\\Http\\Livewire\\Board\\Driver\\DriverTrips',
   'board.drivers.bills' => 'App\\Http\\Livewire\\Board\\Drivers\\Bills',
   'board.trips.add-driver-to-trip' => 'App\\Http\\Livewire\\Board\\Trips\\AddDriverToTrip',
   'cities' => 'App\\Http\\Livewire\\Cities',
@@ -15,6 +16,5 @@
   'merchants.branches' => 'App\\Http\\Livewire\\Merchants\\Branches',
   'merchants.customer.show-all-customers' => 'App\\Http\\Livewire\\Merchants\\Customer\\ShowAllCustomers',
   'merchants.trips.show-trips-list' => 'App\\Http\\Livewire\\Merchants\\Trips\\ShowTripsList',
-  'trip' => 'App\\Http\\Livewire\\Trip',
   'trips' => 'App\\Http\\Livewire\\Trips',
 );

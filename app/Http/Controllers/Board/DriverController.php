@@ -168,6 +168,15 @@ class DriverController extends Controller
 
 
 
+    public function driver_trips(Driver $driver)
+    {
+        
+        return view('board.drivers.driver_trips'  , compact('driver') );
+    }
+
+
+
+
     public function reports(Request $request)
     {
 

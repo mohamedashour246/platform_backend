@@ -33,7 +33,7 @@ $lang = session()->get('locale');
 		<div class="header-elements ">
 			<div class="float-right">
 
-				<a href="{{ route('drivers.create') }}" class="btn btn-info ml-1"> <i class="icon-car"></i> @lang('drivers.driver_trips')  </a>
+				<a href="{{ route('drivers.trips'  , ['driver' => $driver->id ] ) }}" class="btn btn-info ml-1"> <i class="icon-car"></i> @lang('drivers.driver_trips')  </a>
 				<a href="{{ route('drivers.bills'  , ['driver' => $driver->id ] ) }}" class="btn btn-success ml-1"> <i class="icon-newspaper"></i> @lang('drivers.driver_bills')  </a>
 				<a href="{{ route('drivers.edit'  , ['driver' => $driver->id ] ) }}" class="btn btn-warning ml-1"> <i class="icon-pencil5"></i> @lang('drivers.edit_driver_details')  </a>
 				<form action="{{ route('drivers.destroy'  , ['driver' => $driver->id] ) }}" method="POST" class="float-right ml-1">
