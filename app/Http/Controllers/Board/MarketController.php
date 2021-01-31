@@ -108,6 +108,7 @@ class MarketController extends Controller
 
 
 
+
      /**
      * Display the specified resource.
      *
@@ -226,8 +227,7 @@ class MarketController extends Controller
      */
     public function trips(Market $market)
     {
-        // $market->load(['emails' , 'emails.admin' ]);
-        // return view('board.markets.market_emails' ,  compact('market'));
+        return view('board.markets.market_trips'  , compact('market') );
     }
 
 

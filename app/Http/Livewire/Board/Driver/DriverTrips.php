@@ -79,40 +79,50 @@ class DriverTrips extends Component
 	public function filterd_data() {
 		$trips = Trip::query();
 
-		$trips = $trips->where('driver_id'  , $this->driver );
-		$trips = $trips->with(['market'  , 'status' , 'driver' , 'address' , 'payment_method' ]);
+		$trips->where('driver_id'  , $this->driver );
+		$trips->with(['market'  , 'status' , 'driver' , 'address' , 'payment_method' ]);
 
 		if ($this->from_delivery_date != 'all')  {
-			$trips = $trips->whereDate('delivery_date_to_customer', '>=', $this->from_delivery_date);
+			$trips->whereDate('delivery_date_to_customer', '>=', $this->from_delivery_date);
 		}
 
 		if ($this->to_delivery_date != 'all')  {
-			$trips = $trips->whereDate('delivery_date_to_customer', '<=', $this->to_delivery_date);
+			$trips->whereDate('delivery_date_to_customer', '<=', $this->to_delivery_date);
 		}
 		
 
 		if ($this->search != '') {
-			$trips = $trips->where('code', $this->search);
+			$trips->where('code', $this->search);
 		}
 
 
 		if ($this->payment_method != 'all') {
-			$trips = $trips->where('payment_method_id', $this->payment_method);
+			$trips->where('payment_method_id', $this->payment_method);
+
 		}
 
 
 		if ($this->payment_status != 'all') {
-			$trips = $trips->where('paid', $this->payment_status);
+			$trips->where('paid', $this->payment_status);
 		}
 
 		if ($this->status != 'all') {
-			$trips = $trips->where('status_id', $this->status);
+			$trips->where('status_id', $this->status);
 		}
 		
+	
 
-		$this->total_cash_money= $trips->sum('order_price');
-		$this->total_kent_money= $trips->sum('order_price');
-		$this->total_delivery_price= $trips->sum('delivery_price');
+
+
+		$trips = $trips->latest()->paginate($this->paginate);
+
+		$total_delivery_price =  $trips;
+		$total_kent_money =  $trips;
+		$total_cash_money =  $trips;
+
+		$this->total_delivery_price= $total_delivery_price->sum('delivery_price');
+		$this->total_kent_money=$total_kent_money->where('payment_method_id' , 2)->sum('order_price');
+		$this->total_cash_money=$total_cash_money->where('payment_method_id' , 1)->sum('order_price');
 		$this->total_driver_income_today = $this->total_cash_money + $this->total_delivery_price;
 		return $trips;
 
@@ -120,13 +130,13 @@ class DriverTrips extends Component
 
 	public function generateExcel() {
 		$trips = $this->filterd_data();
-		$trips = $trips->latest()->get();
+		// $trips = $trips->latest()->get();
 		return Excel::download(new TripsExport($trips), 'trips.xlsx');
 	}
 
 	public function generatePDF() {
 		$trips = $this->filterd_data();
-		$trips = $trips->latest()->get();
+		// $trips = $trips->latest()->get();
 		$pdfFilePath = public_path('/pdf_files/').time().'.pdf';
 		PDF::loadView('board.drivers.pdf',compact('trips'))->save($pdfFilePath);
 		return  response()->download($pdfFilePath);
@@ -135,7 +145,7 @@ class DriverTrips extends Component
 	public function render()
 	{
 		$trips = $this->filterd_data();
-		$trips = $trips->latest()->paginate($this->paginate);
+	
 		$payment_methods = PaymentMethod::all();
 		$trips_statuses = TripStatus::all();
 
