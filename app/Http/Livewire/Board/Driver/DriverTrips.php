@@ -119,11 +119,12 @@ class DriverTrips extends Component
 		$total_delivery_price =  $trips;
 		$total_kent_money =  $trips;
 		$total_cash_money =  $trips;
+		$total_driver_income_today = $trips;
 
 		$this->total_delivery_price= $total_delivery_price->sum('delivery_price');
 		$this->total_kent_money=$total_kent_money->where('payment_method_id' , 2)->sum('order_price');
 		$this->total_cash_money=$total_cash_money->where('payment_method_id' , 1)->sum('order_price');
-		$this->total_driver_income_today = $this->total_cash_money + $this->total_delivery_price;
+		$this->total_driver_income_today = (Driver::find($this->driver)['bounce'] *  $trips->count() );
 		return $trips;
 
 	}
