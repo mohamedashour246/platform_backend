@@ -5,8 +5,14 @@ namespace App\Http\Controllers\Board;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerResourceCollection;
 use App\Models\CustomerAddress;
+use App\Models\Governorate;
+use App\Models\BuildingType;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Validator;
+use Auth;
+use App\Http\Requests\Board\StoreCustomerRequest;
+use App\Http\Requests\Board\UpdateCustomerRequest;
 
 class CustomerController extends Controller {
 	/**
@@ -15,7 +21,7 @@ class CustomerController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		//
+		return view('board.customers.index');
 	}
 
 	/**
@@ -24,7 +30,10 @@ class CustomerController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		return view('merchants.customers.create');
+
+		$building_types = BuildingType::all();
+		$governorates = Governorate::all();
+		return view('board.customers.create'  , compact('governorates' , 'building_types' ) );
 	}
 
 	/**
@@ -33,9 +42,24 @@ class CustomerController extends Controller {
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request) {
+	public function store(StoreCustomerRequest $request) {
 
-		$validator = Validator::make($request->all(), [
+		$customer_address = new CustomerAddress;
+
+		if (!$customer_address->add($request->all(), null , Auth::guard('admin')->id(), 'admin')) {
+			return back()->with('error_msg', trans('customers.adding_customer_address_error'));
+		}
+
+		return back()->with('success_msg', trans('customers.customer_added'));
+
+	}
+
+
+
+
+	public function store_ajax(Request $request)
+	{
+				$validator = Validator::make($request->all(), [
 				'governorate'      => 'required',
 				'city'             => 'required',
 				'building_type'    => 'nullable',
@@ -65,8 +89,10 @@ class CustomerController extends Controller {
 		}
 
 		return response()->json(['status' => 'success', 'msg' => trans('trips.customer_added')], 200);
-
+		
 	}
+
+
 
 	/**
 	 * Display the specified resource.
@@ -84,8 +110,11 @@ class CustomerController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id) {
-		//
+	public function edit(CustomerAddress $customer) {
+		$building_types = BuildingType::latest()->get();
+		$governorates   = Governorate::where('active', 1)->latest()->get();
+		$cities         = City::where('active', 1)->where('governorate_id', $customer->governorate_id)->latest()->get();
+		return view('board.customers.edit', compact('governorates', 'cities', 'building_types', 'customer'));
 	}
 
 	/**
@@ -95,8 +124,12 @@ class CustomerController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id) {
-		//
+	public function update(UpdateCustomerRequest $request, CustomerAddress $customer) {
+		if (!$customer->edit($request->all())) {
+			return back()->with('error_msg', trans('customers.edit_error'));
+		}
+
+		return back()->with('success_msg', trans('customers.edit_success'));
 	}
 
 	/**

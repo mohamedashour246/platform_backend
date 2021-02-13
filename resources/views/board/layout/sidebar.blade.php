@@ -34,7 +34,7 @@ $lang = session()->get('locale');
 
 			@php
 			$segment = request()->segment(2);
-			$drivers = $admins = $board = $governorates = $cities = $markets = $trips = $city_delivery_prices = $bills = '';
+			$drivers = $admins = $board = $governorates = $cities = $customers =  $markets = $trips = $city_delivery_prices = $bills = '';
 			switch ($segment) {
 				case 'admins':
 				case 'admin_types':
@@ -47,6 +47,9 @@ $lang = session()->get('locale');
 				break;
 				case 'governorates':
 				$governorates = 'active';
+				break;
+				case 'customers':
+				$customers = 'active';
 				break;
 				case 'cities':
 				$cities = 'active';
@@ -123,6 +126,16 @@ $lang = session()->get('locale');
 							<li class="nav-item"><a href="{{ route('admin_types.index') }}" class="nav-link"> <i class="icon-grid5 mr-1"></i>  @lang('admin_types.admin_types') </a></li>
 						</ul>
 					</li>
+
+					<li class="nav-item nav-item-submenu {{ $customers == 'active' ? 'nav-item-open' : '' }}">
+						<a href="#" class="nav-link {{ $customers }}"><i class="icon-users4"></i> <span>@lang('customers.customers')</span></a>
+						<ul class="nav nav-group-sub" data-submenu-title="">
+							<li class="nav-item"><a href="{{ route('customers.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('customers.show_all_customers') </a></li>
+							<li class="nav-item"><a href="{{ route('customers.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('customers.add_new_customer') </a></li>
+							
+						</ul>
+					</li>
+
 					<li class="nav-item nav-item-submenu {{ $drivers == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $drivers }}"><i class="icon-users"></i> <span>@lang('drivers.drivers')</span></a>
 						<ul class="nav nav-group-sub" data-submenu-title="Layouts">

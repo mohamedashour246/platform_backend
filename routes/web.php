@@ -24,6 +24,8 @@ function () {
 		Route::get('/password', 'ProfileController@edit_password')->name('profile.password.edit');
 		Route::patch('/password', 'ProfileController@change_password')->name('profile.password.change');
 		Route::resource('/admins', 'AdminController');
+		// Route::resource('/customers', 'CustomerController');
+
 		// Route::resource('/trip_statuses', 'TripStatusController');
 		// Route::get('/')
 		Route::post('/admins/change_status', 'AdminController@change_status');

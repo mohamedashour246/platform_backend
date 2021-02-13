@@ -1,6 +1,7 @@
 <?php return array (
   'admins' => 'App\\Http\\Livewire\\Admins',
   'board.bills' => 'App\\Http\\Livewire\\Board\\Bills',
+  'board.customers.show-all-customers' => 'App\\Http\\Livewire\\Board\\Customers\\ShowAllCustomers',
   'board.driver.driver-trips' => 'App\\Http\\Livewire\\Board\\Driver\\DriverTrips',
   'board.drivers.bills' => 'App\\Http\\Livewire\\Board\\Drivers\\Bills',
   'board.markets.martket-trips' => 'App\\Http\\Livewire\\Board\\Markets\\MartketTrips',

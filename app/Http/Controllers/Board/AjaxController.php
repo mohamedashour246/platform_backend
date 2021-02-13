@@ -37,6 +37,7 @@ class AjaxController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_new_customar_via_ajax(Request $request) {
+
         $validator = Validator::make($request->all(), [
                 'governorate'     => 'required',
                 'city'            => 'required',
