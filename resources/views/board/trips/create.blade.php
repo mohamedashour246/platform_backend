@@ -52,7 +52,17 @@ $lang = session()->get('locale');
 						
 						<div class="form-group">
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-3">
+									<label> @lang('trips.sender_type') </label>
+									<select name="sender_type"  class="form-control sender_type" >
+										<option value="market"> @lang('trips.market') </option>
+										<option value="client"> @lang('trips.client') </option>
+									</select>
+									@error('sender_type')
+									<label class="text-danger font-weight-bold " > {{ $message }} </label>
+									@enderror
+								</div>
+								<div class="col-md-3">
 									<label> @lang('trips.market') </label>
 									<select name="market_id"  class="form-control market_id" >
 									</select>
@@ -60,7 +70,18 @@ $lang = session()->get('locale');
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
 									@enderror
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-6" style="display: none;">
+									<label> @lang('trips.client') </label>
+									<select name="client_id"  class="form-control client_id" >
+										@foreach ($clients as $client)
+											<option value="{{ $client->id }}"> {{ $client->name }} </option>
+										@endforeach
+									</select>
+									@error('client_id')
+									<label class="text-danger font-weight-bold " > {{ $message }} </label>
+									@enderror
+								</div>
+								<div class="col-md-3">
 									<label> @lang('trips.branch') </label>
 									<select name="branch_id"  class="form-control branch_id" >
 										<option value=""></option>
@@ -70,7 +91,7 @@ $lang = session()->get('locale');
 									@enderror
 								</div>
 
-								<div class="col-md-4">
+								<div class="col-md-3">
 									<label> @lang('trips.order_price') </label>
 									<input type="text" name="order_price" value="{{ old('order_price') }}" class="form-control @error('order_price') is-invalid @enderror " >
 									@error('order_price')
@@ -235,6 +256,23 @@ $lang = session()->get('locale');
 	<script>
 		$(document).ready(function() {
 
+
+		$('select.sender_type').on('change',  function(event) {
+			event.preventDefault();
+			
+			sender_type = $(this).val(); 
+			if (sender_type == 'client') {
+				$('select.market_id').parent().hide();
+				$('select.branch_id').parent().hide();
+				$('select.client_id').parent().show();
+
+			} else {
+				$('select.market_id').parent().show();
+				$('select.branch_id').parent().show();
+				$('select.client_id').parent().hide();
+			}
+
+		});
 
 
 

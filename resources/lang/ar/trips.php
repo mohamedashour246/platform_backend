@@ -87,6 +87,10 @@ return [
 
 	'generate_payment_link' => 'توليد رابط فع' , 
 	'click_here' => 'اضغط هنا' , 
+	'sender_type' => 'نوع المرسل' ,
+	'client' => 'عميل' , 
+	'market' => 'متجر' 
+
 
 
 

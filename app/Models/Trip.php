@@ -49,7 +49,7 @@ class Trip extends Model {
 
 
 	public function add($data, $address_id) {
-		$this->market_id                 = $data['market_id'];
+		$this->market_id                 = $data['sender_type'] == 'market' ? $data['market_id'] : $data['client_id'] ;
 		$this->branch_id                 = $data['branch_id'];
 		$this->code                      = mt_rand(0, 50).time();
 		$this->admin_id                  = Auth::guard('admin')->id();
@@ -57,9 +57,10 @@ class Trip extends Model {
 		$this->payment_method_id         = $data['payment_method_id'];
 		$this->delivery_date_to_customer = $data['delivery_date_to_customer'].' '.$data['delivery_time_to_customer'];
 		$this->receipt_date_from_market  = $data['receipt_date_from_market'].' '.$data['receipt_time_from_market'];
-		$this->status                    = 1;
+		$this->status_id                    = 1;
 		$this->driver_id                 = $data['driver_id'];
 		$this->customer_address_id       = $address_id;
+		$this->sender_type = $data['sender_type'];
 		// $this->notes = $data['notes'];
 		return $this->save();
 	}

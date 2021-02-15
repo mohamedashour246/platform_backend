@@ -176,7 +176,8 @@ return [
 		'markets' => 'المتاجر' , 
 		'market_id' => 'المتجر' , 
 		'branch_id' => 'الفرع',
-		'customers' => 'العملاء'
+		'customers' => 'العملاء' , 
+		'sender_type' => 'نوع الراسل'
 
 	],
 

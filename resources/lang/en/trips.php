@@ -87,6 +87,9 @@ return [
 
 	'generate_payment_link' => 'Generate Payment Link' , 
 	'click_here' => 'Click here' , 
+	'sender_type' => 'Sender Type' , 
+	'client' => 'Client' , 
+	'market' => 'market' 
 
 
 

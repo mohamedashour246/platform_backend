@@ -24,8 +24,8 @@ class StoreTripRequest extends FormRequest
     public function rules()
     {
         return [
-            'market_id' => 'required' , 
-            'branch_id' => 'required' , 
+            'market_id' => 'nullable' , 
+            'branch_id' => 'nullable' , 
             'order_price' => 'nullable' , 
             'driver_id' => 'nullable' , 
             'payment_method_id' => 'required' , 
@@ -35,7 +35,8 @@ class StoreTripRequest extends FormRequest
             'customers' => 'required' , 
             'driver_id' => 'nullable' , 
             'receipt_time_from_market' => 'required' , 
-            'delivery_time_to_customer' => 'required'
+            'delivery_time_to_customer' => 'required' , 
+            'sender_type' => 'required' , 
         ];
     }
 }

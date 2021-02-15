@@ -43,7 +43,8 @@ class TripController extends Controller
         $governorates = Governorate::all();
         $building_types = BuildingType::all();
         $drivers = Driver::all();
-        return view('board.trips.create' , compact('payment_methods' , 'governorates' ,  'building_types' , 'drivers'));
+        $clients = CustomerAddress::all();
+        return view('board.trips.create' , compact('payment_methods' , 'governorates' ,  'building_types' , 'drivers'  , 'clients' ));
     }
 
     /**
