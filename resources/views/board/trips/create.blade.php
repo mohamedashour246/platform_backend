@@ -74,7 +74,7 @@ $lang = session()->get('locale');
 									<label> @lang('trips.client') </label>
 									<select name="client_id"  class="form-control client_id" >
 										@foreach ($clients as $client)
-											<option value="{{ $client->id }}"> {{ $client->name }} </option>
+										<option value="{{ $client->id }}"> {{ $client->name }} </option>
 										@endforeach
 									</select>
 									@error('client_id')
@@ -194,7 +194,7 @@ $lang = session()->get('locale');
 								<div class="col-md-3">
 									<label>@lang('trips.choose_customers') </label>
 									<select name="customers[]" multiple="multiple" class="form-control customers" >
-										<option value=""> اختر المستلم </option>
+										
 									</select>
 									@error('customers')
 									<label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -253,8 +253,8 @@ $lang = session()->get('locale');
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
-	<script>
-		$(document).ready(function() {
+<script>
+	$(document).ready(function() {
 
 
 		$('select.sender_type').on('change',  function(event) {
@@ -414,20 +414,20 @@ $lang = session()->get('locale');
 
 
 
-		});
-	</script>
+	});
+</script>
 <script>
 
 	$(document).ready(function() {
 
 
-		 var market_id = null;
+		var market_id = null;
 
-		  $('.market_id').on('change',  function(event) {
-		  	event.preventDefault();
-		  	market_id = $(this).val();
-		  	$('.branch_id').val('').change();
-		  });
+		$('.market_id').on('change',  function(event) {
+			event.preventDefault();
+			market_id = $(this).val();
+			$('.branch_id').val('').change();
+		});
 
 
 		$('#pickatime1').pickatime({
@@ -482,7 +482,24 @@ $lang = session()->get('locale');
 						text: data.msg,
 						showConfirmButton: false,
 						timer: 1500
-					})
+					});
+
+					var opp = {
+						id: 1,
+						text: 'Barn owl'
+					};
+
+					var option = new Option(data.text, data.id);
+					option.selected = true;
+
+					$(".customers").append(option);
+					$(".customers").trigger("change");
+
+
+
+		
+
+
 				} else {
 					Swal.fire({
 						icon: data.status,
@@ -577,19 +594,19 @@ $(function() {
 
 
 
-		$('button.add_more_items').on('click',  function(event) {
-			event.preventDefault();
-			item = $('div.first_item').clone();
-			item.find('input.quantity').val('');
-			item.find('input.name').val('');
-			item.removeClass('first_item');
-			$('.items').children().last().after(item);
+	$('button.add_more_items').on('click',  function(event) {
+		event.preventDefault();
+		item = $('div.first_item').clone();
+		item.find('input.quantity').val('');
+		item.find('input.name').val('');
+		item.removeClass('first_item');
+		$('.items').children().last().after(item);
 
-		});
+	});
 
 
-		$(document).on('click', 'button.cancel_item', function(event) {
-			event.preventDefault();
+	$(document).on('click', 'button.cancel_item', function(event) {
+		event.preventDefault();
 			//we need first to count the number ot items showen to user
 			items_count = $('.items').children().length;
 			
@@ -598,111 +615,111 @@ $(function() {
 			}
 		});
 
-		  var market_id = null;
+	var market_id = null;
 
-		  $('.market_id').on('change',  function(event) {
-		  	event.preventDefault();
-		  	market_id = $(this).val();
-		  	$('.branch_id').val('').change();
-		  });
+	$('.market_id').on('change',  function(event) {
+		event.preventDefault();
+		market_id = $(this).val();
+		$('.branch_id').val('').change();
+	});
 
-		  $('.market_id').select2({
-		  	placeholder: "اختر المتجر",
-		  	minimumInputLength:3,
-		  	ajax: {
-		  		url: '/Board/ajax/search_markets',
-		  		dataType: 'json',
-		  		type: 'GET' ,
-		  		data: function (params) {
-		  			var queryParameters = {
-		  				q: params.term ,
-		  			}
-		  			return queryParameters;
-		  		},
-		  		delay: 500,
-		  		processResults: function (data) {
-		  			return {
-		  				results:  $.map(data, function (item) {
-		  					return {
-		  						text: item.name +  ' ' + item.name ,
-		  						id: item.id
-		  					}
-		  				})
-		  			};
-		  		},
-		  		cache: true
-		  	}
-		  });
-
-
-		  $('.branch_id').select2({
-		  	placeholder: "اختر الفرع",
-		  	ajax: {
-		  		url: '/Board/ajax/search_branches',
-		  		dataType: 'json',
-		  		type: 'GET' ,
-		  		data: function (params) {
-		  			var queryParameters = {
-		  				q: params.term ,
-		  				market_id : market_id , 
-		  			}
-		  			return queryParameters;
-		  		},
-		  		delay: 500,
-		  		processResults: function (data) {
-		  			return {
-		  				results:  $.map(data, function (item) {
-		  					return {
-		  						text: item.name +  ' ' + item.name ,
-		  						id: item.id
-		  					}
-		  				})
-		  			};
-		  		},
-		  		cache: true
-		  	}
-		  });
+	$('.market_id').select2({
+		placeholder: "اختر المتجر",
+		minimumInputLength:3,
+		ajax: {
+			url: '/Board/ajax/search_markets',
+			dataType: 'json',
+			type: 'GET' ,
+			data: function (params) {
+				var queryParameters = {
+					q: params.term ,
+				}
+				return queryParameters;
+			},
+			delay: 500,
+			processResults: function (data) {
+				return {
+					results:  $.map(data, function (item) {
+						return {
+							text: item.name +  ' ' + item.name ,
+							id: item.id
+						}
+					})
+				};
+			},
+			cache: true
+		}
+	});
 
 
-
-
-
-
-		  $('.pickatime').pickatime({
-		  	formatSubmit: 'HH:i'
-		  });
-
-		  $('.select').select2({
-		  	minimumResultsForSearch: Infinity
-		  });
-
-		  $('.form-input-styled').uniform({
-		  	fileButtonClass: 'action btn bg-primary'
-		  });
-
-
-		  var _componentSwitchery = function() {
-		  	if (typeof Switchery == 'undefined') {
-		  		console.warn('Warning - switchery.min.js is not loaded.');
-		  		return;
-		  	}
-
-
-		  	var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
-		  	elems.forEach(function(html) {
-		  		var switchery = new Switchery(html);
-		  	});
-
-		  	var primary = document.querySelector('.form-check-input-switchery-primary');
-		  	var switchery = new Switchery(primary, { color: '#2196F3' });
-		  };
+	$('.branch_id').select2({
+		placeholder: "اختر الفرع",
+		ajax: {
+			url: '/Board/ajax/search_branches',
+			dataType: 'json',
+			type: 'GET' ,
+			data: function (params) {
+				var queryParameters = {
+					q: params.term ,
+					market_id : market_id , 
+				}
+				return queryParameters;
+			},
+			delay: 500,
+			processResults: function (data) {
+				return {
+					results:  $.map(data, function (item) {
+						return {
+							text: item.name +  ' ' + item.name ,
+							id: item.id
+						}
+					})
+				};
+			},
+			cache: true
+		}
+	});
 
 
 
 
 
 
+	$('.pickatime').pickatime({
+		formatSubmit: 'HH:i'
+	});
+
+	$('.select').select2({
+		minimumResultsForSearch: Infinity
+	});
+
+	$('.form-input-styled').uniform({
+		fileButtonClass: 'action btn bg-primary'
+	});
+
+
+	var _componentSwitchery = function() {
+		if (typeof Switchery == 'undefined') {
+			console.warn('Warning - switchery.min.js is not loaded.');
+			return;
+		}
+
+
+		var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
+		elems.forEach(function(html) {
+			var switchery = new Switchery(html);
 		});
-	</script>
 
-	@endsection
+		var primary = document.querySelector('.form-check-input-switchery-primary');
+		var switchery = new Switchery(primary, { color: '#2196F3' });
+	};
+
+
+
+
+
+
+});
+</script>
+
+@endsection

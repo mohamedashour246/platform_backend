@@ -34,7 +34,8 @@ return [
 	'show_all_customers'            => 'عرض كافه العملاء ',
 	'added_by'                      => 'تم الاضافه بواسطته',
 	'code'                          => 'كود العميل',
-	'business_type'                 => 'نوع النشاط'
+	'business_type'                 => 'نوع النشاط' , 
+	'delete_success' => 'تم حذف العميل بنجاح'
 
 ];
 

@@ -133,7 +133,7 @@ $lang = session()->get('locale');
 		Livewire.on('itemDeleted', itemId => {
 			Toast.fire({
 				icon: 'success',
-				title: "@lang('trips.delete_success')",
+				title: "@lang('customers.delete_success')",
 			});
 		})
 

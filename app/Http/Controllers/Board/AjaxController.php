@@ -53,11 +53,12 @@ class AjaxController extends Controller
                 'longitude'       => 'required',
                 'latitude'        => 'required',
                 'business_type'   => 'nullable',
-                'market_id' => 'required' , 
+                'market_id' => 'nullable' , 
             ]);
 
         // dd($validator->errors());
         if ($validator    ->fails()) {
+
             return response()->json(['status' => 'error', 'msg' => 'من فضلك قم بملىئ البيانات'], 200);
         }
 
@@ -71,7 +72,8 @@ class AjaxController extends Controller
             return response()->json(['status' => 'error', 'msg' => trans('trips.adding_customer_address_error')], 200);
         }
 
-        return response()->json(['status' => 'success', 'msg' => trans('trips.customer_added')], 200);
+
+        return response()->json(['status' => 'success', 'text' => $customer_address->name   , 'id' => $customer_address->id ,  'msg' => trans('trips.customer_added')], 200);
     }
 
     /**
