@@ -1,7 +1,7 @@
 @php
 $lang = session()->get('locale');
 @endphp
-@extends('merchants.layout.master')
+@extends('board.layout.master')
 @section('title')
 @lang('customers.customer_details')
 @endsection
@@ -16,8 +16,8 @@ $lang = session()->get('locale');
 		</div>
 		<div class="header-elements d-none py-0 mb-3 mb-md-0">
 			<div class="breadcrumb">
-				<a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
-				<a href="{{ route('merchants.customers.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('customers.customers') </a>
+				<a href="{{ route('board.index') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
+				<a href="{{ route('customers.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('customers.customers') </a>
 				<span class="breadcrumb-item active"> @lang('customers.customer_details') </span>
 			</div>
 		</div>
