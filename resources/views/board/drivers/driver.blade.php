@@ -33,8 +33,8 @@ $lang = session()->get('locale');
 		<div class="header-elements ">
 			<div class="float-right">
 
-				<a href="{{ route('drivers.trips'  , ['driver' => $driver->id ] ) }}" class="btn btn-info ml-1"> <i class="icon-car"></i> @lang('drivers.driver_trips')  </a>
-				<a href="{{ route('drivers.bills'  , ['driver' => $driver->id ] ) }}" class="btn btn-success ml-1"> <i class="icon-newspaper"></i> @lang('drivers.driver_bills')  </a>
+				{{-- <a href="{{ route('drivers.trips'  , ['driver' => $driver->id ] ) }}" class="btn btn-info ml-1"> <i class="icon-car"></i> @lang('drivers.driver_trips')  </a>
+				<a href="{{ route('drivers.bills'  , ['driver' => $driver->id ] ) }}" class="btn btn-success ml-1"> <i class="icon-newspaper"></i> @lang('drivers.driver_bills')  </a> --}}
 				<a href="{{ route('drivers.edit'  , ['driver' => $driver->id ] ) }}" class="btn btn-warning ml-1"> <i class="icon-pencil5"></i> @lang('drivers.edit_driver_details')  </a>
 				<form action="{{ route('drivers.destroy'  , ['driver' => $driver->id] ) }}" method="POST" class="float-right ml-1">
 					@csrf
@@ -47,129 +47,62 @@ $lang = session()->get('locale');
 
 
 	<div class="row">
-				<div class="col-md-6">
+		@include('board.layout.messages')
+		
+		<div class="col-md-12">
+			<div class="card card-body">
+				<div class="media">
+					<div class="mr-3">
+						<a href="#">
+							<img  src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" class=" img-thumbnail img-fluid "  width="200" height="200">
+						</a>
+					</div>
+					<div class="media-body">
+						<h6 class="mb-0"> {{ $driver->name }} </h6>
 
-			@include('board.layout.messages')
-			<!-- Account settings -->
-			<div class="card">
-				<div class="card-header bg-dark header-elements-inline">
-					<h5 class="card-title"> @lang('drivers.driver_details') {{ $driver->username }} </h5>
-					<div class="header-elements">
-						<div class="list-icons">
-							<a class="list-icons-item" data-action="collapse"></a>
-							<a class="list-icons-item" data-action="reload"></a>
-							<a class="list-icons-item" data-action="remove"></a>
+						<div class="list-icons list-icons-extended">
+							<a href="#" class="list-icons-item" data-popup="tooltip" title="@lang('drivers.phone')" data-toggle="modal" data-trigger="hover" data-target="#call" data-original-title="Call">  {{ $driver->phone }} <i class="icon-phone2"></i> </a>
+							<a href="#" class="list-icons-item" data-popup="tooltip" title="@lang('drivers.code')" data-toggle="modal" data-trigger="hover" data-target="#chat" data-original-title="Chat"> {{ $driver->code }} <i class="icon-barcode2 "></i></a>
+							<a href="#" class="list-icons-item" data-popup="tooltip" title="@lang('drivers.car_number')" data-toggle="modal" data-trigger="hover" data-target="#video" data-original-title="Video"> {{ $driver->car_number }} <i class="icon-car "></i></a>
 						</div>
 					</div>
 				</div>
+				<div class="col-md-5">
+					<div class="card-header bg-transparent header-elements-inline">
+						<span class="card-title font-weight-semibold"></span>
 
-				<div class="card-body">
-					<table class="table  table-xs border-top-0 my-2">
+					</div>
+
+					<table class="table table-borderless table-xs my-2">
 						<tbody>
 							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.code')</th>
-								<td class="text-left"> {{ $driver->code }} </td>
+								<td> @lang('drivers.country') </td>
+								<td class="text-right"> {{ optional($driver->country)['name_'.$lang] }} </td>
 							</tr>
 							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.phone')</th>
-								<td class="text-left"> {{ $driver->phone }} </td>
-							</tr>
-							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.username')</th>
-								<td class="text-left"> {{ $driver->username }} </td>
-							</tr>
-							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.name')</th>
-								<td class="text-left"> {{ $driver->name }} </td>
-							</tr>
-							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.working_start_time')</th>
-								<td class="text-left"> {{ $driver->working_start_time->toTimeString() }} </td>
+								<td class="font-weight-bold text-dark">@lang('drivers.working_start_time')</td>
+								<td class="text-right"> {{ $driver->working_start_time->format('h:i:s A') }} </td>
 							</tr>
 
 							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.working_end_time')</th>
-								<td class="text-left"> {{ $driver->working_end_time->toTimeString() }} </td>
-							</tr>
-							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.car_number')</th>
-								<td class="text-left"> {{ $driver->car_number }} </td>
-							</tr>
-							<tr>
-								<th class="font-weight-bold text-dark">@lang('drivers.country')</th>
-								<td class="text-left"> {{ optional($driver->country)['name_'.$lang] }} </td>
+								<td class="font-weight-bold text-dark">@lang('drivers.working_end_time')</td>
+								<td class="text-right"> {{ $driver->working_end_time->format('h:i:s A') }} </td>
 							</tr>
 
-
-							<tr>
-								<th class="font-weight-bold text-dark"> @lang('drivers.activation') </th>
-								<td class="text-left">	
-									@switch($driver->active)
-									@case(1)
-									<label  class="badge badge-success" > @lang('drivers.active') </label>
-									@break
-									@case(0)
-									<label  class="badge badge-secondary" > @lang('drivers.inactive') </label>
-									@break
-									@endswitch
-								</td>
-							</tr>
-
-							<tr>
-								<td class="font-weight-bold text-dark"> @lang('drivers.bounce') </td>
-								<td class="text-left"> {{ $driver->bounce }} </td>
-							</tr>
+							<td class="font-weight-bold text-dark"> @lang('drivers.created_at') </td>
+							<td class="text-right"> {{ $driver->created_at->toFormattedDateString() }} - {{ $driver->created_at->diffForHumans() }} </td>
 
 
-
-							<tr>
-								<th class="font-weight-bold text-dark"> @lang('drivers.activation') </th>
-								<td class="text-left">	
-									@switch($driver->available)
-									@case(1)
-									<label  class="badge badge-primary" > @lang('drivers.available') </label>
-									@break
-									@case(0)
-									<label  class="badge badge-danger" > @lang('drivers.unavailable') </label>
-									@break
-									@endswitch
-								</td>
-							</tr>
-
-
-							<tr>
-								<td class="font-weight-bold text-dark"> @lang('drivers.created_at') </td>
-								<td class="text-left"> {{ $driver->created_at->toFormattedDateString() }} - {{ $driver->created_at->diffForHumans() }} </td>
-							</tr>
-
-							<tr>
-								<td class="font-weight-bold text-dark"> @lang('drivers.added_by') </td>
-								<td class="text-left font-weight-bold"> <a href="{{ route('drivers.show'  , ['driver' => $driver->id] ) }}"> {{ optional($driver->admin)->username }} </a> </td>
-							</tr>
-
-
-							<tr>
-								<td class="font-weight-bold text-dark"> @lang('drivers.notes') </td>
-								<td class="text-left font-weight-bold"> {{ $driver->notes }} </td>
-							</tr>
-
-
-
-							<tr>
-								<td class="font-weight-semibold">  @lang('drivers.current_profile_picture') </td>
-								<td class="text-right text-muted">
-									<img class="img-responsive img-thumbnail" width="300" height="300" src="{{ Storage::disk('s3')->url('drivers/'.$driver->image) }}" alt="">
-								</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			<!-- /account settings -->
+
 		</div>
-		<div class="col-md-6">
+
+		<div class="col-md-12">
 			<div class="row">
-				<div class="col-sm-6 col-xl-4">
+				<div class="col-sm-6 col-xl-3">
 					<div class="card card-body">
 						<div class="media">
 							<div class="media-body">
@@ -186,7 +119,7 @@ $lang = session()->get('locale');
 
 
 
-				<div class="col-sm-6 col-xl-4">
+				<div class="col-sm-6 col-xl-3">
 					<div class="card card-body">
 						<div class="media">
 							<div class="media-body">
@@ -202,7 +135,7 @@ $lang = session()->get('locale');
 				</div>
 
 
-				<div class="col-sm-6 col-xl-4">
+				<div class="col-sm-6 col-xl-3">
 					<div class="card card-body">
 						<div class="media">
 							<div class="media-body">
@@ -217,7 +150,7 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-xl-4">
+				<div class="col-sm-6 col-xl-3">
 					<div class="card card-body">
 						<div class="media">
 							<div class="media-body">
@@ -232,12 +165,14 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-xl-4">
+				<div class="col-sm-6 col-xl-3">
 					<div class="card card-body">
 						<div class="media">
 							<div class="media-body">
 								<h3 class="font-weight-semibold mb-0"> {{ $today_total_bills_count }} </h3>
-								<span class="text-uppercase font-size-sm text-blue-600">  عدد الفواتير</span>
+								<a href="{{ route('drivers.bills'  , ['driver' => $driver->id ] ) }}"> <span class="text-uppercase font-size-sm text-blue-600">  عدد الفواتير</span> </a>
+
+								
 							</div>
 
 							<div class="ml-3 align-self-center">
@@ -248,7 +183,7 @@ $lang = session()->get('locale');
 				</div>
 
 
-				<div class="col-sm-6 col-xl-4">
+				<div class="col-sm-6 col-xl-3">
 					<div class="card card-body">
 						<div class="media">
 							<div class="media-body">
@@ -263,12 +198,12 @@ $lang = session()->get('locale');
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-xl-4">
+				<div class="col-sm-6 col-xl-3">
 					<div class="card card-body">
 						<div class="media">
 							<div class="media-body">
 								<h3 class="font-weight-semibold mb-0"> {{ $total_trips_count }} </h3>
-								<span class="text-uppercase font-size-sm text-blue-600"> @lang('drivers.total_trips_count') </span>
+								<a href="{{ route('drivers.trips'  , ['driver' => $driver->id ] ) }}"> <span class="text-uppercase font-size-sm text-blue-600"> @lang('drivers.total_trips_count') </span> </a>
 							</div>
 							<div class="ml-3 align-self-center">
 								<i class="icon-car  icon-3x text-blue-400"></i>
@@ -279,6 +214,10 @@ $lang = session()->get('locale');
 
 			</div>
 		</div>
+
+		
+
+
 
 
 
