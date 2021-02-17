@@ -143,6 +143,11 @@ $lang = session()->get('locale');
 							<td class="text-left font-weight-bold"> {{ $trip->notes }} </td>
 						</tr>
 
+						<tr>
+							<td class="font-weight-bold text-dark"> @lang('drivers.bounce') </td>
+							<td class="text-left font-weight-bold"> {{ optional($trip->driver)->bounce }} </td>
+						</tr>
+
 
 
 						<tr>
