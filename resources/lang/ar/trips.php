@@ -89,7 +89,8 @@ return [
 	'click_here' => 'اضغط هنا' , 
 	'sender_type' => 'نوع المرسل' ,
 	'client' => 'عميل' , 
-	'market' => 'متجر' 
+	'market' => 'متجر'  , 
+	'order_image' =>' صوره الطلب'
 
 
 

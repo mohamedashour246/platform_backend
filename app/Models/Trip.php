@@ -46,6 +46,12 @@ class Trip extends Model {
 	}
 
 
+	public function client() {
+
+		return $this->belongsTo(CustomerAddress::class , 'market_id');
+	}
+
+
 
 
 	public function add($data, $address_id) {
