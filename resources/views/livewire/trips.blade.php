@@ -158,7 +158,13 @@ $lang = session()->get('locale');
 						</td>
 						<td  >{{ $i++ }}</td>
 
-						<td> {{ optional($trip->market)->name }} </td>
+						<td> 
+							@if ($trip->sender_type == 'market')
+								<a href="{{ route('markets.show' , ['market' => $trip->market_id ]  ) }}"> {{ optional($trip->market)->name }} </a>
+								@else
+								<a href="{{ route('customers.show' , ['customer' => $trip->market_id ]  ) }}"> {{ optional($trip->client)->name }} </a>
+								@endif
+						 </td>
 						<td> {{ optional($trip->address)->name }} </td>
 						<td> {{ $trip->receipt_date_from_market->toDayDateTimeString() }} </td>
 						<td> {{ $trip->delivery_date_to_customer->toDayDateTimeString() }} </td>
