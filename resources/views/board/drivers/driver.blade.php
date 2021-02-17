@@ -25,6 +25,7 @@ $lang = session()->get('locale');
 </div>
 @endsection
 
+
 @section('content')
 
 <div class="row">
