@@ -59,6 +59,10 @@ Route::group(['middleware' => ['merchant', 'activeMerchant', 'activeMarket', 'wh
 
 
         Route::resource('products', 'merchantDashbaord\ProductController');
+				Route::resource('exproducts', 'Merchant\ExtrasController');
+				Route::resource('orders', 'Merchant\OrderController');
+				Route::resource('dissliders', 'Merchant\DiscountController');
+				Route::resource('customers', 'Merchant\CustomerController');
+
     });
 });
-

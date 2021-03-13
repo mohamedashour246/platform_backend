@@ -172,13 +172,24 @@ return [
 		'title_ar' => 'العنوان بالعربيه' ,
 		'content_en' => 'المحتوى بالعربيه' ,
 		'content_ar' => 'المحتوى بالانجليزيه' ,
-		'admins' => 'المشرفين' , 
-		'markets' => 'المتاجر' , 
-		'market_id' => 'المتجر' , 
+		'admins' => 'المشرفين' ,
+		'markets' => 'المتاجر' ,
+		'market_id' => 'المتجر' ,
 		'branch_id' => 'الفرع',
-		'customers' => 'العملاء' , 
-		'sender_type' => 'نوع الراسل'
-
+		'customers' => 'العملاء' ,
+		'sender_type' => 'نوع الراسل',
+		'cost' => 'السعر',
+    'countofproducts' => 'عدد المنتجات',
+    'status' => 'الحالة',
+		'barcode' => 'الرمز الشريطى',
+		'time_to_arrive' => 'وقت التوصيل',
+		'paymet_type' => 'طريقة الدفع',
+		'total' => 'المبلغ الكلى',
+		'image' => 'الصورة',
+		'expire' => 'التاريخ',
+		'count_use' => 'عدد مرات الاستخدام',
+		'value_discount' => 'قيمة الخصم',
+		'min_cost' => 'الحد الادنى'
 	],
 
 ];

@@ -23,6 +23,8 @@ return [
     'last_orders'                     => '  Last Orders ',
     'last_products'                     => '  Last Products ',
     'last_categories'                     => '  Last Categories ',
+    'available_choose' => 'Available_choose',
+    'additions' => 'Additions',
 
     'show_all_categories'                     => ' Show All Categories        ',
     'show_all_product'                     => '  Show All Products      ',

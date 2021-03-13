@@ -13,14 +13,14 @@
     <div class="page-header">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('merchantDashbaord.product') </h4>
+                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('merchantDashbaord.discount_sliders') </h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none py-0 mb-3 mb-md-0">
                 <div class="breadcrumb">
                     <a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 
-                    <a href="{{ route('products.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.product') </a>
+                    <a href="{{ route('dissliders.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.discount_sliders') </a>
                     <span class="breadcrumb-item active"> @lang('merchantDashbaord.show') </span>
                 </div>
             </div>
@@ -35,7 +35,7 @@
         <!-- Account settings -->
         <div class="card">
             <div class="card-header bg-dark header-elements-inline">
-                <h5 class="card-title"> @lang('merchantDashbaord.product_detail') :  {{$product['name_'.$lang]}} </h5>
+                <h5 class="card-title"> @lang('merchantDashbaord.disslider_detail') :  {{$disslider['name_'.$lang]}} </h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -50,11 +50,11 @@
                     <tbody>
                     <tr>
                         <th class="font-weight-bold text-dark">@lang('merchantDashbaord.name_ar')</th>
-                        <td class="text-left"> {{ $product->name_ar }} </td>
+                        <td class="text-left"> {{ $disslider->name_ar }} </td>
                     </tr>
                     <tr>
                         <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.name_en') </th>
-                        <td class="text-left">	{{ $product->name_en }}	</td>
+                        <td class="text-left">	{{ $disslider->name_en }}	</td>
                     </tr>
                     <tr>
                         <th class="font-weight-bold text-dark">@lang('merchantDashbaord.description_ar')</th>

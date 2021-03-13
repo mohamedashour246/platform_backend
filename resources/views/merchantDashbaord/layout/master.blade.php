@@ -8,6 +8,7 @@
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 	<link href="{{ asset('board_assets/global_assets/css/icons/icomoon/styles.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('board_assets/rtl/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('board_assets/rtl/assets/css/bootstrap_limitless.min.css') }}" rel="stylesheet" type="text/css">
@@ -24,6 +25,7 @@
 
 	@livewireScripts
 	<!-- Core JS files -->
+	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 	<script src="{{ asset('board_assets/global_assets/js/main/jquery.min.js') }}"></script>
 	<script src="{{ asset('board_assets/global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
 	<script src="{{ asset('board_assets/global_assets/js/plugins/loaders/blockui.min.js') }}"></script>

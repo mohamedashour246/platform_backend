@@ -35,7 +35,7 @@ $lang = session()->get('locale');
 
         @php
             $segment = request()->segment(2);
-            $admins = $board = $branches = $customers = $trips =$products= $orders = $categories ='';
+            $admins = $board = $branches = $customers = $trips =$products=  $exproducts = $dissliders = $orders = $categories ='';
             switch ($segment) {
                 case 'admins':
                 case 'admin_types':
@@ -66,6 +66,15 @@ $lang = session()->get('locale');
                 case 'products':
                 $products = 'active';
                 break;
+								case 'exproducts':
+                $exproducts = 'active';
+                break;
+								case 'dissliders':
+								$dissliders = 'active';
+								break;
+								case 'customers':
+								$customers = 'active';
+								break;
                 case 'city_delivery_prices':
                 $city_delivery_prices = 'active';
                 break;
@@ -112,20 +121,7 @@ $lang = session()->get('locale');
 							</span>
 						</a>
 					</li>
-					<!-- <li class="nav-item nav-item-submenu {{ $admins == 'active' ? 'nav-item-open' : '' }}">
-						<a href="#" class="nav-link {{ $admins }}"><i class="icon-users4"></i> <span>@lang('admins.admins')</span></a>
-						<ul class="nav nav-group-sub" data-submenu-title="">
-							<li class="nav-item"><a href="{{ route('merchants.admins.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('admins.show_all_admins') </a></li>
-							<li class="nav-item"><a href="{{ route('merchants.admins.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('admins.add_new_admin') </a></li>
-						</ul>
-					</li>
-					<li class="nav-item nav-item-submenu {{ $customers == 'active' ? 'nav-item-open' : '' }}">
-						<a href="#" class="nav-link {{ $customers }}"><i class="icon-users4"></i> <span>@lang('customers.customers')</span></a>
-						<ul class="nav nav-group-sub" data-submenu-title="">
-							<li class="nav-item"><a href="{{ route('merchants.customers.index') }}" class="nav-link"> <i class="icon-users4 mr-1"></i>  @lang('customers.show_all_customers') </a></li>
-							<li class="nav-item"><a href="{{ route('merchants.customers.create') }}" class="nav-link"> <i class="icon-user-plus mr-1"></i> @lang('customers.add_new_customer') </a></li>
-						</ul>
-					</li> -->
+					
 
                     <li class="nav-item nav-item-submenu {{ $categories == 'active' ? 'nav-item-open' : '' }}">
                         <a href="#" class="nav-link {{ $categories }}"><i class="icon-car"></i> <span>@lang('merchantDashbaord.categories')</span></a>
@@ -148,8 +144,37 @@ $lang = session()->get('locale');
                         <a href="#" class="nav-link {{ $orders }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.orders')</span></a>
                         <ul class="nav nav-group-sub" data-submenu-title="Layouts">
                             <li class="nav-item"><a href="{{ route('orders.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.orders_show') </a></li>
+														<li class="nav-item"><a href="{{ route('orders.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('merchantDashbaord.add_new_order') </a></li>
+
                         </ul>
                     </li>
+
+										<li class="nav-item nav-item-submenu {{ $exproducts == 'active' ? 'nav-item-open' : '' }}">
+												<a href="#" class="nav-link {{ $exproducts }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.additions')</span></a>
+												<ul class="nav nav-group-sub" data-submenu-title="Layouts">
+														<li class="nav-item"><a href="{{ route('exproducts.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.show_all_additions') </a></li>
+														<li class="nav-item"><a href="{{ route('exproducts.create') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.add_data') </a></li>
+
+												</ul>
+										</li>
+
+										<li class="nav-item nav-item-submenu {{ $dissliders == 'active' ? 'nav-item-open' : '' }}">
+												<a href="#" class="nav-link {{ $dissliders }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.discount_sliders')</span></a>
+												<ul class="nav nav-group-sub" data-submenu-title="Layouts">
+														<li class="nav-item"><a href="{{ route('dissliders.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.show_all_dissliders') </a></li>
+														<li class="nav-item"><a href="{{ route('dissliders.create') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.add_slider') </a></li>
+
+												</ul>
+										</li>
+
+										<li class="nav-item nav-item-submenu {{ $customers == 'active' ? 'nav-item-open' : '' }}">
+												<a href="{{route('customers.index')}}" class="nav-link {{ $customers }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.customers_store')</span></a>
+												<!-- <ul class="nav nav-group-sub" data-submenu-title="Layouts">
+														<li class="nav-item"><a href="{{ route('dissliders.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.show_all_dissliders') </a></li>
+														<li class="nav-item"><a href="{{ route('dissliders.create') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.add_slider') </a></li>
+
+												</ul> -->
+										</li>
 
 {{-- 					<li class="nav-item nav-item-submenu {{ $drivers == 'active' ? 'nav-item-open' : '' }}">
 						<a href="#" class="nav-link {{ $drivers }}"><i class="icon-users"></i> <span>@lang('drivers.drivers')</span></a>

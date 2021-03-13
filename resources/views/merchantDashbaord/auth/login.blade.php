@@ -42,7 +42,7 @@
 			<div class="content d-flex justify-content-center align-items-center">
 
 				<!-- Login form -->
-				<form class="login-form" action="{{ route('merchantDashbaord.login') }}" method="POST" >
+				<form class="login-form" action="{{ route('merchants.login') }}" method="POST" >
 
 
 					@include('board.layout.messages')

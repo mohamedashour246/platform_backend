@@ -50,7 +50,7 @@
                     <tbody>
                     <tr>
                         <th class="font-weight-bold text-dark">@lang('merchantDashbaord.client_name')</th>
-                        <td class="text-left"> {{ $order->owner->name }} </td>
+                        <td class="text-left"> {{ auth()->guard('merchant')->user()->name }} </td>
                     </tr>
                     <tr>
                         <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.merchant') </th>
@@ -78,7 +78,7 @@
                     </tr>
                     <tr>
                         <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.city') </th>
-                        <td class="text-left">	{{ $order->city->$name }}	</td>
+                        <td class="text-left">	{{ $order->city->name_ar }}	</td>
                     </tr>
                     <tr>
                         <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.discount') </th>
@@ -91,7 +91,7 @@
 
 
 
-                    <tr>
+                    <!-- <tr>
                         <td class="font-weight-bold text-dark"> @lang('merchantDashbaord.products') </td>
                         <td class="text-left">
                             <div class="card" >
@@ -154,7 +154,7 @@
                                 </table>
                             </div>
                         </td>
-                    </tr>
+                    </tr> -->
 
                     </tbody>
                 </table>

@@ -14,8 +14,9 @@ class Product extends Model
 
 
     ];
-    protected $guarded = ['id', 'created_at', 'updated_at', 'deleted_at'];
-    public function getImagePathAttribute()
+    protected $fillable = ['id','code','merchant_id','name_ar','name_en','image','description_ar','description_en','status','type','deliver_services','unit_type','price','selling_counter','discount','selling_price','cost_per_unit','shipping_cost','limit','barcode','sub_category_id' ,'created_at',  'updated_at', 'deleted_at'
+     ];
+        public function getImagePathAttribute()
     {
         if($this->image){
             return asset('uploads/merchantDashbaord/' . $this->image);

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 
+    protected $fillable = ['id','created_at','updated_at','client_id','merchant_id','city_id','barcode','time_to_arrive','payment_type','status','total'];
+
     public function currentStatus(){
         $status = "";
         if (app()->getLocale()== 'en'){

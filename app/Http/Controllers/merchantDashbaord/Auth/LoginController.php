@@ -34,7 +34,7 @@ class LoginController extends Controller {
 		$credentials = $request->only('username', 'password');
 
 		if (Auth::guard('merchant')->attempt($credentials)) {
-			return redirect()         ->route('merchantDashbaord');
+			return redirect()->route('merchantDashbaord');
 		}
 
 		return back()->with('error_msg', 'عفوا بيانات الدخول غير صحيحه');

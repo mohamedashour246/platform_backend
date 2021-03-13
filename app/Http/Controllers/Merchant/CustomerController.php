@@ -9,6 +9,8 @@ use App\Models\BuildingType;
 use App\Models\City;
 use App\Models\CustomerAddress;
 use App\Models\Governorate;
+use App\Models\Merchant;
+use App\Models\Order;
 use Auth;
 
 class CustomerController extends Controller {
@@ -17,9 +19,11 @@ class CustomerController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() {
-
-		return view('merchants.customers.index');
+	public function index()
+	 {
+		$customers = Order::all();
+		return view('merchantDashbaord.customers.index',
+					compact('customers'));
 	}
 
 	/**
@@ -28,10 +32,9 @@ class CustomerController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create() {
-		$building_types = BuildingType::latest()->get();
-		$governorates   = Governorate::where('active', 1)->latest()->get();
+	
 
-		return view('merchants.customers.create', compact('governorates', 'building_types'));
+		return view('merchantDashbaord.customers.create');
 	}
 
 	/**

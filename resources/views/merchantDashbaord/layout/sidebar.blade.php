@@ -186,6 +186,7 @@ $lang = session()->get('locale');
                         </ul>
                     </li>
 
+
 				</ul>
 			</div>
 			<!-- /main navigation -->

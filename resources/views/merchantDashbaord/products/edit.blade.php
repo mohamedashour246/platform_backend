@@ -3,7 +3,7 @@
 @endphp
 @extends('merchantDashbaord.layout.master')
 @section('title')
-    @lang('merchantDashbaord.add_new_product')
+    @lang('merchantDashbaord.edit_product')
 @endsection
 
 
@@ -69,20 +69,6 @@
                                     <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                     @enderror
                                 </div>
-
-                                <!-- Description Ar Field -->
-                                <div class="form-group col-sm-12 col-lg-6">
-                                    {!! Form::label('description_ar',__('merchantDashbaord.description_ar'))  !!}
-                                    {!! Form::textarea('description_ar', null, ['class' => 'form-control']) !!}
-
-                                </div>
-
-                                <!-- Description En Field -->
-                                <div class="form-group col-sm-12 col-lg-6">
-                                    {!! Form::label('description_en', __('merchantDashbaord.description_en')) !!}
-                                    {!! Form::textarea('description_en', null, ['class' => 'form-control']) !!}
-                                </div>
-
 
                                 <div class="form-group col-sm-4">
                                     {!! Form::label('subcategory_id', __('merchantDashbaord.category'))!!}

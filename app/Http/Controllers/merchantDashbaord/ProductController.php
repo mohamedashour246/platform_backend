@@ -8,11 +8,15 @@ use App\Http\Requests\merchantDashbaord\product\CreateProductRequest;
 use App\Http\Requests\merchantDashbaord\product\UpdateProductRequest;
 use App\MerchantModels\Product;
 use App\MerchantModels\SubCategory;
+use App\MerchantModels\AddProduct;
+
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use App\ImageTrait;
-
+use App\Models\Addition;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends AppBaseController
 {
@@ -38,8 +42,10 @@ class ProductController extends AppBaseController
     public function create()
     {
         $subCategories=SubCategory::all();
-
-        return view('merchantDashbaord.products.create',compact('subCategories'));
+        $exproducts=AddProduct::all();
+        //dd($exproducts);
+        
+        return view('merchantDashbaord.products.create',compact('subCategories','exproducts'));
     }
 
     /**
@@ -49,22 +55,35 @@ class ProductController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateProductRequest $request)
+    public function store(Request $request)
     {
-        $input= $request->all();
+        $input= request()->all();
+        
         $input['merchant_id'] = auth()->guard('merchant')->id();
+        $input['sub_category_id '] = auth()->guard('merchant')->id();
         $input['code'] =   $this->generateRandomCode();
         $input['status'] =   1;
 
 
         /** @var Product $product */
-        if ($request->image) {
-            $this-> saveImage('uploads/merchantDashbaord/' ,$request->image,$width=300,$height=300);
-            $input['image'] = $request->image->hashName();
+        if (request('image')) {
+            $this-> saveImage('uploads/merchantDashbaord/' ,request('image'),$width=300,$height=300);
+            $input['image'] = request('image')->hashName();
         }
-        $product = Product::create($input);
 
+       
 
+        $product = new Product($input);
+        $product->save();
+        //dd($product->id);
+
+       
+       
+        $input['mandatory'] = request('status_add');
+        $input['extras'] = json_encode(request('extras'));
+        $input['product_id'] = $product->id;
+
+        $addition = Addition::create($input);
 
         return redirect(route('products.index'))->with('success_msg' , trans('merchantDashbaord.added_successfully'));
     }

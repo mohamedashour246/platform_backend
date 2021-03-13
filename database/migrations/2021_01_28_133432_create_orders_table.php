@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
 
             $table->string('payment_type')->nullable();
             $table->string('order_status')->nullable();
+            $table->string('barcode');
             $table->integer('discount')->nullable();
             $table->double('delivery_fees')->nullable();
             $table->string('time_to_arrive')->nullable();
