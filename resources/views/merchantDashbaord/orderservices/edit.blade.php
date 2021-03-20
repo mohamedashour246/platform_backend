@@ -197,9 +197,9 @@
                                  @enderror
                                </div>
 
-                               <div class="form-group col-lg-3 col-md-9 col-sm-6">
+                               <!-- <div class="form-group col-lg-3 col-md-9 col-sm-6">
                                  <a href="javascript:void(0);" style="cursor:pointer;margin-bottom:5rem; margin-left:5px" id="addRow" class="fa fa-plus-circle"> </a>
-                               </div>
+                               </div> -->
 
                                <div class="form-group col-sm-12">
                                   {!! Form::label('driver', __('merchantDashbaord.driver')) !!}
