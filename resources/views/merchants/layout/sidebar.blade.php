@@ -35,7 +35,7 @@ $lang = session()->get('locale');
 
         @php
             $segment = request()->segment(2);
-            $admins = $board = $branches = $customers = $trips =$products=  $exproducts = $dissliders = $orders = $categories ='';
+            $admins = $board = $branches = $customers = $trips =$products=  $exproducts = $dissliders = $orders = $orderservices = $categories ='';
             switch ($segment) {
                 case 'admins':
                 case 'admin_types':
@@ -66,6 +66,9 @@ $lang = session()->get('locale');
                 case 'products':
                 $products = 'active';
                 break;
+								case 'orderservices':
+								$orderservices = 'active';
+								break;
 								case 'exproducts':
                 $exproducts = 'active';
                 break;
@@ -121,7 +124,7 @@ $lang = session()->get('locale');
 							</span>
 						</a>
 					</li>
-					
+
 
                     <li class="nav-item nav-item-submenu {{ $categories == 'active' ? 'nav-item-open' : '' }}">
                         <a href="#" class="nav-link {{ $categories }}"><i class="icon-car"></i> <span>@lang('merchantDashbaord.categories')</span></a>
@@ -140,11 +143,11 @@ $lang = session()->get('locale');
 
 
 
-                    <li class="nav-item nav-item-submenu {{ $orders == 'active' ? 'nav-item-open' : '' }}">
-                        <a href="#" class="nav-link {{ $orders }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.orders')</span></a>
+                    <li class="nav-item nav-item-submenu {{ $orderservices == 'active' ? 'nav-item-open' : '' }}">
+                        <a href="#" class="nav-link {{ $orderservices }}"><i class="icon-list-ordered"></i> <span>@lang('merchantDashbaord.orders')</span></a>
                         <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                            <li class="nav-item"><a href="{{ route('orders.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.orders_show') </a></li>
-														<li class="nav-item"><a href="{{ route('orders.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('merchantDashbaord.add_new_order') </a></li>
+                            <li class="nav-item"><a href="{{ route('orderservices.index') }}" class="nav-link">  <i class="icon-car mr-1"></i> @lang('merchantDashbaord.orders_show') </a></li>
+														<!-- <li class="nav-item"><a href="{{ route('orders.create') }}" class="nav-link"> <i class="icon-plus3 mr-1"></i> @lang('merchantDashbaord.add_new_order') </a></li> -->
 
                         </ul>
                     </li>

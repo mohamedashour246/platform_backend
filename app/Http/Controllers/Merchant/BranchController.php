@@ -20,7 +20,7 @@ class BranchController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$branches = Branch::with(['merchant', 'building_type', 'city', 'governorate'])->where('market_id', Session::get('market_id'))->latest()->get();
+		$branches = Branch::with(['market', 'building_type', 'city', 'governorate'])->where('market_id', Session::get('market_id'))->latest()->get();
 		return view('merchants.branches.index', compact('branches'));
 	}
 

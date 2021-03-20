@@ -107,10 +107,21 @@
                                <div class="form-group col-sm-4">
                                    {!! Form::label('repeatation', __('merchantDashbaord.repeatation')) !!}
                                    <select class="form-control" name="repeatation">
-                                        <option value="{{$disslider->id}}" selected> {{$disslider->repeatation}} </option>
-
-                                        <option> جميع الزائرين </option>
-                                        <option> لكل عميل </option>
+                                        @if($disslider->repeatation == 'جميع العملاء' )
+                                         <option value="{{$disslider->id}}" selected> @lang('merchantDashbaord.all_clients') </option>
+                                         <option> @lang('merchantDashbaord.all_visitors') </option>
+                                         <option> @lang('merchantDashbaord.every_client') </option>
+                                        @endif
+                                        @if($disslider->repeatation == 'جميع الزائرين')
+                                         <option value="{{$disslider->id}}" selected> @lang('merchantDashbaord.all_visitors') </option>
+                                         <option> @lang('merchantDashbaord.all_clients') </option>
+                                         <option> @lang('merchantDashbaord.every_client') </option>
+                                        @endif
+                                        @if($disslider->repeatation == 'لكل عميل')
+                                         <option value="{{$disslider->id}}" selected> @lang('merchantDashbaord.every_client') </option>
+                                         <option> @lang('merchantDashbaord.all_clients') </option>
+                                         <option> @lang('merchantDashbaord.all_visitors') </option>
+                                        @endif
                                    </select>
                                    @error('repeatation')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -122,7 +133,7 @@
                                            @lang('merchantDashbaord.free_shipping')
                                         </label>
                                         <input type="checkbox" style="margin-right:5px;" name="free_shipping" class="form-check-input" id="flexSwitchCheckDefault"
-                                                  {{$disslider->isFree() ? 'checked' : ''}}>
+                                                  {{$disslider->free_shipping=='1' ? 'checked' : ''}}>
 
                                    </div>
                                </div>
@@ -136,8 +147,14 @@
                                <div class="form-group col-sm-6">
                                    {!! Form::label('discount_type', __('merchantDashbaord.discount_type')) !!}
                                    <select class="form-control" name="discount_type">
-                                        <option> نسبة مئوية </option>
-                                        <option> كمية </option>
+                                       @if($disslider->discount_type == 'نسبة مئوية')
+                                        <option value="{{$disslider->id}}"> {{$disslider->discount_type}} </option>
+                                        <option> @lang('merchantDashbaord.quantity') </option>
+                                       @endif
+                                       @if($disslider->discount_type == 'كمية')
+                                        <option value="{{$disslider->id}}"> {{$disslider->discount_type}} </option>
+                                        <option> @lang('merchantDashbaord.percent') </option>
+                                       @endif
                                    </select>
                                    @error('discount_type')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -156,7 +173,7 @@
                                            @lang('merchantDashbaord.status_slider')
                                         </label>
                                         <input type="checkbox" style="margin-right:5px;" name="status_slider" class="form-check-input" id="flexSwitchCheckDefault"
-                                                {{$disslider->isStatusSlider() ? 'checked' : ''}}  >
+                                                {{$disslider->status_slider=='1' ? 'checked' : ''}}  >
                                    </div>
                                </div>
 
@@ -166,7 +183,7 @@
                                            @lang('merchantDashbaord.current_status')
                                         </label>
                                         <input type="checkbox" style="margin-right:5px;" name="current_status" class="form-check-input" id="flexSwitchCheckDefault"
-                                              {{$disslider->isStatus() ? 'checked' : ''}}  >
+                                              {{$disslider->current_status=='1' ? 'checked' : ''}}  >
                                    </div>
                                </div>
 

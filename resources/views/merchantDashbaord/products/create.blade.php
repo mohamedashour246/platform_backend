@@ -72,13 +72,18 @@
                                <div class="form-group col-sm-12 col-lg-6">
                                    {!! Form::label('description_ar', __('merchantDashbaord.description_ar')) !!}
                                    {!! Form::textarea('description_ar', null, ['class' => 'form-control']) !!}
-
+                                   @error('description_ar')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
                                </div>
 
                                <!-- Description En Field -->
                                <div class="form-group col-sm-12 col-lg-6">
                                    {!! Form::label('description_en', __('merchantDashbaord.description_en'))!!}
                                    {!! Form::textarea('description_en', null, ['class' => 'form-control']) !!}
+                                   @error('description_en')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
                                </div>
 
 
@@ -302,9 +307,9 @@
                                <div class="form-group col-sm-4">
                                    {!! Form::label('type_add',  __('merchantDashbaord.type'))!!}
                                    <select class="form-control" name="type_add">
-                                           <option selected value=""> one </option>
-                                            <option  value=""> two </option>
-                                            <option  value=""> three </option>
+                                           <option selected value=""> {{trans('merchantDashbaord.one')}} </option>
+                                            <option  value="">  {{trans('merchantDashbaord.two')}} </option>
+                                            <option  value="">  {{trans('merchantDashbaord.three')}} </option>
                                    </select>
                                    @error('type_add')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
@@ -313,8 +318,8 @@
                                <div class="form-group col-sm-4">
                                    {!! Form::label('status_add',  __('merchantDashbaord.status'))!!}
                                    <select class="form-control" name="status_add">
-                                           <option selected value=""> yes </option>
-                                            <option  value=""> no </option>
+                                           <option selected value=""> {{trans('merchantDashbaord.yes')}} </option>
+                                            <option  value=""> {{trans('merchantDashbaord.no')}} </option>
                                    </select>
                                    @error('status')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>

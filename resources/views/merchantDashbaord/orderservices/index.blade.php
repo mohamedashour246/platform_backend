@@ -3,7 +3,7 @@
 @endphp
 @extends('merchantDashbaord.layout.master')
 @section('title')
-    @lang('site.show_all_product')
+    @lang('site.show_all_orders')
 @endsection
 
 
@@ -11,14 +11,14 @@
     <div class="page-header">
         <div class="page-header-content header-elements-md-inline">
             <div class="page-title d-flex">
-                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('merchantDashbaord.product') </h4>
+                <h4><i class="icon-arrow-right6 mr-2"></i> @lang('merchantDashbaord.orders') </h4>
                 <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
             </div>
             <div class="header-elements d-none py-0 mb-3 mb-md-0">
                 <div class="breadcrumb">
                     <a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 
-                    <span class="breadcrumb-item active"> @lang('merchantDashbaord.product') </span>
+                    <span class="breadcrumb-item active"> @lang('merchantDashbaord.orders') </span>
                 </div>
             </div>
         </div>
@@ -31,64 +31,70 @@
 
     <div class="row">
         <div class="col-md-12">
-            @include('merchants.layout.messages')
+            @include('merchantDashbaord.layout.messages')
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <a  href="{{ route('products.create') }}" class="btn btn-primary float-right" > <i class="icon-plus3  mr-1"></i>@lang('merchantDashbaord.add_new_product') </a>
-                </div>
+                    <a  href="{{route('orderservices.create')}}" class="btn btn-primary float-left" > <i class="icon-plus3  mr-1"></i>@lang('merchantDashbaord.add_new_order') </a>
+              </div>
             </div>
             <div class="card" >
 
 
-                <table class="table datatable-responsive table-togglable table-bordered text-center   table-hover ">
+                <table class="table datatable-responsive table-togglable table-bordered  text-center  table-hover ">
                     <thead class="bg-dark">
                     <tr>
                         <th>#</th>
-
-                        <th> @lang('merchantDashbaord.image') </th>
-                        <th> @lang('merchantDashbaord.name_ar') </th>
-                        <th> @lang('merchantDashbaord.name_en') </th>
-                        <th> @lang('merchantDashbaord.category') </th>
-                        <th> @lang('merchantDashbaord.discount') </th>
-                        <th> @lang('merchantDashbaord.status') </th>
+                        <th> @lang('merchantDashbaord.order_type') </th>
+                        <th> @lang('merchantDashbaord.sender_date') </th>
+                        <th> @lang('merchantDashbaord.receiver_date') </th>
+                        <th> @lang('merchantDashbaord.sender') </th>
+                        <th> @lang('merchantDashbaord.price_order') </th>
+                        <th> @lang('merchantDashbaord.payment_type') </th>
+                        <th> @lang('merchantDashbaord.order_name_ar') </th>
+                        <th> @lang('merchantDashbaord.order_name_en') </th>
+                        <th> @lang('merchantDashbaord.receiver') </th>
+                        <th> @lang('merchantDashbaord.driver') </th>
                         <th> @lang('merchantDashbaord.created_at') </th>
-                        {{--                        <th> @lang('branches.action') </th>--}}
+
+
                     </tr>
                     </thead>
                     @php
                         $i =1 ;
                     @endphp
-                    @foreach ($products as $product)
+                    @foreach ($orderservices as $orderservice)
                         <tr>
-                            <td >
-                                <a href="#collapse-icon{{ $product->id }}" class="text-default" data-toggle="collapse">
-                                    <i class="icon-circle-down2"></i>
-                                </a>
-
+                            <td>
+                              <a href="#collapse-icon{{ $orderservice->id }}" class="text-default" data-toggle="collapse">
+                                  <i class="icon-circle-down2"></i>
+                              </a>
                             </td>
-                            <td> <img class="img-thumbnail" width="50" height="50" src=" {{ $product->image_path}}" /></td>
 
-                            {{--                            <td  > <a href="{{ route('merchants.branches.show', ['branch' => $product->id])}}"> {{ $product->name }} </a> </td>--}}
-                            <td>{{$product->name_ar}}</td>
-                            <td>{{$product->name_en}}</td>
-                            <td>{{@$product->subCategory['name_'.$lang]}}</td>
-                            <td>{{$product->discount}}</td>
-                            <td>{{$product->isStatus()}}</td>
-                            <td >{{ $product->created_at->toFormattedDateString() }} - {{ $product->created_at->diffForHumans() }} </td>
+                            <td>{{$orderservice->type}}</td>
+                            <td>{{ $orderservice->receiver }}</td>
+                            <td>{{$orderservice->sender}}</td>
+                            <td>{{auth()->guard('merchant')->user()->name }}</td>
+                            <td>{{$orderservice->price}}</td>
+                            <td>{{$orderservice->payment_type}}</td>
+                            <td>{{ $orderservice->name_ar }}</td>
+                            <td>{{ $orderservice->name_en }}</td>
+                            <td>{{ $orderservice->user->name }}</td>
+                            <td>{{ $orderservice->driver->name }}</td>
+                            <td >{{ $orderservice->created_at->toFormattedDateString() }} - {{ $orderservice->created_at->diffForHumans() }} </td>
 
                         </tr>
-                        <tr class="collapse " id="collapse-icon{{ $product->id }}" >
+                        <tr class="collapse " id="collapse-icon{{ $orderservice->id }}" >
                             <td colspan="100%" >
                                 <div class="float-left">
-                                    <a  href="{{ route('products.show'  , [$product->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
+                                    <a  href="{{ route('orderservices.show'  , [$orderservice->id ] ) }}" class="btn btn-outline bg-primary border-primary text-primary-800 btn-icon">
                                         <i class="icon-eye2 text-primary-800"></i>
                                     </a>
-                                    <a  href="{{ route('products.edit' , [ $product->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
+                                    <a  href="{{ route('orderservices.edit' , [ $orderservice->id ] ) }}" class="btn alpha-warning border-warning text-warning-800 btn-icon ml-2">
                                         <i class="icon-pencil7 text-warning-800"></i>
                                     </a>
-                                    <a href="" data-id="{{ $product->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
+                                    <a href="" data-id="{{ $orderservice->id }}" class=" delete_branch btn btn-outline bg-danger border-danger text-danger-800 btn-icon border-2 ml-2"><i class="icon-trash"></i>  </a>
 
-                                    <form name="deleteFormNumber{{ $product->id }}" action="{{ route('products.destroy' , [$product->id ]) }}" method="POST" >
+                                    <form name="deleteFormNumber{{ $orderservice->id }}" action="{{ route('orderservices.destroy' , [$orderservice->id ]) }}" method="POST" >
 
                                         @method('DELETE')
                                         @csrf
@@ -96,9 +102,6 @@
                                 </div>
                             </td>
                         </tr>
-
-
-
 
                         @endforeach
 
@@ -134,7 +137,7 @@
                 console.log(id);
                 Swal.fire({
 
-                    text: "هل انت متاكد من رغبتك فى حذف الفرع",
+                    text: "هل انت متاكد من حذف الطلب",
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',

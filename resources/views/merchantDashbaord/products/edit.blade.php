@@ -47,120 +47,300 @@
                     </div>
                 </div>
                 {!! Form::model($product, ['route' => ['products.update', $product->id], 'method' => 'patch', 'files' => true]) !!}
+                @method('patch')
                     <div class="card-body">
                         @csrf
                         <fieldset>
                             <legend class="font-weight-bold"> <span class="text-primary"> @lang('merchantDashbaord.product') </span> </legend>
-                            <div class="row">
-                                <!-- Name Ar Field -->
-                                <div class="form-group col-sm-6">
-                                    {!! Form::label('name_ar', __('merchantDashbaord.name_ar'))  !!}
-                                    {!! Form::text('name_ar', null, ['class' => 'form-control']) !!}
-                                    @error('name_ar')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
+                           <div class="row">
+                               <!-- Name Ar Field -->
+                               <div class="form-group col-sm-6">
+                                   {!! Form::label('name_ar', __('merchantDashbaord.name_ar')) !!}
+                                   {!! Form::text('name_ar', null, ['class' => 'form-control']) !!}
+                                   @error('name_ar')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
 
-                                <!-- Name En Field -->
-                                <div class="form-group col-sm-6">
-                                    {!! Form::label('name_en', __('merchantDashbaord.name_en'))  !!}
-                                    {!! Form::text('name_en', null, ['class' => 'form-control']) !!}
-                                    @error('name_en')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
+                               <!-- Name En Field -->
+                               <div class="form-group col-sm-6">
+                                   {!! Form::label('name_en',  __('merchantDashbaord.name_en')) !!}
+                                   {!! Form::text('name_en', null, ['class' => 'form-control']) !!}
+                                   @error('name_en')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
 
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('subcategory_id', __('merchantDashbaord.category'))!!}
-                                    <select class="form-control" name="subcategory_id">
+                               <!-- Description Ar Field -->
+                               <div class="form-group col-sm-12 col-lg-6">
+                                   {!! Form::label('description_ar', __('merchantDashbaord.description_ar')) !!}
+                                   {!! Form::textarea('description_ar', null, ['class' => 'form-control']) !!}
 
-                                        @foreach($subCategories as $subCategory)
-                                            <option @isset($subCategory) @if($product->sub_category_id == $subCategory->id) selected  @endif @endisset value="{{$subCategory->id}}">{{$subCategory['name_'.$lang]}}</option>
-                                        @endforeach
+                               </div>
 
-                                    </select>
-                                    @error('subcategory_id')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
+                               <!-- Description En Field -->
+                               <div class="form-group col-sm-12 col-lg-6">
+                                   {!! Form::label('description_en', __('merchantDashbaord.description_en'))!!}
+                                   {!! Form::textarea('description_en', null, ['class' => 'form-control']) !!}
+                               </div>
 
 
-                                <div class="col-md-4">
-                                    <div class="form-check form-check-switchery mt-4">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" name="status" class="form-check-input-switchery " {{ $product->isActive() ? 'checked' : '' }} data-fouc>
-                                            @lang('merchantDashbaord.status')
-                                        </label>
-                                    </div>
-                                </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('subcategory_id', __('merchantDashbaord.category')) !!}
+                                   <select class="form-control" name="sub_category_id">
 
-                                <!-- Type Field -->
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('type',__('merchantDashbaord.type')) !!}
-                                    {!! Form::text('type', null, ['class' => 'form-control']) !!}
-                                    @error('type')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
+                                       @foreach($subCategories as $subCategory)
+                                           <option @isset($subCategory) @if(old('sub_category_id') == $subCategory->id) selected  @endif @endisset value="{{$subCategory->id}}">{{$subCategory->name_ar}}</option>
+                                       @endforeach
 
-                                <!-- Deliver Services Field -->
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('deliver_services', __('merchantDashbaord.deliver_services')) !!}
-                                    {!! Form::text('deliver_services', null, ['class' => 'form-control']) !!}
-                                    @error('deliver_services')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
+                                   </select>
+                                   @error('sub_category_id')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                                   <input type="hidden" value="1" name="status">
 
-                                <!-- Unit Type Field -->
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('unit_type',__('merchantDashbaord.unit_type'))  !!}
-                                    {!! Form::text('unit_type', null, ['class' => 'form-control']) !!}
-                                    @error('unit_type')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
-
-                                <!-- Price Field -->
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('price', __('merchantDashbaord.price')) !!}
-                                    {!! Form::number('price', null, ['class' => 'form-control']) !!}
-                                    @error('price')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-sm-4">
-                                    {!! Form::label('order',__('merchantDashbaord.order')) !!}
-                                    {!! Form::number('order', null, ['class' => 'form-control']) !!}
-                                    @error('order')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
-
-                                <!-- Discount Field -->
-                                <div class="form-group col-sm-6">
-                                    {!! Form::label('discount', __('merchantDashbaord.discount'))!!}
-                                    {!! Form::number('discount', null, ['class' => 'form-control']) !!}
-                                    @error('discount')
-                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
-                                    @enderror
-                                </div>
-                                <div class="form-group ">
-                                    {!! Form::label('image', __('merchantDashbaord.image').':') !!}
-                                    {!! Form::file('image',['class' => 'form-control image']) !!}
-
-                                </div>
-
-                                    <div class="form-group">
-                                        <img src="{{ $product->image_path }}" style="width: 100px"
-                                             class="img-thumbnail image-preview" alt="">
-                                    </div>
+                               </div>
 
 
 
+                               <!-- Type Field -->
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('type', __('merchantDashbaord.type')) !!}
+                                   {!! Form::text('type', null, ['class' => 'form-control']) !!}
+                                   @error('type')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+
+                               <!-- Deliver Services Field -->
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('deliver_services', __('merchantDashbaord.deliver_services')) !!}
+                                   {!! Form::text('deliver_services', null, ['class' => 'form-control']) !!}
+                                   @error('deliver_services')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+
+                               <!-- Unit Type Field -->
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('unit_type', __('merchantDashbaord.type')) !!}
+                                   {!! Form::text('unit_type', null, ['class' => 'form-control']) !!}
+                                   @error('unit_type')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+
+                               <!-- Price Field -->
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('price',  __('merchantDashbaord.price'))!!}
+                                   {!! Form::number('price', null, ['class' => 'form-control']) !!}
+                                   @error('price')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('order',__('merchantDashbaord.order')) !!}
+                                   {!! Form::number('order', null, ['class' => 'form-control']) !!}
+                                   @error('order')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
 
 
-                            </div>
+                               <!-- Discount Field -->
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('discount', __('merchantDashbaord.discount'))!!}
+                                   {!! Form::number('discount', null, ['class' => 'form-control']) !!}
+                                   @error('discount')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('image', __('merchantDashbaord.image')) !!}
+                                   {!! Form::file('image',['class' => 'form-control image']) !!}
+                                   @error('image')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   <img src="{{$product->image_path}}" style="width: 100px"
+                                        class="img-thumbnail image-preview" alt="">
+                               </div>
+
+                           </div>
+
+                        </fieldset>
+
+                    </div>
+                    <!-- <div class="form-group col-sm-12">
+                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                        <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
+                    </div> -->
+
+
+
+            </div>
+            <!-- /account settings -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Account settings -->
+
+            @include('merchantDashbaord.layout.messages')
+            <div class="card">
+                <div class="card-header bg-dark header-elements-inline">
+                    <h5 class="card-title"> @lang('merchantDashbaord.commercial_info') </h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="card-body">
+
+                        <fieldset>
+                            <legend class="font-weight-bold"> <span class="text-primary"> @lang('merchantDashbaord.commercial_info') </span> </legend>
+                           <div class="row">
+                               <!-- Name Ar Field -->
+
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('selling_price',  __('merchantDashbaord.selling_price'))!!}
+                                   {!! Form::number('selling_price', null, ['class' => 'form-control']) !!}
+                                   @error('price')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('cost_per_unit',  __('merchantDashbaord.cost_per_unit'))!!}
+                                   {!! Form::number('cost_per_unit', null, ['class' => 'form-control']) !!}
+                                   @error('price')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('shipping_cost',  __('merchantDashbaord.shipping_cost'))!!}
+                                   {!! Form::number('shipping_cost', null, ['class' => 'form-control']) !!}
+                                   @error('price')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('limit',  __('merchantDashbaord.limit'))!!}
+                                   {!! Form::number('limit', null, ['class' => 'form-control']) !!}
+                                   @error('price')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-6">
+                                   {!! Form::label('barcode',  __('merchantDashbaord.barcode')) !!}
+                                   {!! Form::text('barcode', null, ['class' => 'form-control']) !!}
+                                   @error('name_en')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('discount',  __('merchantDashbaord.discount'))!!}
+                                   {!! Form::number('discount', null, ['class' => 'form-control']) !!}
+                                   @error('discount')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                           </div>
+
+                        </fieldset>
+                    </div>
+                    <!-- <div class="form-group col-sm-12">
+                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                        <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
+                    </div> -->
+
+
+            </div>
+            <!-- /account settings -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Account settings -->
+
+            @include('merchantDashbaord.layout.messages')
+            <div class="card">
+                <div class="card-header bg-dark header-elements-inline">
+                    <h5 class="card-title"> @lang('merchantDashbaord.Extras') </h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="card-body">
+
+                        <fieldset>
+                          @csrf
+                            <legend class="font-weight-bold"> <span class="text-primary"> @lang('merchantDashbaord.Extras') </span> </legend>
+                           <div class="row">
+                               <!-- Name Ar Field -->
+
+                               <div class="form-group col-sm-6">
+                                   {!! Form::label('title_ar',  __('merchantDashbaord.name_ar')) !!}
+                                   {!! Form::text('title_ar', null, ['class' => 'form-control']) !!}
+                                   @error('title_ar')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-6">
+                                   {!! Form::label('title_en',  __('merchantDashbaord.name_en')) !!}
+                                   {!! Form::text('title_en', null, ['class' => 'form-control']) !!}
+                                   @error('title_en')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('type',  __('merchantDashbaord.type'))!!}
+                                   <select class="form-control" name="type">
+                                           <option selected value=""> {{trans('merchantDashbaord.one')}} </option>
+                                            <option  value="">  {{trans('merchantDashbaord.two')}} </option>
+                                            <option  value="">  {{trans('merchantDashbaord.three')}} </option>
+                                   </select>
+                                   @error('type')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+                               <div class="form-group col-sm-4">
+                                   {!! Form::label('mandatory',  __('merchantDashbaord.status'))!!}
+                                   <select class="form-control" name="mandatory">
+                                           <option selected value=""> {{trans('merchantDashbaord.yes')}} </option>
+                                            <option  value=""> {{trans('merchantDashbaord.no')}} </option>
+                                   </select>
+                                   @error('mandatory')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+
+                               <div class="form-group col-sm-6">
+                                   {!! Form::label('available_choose',  __('merchantDashbaord.available_choose')) !!}
+                                   <select class="form-control multiselect" multiple="multiple" name="extras[]">
+                                     @foreach($exproducts as $exproduct)
+                                            <option value="{{$exproduct->id}}"> {{$exproduct->name_ar}} </option>
+                                            @endforeach
+
+                                   </select>
+                                   @error('available_choose')
+                                   <label class="text-danger font-weight-bold " > {{ $message }} </label>
+                                   @enderror
+                               </div>
+
+                           </div>
 
                         </fieldset>
                     </div>
@@ -168,8 +348,9 @@
                         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                         <a href="{{ route('products.index') }}" class="btn btn-default">Cancel</a>
                     </div>
-                {!! Form::close() !!}
 
+                      {!! Form::close() !!}
+                <!-- </form> -->
 
             </div>
             <!-- /account settings -->

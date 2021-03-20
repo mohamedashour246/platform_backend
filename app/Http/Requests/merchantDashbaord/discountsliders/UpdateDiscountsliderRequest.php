@@ -26,7 +26,7 @@ class UpdateDiscountsliderRequest extends FormRequest
         return [
             'name_ar' => 'required',
             'name_en' => 'required',
-            'image' => 'required|image',
+            'image' => 'nullable|image',
             'expire' => 'required',
             'barcode' => 'required',
             'count_use' => 'required',

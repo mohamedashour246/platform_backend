@@ -176,6 +176,8 @@ return [
 		'markets' => 'المتاجر' ,
 		'market_id' => 'المتجر' ,
 		'branch_id' => 'الفرع',
+		'description_ar' => 'الوصف بالعربية',
+		'description_en' => 'الوصف بالانجليزيه',
 		'customers' => 'العملاء' ,
 		'sender_type' => 'نوع الراسل',
 		'cost' => 'السعر',
@@ -183,13 +185,22 @@ return [
     'status' => 'الحالة',
 		'barcode' => 'الرمز الشريطى',
 		'time_to_arrive' => 'وقت التوصيل',
-		'paymet_type' => 'طريقة الدفع',
 		'total' => 'المبلغ الكلى',
 		'image' => 'الصورة',
 		'expire' => 'التاريخ',
 		'count_use' => 'عدد مرات الاستخدام',
 		'value_discount' => 'قيمة الخصم',
-		'min_cost' => 'الحد الادنى'
+		'min_cost' => 'الحد الادنى',
+		'time_to_arrival' =>  'وقت التوصيل والتسليم',
+		'payment_type' => 'طريقة الدفع',
+		'count' => 'عدد المنتجات',
+		'item_ar'  => 'الاسم بالعربى',
+		'item_en'  => 'الاسم بالانجليزى',
+		'receiver' => 'موعد الاستلام',
+		'sender' => 'موعد التسليم',
+		'time_sender' => 'وقت التسليم',
+		'time_receiver' => 'وقت الاستلام',
+
 	],
 
 ];

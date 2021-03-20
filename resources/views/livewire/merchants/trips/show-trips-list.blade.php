@@ -151,10 +151,10 @@ $lang = session()->get('locale');
 						<td> {{ $trip->delivery_date_to_customer->toDayDateTimeString() }} </td>
 						<td>
 							@switch($trip->status)
-							@case(1)
+							@case('1')
 							<span class="badge badge-primary"> @lang('trips.proccessing') </span>
 							@break
-							@case(0)
+							@case('0')
 							<span class="badge badge-secondary"> @lang('trips.inactive') </span>
 							@break
 							@endswitch

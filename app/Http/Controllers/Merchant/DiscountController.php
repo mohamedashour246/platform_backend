@@ -39,23 +39,24 @@ class DiscountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateDiscountsliderRequest $request)
+    public function store(Request $request)
     {
 
 
-        $input= $request->all();
-        $input['name_ar'] = $request['name_ar'];
-        $input['name_en'] = $request['name_en'];
-        $input['expire'] = $request['expire'];
-        $input['barcode'] = $request['barcode'];
-        $input['count_use'] =   $request['count_use'];
-        $input['repeatation'] =  $request['repeatation'];
-        $input['free_shipping'] = $request['free_shipping'];
-        $input['value_discount'] =  $request['value_discount'];
-        $input['discount_type'] = $request['discount_type'];
-        $input['min_cost'] = $request['min_cost'];
-        $input['status_slider'] = $request['status_slider'];
-        $input['current_status'] = $request['current_status'];
+        $input= request()->all();
+        
+        $this->validate(request(),[
+              
+            'name_ar' => 'required',
+            'name_en' => 'required',
+            'image' => 'required|image',
+            'expire' => 'required',
+            'barcode' => 'required',
+            'count_use' => 'required',
+            'value_discount' => 'required',
+            'min_cost' => 'required',
+
+        ]);
 
         if(request('image')){
           $file = request()->file('image');
@@ -67,7 +68,8 @@ class DiscountController extends Controller
           $input['image'] = $fileName;
       }
 
-        $disslider = DiscountSliders::create($input);
+        $disslider = new DiscountSliders($input);
+        $disslider->save();
 
         return redirect(route('dissliders.index'))->with('success_msg' , trans('merchantDashbaord.added_successfully'));
 
@@ -127,29 +129,50 @@ class DiscountController extends Controller
             return redirect(route('dissliders.index'))->with('error_msg' , trans('merchantDashbaord.not_found'));
         }
         
-        $input = $request->all();
-        if($request->current_status == 'on')
-        {
-            $input['current_status'] = 1;
-        } 
-        else {
-            $input['current_status'] = 0;
+         $input = $request->all();
+        // if($request->current_status == '1')
+        // {
+        //     $input['current_status'] = 1;
+        // } 
+        // else {
+        //     $input['current_status'] = 0;
+        // }
+
+        // if($request->status_slider == '1')
+        // {
+        //     $input['status_slider'] = 1;
+        // } 
+        // else {
+        //     $input['status_slider'] = 0;
+        // }
+
+        // if($request->free_shipping == '1')
+        // {
+        //     $input['free_shipping'] = 1;
+        // } 
+        // else {
+        //     $input['free_shipping'] = 0;
+        // }
+
+        if (request('free_shipping')=='on'){
+            $input['free_shipping'] =1;
+        }else{
+            $input['free_shipping'] =0;
+
         }
 
-        if($request->status_slider == 'on')
-        {
-            $input['status_slider'] = 1;
-        } 
-        else {
-            $input['status_slider'] = 0;
+        if (request('status_slider')=='on'){
+            $input['status_slider'] =1;
+        }else{
+            $input['status_slider'] =0;
+
         }
 
-        if($request->free_shipping == 'on')
-        {
-            $input['free_shipping'] = 1;
-        } 
-        else {
-            $input['free_shipping'] = 0;
+        if (request('current_status')=='on'){
+            $input['current_status'] =1;
+        }else{
+            $input['current_status'] =0;
+
         }
 
         if(request('image')){
@@ -162,15 +185,15 @@ class DiscountController extends Controller
             $input['image'] = $fileName;
         }
 
-        $input['name_ar'] = $request['name_ar'];
-        $input['name_en'] = $request['name_en'];
-        $input['expire'] = $request['expire'];
-        $input['barcode'] = $request['barcode'];
-        $input['count_use'] =   $request['count_use'];
-        $input['repeatation'] =  $request['repeatation'];
-        $input['value_discount'] =  $request['value_discount'];
-        $input['discount_type'] = $request['discount_type'];
-        $input['min_cost'] = $request['min_cost'];
+        // $input['name_ar'] = $request['name_ar'];
+        // $input['name_en'] = $request['name_en'];
+        // $input['expire'] = $request['expire'];
+        // $input['barcode'] = $request['barcode'];
+        // $input['count_use'] =   $request['count_use'];
+        // $input['repeatation'] =  $request['repeatation'];
+        // $input['value_discount'] =  $request['value_discount'];
+        // $input['discount_type'] = $request['discount_type'];
+        // $input['min_cost'] = $request['min_cost'];
 
         $disslider->fill($input);
         $disslider->save();

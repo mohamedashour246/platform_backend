@@ -74,7 +74,6 @@
                             <td>{{$order->payment_type}}</td>
                             <td>{{$order->status}}</td>
                             <td>{{ $order->total .' ' }} @lang('merchantDashbaord.KWD')</td>
-                            <!-- <td>{{$order->currentStatus()}}</td> -->
                             <td >{{ $order->created_at->toFormattedDateString() }} - {{ $order->created_at->diffForHumans() }} </td>
 
                         </tr>

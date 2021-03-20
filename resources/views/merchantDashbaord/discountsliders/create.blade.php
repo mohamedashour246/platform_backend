@@ -18,7 +18,7 @@
                 <div class="breadcrumb">
                     <a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 
-                    <a href="{{ route('dissliders.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.add_disslider') </a>
+                    <a href="{{ route('dissliders.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.dissliders') </a>
                     <span class="breadcrumb-item active"> @lang('merchantDashbaord.add_disslider') </span>
                 </div>
             </div>

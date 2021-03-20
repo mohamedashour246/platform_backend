@@ -51,6 +51,8 @@ return [
     'updated_successfully'                     => ' Updated Successfully',
     'added_successfully'                     => ' Added Successfully',
     'categories'                     => ' Categories ',
+    'yes' => 'yes',
+    'no' => 'no',
 
     'client_name'                     => ' Client Name ',
     'total_price'                     => ' total price',
@@ -67,6 +69,10 @@ return [
     'statics_yearly'                     => 'statics monthly and yearly for orders',
     'delivered_orders'                     => 'delivered orders',
     'new_orders'                     => 'new orders  ',
+    'one' => 'one',
+    'two' => 'two',
+    'three' => 'three',
+
 
 
     'orders'                     => ' Orders',

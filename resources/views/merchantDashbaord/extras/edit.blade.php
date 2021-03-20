@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 
-                    <a href="{{ route('products.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.product') </a>
+                    <a href="{{ route('products.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.additions') </a>
                     <span class="breadcrumb-item active"> @lang('merchantDashbaord.edit_additions') </span>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                                     <div class="form-check form-check-switchery mt-4">
                                         <label class="form-check-label">
                                             @lang('merchantDashbaord.status')
-                                            <input type="checkbox" name="status" class="form-check-input-switchery " {{ $exproduct->isActive() ? 'checked' : '' }} >
+                                            <input type="checkbox" name="status" class="form-check-input-switchery " {{ $exproduct->status == '1' ? 'checked' : '' }} >
 
                                         </label>
                                     </div>

@@ -58,6 +58,34 @@ class ProductController extends AppBaseController
     public function store(Request $request)
     {
         $input= request()->all();
+
+        $this->validate(request(),[
+
+            'name_ar' => 'required',
+            'name_en' => 'required',
+            'image' => 'required',
+            'description_ar' => 'required',
+            'description_en' => 'required',
+            'status' => 'required',
+            'type' => 'required',
+            'deliver_services' => 'required',
+            'unit_type' => 'required',
+            'price' => 'required',
+            'discount' => 'required',
+            'limit' => 'required',
+            'barcode' => 'required',
+            'sub_category_id' => 'required',
+            'title_ar' => 'required',
+            'title_en' => 'required',
+            'mandatory' => 'required',
+            'status_add' => 'required',
+           
+        ]);
+
+        // if($validator->fails())
+        // {
+        //     return redirect()->back()->with('errors',$validator->errors());
+        // }
         
         $input['merchant_id'] = auth()->guard('merchant')->id();
         $input['sub_category_id '] = auth()->guard('merchant')->id();
@@ -125,6 +153,8 @@ class ProductController extends AppBaseController
         /** @var Product $product */
         $product = Product::find($id);
         $subCategories=SubCategory::all();
+        $exproducts = AddProduct::all();
+        $addition = Addition::find($id);
         if($product->merchant_id!=auth()->guard('merchant')->id()){
             return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_permitted'));
 
@@ -135,7 +165,7 @@ class ProductController extends AppBaseController
             return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_found'));
         }
 
-        return view('merchantDashbaord.products.edit')->with(['product'=>$product,'subCategories'=>$subCategories]);
+        return view('merchantDashbaord.products.edit')->with(['product'=>$product,'subCategories'=>$subCategories,'addition'=>$addition,'exproducts'=>$exproducts]);
     }
 
     /**
@@ -146,10 +176,11 @@ class ProductController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateProductRequest $request)
+    public function update($id, Request $request)
     {
         /** @var Product $product */
         $product = Product::find($id);
+        $addition = Addition::find($id);
         if($product->merchant_id!=auth()->guard('merchant')->id()){
             return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_permitted'));
 
@@ -160,8 +191,8 @@ class ProductController extends AppBaseController
 
             return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_found'));
         }
-        $input= $request->all();
-        if ($request->status=='on'){
+        $input= request()->all();
+        if (request('status')=='on'){
             $input['status'] =1;
         }else{
             $input['status'] =0;
@@ -170,9 +201,9 @@ class ProductController extends AppBaseController
         $input['merchant_id'] = auth()->guard('merchant')->id();
 
         /** @var Product $product */
-        if ($request->image) {
-            $this-> saveImage('uploads/merchantDashbaord/' ,$request->image,$width=300,$height=300);
-            $input['image'] = $request->image->hashName();
+        if (request('image')) {
+            $this-> saveImage('uploads/merchantDashbaord/' ,request('image'),$width=300,$height=300);
+            $input['image'] = request('image')->hashName();
         }
         $product->fill($input);
         $product->save();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Merchant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\merchantDashbaord\order\CreateOrderRequest;
 use App\Http\Requests\merchantDashbaord\order\UpdateOrderRequest;
+use App\MerchantModels\Product;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -39,19 +40,28 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateOrderRequest $request)
+    public function store(Request $request)
     {
-        $input= $request->all();
+        $input= request()->all();
         $input['client_id'] = auth()->guard('merchant')->id();
         $input['merchant_id'] = auth()->guard('merchant')->id();
         $input['city_id'] = auth()->guard('merchant')->id();
-        $input['barcode'] = $request['barcode'];
-        $input['time_to_arrive'] =   $request['time_to_arrive'];
-        $input['payment_type'] =  $request['payment_type'];
-        $input['status'] = $request['status'];
-        $input['total'] =  $request['total'];
+        // $input['barcode'] = $request['barcode'];
+        // $input['time_to_arrive'] =   $request['time_to_arrive'];
+        // $input['payment_type'] =  $request['payment_type'];
+        // $input['status'] = $request['status'];
+        // $input['total'] =  $request['total'];
 
-        $order = Order::create($input);
+        $this->validate(request(),[
+
+            'barcode' => 'required',
+            'time_to_arrive' => 'required',
+            'payment_type' => 'required',
+            'total' => 'required',
+        ]);
+
+        $order = new Order($input);
+        $order->save();
 
         return redirect(route('orders.index'))->with('success_msg' , trans('merchantDashbaord.added_successfully'));
 
