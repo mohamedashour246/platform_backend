@@ -21,7 +21,7 @@ return [
     'price'                     => ' السعر ',
     'created_at'                     => ' تم اضافته ',
     'category'                     => ' فئة ',
-    'discount'                     => ' خصم ',
+    'discount'                     => 'الخصم',
     'code'                     => 'الكود ',
     'add_new_category'                     => ' اضافة فئة جديدة   ',
     'add_data'  => 'اضافة بيانات',
@@ -89,7 +89,6 @@ return [
     'receiver' => 'المستقبل',
     'driver' => 'السائق',
     'order_product' => 'منتجات الطلب',
-
     'client_name'                     => ' العميل ',
     'total_price'                     => '   المبلغ الكلى',
     'duration'                     => 'مده التوصيل',

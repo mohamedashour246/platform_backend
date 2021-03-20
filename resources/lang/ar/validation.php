@@ -200,6 +200,13 @@ return [
 		'sender' => 'موعد التسليم',
 		'time_sender' => 'وقت التسليم',
 		'time_receiver' => 'وقت الاستلام',
+		'type' => 'النوع',
+		'discount' => 'الخصم',
+		'order' => 'الترتيب',
+		'deliver_services' => 'خدمة التوصيل',
+		'unit_type'        => 'الوحدة',
+
+
 
 	],
 

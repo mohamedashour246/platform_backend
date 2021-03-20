@@ -70,6 +70,7 @@ class ProductController extends AppBaseController
             'type' => 'required',
             'deliver_services' => 'required',
             'unit_type' => 'required',
+            'order'  => 'required',
             'price' => 'required',
             'discount' => 'required',
             'limit' => 'required',
@@ -111,7 +112,8 @@ class ProductController extends AppBaseController
         $input['extras'] = json_encode(request('extras'));
         $input['product_id'] = $product->id;
 
-        $addition = Addition::create($input);
+        $addition = new Addition($input);
+        $addition->save();
 
         return redirect(route('products.index'))->with('success_msg' , trans('merchantDashbaord.added_successfully'));
     }
@@ -165,7 +167,7 @@ class ProductController extends AppBaseController
             return redirect(route('products.index'))->with('error_msg' , trans('merchantDashbaord.not_found'));
         }
 
-        return view('merchantDashbaord.products.edit')->with(['product'=>$product,'subCategories'=>$subCategories,'addition'=>$addition,'exproducts'=>$exproducts]);
+        return view('merchantDashbaord.products.edit',compact('product','subCategories','exproducts','addition'));
     }
 
     /**

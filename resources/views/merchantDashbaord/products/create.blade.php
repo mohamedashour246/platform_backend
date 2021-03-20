@@ -125,7 +125,7 @@
 
                                <!-- Unit Type Field -->
                                <div class="form-group col-sm-4">
-                                   {!! Form::label('unit_type', __('merchantDashbaord.type')) !!}
+                                   {!! Form::label('unit_type', __('merchantDashbaord.unit_type')) !!}
                                    {!! Form::text('unit_type', null, ['class' => 'form-control']) !!}
                                    @error('unit_type')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>

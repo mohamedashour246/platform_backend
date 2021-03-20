@@ -293,14 +293,14 @@
 
                                <div class="form-group col-sm-6">
                                    {!! Form::label('title_ar',  __('merchantDashbaord.name_ar')) !!}
-                                   {!! Form::text('title_ar', null, ['class' => 'form-control']) !!}
+                                   <input type="text" name="title_ar" value="" placeholder="الاسم بالعربى"  class="form-control">
                                    @error('title_ar')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                    @enderror
                                </div>
                                <div class="form-group col-sm-6">
                                    {!! Form::label('title_en',  __('merchantDashbaord.name_en')) !!}
-                                   {!! Form::text('title_en', null, ['class' => 'form-control']) !!}
+                                   <input type="text" name="title_en" value="" placeholder="الاسم بالانجليزيه"  class="form-control">
                                    @error('title_en')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
                                    @enderror
@@ -309,8 +309,8 @@
                                    {!! Form::label('type',  __('merchantDashbaord.type'))!!}
                                    <select class="form-control" name="type">
                                            <option selected value=""> {{trans('merchantDashbaord.one')}} </option>
-                                            <option  value="">  {{trans('merchantDashbaord.two')}} </option>
-                                            <option  value="">  {{trans('merchantDashbaord.three')}} </option>
+                                            <option>  {{trans('merchantDashbaord.two')}} </option>
+                                            <option>  {{trans('merchantDashbaord.three')}} </option>
                                    </select>
                                    @error('type')
                                    <label class="text-danger font-weight-bold " > {{ $message }} </label>
