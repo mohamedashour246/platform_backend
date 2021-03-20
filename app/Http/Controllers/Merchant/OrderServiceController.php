@@ -86,7 +86,14 @@ class OrderServiceController extends Controller
      */
     public function show($id)
     {
-        
+        $orderservice = OrderService::find($id);
+
+        if (empty($orderservice)) {
+
+            return redirect(route('orderservices.index'))->with('error_msg' , trans('merchantDashbaord.not_foundd'));
+        }
+
+        return view('merchantDashbaord.orderservices.show')->with('orderservice', $orderservice);
     }
 
     /**

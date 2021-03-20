@@ -3,7 +3,7 @@
 @endphp
 @extends('merchantDashbaord.layout.master')
 @section('title')
-    @lang('categories.single_order')
+    @lang('merchantDashbaord.orders_show')
 @endsection
 
 
@@ -20,7 +20,7 @@
                 <div class="breadcrumb">
                     <a href="{{ route('merchants.board') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i>  @lang('board.board') </a>
 
-                    <a href="{{ route('orders.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.order') </a>
+                    <a href="{{ route('orderservices.index') }}" class="breadcrumb-item"><i class="icon-users4 mr-2"></i>  @lang('merchantDashbaord.order') </a>
                     <span class="breadcrumb-item active"> @lang('merchantDashbaord.show') </span>
                 </div>
             </div>
@@ -49,43 +49,43 @@
                 <table class="table  table-xs border-top-0 my-2">
                     <tbody>
                     <tr>
-                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.client_name')</th>
-                        <td class="text-left"> {{ auth()->guard('merchant')->user()->name }} </td>
+                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.type')</th>
+                        <td class="text-left"> {{ $orderservice->type }} </td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.merchant') </th>
-                        <td class="text-left">	{{ auth()->guard('merchant')->user()->name }}	</td>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.receiver_date') </th>
+                        <td class="text-left">	{{ }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.total_price')</th>
-                        <td class="text-left"> {{ $order->total .' ' }} @lang('merchantDashbaord.KWD') </td>
+                        <th class="font-weight-bold text-dark">@lang('merchantDashbaord.')</th>
+                        <td class="text-left"> {{ $order->total .' ' }} @lang('merchantDashbaord.time_receiver') </td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.duration') </th>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.sender_date') </th>
                         <td class="text-left">	{{ $order->duration }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.pay_type') </th>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.time_sender') </th>
                         <td class="text-left">	{{ $order->orderPayment() }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.delivery_fees') </th>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.merchant') </th>
                         <td class="text-left">	{{ $order->delivery_fees .' ' }} @lang('merchantDashbaord.KWD')	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.time_to_arrive') </th>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.price') </th>
                         <td class="text-left">	{{ $order->time_to_arrive }}</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.city') </th>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.payment_type') </th>
                         <td class="text-left">	{{ $order->city->name_ar }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.discount') </th>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.order_name_ar') </th>
                         <td class="text-left">	{{ $order->discount }}	</td>
                     </tr>
                     <tr>
-                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.status') </th>
+                        <th class="font-weight-bold text-dark"> @lang('merchantDashbaord.order_name_en') </th>
                         <td class="text-left">	{{$order->currentStatus()}}	</td>
                     </tr>
 
